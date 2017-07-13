@@ -1,6 +1,9 @@
 import './sticky-footer.css';
 import React, { Component } from 'react';
 import List from './components/List';
+import generateGUID from './index.js';
+
+window.items = [{ id: generateGUID(), itemName: 'Make coffee' }, { id: generateGUID(), itemName: 'Master React' }];
 
 class App extends Component {
   render() {
@@ -11,7 +14,7 @@ class App extends Component {
             <h3 className="text-muted">Kentico Academy</h3>
           </div>
 
-          <div className="jumbotron">
+          {false && <div className="jumbotron">
             <h1>JS onboarding</h1>
             <p className="lead">
               We will implement simple task using <a href="https://facebook.github.io/react/docs/hello-world.html">ReactJS</a> and later move on to refactor our app to use <a href="https://facebook.github.io/immutable-js/">Immutable</a> and <a href="http://redux.js.org/">Redux</a>.
@@ -20,10 +23,10 @@ class App extends Component {
             <p>
               <a className="btn btn-lg btn-success" href="https://github.com/Suzii/kentico-onboarding-js" role="button">Fork me on GitHub</a>
             </p>
-          </div>
+          </div>}
 
           <section id="app-content">
-            <List />
+            <List items={window.items} />
           </section>
         </div>
         <footer className="footer">

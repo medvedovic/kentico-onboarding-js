@@ -8,6 +8,7 @@ export default class ListItem extends React.Component {
     this.state = { isBeingEdited: false, itemName: this.props.itemName };
     this.handleEditItemClick = this.handleEditItemClick.bind(this);
     this.handleUpdateItemClick = this.handleUpdateItemClick.bind(this);
+    this.handleDeleteItemClick = this.handleDeleteItemClick.bind(this);
     this.toggleBeingEdited = this.toggleBeingEdited.bind(this);
   }
   handleEditItemClick() {
@@ -20,15 +21,15 @@ export default class ListItem extends React.Component {
   toggleBeingEdited() {
     this.setState({ isBeingEdited: !(this.state.isBeingEdited) });
   }
-  // handleDeleteItemClick() {
-  //   /* Delete item */
-  // }
+  handleDeleteItemClick() {
+    this.props.onDeleteItem(this.props.id);
+  }
   render() {
     const isBeingEdited = this.state.isBeingEdited;
     return (
       <li>
-        {!isBeingEdited ? (<span onClick={this.handleEditItemClick}>{this.state.itemName}</span>) :
-          (<ListItemEditor itemName={this.state.itemName} onItemUpdate={this.handleUpdateItemClick} onItemCancelEdit={this.toggleBeingEdited} />)
+        {!isBeingEdited ? (<span onClick={this.handleEditItemClick} >{this.state.itemName}</span>) :
+          (<ListItemEditor itemName={this.state.itemName} onItemUpdate={this.handleUpdateItemClick} onItemCancelEdit={this.toggleBeingEdited} onItemDelete={this.handleDeleteItemClick} />)
         }
       </li>
     );
@@ -36,5 +37,7 @@ export default class ListItem extends React.Component {
 }
 
 ListItem.propTypes = {
+  id: PropTypes.string,
   itemName: PropTypes.string,
+  onDeleteItem: PropTypes.func,
 };

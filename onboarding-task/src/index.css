@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
 body {
   margin: 0;
   padding: 0;
@@ -10,7 +12,16 @@ body {
 }
 
 .list li {
-  margin-bottom: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.2em;
+  padding: 10px 0;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.list li:hover {
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 .list li :after {
@@ -19,13 +30,17 @@ body {
   clear: both;
 }
 
+.list li .form-group {
+  margin: 0;
+}
+
 .list li input {
   width: 50%;
   float: left;
   margin-right: 15px;
 }
 
-.btn-default {
-  border-left: 0;
-  border-right: 0;
-}
+/*.btn-default {*/
+  /*border-left: 0;*/
+  /*border-right: 0;*/
+/*}*/
