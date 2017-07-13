@@ -68,6 +68,8 @@ When your pull request gets merged into `upstream/solutions/<your-login>`, fetch
 You can then delete the `feature/task-0` branch and create a new one for the following task (`feature/task-1`).
 
 ## Task 1
+**Prerequisite: ** JS & React sections on [wiki](https://kentico.atlassian.net/wiki/display/KA/04+-+JS-related+tutorials).
+
 According to `assignment.gif` implement all the required functionality (keep in mind we want to be able to edit multiple list items at once). Store some pseudo-random identifier (id) for each item (use some util function for its generation, e.g: http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript)
 All the boilerplate is already there so you can dive into coding straight away. Feel free to use bootstrap css classes. Get familiar with project structure. The entry file is `index.js`. Page layout can be found in `App.jsx`. It renders `List.jsx` in its body, where you are supposed to implement the rest of the functionality. 
 
@@ -77,6 +79,8 @@ Install [ImmutableJS](http://facebook.github.io/immutable-js) to your project: `
 Refactor your application; make sure that all data required for the application (apart from reasonable exceptions, e.g. current text of input fields) is stored as an `Immutable.OrderedMap` of `Immutable.Record`s within the top level component (e.g. `List.jsx`). Use IDs of the items as keys for the Map.
 
 ## Task 3
+**Prerequisite: ** Go through Flux & Redux section on [wiki](https://kentico.atlassian.net/wiki/display/KA/04+-+JS-related+tutorials).
+
 Install [ReduxJS](http://redux.js.org/), [react-redux](http://redux.js.org/docs/basics/UsageWithReact.html) and [redux-logger](https://github.com/evgenyrodionov/redux-logger) to your project: 
 ```
 npm install --save redux
@@ -108,6 +112,8 @@ npm install --save-dev @types/immutable
 Read about how it works here: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 ## Taks 5
+**Prerequisite: ** Make sure you understand promises & IoC (DI) - last two sections of JS sources on [wiki](https://kentico.atlassian.net/wiki/display/KA/04+-+JS-related+tutorials).
+
 What kind of app it would be without the server side, right? Customer hitting F5 and then getting mad about loosing all his items is not a happy customer. Have a look at [06 - CS Onboarding task](https://kentico.atlassian.net/wiki/display/KA/06+-+CS+Onboarding+task) and implement at least Tasks 0 and 1 before you move on to connect your frontend to new your brand new shiny REST API.
 
 **!! IMPORTANT !!**
