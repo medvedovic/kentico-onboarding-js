@@ -2,17 +2,25 @@ import React, { Component } from 'react';
 import assignment from './../../../assignment.gif';
 import PropTypes from 'prop-types';
 
+import generateGUID from '../index.js';
 import TsComponent from './TsComponent.tsx';
 import ListItem from './ListItem.jsx';
+import ListItemInput from './ListItemInput';
 
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = { items: this.props.items };
     this.deleteItem = this.deleteItem.bind(this);
+    this.addItem = this.addItem.bind(this);
+  }
+  addItem(name) {
+    const newArray = this.state.items;
+    newArray.push({ id: generateGUID(), itemName: name });
+    this.setState({ items: newArray });
   }
   deleteItem(key) {
-    const newArray = this.props.items.filter(item => item.id !== key);
+    const newArray = this.state.items.filter(item => item.id !== key);
     this.setState({ items: newArray });
   }
   render() {
@@ -35,12 +43,13 @@ class List extends Component {
         </div>
 
         <div className="row">
-          <div className="col-sm-12 col-md-offset-2 col-md-8">
+          <div className="col-sm-12 col-md-6">
             <ol className="list">
               {
                 items.map((item) => <ListItem key={item.id.toString()} id={item.id} itemName={item.itemName} onDeleteItem={this.deleteItem} />)
               }
             </ol>
+            <ListItemInput onAddItem={this.addItem} />
           </div>
         </div>
       </div>
