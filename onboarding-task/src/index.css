@@ -8,3 +8,24 @@ body {
   display: flex;
 
 }
+
+.list li {
+  margin-bottom: 15px;
+}
+
+.list li :after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+.list li input {
+  width: 50%;
+  float: left;
+  margin-right: 15px;
+}
+
+.btn-default {
+  border-left: 0;
+  border-right: 0;
+}
