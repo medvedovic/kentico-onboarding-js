@@ -16,6 +16,7 @@ export default class ListItem extends React.Component {
   }
   handleUpdateItemClick(value) {
     this.toggleBeingEdited();
+    this.props.onUpdateItem(this.props.id, value);
     this.setState({ itemName: value });
   }
   toggleBeingEdited() {
@@ -40,4 +41,5 @@ ListItem.propTypes = {
   id: PropTypes.string,
   itemName: PropTypes.string,
   onDeleteItem: PropTypes.func,
+  onUpdateItem: PropTypes.func,
 };
