@@ -4,28 +4,29 @@ import PropTypes from 'prop-types';
 export default class ListItemEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { itemName: props.itemName };
+    this.state = {
+      itemName: props.itemName,
+    };
+
     this.handleItemNameChanged = this.handleItemNameChanged.bind(this);
-    this.updateItemName = this.updateItemName.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
+    this.handleUpdateItemNameClick = this.handleUpdateItemNameClick.bind(this);
   }
   handleItemNameChanged(e) {
-    this.setState({ itemName: e.target.value });
+    this.setState({
+      itemName: e.target.value,
+    });
   }
-  updateItemName() {
+  handleUpdateItemNameClick() {
     this.props.onItemUpdate(this.state.itemName);
-  }
-  deleteItem() {
-    this.props.onItemDelete();
   }
   render() {
     return (
       <div className="form-group">
         <input type="text" className="form-control" value={this.state.itemName} onChange={this.handleItemNameChanged} />
         <div className="btn-group" role="group">
-          <button type="button" className="btn btn-default" onClick={this.updateItemName}>Save</button>
+          <button type="button" className="btn btn-default" onClick={this.handleUpdateItemNameClick}>Save</button>
           <button type="button" className="btn btn-default" onClick={this.props.onItemCancelEdit}>Cancel</button>
-          <button type="button" className="btn btn-default" onClick={this.deleteItem}>Delete</button>
+          <button type="button" className="btn btn-default" onClick={this.props.onItemDelete}>Delete</button>
         </div>
       </div>
     );

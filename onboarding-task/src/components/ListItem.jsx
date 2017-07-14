@@ -5,32 +5,54 @@ import ListItemEditor from './ListItemEditor';
 export default class ListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isBeingEdited: false, itemName: this.props.itemName };
+    this.state = {
+      isBeingEdited: false,
+      itemName: this.props.itemName,
+    };
+
     this.handleEditItemClick = this.handleEditItemClick.bind(this);
     this.handleUpdateItemClick = this.handleUpdateItemClick.bind(this);
     this.handleDeleteItemClick = this.handleDeleteItemClick.bind(this);
     this.toggleBeingEdited = this.toggleBeingEdited.bind(this);
   }
+
   handleEditItemClick() {
     this.toggleBeingEdited();
   }
+
   handleUpdateItemClick(value) {
     this.toggleBeingEdited();
     this.props.onUpdateItem(this.props.id, value);
-    this.setState({ itemName: value });
+    this.setState({
+      itemName: value,
+    });
   }
-  toggleBeingEdited() {
-    this.setState({ isBeingEdited: !(this.state.isBeingEdited) });
-  }
+
   handleDeleteItemClick() {
     this.props.onDeleteItem(this.props.id);
   }
+
+  toggleBeingEdited() {
+    this.setState({
+      isBeingEdited: !this.state.isBeingEdited,
+    });
+  }
+
   render() {
     const isBeingEdited = this.state.isBeingEdited;
     return (
       <li>
-        {!isBeingEdited ? (<span onClick={this.handleEditItemClick} >{this.state.itemName}</span>) :
-          (<ListItemEditor itemName={this.state.itemName} onItemUpdate={this.handleUpdateItemClick} onItemCancelEdit={this.toggleBeingEdited} onItemDelete={this.handleDeleteItemClick} />)
+        {
+          !isBeingEdited ? (
+            <span onClick={this.handleEditItemClick}>{this.state.itemName}</span>
+          ) : (
+            <ListItemEditor
+              itemName={this.state.itemName}
+              onItemUpdate={this.handleUpdateItemClick}
+              onItemCancelEdit={this.toggleBeingEdited}
+              onItemDelete={this.handleDeleteItemClick}
+            />
+          )
         }
       </li>
     );
