@@ -1,27 +1,21 @@
 import './sticky-footer.css';
 import React, { Component } from 'react';
-import List from './components/List';
-import generateGUID from './index.js';
+import { List } from './components/List';
+import { generateGUID } from './utils/GUIDGenerator.js';
 
-window.items = [{ id: generateGUID(), itemName: 'Make coffee' }, { id: generateGUID(), itemName: 'Master React' }];
-
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = { items: [{ id: generateGUID(), itemName: 'Make coffee' }, { id: generateGUID(), itemName: 'Master React' }] };
-
-    this.createNewItem = this.createNewItem.bind(this);
-    this.updateItem = this.updateItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  createNewItem(value) {
+  _createNewItem = (value) => {
     this.setState(prevState => ({
       items: prevState.items.concat({ id: generateGUID(), itemName: value }),
     }));
-  }
+  };
 
-  updateItem(key, value) {
+  _updateItem = (key, value) => {
     const newArray = [];
     this.state.items.forEach(item => {
       if (item.id === key) {
@@ -32,13 +26,13 @@ class App extends Component {
       }
     });
     this.setState({ items: newArray });
-  }
+  };
 
-  deleteItem(key) {
+  _deleteItem = (key) => {
     this.setState(prevState => ({
       items: prevState.items.filter(item => item.id !== key),
     }));
-  }
+  };
 
   render() {
     return (
@@ -48,14 +42,14 @@ class App extends Component {
             <h3 className="text-muted">Kentico Academy</h3>
           </div>
 
-          <section id="app-content">
+          <div id="app-content">
             <List
               items={this.state.items}
-              onCreateItem={this.createNewItem}
-              onUpdateItem={this.updateItem}
-              onDeleteItem={this.deleteItem}
+              onCreateItem={this._createNewItem}
+              onUpdateItem={this._updateItem}
+              onDeleteItem={this._deleteItem}
             />
-          </section>
+          </div>
 
         </div>
 
@@ -66,5 +60,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

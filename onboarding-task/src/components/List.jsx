@@ -1,32 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import ListItem from './ListItem.jsx';
-import ListItemInput from './ListItemInput';
+import { ListItem } from './ListItem.jsx';
+import { ListItemInput } from './ListItemInput';
 
-class List extends Component {
-  render() {
-    return (
-      <div className="row">
-        <div className="col-sm-12 col-md-6">
-          <ol className="list">
-            {
-              this.props.items.map(item => (
-                <ListItem
-                  key={item.id}
-                  id={item.id}
-                  itemName={item.itemName}
-                  onUpdateItem={this.props.onUpdateItem}
-                  onDeleteItem={this.props.onDeleteItem}
-                />
-              ))
-            }
-          </ol>
-          <ListItemInput onCreateItem={this.props.onCreateItem} />
-        </div>
+export function List(props) {
+  return (
+    <div className="row">
+      <div className="col-sm-12 col-md-6">
+        <ol className="list">
+          {
+            props.items.map(item => (
+              <ListItem
+                key={item.id}
+                id={item.id}
+                itemName={item.itemName}
+                onUpdateItem={props.onUpdateItem}
+                onDeleteItem={props.onDeleteItem}
+              />
+            ))
+          }
+        </ol>
+        <ListItemInput onCreateItem={props.onCreateItem} />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 List.propTypes = {
@@ -35,5 +33,3 @@ List.propTypes = {
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
 };
-
-export default List;

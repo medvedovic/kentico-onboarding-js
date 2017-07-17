@@ -1,20 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class ListItemInput extends React.Component {
+export class ListItemInput extends React.Component {
+  static propTypes = {
+    onCreateItem: PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       value: '',
     };
+  }
 
-    this.handleCreateItemClick = this.handleCreateItemClick.bind(this);
-    this.handleInputChanged = this.handleInputChanged.bind(this);
+  componentDidMount() {
+    document.addEventListener('keydown', (event) => {
+      if ((event.keyCode === 13) && this.state.value) {
+        this._handleCreateItemClick();
+      }
+    });
   }
-  handleInputChanged(e) {
+
+  _handleInputChanged = (e) => {
     this.setState({ value: e.target.value });
-  }
-  handleCreateItemClick() {
+  };
+
+  _handleCreateItemClick = () => {
     if (!this.state.value) {
       return;
     }
@@ -22,22 +33,18 @@ export default class ListItemInput extends React.Component {
     this.setState({
       value: '',
     });
-  }
+  };
+
   render() {
     return (
       <div className="col-lg-6">
         <div className="input-group">
-          <input type="text" className="form-control" onChange={this.handleInputChanged} value={this.state.value} />
+          <input type="text" className="form-control" onChange={this._handleInputChanged} value={this.state.value} />
           <span className="input-group-btn">
-            <button type="button" className="btn btn-default" onClick={this.handleCreateItemClick}>Add</button>
+            <button type="button" className="btn btn-default" onClick={this._handleCreateItemClick}>Add</button>
           </span>
         </div>
       </div>
     );
   }
 }
-
-ListItemInput.propTypes = {
-  onCreateItem: PropTypes.func,
-};
-
