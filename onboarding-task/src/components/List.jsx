@@ -2,23 +2,24 @@ import React from 'react';
 
 import { ListItem } from './ListItem.jsx';
 import { ListItemInput } from './ListItemInput';
-import { generateGUID } from '../utils/GUIDGenerator';
+import { GuidGenerator } from '../utils/GuidGenerator';
 
 export class List extends React.PureComponent {
   static displayName = 'List';
 
   constructor(props) {
     super(props);
-    this.state = { items: [
-      { id: generateGUID(), itemName: 'Make coffee' },
-      { id: generateGUID(), itemName: 'Master React' },
-    ],
+    this.state = {
+      items: [
+        { id: GuidGenerator.generate(), itemName: 'Make coffee' },
+        { id: GuidGenerator.generate(), itemName: 'Master React' },
+      ],
     };
   }
 
   _createNewItem = (value) => {
     this.setState(prevState => ({
-      items: prevState.items.concat({ id: generateGUID(), itemName: value }),
+      items: prevState.items.concat({ id: GuidGenerator.generate(), itemName: value }),
     }));
   };
 
@@ -48,13 +49,14 @@ export class List extends React.PureComponent {
           <ol className="list">
             {
               this.state.items.map(item => (
-                <ListItem
-                  key={item.id}
-                  id={item.id}
-                  itemName={item.itemName}
-                  onUpdateItem={this._updateItem}
-                  onDeleteItem={this._deleteItem}
-                />
+                <li key={item.id}>
+                  <ListItem
+                    id={item.id}
+                    itemName={item.itemName}
+                    onUpdateItem={this._updateItem}
+                    onDeleteItem={this._deleteItem}
+                  />
+                </li>
               ))
             }
           </ol>

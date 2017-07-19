@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItemEditor } from './ListItemEditor';
+import { ListItemDisplay } from './ListItemDisplay';
 
 export class ListItem extends React.Component {
   static displayName = 'displayName';
@@ -39,21 +40,18 @@ export class ListItem extends React.Component {
 
   render() {
     const isBeingEdited = this.state.isBeingEdited;
-    return (
-      <li>
-        {
-          !isBeingEdited ? (
-            <span onClick={this._toggleBeingEdited}>{this.state.itemName}</span>
-          ) : (
-            <ListItemEditor
-              itemName={this.state.itemName}
-              onItemUpdate={this._handleUpdateItemClick}
-              onItemCancelEdit={this._toggleBeingEdited}
-              onItemDelete={this._handleDeleteItemClick}
-            />
-          )
-        }
-      </li>
-    );
+
+    if (isBeingEdited) {
+      return (<ListItemEditor
+        itemName={this.state.itemName}
+        onItemUpdate={this._handleUpdateItemClick}
+        onItemCancelEdit={this._toggleBeingEdited}
+        onItemDelete={this._handleDeleteItemClick}
+      />);
+    }
+
+    return <ListItemDisplay itemName={this.props.itemName} onClick={this._toggleBeingEdited} />;
+
+    // return (<span onClick={this._toggleBeingEdited}>{this.props.itemName}</span>);
   }
 }
