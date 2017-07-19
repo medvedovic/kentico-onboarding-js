@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 export class ListItemEditor extends React.Component {
   static propTypes = {
-    itemName: PropTypes.string,
-    onItemUpdate: PropTypes.func,
-    onItemCancelEdit: PropTypes.func,
-    onItemDelete: PropTypes.func,
+    itemName: PropTypes.string.isRequired,
+    onItemUpdate: PropTypes.func.isRequired,
+    onItemCancelEdit: PropTypes.func.isRequired,
+    onItemDelete: PropTypes.func.isRequired,
   };
 
   constructor(props) {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export class ListItemInput extends React.Component {
   static propTypes = {
-    onCreateItem: PropTypes.func,
+    onCreateItem: PropTypes.func.isRequired,
   };
 
   constructor(props) {

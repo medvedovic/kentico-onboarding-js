@@ -28,8 +28,8 @@ export function List(props) {
 }
 
 List.propTypes = {
-  items: PropTypes.array,
-  onCreateItem: PropTypes.func,
-  onUpdateItem: PropTypes.func,
-  onDeleteItem: PropTypes.func,
+  items: PropTypes.array.isRequired,
+  onCreateItem: PropTypes.func.isRequired,
+  onUpdateItem: PropTypes.func.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
 };

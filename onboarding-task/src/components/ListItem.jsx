@@ -4,10 +4,10 @@ import { ListItemEditor } from './ListItemEditor';
 
 export class ListItem extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
-    itemName: PropTypes.string,
-    onDeleteItem: PropTypes.func,
-    onUpdateItem: PropTypes.func,
+    id: PropTypes.string.isRequired,
+    itemName: PropTypes.string.isRequired,
+    onDeleteItem: PropTypes.func.isRequired,
+    onUpdateItem: PropTypes.func.isRequired,
   };
 
   constructor(props) {
