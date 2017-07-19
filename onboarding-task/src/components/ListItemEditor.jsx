@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export class ListItemEditor extends React.Component {
+  static displayName = 'ListItemEditor';
   static propTypes = {
     itemName: PropTypes.string.isRequired,
     onItemUpdate: PropTypes.func.isRequired,

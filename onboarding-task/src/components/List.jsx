@@ -27,6 +27,8 @@ export function List(props) {
   );
 }
 
+List.displayName = 'List';
+
 List.propTypes = {
   items: PropTypes.array.isRequired,
   onCreateItem: PropTypes.func.isRequired,

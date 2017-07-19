@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export class ListItemInput extends React.Component {
+  static displayName = 'ListItemInput';
   static propTypes = {
     onCreateItem: PropTypes.func.isRequired,
   };
