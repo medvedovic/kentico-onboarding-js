@@ -40,6 +40,7 @@ export class ListItemInput extends React.Component {
   };
 
   render() {
+    const { value } = this.state;
     return (
       <div className="col-lg-6">
         <div className="input-group">
@@ -47,7 +48,7 @@ export class ListItemInput extends React.Component {
             type="text"
             className="form-control"
             onChange={this._handleInputChanged}
-            value={this.state.value}
+            value={value}
             ref={(input) => {
               this.textInput = input;
             }}

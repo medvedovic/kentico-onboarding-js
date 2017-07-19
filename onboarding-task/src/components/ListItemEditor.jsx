@@ -50,12 +50,13 @@ export class ListItemEditor extends React.Component {
   };
 
   render() {
+    const { itemName } = this.state;
     return (
       <div className="form-group">
         <input
           type="text"
           className="form-control"
-          value={this.state.itemName}
+          value={itemName}
           onChange={this._handleItemNameChanged}
           ref={(input) => {
             this.textInput = input;
