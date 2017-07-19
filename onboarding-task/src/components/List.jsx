@@ -4,7 +4,7 @@ import { ListItem } from './ListItem.jsx';
 import { ListItemInput } from './ListItemInput';
 import { GuidGenerator } from '../utils/GuidGenerator';
 
-export class List extends React.PureComponent {
+export class List extends React.Component {
   static displayName = 'List';
 
   constructor(props) {
@@ -19,7 +19,9 @@ export class List extends React.PureComponent {
 
   _createNewItem = (value) => {
     this.setState(prevState => ({
-      items: prevState.items.concat({ id: GuidGenerator.generate(), itemName: value }),
+      items: prevState.items.concat({
+        id: GuidGenerator.generate(), itemName: value,
+      }),
     }));
   };
 
@@ -33,7 +35,9 @@ export class List extends React.PureComponent {
         newArray.push(item);
       }
     });
-    this.setState({ items: newArray });
+    this.setState({
+      items: newArray,
+    });
   };
 
   _deleteItem = (key) => {
@@ -43,12 +47,13 @@ export class List extends React.PureComponent {
   };
 
   render() {
+    const { items } = this.state;
     return (
       <div className="row">
         <div className="col-sm-12 col-md-6">
           <ol className="list">
             {
-              this.state.items.map(item => (
+              items.map(item => (
                 <li key={item.id}>
                   <ListItem
                     id={item.id}

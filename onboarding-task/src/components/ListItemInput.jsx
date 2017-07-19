@@ -23,7 +23,10 @@ export class ListItemInput extends React.Component {
   }
 
   _handleInputChanged = (e) => {
-    this.setState({ value: e.target.value });
+    const value = e.target.value;
+    this.setState({
+      value,
+    });
   };
 
   _handleCreateItemClick = () => {

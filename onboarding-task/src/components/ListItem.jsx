@@ -16,16 +16,12 @@ export class ListItem extends React.Component {
     super(props);
     this.state = {
       isBeingEdited: false,
-      itemName: this.props.itemName,
     };
   }
 
   _handleUpdateItemClick = (value) => {
     this._toggleBeingEdited();
     this.props.onUpdateItem(this.props.id, value);
-    this.setState({
-      itemName: value,
-    });
   };
 
   _handleDeleteItemClick = () => {
@@ -33,25 +29,26 @@ export class ListItem extends React.Component {
   };
 
   _toggleBeingEdited = () => {
-    this.setState({
-      isBeingEdited: !this.state.isBeingEdited,
-    });
+    this.setState(prevState => ({
+      isBeingEdited: !prevState.isBeingEdited,
+    }));
   };
 
   render() {
-    const isBeingEdited = this.state.isBeingEdited;
+    const { isBeingEdited } = this.state;
+    const { itemName } = this.props;
 
     if (isBeingEdited) {
-      return (<ListItemEditor
-        itemName={this.state.itemName}
-        onItemUpdate={this._handleUpdateItemClick}
-        onItemCancelEdit={this._toggleBeingEdited}
-        onItemDelete={this._handleDeleteItemClick}
-      />);
+      return (
+        <ListItemEditor
+          itemName={itemName}
+          onItemUpdate={this._handleUpdateItemClick}
+          onItemCancelEdit={this._toggleBeingEdited}
+          onItemDelete={this._handleDeleteItemClick}
+        />
+      );
     }
 
-    return <ListItemDisplay itemName={this.props.itemName} onClick={this._toggleBeingEdited} />;
-
-    // return (<span onClick={this._toggleBeingEdited}>{this.props.itemName}</span>);
+    return <ListItemDisplay itemName={itemName} onClick={this._toggleBeingEdited} />;
   }
 }

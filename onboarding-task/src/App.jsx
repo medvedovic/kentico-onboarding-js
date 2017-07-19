@@ -1,8 +1,8 @@
 import './sticky-footer.css';
-import React, { Component } from 'react';
+import React from 'react';
 import { List } from './components/List';
 
-export function App(props) {
+export function App() {
   return (
     <div>
       <div className="container">

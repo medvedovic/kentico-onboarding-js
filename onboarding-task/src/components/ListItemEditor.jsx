@@ -30,6 +30,7 @@ export class ListItemEditor extends React.Component {
         this._handleUpdateItemNameClick();
       }
     });
+
     this._focus();
   }
 
@@ -38,9 +39,9 @@ export class ListItemEditor extends React.Component {
   };
 
   _handleItemNameChanged = (e) => {
-    const val = e.target.value;
+    const itemName = e.target.value;
     this.setState({
-      itemName: val,
+      itemName,
     });
   };
 
