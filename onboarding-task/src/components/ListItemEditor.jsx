@@ -17,6 +17,26 @@ export class ListItemEditor extends React.Component {
     };
   }
 
+  componentDidMount() {
+    // Cancel editation on ESC
+    document.addEventListener('keydown', e => {
+      if (e.keyCode === 27) {
+        this.props.onItemCancelEdit();
+      }
+    });
+    // Save on enter
+    document.addEventListener('keydown', (event) => {
+      if ((event.keyCode === 13) && this.state.itemName && document.activeElement === this.textInput) {
+        this._handleUpdateItemNameClick();
+      }
+    });
+    this._focus();
+  }
+
+  _focus = () => {
+    this.textInput.focus();
+  };
+
   _handleItemNameChanged = (e) => {
     const val = e.target.value;
     this.setState({
@@ -31,7 +51,15 @@ export class ListItemEditor extends React.Component {
   render() {
     return (
       <div className="form-group">
-        <input type="text" className="form-control" value={this.state.itemName} onChange={this._handleItemNameChanged} />
+        <input
+          type="text"
+          className="form-control"
+          value={this.state.itemName}
+          onChange={this._handleItemNameChanged}
+          ref={(input) => {
+            this.textInput = input;
+          }}
+        />
         <div className="btn-group" role="group">
           <button type="button" className="btn btn-default" onClick={this._handleUpdateItemNameClick}>Save</button>
           <button type="button" className="btn btn-default" onClick={this.props.onItemCancelEdit}>Cancel</button>
