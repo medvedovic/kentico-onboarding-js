@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ListItem } from './ListItem.jsx';
 import { ListItemInput } from './ListItemInput';
-import { GuidGenerator } from '../utils/GuidGenerator';
+import { generateGuid } from '../utils/generateGuid';
 
 export class List extends React.Component {
   static displayName = 'List';
@@ -11,8 +11,8 @@ export class List extends React.Component {
     super(props);
     this.state = {
       items: [
-        { id: GuidGenerator.generate(), itemName: 'Make coffee' },
-        { id: GuidGenerator.generate(), itemName: 'Master React' },
+        { id: generateGuid(), itemName: 'Make coffee' },
+        { id: generateGuid(), itemName: 'Master React' },
       ],
     };
   }
@@ -20,7 +20,7 @@ export class List extends React.Component {
   _createNewItem = (value) => {
     this.setState(prevState => ({
       items: prevState.items.concat({
-        id: GuidGenerator.generate(), itemName: value,
+        id: generateGuid(), itemName: value,
       }),
     }));
   };
