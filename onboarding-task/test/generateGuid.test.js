@@ -10,7 +10,7 @@ describe('generateGuid', () => {
   });
 
   it('provides unique values', () => {
-    const numberOfIterations = 1000;
+    const numberOfIterations = 100;
     let arr = [];
     for (let i = 0; i < numberOfIterations; i++) {
       arr.push(generateGuid());

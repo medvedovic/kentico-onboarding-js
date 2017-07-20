@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { isTextInputValid } from '../utils/isTextInputValid';
+
 export class ListItemInput extends React.PureComponent {
   static displayName = 'ListItemInput';
   static propTypes = {
@@ -23,7 +25,7 @@ export class ListItemInput extends React.PureComponent {
   }
 
   _handleInputOnEnter = (e) => {
-    if ((e.key === 'Enter') && this.state.value && document.activeElement === this.textInput) {
+    if ((e.key === 'Enter') && document.activeElement === this.textInput) {
       this._handleCreateItemClick();
     }
   };
@@ -38,15 +40,24 @@ export class ListItemInput extends React.PureComponent {
   };
 
   _handleCreateItemClick = () => {
-    if (!this.state.value) {
+    const { value } = this.state;
+    if (isTextInputValid(value)) {
+      this.props.onCreateItem(value);
+      this._resetInput();
+    }
+    else {
+      this._resetInput();
       return;
     }
-    this.props.onCreateItem(this.state.value);
+  };
+
+  _resetInput = () => {
     this.setState(() => {
       return {
         value: '',
       };
     });
+    this.textInput.blur();
   };
 
   render() {

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { isTextInputValid } from '../utils/isTextInputValid';
+
 export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
@@ -18,21 +20,21 @@ export class ListItemEditor extends React.PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this._handleKeyboarInput);
+    document.addEventListener('keydown', this._handleKeyboardInput);
     this._focus();
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this._handleKeyboarInput);
+    document.removeEventListener('keydown', this._handleKeyboardInput);
   }
 
-  _handleKeyboarInput = (e) => {
+  _handleKeyboardInput = (e) => {
     switch (e.key) {
       case 'Escape':
         this.props.onItemCancelEdit();
         break;
       case 'Enter':
-        if (this.state.itemName && document.activeElement === this.textInput) {
+        if (document.activeElement === this.textInput) {
           this._handleUpdateItemNameClick();
         }
         break;
@@ -55,7 +57,10 @@ export class ListItemEditor extends React.PureComponent {
   };
 
   _handleUpdateItemNameClick =() => {
-    this.props.onItemUpdate(this.state.itemName);
+    const { itemName } = this.state;
+    if (isTextInputValid(itemName)) {
+      this.props.onItemUpdate(itemName);
+    }
   };
 
   render() {
