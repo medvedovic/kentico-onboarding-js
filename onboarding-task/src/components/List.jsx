@@ -4,7 +4,7 @@ import { ListItem } from './ListItem.jsx';
 import { ListItemInput } from './ListItemInput';
 import { generateGuid } from '../utils/generateGuid';
 
-export class List extends React.Component {
+export class List extends React.PureComponent {
   static displayName = 'List';
 
   constructor(props) {

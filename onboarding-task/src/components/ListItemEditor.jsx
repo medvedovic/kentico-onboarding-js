@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export class ListItemEditor extends React.Component {
+export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
     itemName: PropTypes.string.isRequired,
