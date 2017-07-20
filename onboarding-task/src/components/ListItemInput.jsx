@@ -16,18 +16,15 @@ export class ListItemInput extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
-    document.addEventListener('keydown', this._handleInputOnEnter);
-  }
+  _onSubmitForm = (e) => {
+    e.preventDefault();
+    const { value } = this.state;
 
-  componentWillMount() {
-    document.removeEventListener('keydown', this._handleInputOnEnter);
-  }
-
-  _handleInputOnEnter = (e) => {
-    if ((e.key === 'Enter') && document.activeElement === this.textInput) {
-      this._handleCreateItemClick();
+    if (isTextInputValid(value)) {
+      this.props.onCreateItem(value);
     }
+
+    this._resetInput();
   };
 
   _handleInputChanged = (e) => {
@@ -37,18 +34,6 @@ export class ListItemInput extends React.PureComponent {
         value,
       };
     });
-  };
-
-  _handleCreateItemClick = () => {
-    const { value } = this.state;
-    if (isTextInputValid(value)) {
-      this.props.onCreateItem(value);
-      this._resetInput();
-    }
-    else {
-      this._resetInput();
-      return;
-    }
   };
 
   _resetInput = () => {
@@ -64,20 +49,22 @@ export class ListItemInput extends React.PureComponent {
     const { value } = this.state;
     return (
       <div className="col-sm-12 top-offset">
-        <div className="input-group">
-          <span className="input-group-btn">
-            <button type="button" className="btn btn-default" onClick={this._handleCreateItemClick}>Add</button>
-          </span>
-          <input
-            type="text"
-            className="form-control enlarge"
-            onChange={this._handleInputChanged}
-            value={value}
-            ref={(input) => {
-              this.textInput = input;
-            }}
-          />
-        </div>
+        <form onSubmit={this._onSubmitForm}>
+          <div className="input-group">
+            <span className="input-group-btn">
+              <button type="submit" className="btn btn-default">Add</button>
+            </span>
+            <input
+              type="text"
+              className="form-control enlarge"
+              onChange={this._handleInputChanged}
+              value={value}
+              ref={(input) => {
+                this.textInput = input;
+              }}
+            />
+          </div>
+        </form>
       </div>
     );
   }
