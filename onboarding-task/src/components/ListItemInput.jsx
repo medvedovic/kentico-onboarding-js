@@ -24,8 +24,10 @@ export class ListItemInput extends React.PureComponent {
 
   _handleInputChanged = (e) => {
     const value = e.target.value;
-    this.setState({
-      value,
+    this.setState(() => {
+      return {
+        value,
+      };
     });
   };
 
@@ -34,8 +36,10 @@ export class ListItemInput extends React.PureComponent {
       return;
     }
     this.props.onCreateItem(this.state.value);
-    this.setState({
-      value: '',
+    this.setState(() => {
+      return {
+        value: '',
+      };
     });
   };
 

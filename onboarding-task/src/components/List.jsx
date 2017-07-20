@@ -20,7 +20,8 @@ export class List extends React.PureComponent {
   _createNewItem = (value) => {
     this.setState(prevState => ({
       items: prevState.items.concat({
-        id: generateGuid(), itemName: value,
+        id: generateGuid(),
+        itemName: value,
       }),
     }));
   };
@@ -29,20 +30,27 @@ export class List extends React.PureComponent {
     const newArray = [];
     this.state.items.forEach(item => {
       if (item.id === key) {
-        newArray.push({ id: key, itemName: value });
+        newArray.push({
+          id: key,
+          itemName: value,
+        });
       }
       else {
         newArray.push(item);
       }
     });
-    this.setState({
-      items: newArray,
+    this.setState(() => {
+      return {
+        items: newArray,
+      };
     });
   };
 
   _deleteItem = (key) => {
     this.setState(prevState => ({
-      items: prevState.items.filter(item => item.id !== key),
+      items: prevState.items.filter(item => {
+        return item.id !== key;
+      }),
     }));
   };
 
