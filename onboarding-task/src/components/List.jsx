@@ -65,7 +65,7 @@ export class List extends React.PureComponent {
                 <li key={item.id}>
                   <ListItem
                     id={item.id}
-                    itemName={item.itemName}
+                    item={item}
                     onUpdateItem={this._updateItem}
                     onDeleteItem={this._deleteItem}
                   />

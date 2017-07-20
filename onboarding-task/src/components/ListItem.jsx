@@ -7,7 +7,7 @@ export class ListItem extends React.PureComponent {
   static displayName = 'displayName';
   static propTypes = {
     id: PropTypes.string.isRequired,
-    itemName: PropTypes.string.isRequired,
+    item: PropTypes.object.isRequired,
     onDeleteItem: PropTypes.func.isRequired,
     onUpdateItem: PropTypes.func.isRequired,
   };
@@ -36,12 +36,12 @@ export class ListItem extends React.PureComponent {
 
   render() {
     const { isBeingEdited } = this.state;
-    const { itemName } = this.props;
+    const { item } = this.props;
 
     if (isBeingEdited) {
       return (
         <ListItemEditor
-          itemName={itemName}
+          itemName={item.itemName}
           onItemUpdate={this._handleUpdateItemClick}
           onItemCancelEdit={this._toggleBeingEdited}
           onItemDelete={this._handleDeleteItemClick}
@@ -49,6 +49,6 @@ export class ListItem extends React.PureComponent {
       );
     }
 
-    return <ListItemDisplay itemName={itemName} onClick={this._toggleBeingEdited} />;
+    return <ListItemDisplay item={item} onClick={this._toggleBeingEdited} />;
   }
 }
