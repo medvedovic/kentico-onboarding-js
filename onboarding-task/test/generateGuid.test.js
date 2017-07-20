@@ -1,6 +1,6 @@
 import { generateGuid } from '../src/utils/generateGuid';
 
-describe('GuidGenerator', () => {
+describe('generateGuid', () => {
   it('provides correct format', () => {
     expect(/(\w{8}-\w{4}-4\w{3}-\w{4}-\w{12})/.test(generateGuid())).toBe(true);
   });
