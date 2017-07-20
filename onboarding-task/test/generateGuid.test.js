@@ -15,7 +15,9 @@ describe('generateGuid', () => {
     for (let i = 0; i < numberOfIterations; i++) {
       arr.push(generateGuid());
     }
-    const newArr = arr.filter((x, y) => x !== y);
+    const newArr = arr.filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
     arr = null;
     expect(newArr.length).toBe(numberOfIterations);
   });

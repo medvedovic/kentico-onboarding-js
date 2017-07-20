@@ -10,7 +10,7 @@ describe('isTextInputValid', () => {
   it('works on empty strings', () => {
     expect(isTextInputValid('')).toBe(false);
   });
-  it('works on any string', () => {
-    expect(isTextInputValid(Math.random().toString(36) + '00000000000000000').slice(2, 12)).toBe(true);
+  it('works on a valid string', () => {
+    expect(isTextInputValid('Hello world')).toBe(true);
   });
 });
