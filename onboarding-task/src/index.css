@@ -48,7 +48,7 @@ body {
 
 .btn-default:hover {
   border-color: #000;
-  text-shadow: 0 0 1px #66ccff;
+  text-shadow: 1px 1px 1px #66ccff;
 }
 
 .list li :after {
