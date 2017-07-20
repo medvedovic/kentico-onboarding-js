@@ -52,20 +52,20 @@ export class ListItemInput extends React.PureComponent {
   render() {
     const { value } = this.state;
     return (
-      <div className="col-lg-6">
+      <div className="col-sm-12 top-offset">
         <div className="input-group">
+          <span className="input-group-btn">
+            <button type="button" className="btn btn-default" onClick={this._handleCreateItemClick}>Add</button>
+          </span>
           <input
             type="text"
-            className="form-control"
+            className="form-control enlarge"
             onChange={this._handleInputChanged}
             value={value}
             ref={(input) => {
               this.textInput = input;
             }}
           />
-          <span className="input-group-btn">
-            <button type="button" className="btn btn-default" onClick={this._handleCreateItemClick}>Add</button>
-          </span>
         </div>
       </div>
     );

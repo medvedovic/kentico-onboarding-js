@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto Condensed', sans-serif;
+  color: #666;
 }
 
 .img--assignment {
@@ -18,14 +19,36 @@ body {
 .list li {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 1.2em;
-  padding: 10px 0;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  line-height: 40px;
+  height: 40px;
 }
 
-.list li:hover {
-  border-top: 1px solid #f1f1f1;
-  border-bottom: 1px solid #f1f1f1;
+.list span {
+  display: block;
+}
+
+.list span:hover {
+  cursor: pointer;
+  text-shadow: 0 0 1px #66ccff;
+}
+
+.list li:hover,
+.list li .form-group input,
+.btn-default:hover {
+  color: #000;
+  background-color: transparent;
+}
+
+.btn-default {
+  transition: .3s all linear;
+  color: #808080;
+}
+
+.btn-default:hover {
+  border-color: #000;
+  text-shadow: 0 0 1px #66ccff;
 }
 
 .list li :after {
@@ -38,8 +61,31 @@ body {
   margin: 0;
 }
 
-.list li input {
+.list li .form-control {
+  display: inline-block;
   width: 50%;
-  float: left;
-  margin-right: 15px;
+  margin-right: 25px;
+}
+
+.form-control {
+  transition: .3s all linear;
+}
+
+.form-control:focus,
+input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #333;
+}
+
+.top-offset {
+  padding-top: 1em;
+}
+
+.enlarge {
+  width: 50% !important;
+}
+
+.enlarge:focus {
+  width: 100% !important;
 }
