@@ -18,21 +18,28 @@ export class ListItemEditor extends React.PureComponent {
   }
 
   componentDidMount() {
-    // Cancel editation on ESC
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === 27) {
-        this.props.onItemCancelEdit();
-      }
-    });
-    // Save on enter
-    document.addEventListener('keydown', (event) => {
-      if ((event.keyCode === 13) && this.state.itemName && document.activeElement === this.textInput) {
-        this._handleUpdateItemNameClick();
-      }
-    });
-
+    document.addEventListener('keydown', this._handleKeyboarInput);
     this._focus();
   }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._handleKeyboarInput);
+  }
+
+  _handleKeyboarInput = (e) => {
+    switch (e.key) {
+      case 'Escape':
+        this.props.onItemCancelEdit();
+        break;
+      case 'Enter':
+        if (this.state.itemName && document.activeElement === this.textInput) {
+          this._handleUpdateItemNameClick();
+        }
+        break;
+      default:
+        return;
+    }
+  };
 
   _focus = () => {
     this.textInput.focus();

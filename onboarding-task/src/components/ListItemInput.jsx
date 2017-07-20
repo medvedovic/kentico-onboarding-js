@@ -15,12 +15,18 @@ export class ListItemInput extends React.PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', (event) => {
-      if ((event.keyCode === 13) && this.state.value && document.activeElement === this.textInput) {
-        this._handleCreateItemClick();
-      }
-    });
+    document.addEventListener('keydown', this._handleInputOnEnter);
   }
+
+  componentWillMount() {
+    document.removeEventListener('keydown', this._handleInputOnEnter);
+  }
+
+  _handleInputOnEnter = (e) => {
+    if ((e.key === 'Enter') && this.state.value && document.activeElement === this.textInput) {
+      this._handleCreateItemClick();
+    }
+  };
 
   _handleInputChanged = (e) => {
     const value = e.target.value;
