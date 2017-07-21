@@ -6,7 +6,9 @@ import { isTextInputValid } from '../utils/isTextInputValid';
 export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
-    item: PropTypes.object.isRequired,
+    item: PropTypes.shape({
+      value: PropTypes.string.isRequired,
+    }).isRequired,
     onItemUpdate: PropTypes.func.isRequired,
     onItemCancelEdit: PropTypes.func.isRequired,
     onItemDelete: PropTypes.func.isRequired,

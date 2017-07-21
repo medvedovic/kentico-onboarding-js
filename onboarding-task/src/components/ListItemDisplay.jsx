@@ -11,5 +11,7 @@ ListItemDisplay.displayName = 'ListItemDisplay';
 
 ListItemDisplay.propTypes = {
   onClick: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+  }).isRequired,
 };

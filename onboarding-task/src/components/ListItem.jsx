@@ -7,7 +7,9 @@ export class ListItem extends React.PureComponent {
   static displayName = 'displayName';
   static propTypes = {
     id: PropTypes.string.isRequired,
-    item: PropTypes.object.isRequired,
+    item: PropTypes.shape({
+      value: PropTypes.string.isRequired,
+    }).isRequired,
     onDeleteItem: PropTypes.func.isRequired,
     onUpdateItem: PropTypes.func.isRequired,
   };
