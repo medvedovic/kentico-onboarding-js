@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const ListItemDisplay = (props) => {
   return (
-    <span onClick={props.onClick}>{props.item.itemName}</span>
+    <span onClick={props.onClick}>{props.item.value}</span>
   );
 };
 

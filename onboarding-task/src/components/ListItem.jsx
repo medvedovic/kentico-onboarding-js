@@ -37,11 +37,10 @@ export class ListItem extends React.PureComponent {
   render() {
     const { isBeingEdited } = this.state;
     const { item } = this.props;
-
     if (isBeingEdited) {
       return (
         <ListItemEditor
-          itemName={item.itemName}
+          item={item}
           onItemUpdate={this._handleUpdateItemClick}
           onItemCancelEdit={this._toggleBeingEdited}
           onItemDelete={this._handleDeleteItemClick}
