@@ -1,37 +1,81 @@
-import React, { Component } from 'react';
-import assignment from './../../../assignment.gif';
+import React from 'react';
 
-import TsComponent from './TsComponent.tsx';
+import { ListItem } from './ListItem.jsx';
+import { ListItemInput } from './ListItemInput';
+import { generateGuid } from '../utils/generateGuid';
 
-class List extends Component {
+export class List extends React.PureComponent {
+  static displayName = 'List';
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [
+        { id: generateGuid(), itemName: 'Make coffee' },
+        { id: generateGuid(), itemName: 'Master React' },
+      ],
+    };
+  }
+
+  _createNewItem = (value) => {
+    this.setState(prevState => ({
+      items: prevState.items.concat({
+        id: generateGuid(),
+        itemName: value,
+      }),
+    }));
+  };
+
+  _updateItem = (key, value) => {
+    const newArray = [];
+    this.state.items.forEach(item => {
+      if (item.id === key) {
+        newArray.push({
+          id: key,
+          itemName: value,
+        });
+      }
+      else {
+        newArray.push(item);
+      }
+    });
+    this.setState(() => {
+      return {
+        items: newArray,
+      };
+    });
+  };
+
+  _deleteItem = (key) => {
+    this.setState(prevState => ({
+      items: prevState.items.filter(item => {
+        return item.id !== key;
+      }),
+    }));
+  };
+
   render() {
+    const { items } = this.state;
     return (
       <div className="row">
-        {/* TODO: You can delete the assignment part once you do not need it */}
-        <div className="row">
-          <div className="col-sm-12 text-center">
-            <TsComponent name="𝕱𝖆𝖓𝖈𝖞" />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-sm-12">
-            <p className="lead text-center">Desired functionality is captured on the gif image. </p>
-            <p className="lead text-center"><b>Note: </b>Try to make solution easily extensible (e.g. more displayed fields per item).</p>
-            <img src={assignment} alt="assignment" className="img--assignment" />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-sm-12 col-md-offset-2 col-md-8">
-            <pre>
-              // TODO: implement the list here :)
-            </pre>
-          </div>
+        <div className="col-sm-12 col-md-6">
+          <ol className="list">
+            {
+              items.map(item => (
+                <li key={item.id}>
+                  <ListItem
+                    id={item.id}
+                    item={item}
+                    onUpdateItem={this._updateItem}
+                    onDeleteItem={this._deleteItem}
+                  />
+                </li>
+              ))
+            }
+          </ol>
+          <ListItemInput onCreateItem={this._createNewItem} />
         </div>
       </div>
     );
   }
 }
-
-export default List;
