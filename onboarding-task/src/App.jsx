@@ -23,4 +23,4 @@ export function App() {
   );
 }
 
-App.displayname = 'App';
+App.displayName = 'App';
