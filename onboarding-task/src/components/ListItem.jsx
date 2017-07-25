@@ -4,7 +4,7 @@ import { ListItemEditor } from './ListItemEditor';
 import { ListItemDisplay } from './ListItemDisplay';
 
 export class ListItem extends React.PureComponent {
-  static displayName = 'displayName';
+  static displayName = 'ListItem';
   static propTypes = {
     id: PropTypes.string.isRequired,
     item: PropTypes.shape({
