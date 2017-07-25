@@ -1,6 +1,9 @@
-import { isTextInputValid } from '../src/utils/isTextInputValid';
+import { isTextInputValid } from '../../src/utils/isTextInputValid';
 
 describe('isTextInputValid', () => {
+  it('works on whitespaces', () => {
+    expect(isTextInputValid('    ')).toBe(false);
+  });
   it('works on null', () => {
     expect(isTextInputValid(null)).toBe(false);
   });
