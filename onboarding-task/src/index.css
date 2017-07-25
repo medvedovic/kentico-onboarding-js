@@ -5,11 +5,11 @@ body {
   padding: 0;
   font-family: 'Roboto Condensed', sans-serif;
   color: #666;
+  font-size: 14px;
 }
 
 .img--assignment {
   display: flex;
-
 }
 
 .list {
@@ -21,8 +21,8 @@ body {
   font-size: 1.2em;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  line-height: 40px;
-  height: 40px;
+  line-height: 2.385em;
+  height: 2.385em;
 }
 
 .list span {
@@ -64,7 +64,7 @@ body {
 .list li .form-control {
   display: inline-block;
   width: 50%;
-  margin-right: 25px;
+  margin-right: 1.78em;
 }
 
 .form-control {
