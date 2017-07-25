@@ -21,14 +21,6 @@ export class ListItemEditor extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
-    document.addEventListener('keydown', this._handleKeyboardInput);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this._handleKeyboardInput);
-  }
-
   _handleKeyboardInput = (e) => {
     switch (e.key) {
       case 'Escape':
@@ -69,6 +61,7 @@ export class ListItemEditor extends React.PureComponent {
           className="form-control"
           value={value}
           onChange={this._handleItemNameChanged}
+          onKeyDown={this._handleKeyboardInput}
           ref={(input) => {
             this.textInput = input;
           }}
