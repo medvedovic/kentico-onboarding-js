@@ -1,1 +1,1 @@
-export const isTextInputValid = (input) => input && input.trim().length > 0;
+export const isTextInputValid = (input) => !!input && input.trim().length > 0;
