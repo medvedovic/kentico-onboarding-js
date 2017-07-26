@@ -1,19 +1,19 @@
 import { isTextInputValid } from '../../src/utils/isTextInputValid';
 
 describe('isTextInputValid', () => {
-  it('works on whitespaces', () => {
+  it('returns false for whitespaces', () => {
     expect(isTextInputValid('    ')).toBe(false);
   });
-  it('works on null', () => {
+  it('returns false for null', () => {
     expect(isTextInputValid(null)).toBe(false);
   });
-  it('works on undefined', () => {
+  it('returns false for undefined', () => {
     expect(isTextInputValid(undefined)).toBe(false);
   });
-  it('works on empty strings', () => {
+  it('returns false for empty strings', () => {
     expect(isTextInputValid('')).toBe(false);
   });
-  it('works on a valid string', () => {
+  it('returns true for a valid string', () => {
     expect(isTextInputValid('Hello world')).toBe(true);
   });
 });
