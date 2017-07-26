@@ -42,6 +42,25 @@ export class ListItemInput extends React.PureComponent {
     }));
   };
 
+  _focusOnShortcut = (e) => {
+    if (e.altKey && e.key === 'n') {
+      if (document.activeElement === this.textInput) {
+        this.textInput.blur();
+      }
+      else {
+        this.textInput.focus();
+      }
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this._focusOnShortcut, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._focusOnShortcut);
+  }
+
   render() {
     const { value } = this.state;
 
@@ -57,6 +76,9 @@ export class ListItemInput extends React.PureComponent {
               className="form-control enlarge"
               onChange={this._handleInputChanged}
               value={value}
+              ref={(input) => {
+                this.textInput = input;
+              }}
             />
           </div>
         </form>
