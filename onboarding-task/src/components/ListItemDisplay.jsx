@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ListItemDisplay = (props) => {
-  return (
-    <span onClick={props.onClick}>{props.item.value}</span>
-  );
-};
+export const ListItemDisplay = (props) => (
+  <span onClick={props.onClick}>{props.item.value}</span>
+);
 
 ListItemDisplay.displayName = 'ListItemDisplay';
 
