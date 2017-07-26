@@ -1,6 +1,6 @@
 import './sticky-footer.css';
 import React from 'react';
-import { List } from './components/List';
+import List from './components/List';
 
 export function App() {
   return (

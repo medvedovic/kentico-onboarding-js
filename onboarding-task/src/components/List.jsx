@@ -1,65 +1,85 @@
 import React from 'react';
-import { OrderedMap } from 'immutable';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import { ListItem } from './ListItem.jsx';
-import { ListItemModel } from '../model/ListItemModel';
 import { ListItemInput } from './ListItemInput';
-import { generateGuid } from '../utils/generateGuid';
+import * as UserActions from '../actions/userActions';
+import { OrderedMap } from 'immutable';
 
-export class List extends React.PureComponent {
-  static displayName = 'List';
+// class List extends React.PureComponent {
+//   static displayName = 'List';
+//
+//   render() {
+//     const { items } = this.props;
+//
+//     console.log(this.props);
+//
+//     return (
+//       <div className="row">
+//         <div className="col-sm-12 col-md-6">
+//           <ol className="list">
+//             {
+//               items.map((item, key) => (
+//                 <li key={key}>
+//                   <ListItem
+//                     id={key}
+//                     item={item}
+//                     onUpdateItem={this.props.actions.updateItem}
+//                     onDeleteItem={this.props.actions.deleteItem}
+//                   />
+//                 </li>
+//               ))
+//             }
+//           </ol>
+//           <ListItemInput onCreateItem={this.props.actions.createItem} />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: new OrderedMap([
-        [generateGuid(), new ListItemModel({ value: 'Make coffee' })],
-        [generateGuid(), new ListItemModel({ value: 'Master React' })],
-      ]),
-    };
-  }
+const List = ({ items, actions }) => (
+  <div className="row">
+    <div className="col-sm-12 col-md-6">
+      <ol className="list">
+        {
+          items.map((item, key) => (
+            <li key={key}>
+              <ListItem
+                id={key}
+                item={item}
+                onUpdateItem={actions.updateItem}
+                onDeleteItem={actions.deleteItem}
+              />
+            </li>
+          ))
+        }
+      </ol>
+      <ListItemInput onCreateItem={actions.createItem} />
+    </div>
+  </div>
+);
 
-  _createNewItem = (value) => {
-    this.setState(prevState => ({
-      items: prevState.items.set(generateGuid(), new ListItemModel({ value })),
-    }));
-  };
+List.propTypes = {
+  items: PropTypes.instanceOf(OrderedMap),
+  actions: PropTypes.shape({
+    createItem: PropTypes.func.isRequired,
+    updateItem: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
-  _updateItem = (key, value) => {
-    const prevItem = this.state.items.get(key);
-    const newItem = new ListItemModel({ ...prevItem.toJS(), value });
-    this.setState(prevState => ({
-      items: prevState.items.set(key, newItem),
-    }));
-  };
+const mapStateToProps = (store) => ({
+  ...store,
+});
 
-  _deleteItem = (key) => {
-    this.setState(prevState => ({
-      items: prevState.items.delete(key),
-    }));
-  };
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(UserActions, dispatch),
+});
 
-  render() {
-    const { items } = this.state;
-    return (
-      <div className="row">
-        <div className="col-sm-12 col-md-6">
-          <ol className="list">
-            {
-              items.map((item, key) => (
-                <li key={key}>
-                  <ListItem
-                    id={key}
-                    item={item}
-                    onUpdateItem={this._updateItem}
-                    onDeleteItem={this._deleteItem}
-                  />
-                </li>
-              ))
-            }
-          </ol>
-          <ListItemInput onCreateItem={this._createNewItem} />
-        </div>
-      </div>
-    );
-  }
-}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List);

@@ -1,4 +1,4 @@
-import { OrderedMap } from 'immutable';
+import { combineReducers } from 'redux';
 import {
   CREATE_ITEM,
   UPDATE_ITEM,
@@ -7,19 +7,28 @@ import {
 import { generateGuid } from '../utils/generateGuid';
 import { ListItemModel } from '../model/ListItemModel';
 
-export const listApp = (state = new OrderedMap(), action) => {
+export const listApp = (items = {}, action) => {
   switch (action.type) {
-    case CREATE_ITEM:
-      return state.set(generateGuid(), new ListItemModel({
+    case CREATE_ITEM: {
+      const guid = generateGuid();
+
+      return items.set(guid, new ListItemModel({
+        guid,
+        value: action.value,
+      }));
+    }
+    case UPDATE_ITEM:
+      return items.set(action.item.guid, new ListItemModel({
+        ...action.item,
         value: action.item.value,
       }));
-    case UPDATE_ITEM:
-      return state.set(action.key, new ListItemModel({
-        ...action.item, value: action.item.value,
-      }));
     case DELETE_ITEM:
-      return state.delete(action.item.key);
+      return items.delete(action.itemGuid);
     default:
-      return state;
+      return items;
   }
 };
+
+export const reducer = combineReducers({
+  items: listApp,
+});

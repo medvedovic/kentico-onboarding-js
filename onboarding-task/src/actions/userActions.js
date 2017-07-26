@@ -1,13 +1,16 @@
 import { CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM } from './actionTypes';
 
-export const createItem = (item) => ({
+export const createItem = (value) => ({
   type: CREATE_ITEM,
-  item,
+  value,
 });
 
-export const updateItem = (item) => ({
+export const updateItem = (guid, value) => ({
   type: UPDATE_ITEM,
-  item,
+  item: {
+    guid,
+    value,
+  },
 });
 
 export const deleteItem = (itemGuid) => ({
