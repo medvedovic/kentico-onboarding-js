@@ -7,6 +7,7 @@ export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
     item: PropTypes.shape({
+      guid: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }).isRequired,
     onItemUpdate: PropTypes.func.isRequired,

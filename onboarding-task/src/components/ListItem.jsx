@@ -6,8 +6,8 @@ import { ListItemDisplay } from './ListItemDisplay';
 export class ListItem extends React.PureComponent {
   static displayName = 'ListItem';
   static propTypes = {
-    id: PropTypes.string.isRequired,
     item: PropTypes.shape({
+      guid: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }).isRequired,
     onDeleteItem: PropTypes.func.isRequired,
@@ -23,12 +23,16 @@ export class ListItem extends React.PureComponent {
   }
 
   _handleUpdateItemClick = (value) => {
+    const { guid } = this.props.item;
+    console.log(guid);
     this._toggleBeingEdited();
-    this.props.onUpdateItem(this.props.id, value);
+    this.props.onUpdateItem(guid, value);
   };
 
   _handleDeleteItemClick = () => {
-    this.props.onDeleteItem(this.props.id);
+    const { guid } = this.props.item;
+
+    this.props.onDeleteItem(guid);
   };
 
   _toggleBeingEdited = () => {

@@ -11,17 +11,32 @@ export class List extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    const id1 = generateGuid();
+    const id2 = generateGuid();
+    const initialItems = new OrderedMap([
+      [id1, new ListItemModel({
+        guid: id1,
+        value: 'Make coffee',
+      })],
+      [id2, new ListItemModel({
+        guid: id2,
+        value: 'Master React',
+      })],
+    ]);
+
     this.state = {
-      items: new OrderedMap([
-        [generateGuid(), new ListItemModel({ value: 'Make coffee' })],
-        [generateGuid(), new ListItemModel({ value: 'Master React' })],
-      ]),
+      items: initialItems,
     };
   }
 
   _createNewItem = (value) => {
+    const guid = generateGuid();
+
     this.setState(prevState => ({
-      items: prevState.items.set(generateGuid(), new ListItemModel({ value })),
+      items: prevState.items.set(guid, new ListItemModel({
+        guid,
+        value,
+      })),
     }));
   };
 
@@ -51,7 +66,6 @@ export class List extends React.PureComponent {
               items.map((item, key) => (
                 <li key={key}>
                   <ListItem
-                    id={key}
                     item={item}
                     onUpdateItem={this._updateItem}
                     onDeleteItem={this._deleteItem}

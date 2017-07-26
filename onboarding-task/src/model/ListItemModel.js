@@ -5,5 +5,6 @@ import { Record } from 'immutable';
  */
 
 export const ListItemModel = Record({
+  guid: '',
   value: '',
 });
