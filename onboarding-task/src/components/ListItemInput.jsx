@@ -40,8 +40,6 @@ export class ListItemInput extends React.PureComponent {
     this.setState(() => ({
       value: '',
     }));
-
-    this.textInput.blur();
   };
 
   render() {
@@ -59,9 +57,6 @@ export class ListItemInput extends React.PureComponent {
               className="form-control enlarge"
               onChange={this._handleInputChanged}
               value={value}
-              ref={(input) => {
-                this.textInput = input;
-              }}
             />
           </div>
         </form>
