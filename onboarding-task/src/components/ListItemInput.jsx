@@ -11,6 +11,7 @@ export class ListItemInput extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
       value: '',
     };
@@ -29,6 +30,7 @@ export class ListItemInput extends React.PureComponent {
 
   _handleInputChanged = (e) => {
     const value = e.target.value;
+
     this.setState(() => ({
       value,
     }));
@@ -44,6 +46,7 @@ export class ListItemInput extends React.PureComponent {
 
   render() {
     const { value } = this.state;
+
     return (
       <div className="col-sm-12 top-offset">
         <form onSubmit={this._onSubmitForm}>

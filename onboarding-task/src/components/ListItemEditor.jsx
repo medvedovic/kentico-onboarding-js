@@ -16,6 +16,7 @@ export class ListItemEditor extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
       value: props.item.value,
     };
@@ -38,6 +39,7 @@ export class ListItemEditor extends React.PureComponent {
 
   _handleItemNameChanged = (e) => {
     const { value } = e.target;
+
     this.setState(() => ({
       value,
     }));
@@ -45,6 +47,7 @@ export class ListItemEditor extends React.PureComponent {
 
   _handleUpdateItemNameClick = () => {
     const { value } = this.state;
+
     if (isTextInputValid(value)) {
       this.props.onItemUpdate(value);
     }
@@ -52,6 +55,7 @@ export class ListItemEditor extends React.PureComponent {
 
   render() {
     const { value } = this.state;
+
     return (
       <div className="form-group">
         <input

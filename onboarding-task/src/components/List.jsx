@@ -10,6 +10,7 @@ export class List extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
       items: new OrderedMap([
         [generateGuid(), new ListItemModel({ value: 'Make coffee' })],
@@ -27,6 +28,7 @@ export class List extends React.PureComponent {
   _updateItem = (key, value) => {
     const prevItem = this.state.items.get(key);
     const newItem = new ListItemModel({ ...prevItem.toJS(), value });
+
     this.setState(prevState => ({
       items: prevState.items.set(key, newItem),
     }));
@@ -40,6 +42,7 @@ export class List extends React.PureComponent {
 
   render() {
     const { items } = this.state;
+
     return (
       <div className="row">
         <div className="col-sm-12 col-md-6">

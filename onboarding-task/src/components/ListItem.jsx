@@ -16,6 +16,7 @@ export class ListItem extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
       isBeingEdited: false,
     };
@@ -39,6 +40,7 @@ export class ListItem extends React.PureComponent {
   render() {
     const { isBeingEdited } = this.state;
     const { item } = this.props;
+
     if (isBeingEdited) {
       return (
         <ListItemEditor
