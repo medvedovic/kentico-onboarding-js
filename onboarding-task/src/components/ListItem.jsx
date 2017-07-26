@@ -10,8 +10,10 @@ export class ListItem extends React.PureComponent {
     item: PropTypes.shape({
       value: PropTypes.string.isRequired,
     }).isRequired,
-    onDeleteItem: PropTypes.func.isRequired,
-    onUpdateItem: PropTypes.func.isRequired,
+    actions: PropTypes.shape({
+      onDeleteItem: PropTypes.func.isRequired,
+      onUpdateItem: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -23,11 +25,11 @@ export class ListItem extends React.PureComponent {
 
   _handleUpdateItemClick = (value) => {
     this._toggleBeingEdited();
-    this.props.onUpdateItem(this.props.id, value);
+    this.props.actions.onUpdateItem(this.props.id, value);
   };
 
   _handleDeleteItemClick = () => {
-    this.props.onDeleteItem(this.props.id);
+    this.props.actions.onDeleteItem(this.props.id);
   };
 
   _toggleBeingEdited = () => {

@@ -1,14 +1,18 @@
 import { List } from '../components/List';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as UserActions from '../actions/userActions';
+import { CREATE_ITEM } from '../actions/actionTypes';
 
 const mapStateToProps = (store) => ({
   ...store,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(UserActions, dispatch),
+  actions: {
+    onCreateItem: (value) => dispatch({
+      type: CREATE_ITEM,
+      value,
+    }),
+  },
 });
 
 export const ListContainer = connect(

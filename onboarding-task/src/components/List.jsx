@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { OrderedMap } from 'immutable';
 
 import { ListItem } from './ListItem.jsx';
+import { ListItemContainer } from '../containers/ListItemContainer';
 import { ListItemInput } from './ListItemInput';
 
 export const List = ({ items, actions }) => (
@@ -12,17 +13,15 @@ export const List = ({ items, actions }) => (
         {
           items.map((item, key) => (
             <li key={key}>
-              <ListItem
+              <ListItemContainer
                 id={key}
                 item={item}
-                onUpdateItem={actions.updateItem}
-                onDeleteItem={actions.deleteItem}
               />
             </li>
           ))
         }
       </ol>
-      <ListItemInput onCreateItem={actions.createItem} />
+      <ListItemInput onCreateItem={actions.onCreateItem} />
     </div>
   </div>
 );
@@ -30,8 +29,6 @@ export const List = ({ items, actions }) => (
 List.propTypes = {
   items: PropTypes.instanceOf(OrderedMap),
   actions: PropTypes.shape({
-    createItem: PropTypes.func.isRequired,
-    updateItem: PropTypes.func.isRequired,
-    deleteItem: PropTypes.func.isRequired,
+    onCreateItem: PropTypes.func.isRequired,
   }).isRequired,
 };
