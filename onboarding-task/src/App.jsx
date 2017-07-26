@@ -1,6 +1,6 @@
 import './sticky-footer.css';
 import React from 'react';
-import List from './components/List';
+import { ListContainer } from './containers/ListContainer';
 
 export function App() {
   return (
@@ -11,7 +11,7 @@ export function App() {
         </div>
 
         <div id="app-content">
-          <List />
+          <ListContainer />
         </div>
 
       </div>
