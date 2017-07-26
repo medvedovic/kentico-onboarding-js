@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { OrderedMap } from 'immutable';
 
-import { ListItem } from './ListItem.jsx';
 import { ListItemContainer } from '../containers/ListItemContainer';
 import { ListItemInput } from './ListItemInput';
 
