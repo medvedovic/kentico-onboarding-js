@@ -1,7 +1,7 @@
 import React from 'react';
 import { initialItems } from '../constants/initialItems';
 import { ListItem } from './ListItem.jsx';
-import { ListItemModel } from '../models/ListItem';
+import { ListItem as ListItemModel } from '../models/ListItem';
 import { ListItemInput } from './ListItemInput';
 import { generateGuid } from '../utils/generateGuid';
 
