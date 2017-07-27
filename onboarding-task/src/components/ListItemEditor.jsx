@@ -7,7 +7,7 @@ export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
     item: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      guid: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }).isRequired,
     actions: PropTypes.shape({
@@ -19,6 +19,7 @@ export class ListItemEditor extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
       value: props.item.value,
     };
@@ -41,26 +42,31 @@ export class ListItemEditor extends React.PureComponent {
 
   _handleItemNameChanged = (e) => {
     const { value } = e.target;
-    this.setState(() => {
-      return {
-        value,
-      };
-    });
+
+    this.setState(() => ({
+      value,
+    }));
   };
 
   _handleUpdateClick = () => {
     const { value } = this.state;
+    const { guid } = this.props.item;
+
     if (isTextInputValid(value)) {
-      this.props.actions.onUpdateItem(this.props.item.id, value);
+      this.props.actions.onUpdateItem(guid, value);
     }
+    this.props.onCancelEdit();
   };
 
   _handleDeleteClick = () => {
-    this.props.actions.onDeleteItem(this.props.item.id);
+    const { guid } = this.props.item;
+
+    this.props.actions.onDeleteItem(guid);
   };
 
   render() {
     const { value } = this.state;
+
     return (
       <div className="form-group">
         <input

@@ -6,14 +6,15 @@ import { ListItemEditorViewModel } from '../containers/ListItemEditorViewModel';
 export class ListItem extends React.PureComponent {
   static displayName = 'ListItem';
   static propTypes = {
-    id: PropTypes.string.isRequired,
     item: PropTypes.shape({
+      guid: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }).isRequired,
   };
 
   constructor(props) {
     super(props);
+
     this.state = {
       isBeingEdited: false,
     };

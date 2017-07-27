@@ -10,12 +10,9 @@ export const List = ({ items, actions }) => (
     <div className="col-sm-12 col-md-6">
       <ol className="list">
         {
-          items.map((item, key) => (
-            <li key={key}>
-              <ListItem
-                id={key}
-                item={item}
-              />
+          items.entrySeq().map(([guid, item]) => (
+            <li key={guid}>
+              <ListItem item={item} />
             </li>
           ))
         }

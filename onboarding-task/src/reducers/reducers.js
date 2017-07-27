@@ -5,7 +5,7 @@ import {
   DELETE_ITEM,
 } from '../actions/actionTypes';
 import { generateGuid } from '../utils/generateGuid';
-import { ListItemModel } from '../model/ListItemModel';
+import { ListItem as ListItemModel } from '../models/ListItem';
 
 export const listApp = (items = {}, action) => {
   switch (action.type) {
