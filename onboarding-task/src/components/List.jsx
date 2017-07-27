@@ -1,7 +1,7 @@
 import React from 'react';
 import { OrderedMap } from 'immutable';
 import { ListItem } from './ListItem.jsx';
-import { ListItemModel } from '../models/ListItemModel';
+import { ListItemModel } from '../models/ListItem';
 import { ListItemInput } from './ListItemInput';
 import { generateGuid } from '../utils/generateGuid';
 
