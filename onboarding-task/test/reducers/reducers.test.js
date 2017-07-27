@@ -17,47 +17,41 @@ describe('List App reducer', () => {
   ]);
 
   it('Adds new item properly', () => {
-    expect(
-      listApp(
-        initialState, {
-          type: CREATE_ITEM,
-          value: 'Do stuff',
-        }
-      ).count()
-    ).toBe(3);
+    const result = listApp(initialState, {
+      type: CREATE_ITEM,
+      value: 'Do stuff',
+    }).count();
+
+    expect(result).toBe(3);
   });
 
   it('Updates item properly', () => {
-    expect(
-      listApp(
-        initialState, {
-          type: UPDATE_ITEM,
-          item: {
-            guid: _guid1,
-            value: 'Do stuff',
-          },
-        }
-      )
-    ).toEqual(
-      new OrderedMap([
-        [_guid1, new ListItemModel({ value: 'Do stuff' })],
-        [_guid2, new ListItemModel({ value: 'Master React' })],
-      ])
-    );
+    const expectedResult = new OrderedMap([
+      [_guid1, new ListItemModel({ value: 'Do stuff' })],
+      [_guid2, new ListItemModel({ value: 'Master React' })],
+    ]);
+
+    const testResult = listApp(initialState, {
+      type: UPDATE_ITEM,
+      item: {
+        guid: _guid1,
+        value: 'Do stuff',
+      },
+    });
+
+    expect(testResult).toEqual(expectedResult);
   });
 
   it('Deletes item properly', () => {
-    expect(
-      listApp(
-        initialState, {
-          type: DELETE_ITEM,
-          itemGuid: _guid1,
-        }
-      )
-    ).toEqual(
-      new OrderedMap([
-        [_guid2, new ListItemModel({ value: 'Master React' })],
-      ])
-    );
+    const expectedResult = new OrderedMap([
+      [_guid2, new ListItemModel({ value: 'Master React' })],
+    ]);
+
+    const testResult = listApp(initialState, {
+      type: DELETE_ITEM,
+      itemGuid: _guid1,
+    });
+
+    expect(testResult).toEqual(expectedResult);
   });
 });
