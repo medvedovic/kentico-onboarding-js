@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItemDisplay } from './ListItemDisplay';
-import { ListItemEditorViewModel } from '../containers/ListItemEditorViewModel';
+import { ListItemEditorContainer } from '../containers/ListItemEditorContainer';
 
 export class ListItem extends React.PureComponent {
   static displayName = 'ListItem';
@@ -32,7 +32,7 @@ export class ListItem extends React.PureComponent {
 
     if (isBeingEdited) {
       return (
-        <ListItemEditorViewModel
+        <ListItemEditorContainer
           item={item}
           onCancelEdit={this._toggleBeingEdited}
         />

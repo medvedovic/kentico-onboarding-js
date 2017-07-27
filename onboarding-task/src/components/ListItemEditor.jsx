@@ -10,10 +10,8 @@ export class ListItemEditor extends React.PureComponent {
       guid: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }).isRequired,
-    actions: PropTypes.shape({
-      onUpdateItem: PropTypes.func.isRequired,
-      onDeleteItem: PropTypes.func.isRequired,
-    }).isRequired,
+    onUpdateItem: PropTypes.func.isRequired,
+    onDeleteItem: PropTypes.func.isRequired,
     onCancelEdit: PropTypes.func.isRequired,
   };
 
@@ -53,7 +51,7 @@ export class ListItemEditor extends React.PureComponent {
     const { guid } = this.props.item;
 
     if (isTextInputValid(value)) {
-      this.props.actions.onUpdateItem(guid, value);
+      this.props.onUpdateItem(guid, value);
     }
     this.props.onCancelEdit();
   };
@@ -61,7 +59,7 @@ export class ListItemEditor extends React.PureComponent {
   _handleDeleteClick = () => {
     const { guid } = this.props.item;
 
-    this.props.actions.onDeleteItem(guid);
+    this.props.onDeleteItem(guid);
   };
 
   render() {
