@@ -6,25 +6,25 @@ import {
 } from '../constants/actionTypes';
 import { ListItem as ListItemModel } from '../models/ListItem';
 
-export const listApp = (items = {}, action) => {
+export const items = (state = {}, action) => {
   switch (action.type) {
     case CREATE_ITEM: {
       const { item } = action;
 
-      return items.set(item.guid, item);
+      return state.set(item.guid, item);
     }
     case UPDATE_ITEM:
-      return items.set(action.item.guid, new ListItemModel({
+      return state.set(action.item.guid, new ListItemModel({
         ...action.item,
         value: action.item.value,
       }));
     case DELETE_ITEM:
-      return items.delete(action.itemGuid);
+      return state.delete(action.itemGuid);
     default:
-      return items;
+      return state;
   }
 };
 
 export const reducer = combineReducers({
-  items: listApp,
+  items,
 });

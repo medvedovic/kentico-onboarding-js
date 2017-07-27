@@ -1,14 +1,9 @@
 import { OrderedMap } from 'immutable';
 import { ListItem as ListItemModel } from '../../src/models/ListItem';
 import { generateGuid } from '../../src/utils/generateGuid';
-import { listApp } from '../../src/reducers/reducers';
-import {
-  CREATE_ITEM,
-  UPDATE_ITEM,
-  DELETE_ITEM,
-} from '../../src/constants/actionTypes';
+import { items } from '../../src/reducers/reducers';
 import { itemFactory } from '../../src/utils/itemFactory';
-import { createItem } from '../../src/actions/userActions';
+import { createItem, deleteItem, updateItem } from '../../src/actions/userActions';
 
 describe('List App reducer', () => {
   const _guid1 = generateGuid();
@@ -26,7 +21,7 @@ describe('List App reducer', () => {
       [newItem.guid, newItem],
     ]);
 
-    const result = listApp(initialState, createItem(newItem));
+    const result = items(initialState, createItem(newItem));
 
     expect(result).toEqual(expectedStoreState);
   });
@@ -37,13 +32,7 @@ describe('List App reducer', () => {
       [_guid2, new ListItemModel({ guid: _guid2, value: 'Master React' })],
     ]);
 
-    const testStore = listApp(initialState, {
-      type: UPDATE_ITEM,
-      item: {
-        guid: _guid1,
-        value: 'Do stuff',
-      },
-    });
+    const testStore = items(initialState, updateItem(_guid1, 'Do stuff'));
 
     expect(testStore).toEqual(expectedStoreState);
   });
@@ -53,10 +42,7 @@ describe('List App reducer', () => {
       [_guid2, new ListItemModel({ guid: _guid2, value: 'Master React' })],
     ]);
 
-    const testStore = listApp(initialState, {
-      type: DELETE_ITEM,
-      itemGuid: _guid1,
-    });
+    const testStore = items(initialState, deleteItem(_guid1));
 
     expect(testStore).toEqual(expectedStoreState);
   });
