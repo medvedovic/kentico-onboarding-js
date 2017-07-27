@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { isTextInputValid } from '../utils/isTextInputValid';
+import { itemFactory } from '../utils/itemFactory';
 
 export class ListItemInput extends React.PureComponent {
   static displayName = 'ListItemInput';
@@ -22,7 +23,8 @@ export class ListItemInput extends React.PureComponent {
     const { value } = this.state;
 
     if (isTextInputValid(value)) {
-      this.props.onCreateItem(value);
+      const newItem = itemFactory(value);
+      this.props.onCreateItem(newItem);
     }
 
     this._resetInput();
