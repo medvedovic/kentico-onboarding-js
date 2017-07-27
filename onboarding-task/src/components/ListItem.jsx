@@ -4,28 +4,35 @@ import { ListItemEditor } from './ListItemEditor';
 import { ListItemDisplay } from './ListItemDisplay';
 
 export class ListItem extends React.PureComponent {
-  static displayName = 'displayName';
+  static displayName = 'ListItem';
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    item: PropTypes.object.isRequired,
+    item: PropTypes.shape({
+      guid: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }).isRequired,
     onDeleteItem: PropTypes.func.isRequired,
     onUpdateItem: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
+
     this.state = {
       isBeingEdited: false,
     };
   }
 
   _handleUpdateItemClick = (value) => {
+    const { guid } = this.props.item;
+
     this._toggleBeingEdited();
-    this.props.onUpdateItem(this.props.id, value);
+    this.props.onUpdateItem(guid, value);
   };
 
   _handleDeleteItemClick = () => {
-    this.props.onDeleteItem(this.props.id);
+    const { guid } = this.props.item;
+
+    this.props.onDeleteItem(guid);
   };
 
   _toggleBeingEdited = () => {
@@ -41,7 +48,7 @@ export class ListItem extends React.PureComponent {
     if (isBeingEdited) {
       return (
         <ListItemEditor
-          itemName={item.itemName}
+          item={item}
           onItemUpdate={this._handleUpdateItemClick}
           onItemCancelEdit={this._toggleBeingEdited}
           onItemDelete={this._handleDeleteItemClick}

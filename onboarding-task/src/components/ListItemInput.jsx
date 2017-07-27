@@ -11,6 +11,7 @@ export class ListItemInput extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
       value: '',
     };
@@ -29,24 +30,40 @@ export class ListItemInput extends React.PureComponent {
 
   _handleInputChanged = (e) => {
     const value = e.target.value;
-    this.setState(() => {
-      return {
-        value,
-      };
-    });
+
+    this.setState(() => ({
+      value,
+    }));
   };
 
   _resetInput = () => {
-    this.setState(() => {
-      return {
-        value: '',
-      };
-    });
-    this.textInput.blur();
+    this.setState(() => ({
+      value: '',
+    }));
   };
+
+  _focusOnShortcut = (e) => {
+    if (e.altKey && e.key === 'n') {
+      if (document.activeElement === this.textInput) {
+        this.textInput.blur();
+      }
+      else {
+        this.textInput.focus();
+      }
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this._focusOnShortcut, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._focusOnShortcut);
+  }
 
   render() {
     const { value } = this.state;
+
     return (
       <div className="col-sm-12 top-offset">
         <form onSubmit={this._onSubmitForm}>

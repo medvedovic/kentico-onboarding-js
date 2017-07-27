@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { initialItems } from '../constants/initialItems';
 import { ListItem } from './ListItem.jsx';
+import { ListItem as ListItemModel } from '../models/ListItem';
 import { ListItemInput } from './ListItemInput';
 import { generateGuid } from '../utils/generateGuid';
 
@@ -9,62 +10,49 @@ export class List extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      items: [
-        { id: generateGuid(), itemName: 'Make coffee' },
-        { id: generateGuid(), itemName: 'Master React' },
-      ],
+      items: initialItems,
     };
   }
 
   _createNewItem = (value) => {
+    const guid = generateGuid();
+
     this.setState(prevState => ({
-      items: prevState.items.concat({
-        id: generateGuid(),
-        itemName: value,
-      }),
+      items: prevState.items.set(guid, new ListItemModel({
+        guid,
+        value,
+      })),
     }));
   };
 
   _updateItem = (key, value) => {
-    const newArray = [];
-    this.state.items.forEach(item => {
-      if (item.id === key) {
-        newArray.push({
-          id: key,
-          itemName: value,
-        });
-      }
-      else {
-        newArray.push(item);
-      }
-    });
-    this.setState(() => {
-      return {
-        items: newArray,
-      };
-    });
+    const prevItem = this.state.items.get(key);
+    const newItem = new ListItemModel({ ...prevItem.toJS(), value });
+
+    this.setState(prevState => ({
+      items: prevState.items.set(key, newItem),
+    }));
   };
 
   _deleteItem = (key) => {
     this.setState(prevState => ({
-      items: prevState.items.filter(item => {
-        return item.id !== key;
-      }),
+      items: prevState.items.delete(key),
     }));
   };
 
   render() {
     const { items } = this.state;
+
     return (
       <div className="row">
         <div className="col-sm-12 col-md-6">
           <ol className="list">
             {
-              items.map(item => (
-                <li key={item.id}>
+              items.entrySeq().map(([guid, item]) => (
+                <li key={guid}>
                   <ListItem
-                    id={item.id}
                     item={item}
                     onUpdateItem={this._updateItem}
                     onDeleteItem={this._deleteItem}

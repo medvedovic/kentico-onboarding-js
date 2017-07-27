@@ -6,7 +6,10 @@ import { isTextInputValid } from '../utils/isTextInputValid';
 export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
-    itemName: PropTypes.string.isRequired,
+    item: PropTypes.shape({
+      guid: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }).isRequired,
     onItemUpdate: PropTypes.func.isRequired,
     onItemCancelEdit: PropTypes.func.isRequired,
     onItemDelete: PropTypes.func.isRequired,
@@ -14,17 +17,10 @@ export class ListItemEditor extends React.PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      itemName: props.itemName,
+      value: props.item.value,
     };
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this._handleKeyboardInput);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this._handleKeyboardInput);
   }
 
   _handleKeyboardInput = (e) => {
@@ -43,30 +39,32 @@ export class ListItemEditor extends React.PureComponent {
   };
 
   _handleItemNameChanged = (e) => {
-    const itemName = e.target.value;
-    this.setState(() => {
-      return {
-        itemName,
-      };
-    });
+    const { value } = e.target;
+
+    this.setState(() => ({
+      value,
+    }));
   };
 
-  _handleUpdateItemNameClick =() => {
-    const { itemName } = this.state;
-    if (isTextInputValid(itemName)) {
-      this.props.onItemUpdate(itemName);
+  _handleUpdateItemNameClick = () => {
+    const { value } = this.state;
+
+    if (isTextInputValid(value)) {
+      this.props.onItemUpdate(value);
     }
   };
 
   render() {
-    const { itemName } = this.state;
+    const { value } = this.state;
+
     return (
       <div className="form-group">
         <input
           type="text"
           className="form-control"
-          value={itemName}
+          value={value}
           onChange={this._handleItemNameChanged}
+          onKeyDown={this._handleKeyboardInput}
           ref={(input) => {
             this.textInput = input;
           }}
