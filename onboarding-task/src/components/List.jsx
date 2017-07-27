@@ -1,5 +1,5 @@
 import React from 'react';
-import { OrderedMap } from 'immutable';
+import { initialItems } from '../constants/initialItems';
 import { ListItem } from './ListItem.jsx';
 import { ListItemModel } from '../models/ListItem';
 import { ListItemInput } from './ListItemInput';
@@ -10,19 +10,6 @@ export class List extends React.PureComponent {
 
   constructor(props) {
     super(props);
-
-    const id1 = generateGuid();
-    const id2 = generateGuid();
-    const initialItems = new OrderedMap([
-      [id1, new ListItemModel({
-        guid: id1,
-        value: 'Make coffee',
-      })],
-      [id2, new ListItemModel({
-        guid: id2,
-        value: 'Master React',
-      })],
-    ]);
 
     this.state = {
       items: initialItems,
