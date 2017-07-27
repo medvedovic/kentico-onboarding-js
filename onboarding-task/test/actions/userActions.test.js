@@ -14,18 +14,18 @@ describe('User Actions', () => {
   const _value = 'Go home';
 
   it('Returns "Creates item" action properly', () => {
-    const expectedResult = {
+    const expectedAction = {
       type: CREATE_ITEM,
       value: _value,
     };
 
-    const testResult = createItem(_value);
+    const resultAction = createItem(_value);
 
-    expect(testResult).toEqual(expectedResult);
+    expect(resultAction).toEqual(expectedAction);
   });
 
   it('Returns "Updates item" action properly', () => {
-    const expectedResult = {
+    const expectedAction = {
       type: UPDATE_ITEM,
       item: {
         guid: _guid,
@@ -33,19 +33,19 @@ describe('User Actions', () => {
       },
     };
 
-    const testResult = updateItem(_guid, _value);
+    const resultAction = updateItem(_guid, _value);
 
-    expect(testResult).toEqual(expectedResult);
+    expect(resultAction).toEqual(expectedAction);
   });
 
   it('Returns "Deletes item" action properly', () => {
-    const expectedResult = {
+    const expectedAction = {
       type: DELETE_ITEM,
       itemGuid: _guid,
     };
 
-    const testResult = deleteItem(_guid);
+    const resultAction = deleteItem(_guid);
 
-    expect(testResult).toEqual(expectedResult);
+    expect(resultAction).toEqual(expectedAction);
   });
 });
