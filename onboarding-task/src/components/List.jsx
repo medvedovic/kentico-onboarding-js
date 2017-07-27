@@ -1,7 +1,7 @@
 import React from 'react';
 import { OrderedMap } from 'immutable';
 import { ListItem } from './ListItem.jsx';
-import { ListItemModel } from '../model/ListItemModel';
+import { ListItemModel } from '../models/ListItemModel';
 import { ListItemInput } from './ListItemInput';
 import { generateGuid } from '../utils/generateGuid';
 
@@ -63,8 +63,8 @@ export class List extends React.PureComponent {
         <div className="col-sm-12 col-md-6">
           <ol className="list">
             {
-              items.map((item, key) => (
-                <li key={key}>
+              items.map((item, guid) => (
+                <li key={guid}>
                   <ListItem
                     item={item}
                     onUpdateItem={this._updateItem}

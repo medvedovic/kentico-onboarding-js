@@ -24,7 +24,7 @@ export class ListItem extends React.PureComponent {
 
   _handleUpdateItemClick = (value) => {
     const { guid } = this.props.item;
-    console.log(guid);
+
     this._toggleBeingEdited();
     this.props.onUpdateItem(guid, value);
   };
