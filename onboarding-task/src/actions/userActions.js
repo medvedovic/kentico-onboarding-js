@@ -1,4 +1,4 @@
-import { CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM } from './actionTypes';
+import { CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM } from '../constants/actionTypes';
 
 export const createItem = (value) => ({
   type: CREATE_ITEM,

@@ -7,7 +7,7 @@ import {
   CREATE_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
-} from '../../src/actions/actionTypes';
+} from '../../src/constants/actionTypes';
 
 describe('User Actions', () => {
   const _guid = 'b0771aeb-da9e-47e4-b3f0-c52856eaacb0';

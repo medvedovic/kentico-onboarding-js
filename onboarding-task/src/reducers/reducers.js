@@ -3,7 +3,7 @@ import {
   CREATE_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
-} from '../actions/actionTypes';
+} from '../constants/actionTypes';
 import { generateGuid } from '../utils/generateGuid';
 import { ListItem as ListItemModel } from '../models/ListItem';
 

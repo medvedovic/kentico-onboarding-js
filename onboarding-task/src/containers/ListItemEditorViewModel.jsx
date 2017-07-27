@@ -1,4 +1,4 @@
-import { DELETE_ITEM, UPDATE_ITEM } from '../actions/actionTypes';
+import { DELETE_ITEM, UPDATE_ITEM } from '../constants/actionTypes';
 import { ListItemEditor } from '../components/ListItemEditor';
 import { connect } from 'react-redux';
 

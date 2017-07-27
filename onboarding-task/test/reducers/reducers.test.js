@@ -6,7 +6,7 @@ import {
   CREATE_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
-} from '../../src/actions/actionTypes';
+} from '../../src/constants/actionTypes';
 
 describe('List App reducer', () => {
   const _guid1 = generateGuid();

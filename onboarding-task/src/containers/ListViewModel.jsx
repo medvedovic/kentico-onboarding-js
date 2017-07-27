@@ -1,6 +1,6 @@
 import { List } from '../components/List';
 import { connect } from 'react-redux';
-import { CREATE_ITEM } from '../actions/actionTypes';
+import { CREATE_ITEM } from '../constants/actionTypes';
 
 const mapStateToProps = (store) => ({
   ...store,
