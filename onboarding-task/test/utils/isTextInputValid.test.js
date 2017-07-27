@@ -2,32 +2,32 @@ import { isTextInputValid } from '../../src/utils/isTextInputValid';
 
 describe('isTextInputValid', () => {
   it('returns false for whitespaces', () => {
-    const result = isTextInputValid('     ');
+    const isValid = isTextInputValid('     ');
 
-    expect(result).toBe(false);
+    expect(isValid).toBe(false);
   });
 
   it('returns false for null', () => {
-    const result = isTextInputValid(null);
+    const isValid = isTextInputValid(null);
 
-    expect(result).toBe(false);
+    expect(isValid).toBe(false);
   });
 
   it('returns false for undefined', () => {
-    const result = isTextInputValid(undefined);
+    const isValid = isTextInputValid(undefined);
 
-    expect(result).toBe(false);
+    expect(isValid).toBe(false);
   });
 
   it('returns false for empty strings', () => {
-    const result = isTextInputValid('');
+    const isValid = isTextInputValid('');
 
-    expect(result).toBe(false);
+    expect(isValid).toBe(false);
   });
 
   it('returns true for a valid string', () => {
-    const result = isTextInputValid('Hello world');
+    const isValid = isTextInputValid('Hello world');
 
-    expect(result).toBe(true);
+    expect(isValid).toBe(true);
   });
 });
