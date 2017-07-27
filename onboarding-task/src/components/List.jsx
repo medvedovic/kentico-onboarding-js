@@ -50,7 +50,7 @@ export class List extends React.PureComponent {
         <div className="col-sm-12 col-md-6">
           <ol className="list">
             {
-              items.forEach((item, guid) => (
+              items.entrySeq().map(([guid, item]) => (
                 <li key={guid}>
                   <ListItem
                     item={item}
