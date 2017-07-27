@@ -1,9 +1,6 @@
-import { ListItem } from '../components/ListItem';
+import { DELETE_ITEM, UPDATE_ITEM } from '../actions/actionTypes';
+import { ListItemEditor } from '../components/ListItemEditor';
 import { connect } from 'react-redux';
-import {
-  UPDATE_ITEM,
-  DELETE_ITEM,
-} from '../actions/actionTypes';
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
@@ -21,9 +18,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export const ListItemContainer = connect(
+export const ListItemEditorViewModel = connect(
   undefined,
   mapDispatchToProps
-)(ListItem);
+)(ListItemEditor);
 
-ListItemContainer.displayName = 'ListContainer';
+ListItemEditorViewModel.displayName = 'ListItemEditorViewModel';

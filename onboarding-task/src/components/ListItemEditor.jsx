@@ -7,11 +7,14 @@ export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
     item: PropTypes.shape({
+      id: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }).isRequired,
-    onItemUpdate: PropTypes.func.isRequired,
-    onItemCancelEdit: PropTypes.func.isRequired,
-    onItemDelete: PropTypes.func.isRequired,
+    actions: PropTypes.shape({
+      onUpdateItem: PropTypes.func.isRequired,
+      onDeleteItem: PropTypes.func.isRequired,
+    }).isRequired,
+    onCancelEdit: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -24,11 +27,11 @@ export class ListItemEditor extends React.PureComponent {
   _handleKeyboardInput = (e) => {
     switch (e.key) {
       case 'Escape':
-        this.props.onItemCancelEdit();
+        this.props.onCancelEdit();
         break;
       case 'Enter':
         if (document.activeElement === this.textInput) {
-          this._handleUpdateItemNameClick();
+          this._handleUpdateClick();
         }
         break;
       default:
@@ -45,11 +48,15 @@ export class ListItemEditor extends React.PureComponent {
     });
   };
 
-  _handleUpdateItemNameClick = () => {
+  _handleUpdateClick = () => {
     const { value } = this.state;
     if (isTextInputValid(value)) {
-      this.props.onItemUpdate(value);
+      this.props.actions.onUpdateItem(this.props.item.id, value);
     }
+  };
+
+  _handleDeleteClick = () => {
+    this.props.actions.onDeleteItem(this.props.item.id);
   };
 
   render() {
@@ -68,9 +75,9 @@ export class ListItemEditor extends React.PureComponent {
           autoFocus
         />
         <div className="btn-group" role="group">
-          <button type="button" className="btn btn-default" onClick={this._handleUpdateItemNameClick}>Save</button>
-          <button type="button" className="btn btn-default" onClick={this.props.onItemCancelEdit}>Cancel</button>
-          <button type="button" className="btn btn-default" onClick={this.props.onItemDelete}>Delete</button>
+          <button type="button" className="btn btn-default" onClick={this._handleUpdateClick}>Save</button>
+          <button type="button" className="btn btn-default" onClick={this.props.onCancelEdit}>Cancel</button>
+          <button type="button" className="btn btn-default" onClick={this._handleDeleteClick}>Delete</button>
         </div>
       </div>
     );

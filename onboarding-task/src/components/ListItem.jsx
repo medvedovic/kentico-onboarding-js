@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListItemEditor } from './ListItemEditor';
 import { ListItemDisplay } from './ListItemDisplay';
+import { ListItemEditorViewModel } from '../containers/ListItemEditorViewModel';
 
 export class ListItem extends React.PureComponent {
   static displayName = 'ListItem';
@@ -9,10 +9,6 @@ export class ListItem extends React.PureComponent {
     id: PropTypes.string.isRequired,
     item: PropTypes.shape({
       value: PropTypes.string.isRequired,
-    }).isRequired,
-    actions: PropTypes.shape({
-      onDeleteItem: PropTypes.func.isRequired,
-      onUpdateItem: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -23,15 +19,6 @@ export class ListItem extends React.PureComponent {
     };
   }
 
-  _handleUpdateItemClick = (value) => {
-    this._toggleBeingEdited();
-    this.props.actions.onUpdateItem(this.props.id, value);
-  };
-
-  _handleDeleteItemClick = () => {
-    this.props.actions.onDeleteItem(this.props.id);
-  };
-
   _toggleBeingEdited = () => {
     this.setState(prevState => ({
       isBeingEdited: !prevState.isBeingEdited,
@@ -41,13 +28,12 @@ export class ListItem extends React.PureComponent {
   render() {
     const { isBeingEdited } = this.state;
     const { item } = this.props;
+
     if (isBeingEdited) {
       return (
-        <ListItemEditor
+        <ListItemEditorViewModel
           item={item}
-          onItemUpdate={this._handleUpdateItemClick}
-          onItemCancelEdit={this._toggleBeingEdited}
-          onItemDelete={this._handleDeleteItemClick}
+          onCancelEdit={this._toggleBeingEdited}
         />
       );
     }

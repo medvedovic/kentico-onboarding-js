@@ -15,9 +15,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export const ListContainer = connect(
+export const ListViewModel = connect(
   mapStateToProps,
   mapDispatchToProps
 )(List);
 
-ListContainer.displayName = 'ListContainer';
+ListViewModel.displayName = 'ListViewModel';

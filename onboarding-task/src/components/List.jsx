@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { OrderedMap } from 'immutable';
 
-import { ListItemContainer } from '../containers/ListItemContainer';
 import { ListItemInput } from './ListItemInput';
+import { ListItem } from './ListItem';
 
 export const List = ({ items, actions }) => (
   <div className="row">
@@ -12,7 +12,7 @@ export const List = ({ items, actions }) => (
         {
           items.map((item, key) => (
             <li key={key}>
-              <ListItemContainer
+              <ListItem
                 id={key}
                 item={item}
               />
