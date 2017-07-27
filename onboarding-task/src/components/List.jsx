@@ -5,7 +5,7 @@ import { OrderedMap } from 'immutable';
 import { ListItemInput } from './ListItemInput';
 import { ListItem } from './ListItem';
 
-export const List = ({ items, actions }) => (
+export const List = ({ items, onCreateItem }) => (
   <div className="row">
     <div className="col-sm-12 col-md-6">
       <ol className="list">
@@ -17,14 +17,12 @@ export const List = ({ items, actions }) => (
           ))
         }
       </ol>
-      <ListItemInput onCreateItem={actions.onCreateItem} />
+      <ListItemInput onCreateItem={onCreateItem} />
     </div>
   </div>
 );
 
 List.propTypes = {
   items: PropTypes.instanceOf(OrderedMap),
-  actions: PropTypes.shape({
-    onCreateItem: PropTypes.func.isRequired,
-  }).isRequired,
+  onCreateItem: PropTypes.func.isRequired,
 };
