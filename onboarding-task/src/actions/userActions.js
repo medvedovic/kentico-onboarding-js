@@ -1,8 +1,8 @@
 import { CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM } from '../constants/actionTypes';
 
-export const createItem = (value) => ({
+export const createItem = (item) => ({
   type: CREATE_ITEM,
-  value,
+  item,
 });
 
 export const updateItem = (guid, value) => ({

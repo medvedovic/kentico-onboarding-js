@@ -7,6 +7,8 @@ import {
   UPDATE_ITEM,
   DELETE_ITEM,
 } from '../../src/constants/actionTypes';
+import { itemFactory } from '../../src/utils/itemFactory';
+import { createItem } from '../../src/actions/userActions';
 
 describe('List App reducer', () => {
   const _guid1 = generateGuid();
@@ -17,12 +19,16 @@ describe('List App reducer', () => {
   ]);
 
   it('Adds new item properly', () => {
-    const result = listApp(initialState, {
-      type: CREATE_ITEM,
-      value: 'Do stuff',
-    });
+    const newItem = itemFactory('Make a sandwich');
+    const expectedStoreState = new OrderedMap([
+      [_guid1, new ListItemModel({ guid: _guid1, value: 'Make coffee' })],
+      [_guid2, new ListItemModel({ guid: _guid2, value: 'Master React' })],
+      [newItem.guid, newItem],
+    ]);
 
-    expect(result.count()).toBe(3);
+    const result = listApp(initialState, createItem(newItem));
+
+    expect(result).toEqual(expectedStoreState);
   });
 
   it('Updates item properly', () => {
