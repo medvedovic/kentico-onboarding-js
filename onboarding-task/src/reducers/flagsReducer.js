@@ -5,7 +5,7 @@ import {
 } from '../constants/actionTypes';
 import { ListItemFlag } from '../models/ListItemFlag';
 
-export const itemsBeingEdited = (state = {}, action) => {
+export const flagsReducer = (state = {}, action) => {
   switch (action.type) {
     case TOGGLE_BEING_EDITED: {
       const itemFlags = state.get(action.payload.itemGuid);

@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
 import { generateGuid } from '../../src/utils/generateGuid';
-import { itemsBeingEdited } from '../../src/reducers/itemsBeingEdited';
+import { flagsReducer } from '../../src/reducers/flagsReducer';
 import { createItem, deleteItem, toggleBeingEdited } from '../../src/actions/userActions';
 import { ListItemFlag } from '../../src/models/ListItemFlag';
 
@@ -20,7 +20,7 @@ describe('Items Being Edited Reducer', () => {
       })],
     ]);
 
-    const result = itemsBeingEdited(initialState, toggleBeingEdited(id2));
+    const result = flagsReducer(initialState, toggleBeingEdited(id2));
 
     expect(result).toEqual(expectedResult);
   });
@@ -29,7 +29,7 @@ describe('Items Being Edited Reducer', () => {
     const expectedResult = new Map([
       [id1, new ListItemFlag()],
     ]);
-    const result = itemsBeingEdited(initialState, deleteItem(id2));
+    const result = flagsReducer(initialState, deleteItem(id2));
 
     expect(result).toEqual(expectedResult);
   });
@@ -44,7 +44,7 @@ describe('Items Being Edited Reducer', () => {
       value: '',
     };
 
-    const result = itemsBeingEdited(initialState, createItem(dummyItem));
+    const result = flagsReducer(initialState, createItem(dummyItem));
 
     expect(result).toEqual(expectedResult);
   });

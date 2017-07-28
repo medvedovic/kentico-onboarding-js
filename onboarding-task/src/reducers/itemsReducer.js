@@ -3,7 +3,7 @@ import {
   DELETE_ITEM,
   UPDATE_ITEM,
 } from '../constants/actionTypes';
-import { item as itemReducer } from './itemReducer';
+import { updateItemReducer as itemReducer } from './updateItemReducer';
 
 export const items = (state = {}, action) => {
   switch (action.type) {

@@ -1,7 +1,7 @@
 import { UPDATE_ITEM } from '../constants/actionTypes';
 import { ListItemData } from '../models/ListItemData';
 
-export const item = (state = {}, action) => {
+export const updateItemReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_ITEM:
       return new ListItemData({
