@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createItem, toggleBeingEdited } from '../actions/userActions';
 import { ListItemViewModel } from '../models/ListItemViewModel';
 
-const doStuff = (items, flags) => (
+const mergeItemDataWithFlags = (items, flags) => (
   items.map((item) => (
     new ListItemViewModel({
       listItemData: item,
@@ -13,7 +13,7 @@ const doStuff = (items, flags) => (
 );
 
 const mapStateToProps = (store) => ({
-  itemsViewModel: doStuff(store.items, store.itemsBeingEdited),
+  itemsViewModel: mergeItemDataWithFlags(store.items, store.itemsBeingEdited),
 });
 
 const mapDispatchToProps = (dispatch) => ({

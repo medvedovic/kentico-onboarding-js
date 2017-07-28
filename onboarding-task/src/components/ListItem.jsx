@@ -6,32 +6,36 @@ import { ListItemEditorContainer } from '../containers/ListItemEditorContainer';
 export class ListItem extends React.PureComponent {
   static displayName = 'ListItem';
   static propTypes = {
-    item: PropTypes.shape({
-      guid: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+    itemViewModel: PropTypes.shape({
+      listItemData: PropTypes.shape({
+        guid: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+      }).isRequired,
+      listItemFlag: PropTypes.shape({
+        isBeingEdited: PropTypes.bool.isRequired,
+      }).isRequired,
     }).isRequired,
-    isBeingEdited: PropTypes.bool.isRequired,
     onToggleBeingEdited: PropTypes.func.isRequired,
   };
 
   _toggleBeingEdited = () => {
-    const { guid } = this.props.item;
+    const { guid } = this.props.itemViewModel.listItemData;
     this.props.onToggleBeingEdited(guid);
   };
 
   render() {
-    const { isBeingEdited } = this.props;
-    const { item } = this.props;
+    const { isBeingEdited } = this.props.itemViewModel.listItemFlag;
+    const { listItemData } = this.props.itemViewModel;
 
     if (isBeingEdited) {
       return (
         <ListItemEditorContainer
-          item={item}
+          item={listItemData}
           onCancelEdit={this._toggleBeingEdited}
         />
       );
     }
 
-    return <ListItemDisplay item={item} onClick={this._toggleBeingEdited} />;
+    return <ListItemDisplay item={listItemData} onClick={this._toggleBeingEdited} />;
   }
 }

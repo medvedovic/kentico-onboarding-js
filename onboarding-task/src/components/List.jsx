@@ -12,7 +12,7 @@ export const List = ({ itemsViewModel, onCreateItem, onToggleBeingEdited }) => (
         {
           itemsViewModel.entrySeq().map(([guid, item]) => (
             <li key={guid}>
-              <ListItem item={item.listItemData} isBeingEdited={item.listItemFlag.isBeingEdited} onToggleBeingEdited={onToggleBeingEdited} />
+              <ListItem itemViewModel={item} onToggleBeingEdited={onToggleBeingEdited} />
             </li>
           ))
         }
