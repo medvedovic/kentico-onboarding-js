@@ -1,6 +1,7 @@
 import { generateGuid } from '../utils/generateGuid';
 import { ListItemData } from '../models/ListItemData';
 import { OrderedMap } from 'immutable';
+import { ListItemFlag } from '../models/ListItemFlag';
 
 const id1 = generateGuid();
 const id2 = generateGuid();
@@ -16,8 +17,8 @@ export const initialState = {
       value: 'Master React',
     })],
   ]),
-  itemsBeingEdited: new OrderedMap([
-    [id1, false],
-    [id2, false],
+  itemsBeingEdited: new Map([
+    [id1, new ListItemFlag()],
+    [id2, new ListItemFlag()],
   ]),
 };

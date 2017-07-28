@@ -1,10 +1,19 @@
 import { List } from '../components/List';
 import { connect } from 'react-redux';
 import { createItem, toggleBeingEdited } from '../actions/userActions';
+import { ListItemViewModel } from '../models/ListItemViewModel';
+
+const doStuff = (items, flags) => (
+  items.map((item) => (
+    new ListItemViewModel({
+      listItemData: item,
+      listItemFlag: flags.get(item.guid),
+    })
+  ))
+);
 
 const mapStateToProps = (store) => ({
-  items: store.items,
-  itemsBeingEdited: store.itemsBeingEdited,
+  itemsViewModel: doStuff(store.items, store.itemsBeingEdited),
 });
 
 const mapDispatchToProps = (dispatch) => ({

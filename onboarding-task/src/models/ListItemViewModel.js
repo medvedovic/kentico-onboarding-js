@@ -7,6 +7,6 @@ import { ListItemFlag } from './ListItemFlag';
  */
 
 export const ListItemViewModel = Record({
-  listItemData: new ListItemData,
-  listItemFlag: new ListItemFlag,
+  listItemData: new ListItemData(),
+  listItemFlag: new ListItemFlag(),
 });

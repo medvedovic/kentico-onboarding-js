@@ -6,5 +6,4 @@ import { Record } from 'immutable';
 
 export const ListItemFlag = Record({
   isBeingEdited: false,
-  newValue: '',
 });
