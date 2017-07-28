@@ -1,3 +1,0 @@
-xit('Reducer', () => {
-  return;
-});
