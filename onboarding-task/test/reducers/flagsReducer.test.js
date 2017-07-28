@@ -34,13 +34,15 @@ describe('Items Being Edited Reducer', () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it('Returns default state on unknown action', () => {
+  it('Returns new state on create', () => {
+    const dummyId = 'xxyyzz';
     const expectedResult = new Map([
       [id1, new ListItemFlag()],
       [id2, new ListItemFlag()],
+      [dummyId, new ListItemFlag()],
     ]);
     const dummyItem = {
-      guid: '',
+      guid: dummyId,
       value: '',
     };
 

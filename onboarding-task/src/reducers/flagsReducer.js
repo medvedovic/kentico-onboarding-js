@@ -1,18 +1,15 @@
-import {
-  CREATE_ITEM,
+import { CREATE_ITEM,
   DELETE_ITEM,
   TOGGLE_BEING_EDITED,
 } from '../constants/actionTypes';
 import { ListItemFlag } from '../models/ListItemFlag';
+import { updateFlagsReducer } from './updateFlagsReducer';
 
 export const flagsReducer = (state = {}, action) => {
   switch (action.type) {
     case TOGGLE_BEING_EDITED: {
       const itemFlags = state.get(action.payload.itemGuid);
-      const newFlags = new ListItemFlag({
-        ...itemFlags,
-        isBeingEdited: !itemFlags.isBeingEdited,
-      });
+      const newFlags = updateFlagsReducer(itemFlags, action);
 
       return state.set(action.payload.itemGuid, newFlags);
     }
