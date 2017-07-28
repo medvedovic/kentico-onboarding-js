@@ -6,16 +6,12 @@ import { createLogger } from 'redux-logger';
 
 import { App } from './App.jsx';
 import { reducer } from './reducers/reducers';
-import { initialItems } from './constants/initialItems';
+import { initialState } from './constants/initialState';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 const logger = createLogger();
-const initialState = {
-  items: initialItems,
-};
-
 const store = createStore(reducer, initialState, applyMiddleware(logger));
 
 ReactDOM.render(
