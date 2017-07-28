@@ -1,8 +1,8 @@
-import { OrderedMap } from 'immutable';
-import { ListItem as ListItemModel } from '../../src/models/ListItem';
 import { generateGuid } from '../../src/utils/generateGuid';
-import { items } from '../../src/reducers/reducers';
+import { ListItem as ListItemModel } from '../../src/models/ListItem';
+import { OrderedMap } from 'immutable';
 import { itemFactory } from '../../src/utils/itemFactory';
+import { items } from '../../src/reducers/itemsReducer';
 import { createItem, deleteItem, updateItem } from '../../src/actions/userActions';
 
 describe('List App reducer', () => {

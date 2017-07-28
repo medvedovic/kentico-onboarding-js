@@ -1,10 +1,9 @@
-import { combineReducers } from 'redux';
 import {
   CREATE_ITEM,
-  UPDATE_ITEM,
   DELETE_ITEM,
+  UPDATE_ITEM,
 } from '../constants/actionTypes';
-import { ListItem as ListItemModel } from '../models/ListItem';
+import { item as itemReducer } from './itemReducer';
 
 export const items = (state = {}, action) => {
   switch (action.type) {
@@ -13,18 +12,15 @@ export const items = (state = {}, action) => {
 
       return state.set(item.guid, item);
     }
-    case UPDATE_ITEM:
-      return state.set(action.item.guid, new ListItemModel({
-        ...action.item,
-        value: action.item.value,
-      }));
+    case UPDATE_ITEM: {
+      const toBeUpdated = state.get(action.item.guid);
+      const updatedItem = itemReducer(toBeUpdated, action);
+
+      return state.set(action.item.guid, updatedItem);
+    }
     case DELETE_ITEM:
       return state.delete(action.itemGuid);
     default:
       return state;
   }
 };
-
-export const reducer = combineReducers({
-  items,
-});

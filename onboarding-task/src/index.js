@@ -5,14 +5,14 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 
 import { App } from './App.jsx';
-import { reducer } from './reducers/reducers';
+import { rootReducer } from './reducers/reducer';
 import { initialState } from './constants/initialState';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 const logger = createLogger();
-const store = createStore(reducer, initialState, applyMiddleware(logger));
+const store = createStore(rootReducer, initialState, applyMiddleware(logger));
 
 ReactDOM.render(
   <Provider store={store}>
