@@ -5,14 +5,14 @@ import { OrderedMap } from 'immutable';
 import { ListItemInput } from './ListItemInput';
 import { ListItem } from './ListItem';
 
-export const List = ({ items, onCreateItem }) => (
+export const List = ({ items, itemsBeingEdited, onCreateItem, onToggleBeingEdited }) => (
   <div className="row">
     <div className="col-sm-12 col-md-6">
       <ol className="list">
         {
           items.entrySeq().map(([guid, item]) => (
             <li key={guid}>
-              <ListItem item={item} />
+              <ListItem item={item} isBeingEdited={itemsBeingEdited.get(guid)} onToggleBeingEdited={onToggleBeingEdited} />
             </li>
           ))
         }
@@ -24,5 +24,7 @@ export const List = ({ items, onCreateItem }) => (
 
 List.propTypes = {
   items: PropTypes.instanceOf(OrderedMap),
+  itemsBeingEdited: PropTypes.instanceOf(OrderedMap),
   onCreateItem: PropTypes.func.isRequired,
+  onToggleBeingEdited: PropTypes.func.isRequired,
 };

@@ -16,4 +16,8 @@ export const initialState = {
       value: 'Master React',
     })],
   ]),
+  itemsBeingEdited: new OrderedMap([
+    [id1, false],
+    [id2, false],
+  ]),
 };

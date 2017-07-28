@@ -10,24 +10,17 @@ export class ListItem extends React.PureComponent {
       guid: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     }).isRequired,
+    isBeingEdited: PropTypes.bool.isRequired,
+    onToggleBeingEdited: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isBeingEdited: false,
-    };
-  }
-
   _toggleBeingEdited = () => {
-    this.setState(prevState => ({
-      isBeingEdited: !prevState.isBeingEdited,
-    }));
+    const { guid } = this.props.item;
+    this.props.onToggleBeingEdited(guid);
   };
 
   render() {
-    const { isBeingEdited } = this.state;
+    const { isBeingEdited } = this.props;
     const { item } = this.props;
 
     if (isBeingEdited) {
