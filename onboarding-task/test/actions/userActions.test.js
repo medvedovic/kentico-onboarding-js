@@ -20,7 +20,9 @@ describe('User Actions', () => {
     };
     const expectedAction = {
       type: CREATE_ITEM,
-      item: _item,
+      payload: {
+        item: _item,
+      },
     };
 
     const resultAction = createItem(_item);
@@ -31,9 +33,11 @@ describe('User Actions', () => {
   it('Returns "Updates item" action properly', () => {
     const expectedAction = {
       type: UPDATE_ITEM,
-      item: {
-        guid: _guid,
-        value: _value,
+      payload: {
+        item: {
+          guid: _guid,
+          value: _value,
+        },
       },
     };
 
@@ -45,7 +49,9 @@ describe('User Actions', () => {
   it('Returns "Deletes item" action properly', () => {
     const expectedAction = {
       type: DELETE_ITEM,
-      itemGuid: _guid,
+      payload: {
+        itemGuid: _guid,
+      },
     };
 
     const resultAction = deleteItem(_guid);

@@ -2,23 +2,31 @@ import { CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM, TOGGLE_BEING_EDITED } from '../c
 
 export const createItem = (item) => ({
   type: CREATE_ITEM,
-  item,
+  payload: {
+    item,
+  },
 });
 
 export const updateItem = (guid, value) => ({
   type: UPDATE_ITEM,
-  item: {
-    guid,
-    value,
+  payload: {
+    item: {
+      guid,
+      value,
+    },
   },
 });
 
 export const deleteItem = (itemGuid) => ({
   type: DELETE_ITEM,
-  itemGuid,
+  payload: {
+    itemGuid,
+  },
 });
 
 export const toggleBeingEdited = (itemGuid) => ({
   type: TOGGLE_BEING_EDITED,
-  itemGuid,
+  payload: {
+    itemGuid,
+  },
 });

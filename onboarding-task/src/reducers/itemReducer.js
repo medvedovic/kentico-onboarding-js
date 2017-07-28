@@ -5,8 +5,8 @@ export const item = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_ITEM:
       return new ListItem({
-        ...action.item,
-        value: action.item.value,
+        ...action.payload.item,
+        value: action.payload.item.value,
       });
     default:
       return state;
