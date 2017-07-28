@@ -1,20 +1,23 @@
-import { OrderedMap } from 'immutable';
+import { Map } from 'immutable';
 import { generateGuid } from '../../src/utils/generateGuid';
 import { itemsBeingEdited } from '../../src/reducers/itemsBeingEdited';
-import {createItem, deleteItem, toggleBeingEdited} from '../../src/actions/userActions';
+import { createItem, deleteItem, toggleBeingEdited } from '../../src/actions/userActions';
+import { ListItemFlag } from '../../src/models/ListItemFlag';
 
 describe('Items Being Edited Reducer', () => {
   const id1 = generateGuid();
   const id2 = generateGuid();
-  const initialState = new OrderedMap([
-    [id1, false],
-    [id2, false],
+  const initialState = new Map([
+    [id1, new ListItemFlag()],
+    [id2, new ListItemFlag()],
   ]);
 
   it('Return new state on toggle', () => {
-    const expectedResult = new OrderedMap([
-      [id1, false],
-      [id2, true],
+    const expectedResult = new Map([
+      [id1, new ListItemFlag()],
+      [id2, new ListItemFlag({
+        isBeingEdited: true,
+      })],
     ]);
 
     const result = itemsBeingEdited(initialState, toggleBeingEdited(id2));
@@ -23,8 +26,8 @@ describe('Items Being Edited Reducer', () => {
   });
 
   it('Returns new state on delete', () => {
-    const expectedResult = new OrderedMap([
-      [id1, false],
+    const expectedResult = new Map([
+      [id1, new ListItemFlag()],
     ]);
     const result = itemsBeingEdited(initialState, deleteItem(id2));
 
@@ -32,9 +35,9 @@ describe('Items Being Edited Reducer', () => {
   });
 
   it('Returns default state on unknown action', () => {
-    const expectedResult = new OrderedMap([
-      [id1, false],
-      [id2, false],
+    const expectedResult = new Map([
+      [id1, new ListItemFlag()],
+      [id2, new ListItemFlag()],
     ]);
     const dummyItem = {
       guid: '',

@@ -1,6 +1,6 @@
 import { generateGuid } from '../utils/generateGuid';
 import { ListItemData } from '../models/ListItemData';
-import { OrderedMap } from 'immutable';
+import { OrderedMap, Map } from 'immutable';
 import { ListItemFlag } from '../models/ListItemFlag';
 
 const id1 = generateGuid();
