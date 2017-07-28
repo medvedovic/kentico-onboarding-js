@@ -22,6 +22,8 @@ export const List = ({ itemsViewModel, onCreateItem, onToggleBeingEdited }) => (
   </div>
 );
 
+List.displayName = 'List';
+
 List.propTypes = {
   itemsViewModel: PropTypes.object,
   items: PropTypes.instanceOf(OrderedMap),
