@@ -14,12 +14,16 @@ describe('User Actions', () => {
   const _value = 'Go home';
 
   it('Returns "Creates item" action properly', () => {
-    const expectedAction = {
-      type: CREATE_ITEM,
+    const _item = {
+      guid: _guid,
       value: _value,
     };
+    const expectedAction = {
+      type: CREATE_ITEM,
+      item: _item,
+    };
 
-    const resultAction = createItem(_value);
+    const resultAction = createItem(_item);
 
     expect(resultAction).toEqual(expectedAction);
   });
