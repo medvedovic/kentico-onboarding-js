@@ -1,8 +1,8 @@
 import { generateGuid } from './generateGuid';
-import { ListItem } from '../models/ListItem';
+import { ListItemData } from '../models/ListItemData';
 
 export const itemFactory = (value) => (
-  new ListItem({
+  new ListItemData({
     guid: generateGuid(),
     value,
   })

@@ -1,5 +1,5 @@
 import { generateGuid } from '../../src/utils/generateGuid';
-import { ListItem as ListItemModel } from '../../src/models/ListItem';
+import { ListItemData as ListItemModel } from '../../src/models/ListItemData';
 import { OrderedMap } from 'immutable';
 import { itemFactory } from '../../src/utils/itemFactory';
 import { items } from '../../src/reducers/itemsReducer';

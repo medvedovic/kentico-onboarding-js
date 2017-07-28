@@ -1,5 +1,5 @@
 import { createItem, updateItem } from '../../src/actions/userActions';
-import { ListItem as ListItemModel } from '../../src/models/ListItem';
+import { ListItemData as ListItemModel } from '../../src/models/ListItemData';
 import { generateGuid } from '../../src/utils/generateGuid';
 import { item } from '../../src/reducers/itemReducer';
 

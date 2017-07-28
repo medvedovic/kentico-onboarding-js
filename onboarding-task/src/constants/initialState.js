@@ -1,5 +1,5 @@
 import { generateGuid } from '../utils/generateGuid';
-import { ListItem } from '../models/ListItem';
+import { ListItemData } from '../models/ListItemData';
 import { OrderedMap } from 'immutable';
 
 const id1 = generateGuid();
@@ -7,11 +7,11 @@ const id2 = generateGuid();
 
 export const initialState = {
   items: new OrderedMap([
-    [id1, new ListItem({
+    [id1, new ListItemData({
       guid: id1,
       value: 'Make coffee',
     })],
-    [id2, new ListItem({
+    [id2, new ListItemData({
       guid: id2,
       value: 'Master React',
     })],
