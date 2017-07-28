@@ -15,4 +15,4 @@ export const ListContainer = connect(
   mapDispatchToProps
 )(List);
 
-ListContainer.displayName = 'ListViewModel';
+ListContainer.displayName = 'ListContainer';

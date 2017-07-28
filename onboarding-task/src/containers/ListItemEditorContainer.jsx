@@ -12,4 +12,4 @@ export const ListItemEditorContainer = connect(
   mapDispatchToProps
 )(ListItemEditor);
 
-ListItemEditorContainer.displayName = 'ListItemEditorViewModel';
+ListItemEditorContainer.displayName = 'ListItemEditorContainer';
