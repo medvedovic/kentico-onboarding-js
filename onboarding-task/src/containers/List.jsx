@@ -1,16 +1,7 @@
 import { List } from '../components/List';
 import { connect } from 'react-redux';
 import { createItem, toggleBeingEdited } from '../actions/userActions';
-import { ListItemViewModel } from '../models/ListItemViewModel';
-
-const mergeItemDataWithFlags = (items, flags) => (
-  items.map((item) => (
-    new ListItemViewModel({
-      listItemData: item,
-      listItemFlag: flags.get(item.guid),
-    })
-  ))
-);
+import { mergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
 
 const mapStateToProps = (store) => ({
   itemsViewModel: mergeItemDataWithFlags(store.items, store.itemsBeingEdited),
