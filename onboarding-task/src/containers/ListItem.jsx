@@ -4,10 +4,10 @@ import { toggleBeingEdited } from '../actions/userActions';
 import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
 
 const mapStateToProps = (store, props) => {
-  const { guid, value } = store.items.get(props.guid);
-  const { isBeingEdited } = store.flags.get(props.guid);
+  const item = store.items.get(props.guid);
+  const flags = store.flags.get(props.guid);
 
-  return { itemViewModel: memoizedMergeItemDataWithFlags(guid, value, isBeingEdited) };
+  return { itemViewModel: memoizedMergeItemDataWithFlags(item, flags) };
 };
 
 const mapDispatchToProps = (dispatch, props) => {

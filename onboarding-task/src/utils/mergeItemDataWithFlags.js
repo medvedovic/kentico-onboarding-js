@@ -1,9 +1,8 @@
 import memoize from 'memoizee';
 
-export const mergeItemDataWithFlags = (guid, value, isBeingEdited) => ({
-  guid,
-  value,
-  isBeingEdited,
+export const mergeItemDataWithFlags = (item, flags) => ({
+  ...item.toJS(),
+  ...flags.toJS(),
 });
 
 export const memoizedMergeItemDataWithFlags = memoize(mergeItemDataWithFlags);
