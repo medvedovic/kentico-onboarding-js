@@ -17,7 +17,7 @@ describe('Merge Item Data With Flags', () => {
       isBeingEdited: false,
     };
 
-    const test = mergeItemDataWithFlags(item, itemFlags);
+    const test = mergeItemDataWithFlags(item.guid, item.value, itemFlags.isBeingEdited);
 
     expect(test).toEqual(expectedResult);
   });

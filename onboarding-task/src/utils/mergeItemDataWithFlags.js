@@ -1,4 +1,5 @@
-export const mergeItemDataWithFlags = (item, flags) => ({
-  ...item.toJS(),
-  ...flags.toJS(),
+export const mergeItemDataWithFlags = (guid, value, isBeingEdited) => ({
+  guid,
+  value,
+  isBeingEdited,
 });
