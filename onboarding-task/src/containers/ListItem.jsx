@@ -10,9 +10,13 @@ const mapStateToProps = (store, props) => {
   return { itemViewModel: memoizedMergeItemDataWithFlags(guid, value, isBeingEdited) };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onToggleBeingEdited: (itemGuid) => dispatch(toggleBeingEdited(itemGuid)),
-});
+const mapDispatchToProps = (dispatch, props) => {
+  const { guid } = props;
+
+  return {
+    onToggleBeingEdited: () => dispatch(toggleBeingEdited(guid)),
+  };
+};
 
 export const ListItemContainer = connect(
   mapStateToProps,
