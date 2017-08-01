@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import { CREATE_ITEM,
   DELETE_ITEM,
   TOGGLE_BEING_EDITED,
@@ -5,7 +6,7 @@ import { CREATE_ITEM,
 import { ListItemFlag } from '../models/ListItemFlag';
 import { updateFlagsReducer } from './updateFlagsReducer';
 
-export const flags = (state = {}, action) => {
+export const flags = (state = new Map(), action) => {
   switch (action.type) {
     case TOGGLE_BEING_EDITED: {
       const itemFlags = state.get(action.payload.itemGuid);

@@ -1,3 +1,4 @@
+import { OrderedMap } from 'immutable';
 import {
   CREATE_ITEM,
   DELETE_ITEM,
@@ -5,7 +6,7 @@ import {
 } from '../constants/actionTypes';
 import { updateItemReducer as itemReducer } from './updateItemReducer';
 
-export const items = (state = {}, action) => {
+export const items = (state = new OrderedMap(), action) => {
   switch (action.type) {
     case CREATE_ITEM: {
       const { item } = action.payload;
