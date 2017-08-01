@@ -24,6 +24,6 @@ export const List = ({ itemIds, onCreateItem }) => (
 List.displayName = 'List';
 
 List.propTypes = {
-  itemIds: PropTypes.array.isRequired,           /* TODO - get instance of array */
+  itemIds: PropTypes.array.isRequired,
   onCreateItem: PropTypes.func.isRequired,
 };
