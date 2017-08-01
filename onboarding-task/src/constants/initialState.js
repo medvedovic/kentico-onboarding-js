@@ -17,7 +17,7 @@ export const initialState = {
       value: 'Master React',
     })],
   ]),
-  itemsBeingEdited: new Map([
+  flags: new Map([
     [id1, new ListItemFlag()],
     [id2, new ListItemFlag()],
   ]),

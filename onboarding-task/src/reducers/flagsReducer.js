@@ -5,7 +5,7 @@ import { CREATE_ITEM,
 import { ListItemFlag } from '../models/ListItemFlag';
 import { updateFlagsReducer } from './updateFlagsReducer';
 
-export const flagsReducer = (state = {}, action) => {
+export const flags = (state = {}, action) => {
   switch (action.type) {
     case TOGGLE_BEING_EDITED: {
       const itemFlags = state.get(action.payload.itemGuid);

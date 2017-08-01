@@ -6,9 +6,10 @@ import { isTextInputValid } from '../utils/isTextInputValid';
 export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
-    item: PropTypes.shape({
+    itemViewModel: PropTypes.shape({
       guid: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
+      isBeingEdited: PropTypes.bool.isRequired,
     }).isRequired,
     onUpdateItem: PropTypes.func.isRequired,
     onDeleteItem: PropTypes.func.isRequired,
@@ -19,7 +20,7 @@ export class ListItemEditor extends React.PureComponent {
     super(props);
 
     this.state = {
-      value: props.item.value,
+      value: props.itemViewModel.value,
     };
   }
 
@@ -48,7 +49,7 @@ export class ListItemEditor extends React.PureComponent {
 
   _handleUpdateClick = () => {
     const { value } = this.state;
-    const { guid } = this.props.item;
+    const { guid } = this.props.itemViewModel;
 
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(guid, value);
@@ -57,7 +58,7 @@ export class ListItemEditor extends React.PureComponent {
   };
 
   _handleDeleteClick = () => {
-    const { guid } = this.props.item;
+    const { guid } = this.props.itemViewModel;
 
     this.props.onDeleteItem(guid);
   };

@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { OrderedMap } from 'immutable';
 
 import { ListItemInput } from './ListItemInput';
-import { ListItem } from './ListItem';
+import { ListItemContainer } from '../containers/ListItem';
 
-export const List = ({ itemsViewModel, onCreateItem, onToggleBeingEdited }) => (
+export const List = ({ itemIds, onCreateItem }) => (
   <div className="row">
     <div className="col-sm-12 col-md-6">
       <ol className="list">
         {
-          itemsViewModel.entrySeq().map(([guid, item]) => (
+          itemIds.map(guid => (
             <li key={guid}>
-              <ListItem itemViewModel={item} onToggleBeingEdited={onToggleBeingEdited} />
+              <ListItemContainer guid={guid} />
             </li>
           ))
         }
@@ -25,9 +24,6 @@ export const List = ({ itemsViewModel, onCreateItem, onToggleBeingEdited }) => (
 List.displayName = 'List';
 
 List.propTypes = {
-  itemsViewModel: PropTypes.object,
-  items: PropTypes.instanceOf(OrderedMap),
-  itemsBeingEdited: PropTypes.instanceOf(OrderedMap),
+  itemIds: PropTypes.array.isRequired,           /* TODO - get instance of array */
   onCreateItem: PropTypes.func.isRequired,
-  onToggleBeingEdited: PropTypes.func.isRequired,
 };
