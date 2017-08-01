@@ -1,7 +1,6 @@
 import { mergeItemDataWithFlags } from '../../src/utils/mergeItemDataWithFlags';
 import { ListItemData } from '../../src/models/ListItemData';
 import { ListItemFlag } from '../../src/models/ListItemFlag';
-import { ListItemViewModel } from '../../src/models/ListItemViewModel';
 
 describe('Merge Item Data With Flags', () => {
   it('Returns merged data with flags', () => {
