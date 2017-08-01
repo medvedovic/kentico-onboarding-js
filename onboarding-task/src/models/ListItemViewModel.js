@@ -7,6 +7,7 @@ import { ListItemFlag } from './ListItemFlag';
  */
 
 export const ListItemViewModel = Record({
-  listItemData: new ListItemData(),
-  listItemFlag: new ListItemFlag(),
+  guid: '',
+  value: '',
+  isBeingEdited: false,
 });

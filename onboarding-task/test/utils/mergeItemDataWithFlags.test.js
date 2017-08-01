@@ -1,8 +1,7 @@
-import { OrderedMap, Map } from 'immutable';
 import { mergeItemDataWithFlags } from '../../src/utils/mergeItemDataWithFlags';
-import { ListItemViewModel } from '../../src/models/ListItemViewModel';
 import { ListItemData } from '../../src/models/ListItemData';
 import { ListItemFlag } from '../../src/models/ListItemFlag';
+import { ListItemViewModel } from '../../src/models/ListItemViewModel';
 
 describe('Merge Item Data With Flags', () => {
   it('Returns merged data with flags', () => {
@@ -11,17 +10,15 @@ describe('Merge Item Data With Flags', () => {
       guid,
       value: 'Do stuff',
     });
-    const flags = new ListItemFlag();
+    const itemFlags = new ListItemFlag();
 
-    const expectedResult = new OrderedMap([
-      [guid,
-        new ListItemViewModel({
-          listItemData: item,
-          listItemFlag: flags,
-        })],
-    ]);
+    const expectedResult = new ListItemViewModel({
+      guid,
+      value: 'Do stuff',
+      isBeingEdited: false,
+    });
 
-    const test = mergeItemDataWithFlags(new OrderedMap([[guid, item]]), new Map([[guid, flags]]));
+    const test = mergeItemDataWithFlags(item, itemFlags);
 
     expect(test).toEqual(expectedResult);
   });
