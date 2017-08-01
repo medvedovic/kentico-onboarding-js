@@ -1,10 +1,11 @@
-import { ListItemEditor } from '../components/ListItemEditor';
 import { connect } from 'react-redux';
+
+import { ListItemEditor } from '../components/ListItemEditor';
 import { deleteItem, updateItem } from '../actions/userActions';
 
-const mapDispatchToProps = (dispatch) => ({
-  onUpdateItem: (guid, value) => dispatch(updateItem(guid, value)),
-  onDeleteItem: (guid) => dispatch(deleteItem(guid)),
+const mapDispatchToProps = (dispatch, props) => ({
+  onUpdateItem: (value) => dispatch(updateItem(props.itemViewModel.guid, value)),
+  onDeleteItem: () => dispatch(deleteItem(props.itemViewModel.guid)),
 });
 
 export const ListItemEditorContainer = connect(

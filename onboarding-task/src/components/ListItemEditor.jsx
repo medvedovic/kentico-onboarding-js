@@ -49,18 +49,11 @@ export class ListItemEditor extends React.PureComponent {
 
   _handleUpdateClick = () => {
     const { value } = this.state;
-    const { guid } = this.props.itemViewModel;
 
     if (isTextInputValid(value)) {
-      this.props.onUpdateItem(guid, value);
+      this.props.onUpdateItem(value);
     }
     this.props.onCancelEdit();
-  };
-
-  _handleDeleteClick = () => {
-    const { guid } = this.props.itemViewModel;
-
-    this.props.onDeleteItem(guid);
   };
 
   render() {
@@ -82,7 +75,7 @@ export class ListItemEditor extends React.PureComponent {
         <div className="btn-group" role="group">
           <button type="button" className="btn btn-default" onClick={this._handleUpdateClick}>Save</button>
           <button type="button" className="btn btn-default" onClick={this.props.onCancelEdit}>Cancel</button>
-          <button type="button" className="btn btn-default" onClick={this._handleDeleteClick}>Delete</button>
+          <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
         </div>
       </div>
     );
