@@ -4,8 +4,8 @@ import { toggleBeingEdited } from '../actions/userActions';
 import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
 
 const mapStateToProps = (store, props) => {
-  const item = store.items.get(props.guid);
-  const flags = store.flags.get(props.guid);
+  const item = store.items.byIds.get(props.guid);
+  const flags = store.items.flags.get(props.guid);
 
   return { itemViewModel: memoizedMergeItemDataWithFlags(item, flags) };
 };

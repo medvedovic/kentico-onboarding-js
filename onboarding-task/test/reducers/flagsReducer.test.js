@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
 import { generateGuid } from '../../src/utils/generateGuid';
-import { flags } from '../../src/reducers/flagsReducer';
+import { flags } from '../../src/reducers/flags/flags';
 import { createItem, deleteItem, toggleBeingEdited } from '../../src/actions/userActions';
 import { ListItemFlag } from '../../src/models/ListItemFlag';
 

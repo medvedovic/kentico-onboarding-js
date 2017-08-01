@@ -2,7 +2,7 @@ import { generateGuid } from '../../src/utils/generateGuid';
 import { ListItemData as ListItemModel } from '../../src/models/ListItemData';
 import { OrderedMap } from 'immutable';
 import { itemFactory } from '../../src/utils/itemFactory';
-import { items } from '../../src/reducers/itemsReducer';
+import { items } from '../../src/reducers/items/items';
 import { createItem, deleteItem, updateItem } from '../../src/actions/userActions';
 
 describe('List App reducer', () => {

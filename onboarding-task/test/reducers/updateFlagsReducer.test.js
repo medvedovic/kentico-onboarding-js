@@ -1,5 +1,5 @@
 import { ListItemFlag } from '../../src/models/ListItemFlag';
-import { updateFlagsReducer } from '../../src/reducers/updateFlagsReducer';
+import { flag } from '../../src/reducers/flags/flag';
 import { toggleBeingEdited } from '../../src/actions/userActions';
 
 describe('Update Flags Reducer', () => {
@@ -8,7 +8,7 @@ describe('Update Flags Reducer', () => {
       isBeingEdited: true,
     });
 
-    const newState = updateFlagsReducer(new ListItemFlag(), toggleBeingEdited(''));
+    const newState = flag(new ListItemFlag(), toggleBeingEdited(''));
 
     expect(newState).toEqual(expectedState);
   });

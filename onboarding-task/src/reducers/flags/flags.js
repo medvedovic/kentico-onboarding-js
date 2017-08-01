@@ -2,15 +2,15 @@ import { Map } from 'immutable';
 import { CREATE_ITEM,
   DELETE_ITEM,
   TOGGLE_BEING_EDITED,
-} from '../constants/actionTypes';
-import { ListItemFlag } from '../models/ListItemFlag';
-import { updateFlagsReducer } from './updateFlagsReducer';
+} from '../../constants/actionTypes';
+import { ListItemFlag } from '../../models/ListItemFlag';
+import { flag } from './flag';
 
 export const flags = (state = new Map(), action) => {
   switch (action.type) {
     case TOGGLE_BEING_EDITED: {
       const itemFlags = state.get(action.payload.itemGuid);
-      const newFlags = updateFlagsReducer(itemFlags, action);
+      const newFlags = flag(itemFlags, action);
 
       return state.set(action.payload.itemGuid, newFlags);
     }
