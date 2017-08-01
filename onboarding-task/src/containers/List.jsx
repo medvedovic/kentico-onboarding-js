@@ -1,9 +1,9 @@
-import { List } from '../components/List';
 import { connect } from 'react-redux';
+import { List } from '../components/List';
 import { createItem } from '../actions/userActions';
 
 const mapStateToProps = ({ items }) => ({
-  itemIds: items.byIds.keySeq().toArray(),
+  itemIds: items.ids.toArray(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
