@@ -1,13 +1,13 @@
 import { ListItem } from '../components/ListItem';
 import { connect } from 'react-redux';
 import { toggleBeingEdited } from '../actions/userActions';
-import { mergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
+import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
 
 const mapStateToProps = (store, props) => {
-  const item = store.items.get(props.guid);
-  const itemFlags = store.flags.get(props.guid);
+  const { guid, value } = store.items.get(props.guid);
+  const { isBeingEdited } = store.flags.get(props.guid);
 
-  return { itemViewModel: mergeItemDataWithFlags(item, itemFlags) };
+  return { itemViewModel: memoizedMergeItemDataWithFlags(guid, value, isBeingEdited) };
 };
 
 const mapDispatchToProps = (dispatch) => ({
