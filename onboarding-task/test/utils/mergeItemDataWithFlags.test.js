@@ -12,11 +12,11 @@ describe('Merge Item Data With Flags', () => {
     });
     const itemFlags = new ListItemFlag();
 
-    const expectedResult = new ListItemViewModel({
+    const expectedResult = {
       guid,
       value: 'Do stuff',
       isBeingEdited: false,
-    });
+    };
 
     const test = mergeItemDataWithFlags(item, itemFlags);
 
