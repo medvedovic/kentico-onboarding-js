@@ -1,6 +1,10 @@
 import { ListItem } from '../components/ListItem';
 import { connect } from 'react-redux';
-import { toggleBeingEdited } from '../actions/userActions';
+import {
+  toggleBeingEdited,
+  updateItem,
+  deleteItem,
+} from '../actions/userActions';
 import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
 
 const mapStateToProps = (store, props) => {
@@ -15,6 +19,8 @@ const mapDispatchToProps = (dispatch, props) => {
 
   return {
     onToggleBeingEdited: () => dispatch(toggleBeingEdited(guid)),
+    onUpdateItem: (value) => dispatch(updateItem(guid, value)),
+    onDeleteItem: () => dispatch(deleteItem(guid)),
   };
 };
 

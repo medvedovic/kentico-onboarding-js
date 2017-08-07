@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import HotKey from 'react-shortcut';
 
 import { isTextInputValid } from '../utils/isTextInputValid';
 
@@ -24,18 +25,9 @@ export class ListItemEditor extends React.PureComponent {
     };
   }
 
-  _handleKeyboardInput = (e) => {
-    switch (e.key) {
-      case 'Escape':
-        this.props.onCancelEdit();
-        break;
-      case 'Enter':
-        if (document.activeElement === this.textInput) {
-          this._handleUpdateClick();
-        }
-        break;
-      default:
-        return;
+  _handleKeyboardInput = () => {
+    if (document.activeElement === this.textInput) {
+      this._handleUpdateClick();
     }
   };
 
@@ -57,6 +49,8 @@ export class ListItemEditor extends React.PureComponent {
   };
 
   render() {
+    const saveKey = ['enter'];
+    const cancelKey = ['escape'];
     const { value } = this.state;
 
     return (
@@ -66,7 +60,6 @@ export class ListItemEditor extends React.PureComponent {
           className="form-control"
           value={value}
           onChange={this._handleItemNameChanged}
-          onKeyDown={this._handleKeyboardInput}
           ref={(input) => {
             this.textInput = input;
           }}
@@ -74,7 +67,9 @@ export class ListItemEditor extends React.PureComponent {
         />
         <div className="btn-group" role="group">
           <button type="button" className="btn btn-default" onClick={this._handleUpdateClick}>Save</button>
+          <HotKey keys={saveKey} onKeysCoincide={this._handleKeyboardInput} />
           <button type="button" className="btn btn-default" onClick={this.props.onCancelEdit}>Cancel</button>
+          <HotKey keys={cancelKey} onKeysCoincide={this.props.onCancelEdit} />
           <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
         </div>
       </div>

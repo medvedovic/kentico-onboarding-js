@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItemDisplay } from './ListItemDisplay';
-import { ListItemEditorContainer } from '../containers/ListItemEditor';
+import { ListItemEditor } from './ListItemEditor';
 
-export const ListItem = ({ itemViewModel, onToggleBeingEdited }) => {
+export const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
   if (itemViewModel.isBeingEdited) {
     return (
-      <ListItemEditorContainer
+      <ListItemEditor
         itemViewModel={itemViewModel}
         onCancelEdit={onToggleBeingEdited}
+        onUpdateItem={onUpdateItem}
+        onDeleteItem={onDeleteItem}
       />
     );
   }
@@ -24,4 +26,6 @@ ListItem.propTypes = {
     isBeingEdited: PropTypes.bool.isRequired,
   }).isRequired,
   onToggleBeingEdited: PropTypes.func.isRequired,
+  onUpdateItem: PropTypes.func.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
 };
