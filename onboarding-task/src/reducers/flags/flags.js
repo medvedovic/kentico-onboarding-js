@@ -14,7 +14,7 @@ export const flags = (state = new Map(), action) => {
       return state.set(action.payload.itemId, newFlags);
     }
     case CREATE_ITEM: {
-      const newFlags = flags(undefined, action);
+      const newFlags = flag(undefined, action);
 
       return state.set(action.payload.item.id, newFlags);
     }
