@@ -20,13 +20,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
   return {
     onToggleBeingEdited: () => dispatch(toggleBeingEdited(guid)),
-    onUpdateItem: (value) => {
-      if (isTextInputValid(value)) {
-        dispatch(updateItem(guid, value));
-        return true;
-      }
-      return false;
-    },
+    onUpdateItem: (value) => dispatch(updateItem(guid, value)),
     onDeleteItem: () => dispatch(deleteItem(guid)),
   };
 };

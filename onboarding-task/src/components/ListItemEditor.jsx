@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
+import { isTextInputValid } from '../utils/isTextInputValid';
 
 export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
@@ -34,11 +35,12 @@ export class ListItemEditor extends React.PureComponent {
   _handleUpdate = () => {
     const { value } = this.state;
 
-    if (!this.props.onUpdateItem(value)) {
-      this.errorElement.style.display = 'block';
+    if (isTextInputValid(value)) {
+      this.props.onUpdateItem(value);
+      this.props.onCancelEdit();
     }
     else {
-      this.props.onCancelEdit();
+      this.errorElement.style.display = 'block';
     }
   };
 
