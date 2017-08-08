@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
-import { isTextInputValid } from '../utils/isTextInputValid';
 import { keyMap } from '../constants/keyMap';
 
 export class ListItemEditor extends React.PureComponent {
@@ -37,10 +36,12 @@ export class ListItemEditor extends React.PureComponent {
   _handleUpdate = () => {
     const { value } = this.state;
 
-    if (isTextInputValid(value)) {
-      this.props.onUpdateItem(value);
+    if (!this.props.onUpdateItem(value)) {
+      this.errorElement.style.display = 'block';
     }
-    this.props.onCancelEdit();
+    else {
+      this.props.onCancelEdit();
+    }
   };
 
   render() {
@@ -70,6 +71,15 @@ export class ListItemEditor extends React.PureComponent {
               <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
             </div>
           </div>
+          <span
+            className="error"
+            style={{
+              display: 'none',
+            }}
+            ref={span => {
+              this.errorElement = span;
+            }}
+          >Invalid input!</span>
         </HotKeys>
       </HotKeys>
     );

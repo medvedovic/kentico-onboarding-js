@@ -21,8 +21,6 @@ body {
   font-size: 1.2em;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  line-height: 2.385em;
-  height: 2.385em;
 }
 
 .list span {
@@ -31,7 +29,6 @@ body {
 
 .list span:hover {
   cursor: pointer;
-  /* text-shadow: 1px 1px 1px #66ccff; */
 }
 
 .list li:hover,
@@ -58,6 +55,13 @@ body {
 
 .list li .form-group {
   margin: 0;
+  line-height: 2.385em;
+  height: 2.385em;
+}
+
+.list li > span {
+  line-height: 2.385em;
+  height: 2.385em;
 }
 
 .list li .form-control {
@@ -93,4 +97,9 @@ input:focus {
 
 .enlarge:focus {
   width: 100% !important;
+}
+
+.error {
+  color: #f44336;
+  font-size: 0.85em;
 }

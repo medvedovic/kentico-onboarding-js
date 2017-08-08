@@ -5,18 +5,19 @@ import { ListItemDisplay } from './ListItemDisplay';
 import { ListItemEditor } from './ListItemEditor';
 
 export const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
-  if (itemViewModel.isBeingEdited) {
-    return (
+  return (
+    itemViewModel.isBeingEdited ?
       <ListItemEditor
         itemViewModel={itemViewModel}
         onCancelEdit={onToggleBeingEdited}
         onUpdateItem={onUpdateItem}
         onDeleteItem={onDeleteItem}
+      /> :
+      <ListItemDisplay
+        itemViewModel={itemViewModel}
+        onClick={onToggleBeingEdited}
       />
-    );
-  }
-
-  return <ListItemDisplay itemViewModel={itemViewModel} onClick={onToggleBeingEdited} />;
+  );
 };
 
 ListItem.displayName = 'ListItem';

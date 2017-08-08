@@ -6,6 +6,7 @@ import {
   deleteItem,
 } from '../actions/userActions';
 import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
+import { isTextInputValid } from '../utils/isTextInputValid';
 
 const mapStateToProps = (store, props) => {
   const item = store.items.byIds.get(props.guid);
@@ -19,7 +20,13 @@ const mapDispatchToProps = (dispatch, props) => {
 
   return {
     onToggleBeingEdited: () => dispatch(toggleBeingEdited(guid)),
-    onUpdateItem: (value) => dispatch(updateItem(guid, value)),
+    onUpdateItem: (value) => {
+      if (isTextInputValid(value)) {
+        dispatch(updateItem(guid, value));
+        return true;
+      }
+      return false;
+    },
     onDeleteItem: () => dispatch(deleteItem(guid)),
   };
 };
