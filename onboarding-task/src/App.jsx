@@ -1,6 +1,6 @@
 import './sticky-footer.css';
 import React from 'react';
-import { ListContainer } from './containers/List';
+import { List } from './containers/List';
 
 export const App = () => (
   <div>
@@ -10,7 +10,7 @@ export const App = () => (
       </div>
 
       <div id="app-content">
-        <ListContainer />
+        <List />
       </div>
 
       <section className="shortcuts">

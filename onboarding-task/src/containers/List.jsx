@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { List } from '../components/List';
+
+import { List as ListComponent } from '../components/List';
 import { createItem } from '../actions/userActions';
 
 const mapStateToProps = ({ items }) => ({
@@ -10,9 +11,7 @@ const mapDispatchToProps = (dispatch) => ({
   onCreateItem: (value) => dispatch(createItem(value)),
 });
 
-export const ListContainer = connect(
+export const List = connect(
   mapStateToProps,
   mapDispatchToProps
-)(List);
-
-ListContainer.displayName = 'ListContainer';
+)(ListComponent);
