@@ -26,12 +26,6 @@ export class ListItemEditor extends React.PureComponent {
     };
   }
 
-  _handleKeyboardInput = () => {
-    if (document.activeElement === this.textInput) {
-      this._handleUpdateClick();
-    }
-  };
-
   _handleItemNameChanged = (e) => {
     const { value } = e.target;
 
@@ -40,7 +34,7 @@ export class ListItemEditor extends React.PureComponent {
     }));
   };
 
-  _handleUpdateClick = () => {
+  _handleUpdate = () => {
     const { value } = this.state;
 
     if (isTextInputValid(value)) {
@@ -51,9 +45,8 @@ export class ListItemEditor extends React.PureComponent {
 
   render() {
     const { onCancelEdit } = this.props;
-    const { value } = this.state;
     const handlers = {
-      'saveKey': this._handleUpdateClick,
+      'saveKey': this._handleUpdate,
       'cancelKey': onCancelEdit,
     };
 
@@ -64,7 +57,7 @@ export class ListItemEditor extends React.PureComponent {
             <input
               type="text"
               className="form-control"
-              value={value}
+              value={this.state.value}
               onChange={this._handleItemNameChanged}
               ref={(input) => {
                 this.textInput = input;
@@ -72,7 +65,7 @@ export class ListItemEditor extends React.PureComponent {
               autoFocus
             />
             <div className="btn-group" role="group">
-              <button type="button" className="btn btn-default" onClick={this._handleUpdateClick}>Save</button>
+              <button type="button" className="btn btn-default" onClick={this._handleUpdate}>Save</button>
               <button type="button" className="btn btn-default" onClick={onCancelEdit}>Cancel</button>
               <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
             </div>
