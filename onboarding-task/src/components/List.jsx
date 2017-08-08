@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
 import { ListItemInput } from './ListItemInput';
-import { ListItemContainer } from '../containers/ListItem';
+import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
 
 export const List = ({ itemIds, onCreateItem }) => (
@@ -14,7 +14,7 @@ export const List = ({ itemIds, onCreateItem }) => (
           {
             itemIds.map(id => (
               <li key={id}>
-                <ListItemContainer id={id} />
+                <ListItem id={id} />
               </li>
             ))
           }

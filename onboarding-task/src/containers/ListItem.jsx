@@ -1,33 +1,28 @@
-import { ListItem } from '../components/ListItem';
 import { connect } from 'react-redux';
+
+import { ListItem as ListItemComponent } from '../components/ListItem';
 import {
   toggleBeingEdited,
   updateItem,
   deleteItem,
 } from '../actions/userActions';
 import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
-import { isTextInputValid } from '../utils/isTextInputValid';
 
-const mapStateToProps = (store, props) => {
-  const item = store.items.byIds.get(props.id);
-  const flags = store.items.flags.get(props.id);
+const mapStateToProps = ({ items }, { id }) => {
+  const item = items.byIds.get(id);
+  const flags = items.flags.get(id);
 
   return { itemViewModel: memoizedMergeItemDataWithFlags(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
-  const { id } = props;
+const mapDispatchToProps = (dispatch, { id }) => ({
+  onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
+  onUpdateItem: (value) => dispatch(updateItem(id, value)),
+  onDeleteItem: () => dispatch(deleteItem(id)),
+});
 
-  return {
-    onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
-    onUpdateItem: (value) => dispatch(updateItem(id, value)),
-    onDeleteItem: () => dispatch(deleteItem(id)),
-  };
-};
-
-export const ListItemContainer = connect(
+export const ListItem = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListItem);
+)(ListItemComponent);
 
-ListItemContainer.displayName = 'ListItemContainer';
