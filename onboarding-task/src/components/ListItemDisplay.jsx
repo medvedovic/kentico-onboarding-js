@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ListItemDisplay = ({ itemViewModel, onClick }) => (
-  <span onClick={onClick}>{itemViewModel.value}</span>
+export const ListItemDisplay = ({ itemViewModel: { value }, onClick }) => (
+  <span onClick={onClick}>{value}</span>
 );
 
 ListItemDisplay.displayName = 'ListItemDisplay';
