@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListItemDisplay } from './ListItemDisplay';
-import { ListItemEditorContainer } from '../containers/ListItemEditor';
 
-export const ListItem = ({ itemViewModel, onToggleBeingEdited }) => {
-  if (itemViewModel.isBeingEdited) {
-    return (
-      <ListItemEditorContainer
+import { ListItemDisplay } from './ListItemDisplay';
+import { ListItemEditor } from './ListItemEditor';
+
+export const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
+  return (
+    itemViewModel.isBeingEdited ?
+      <ListItemEditor
         itemViewModel={itemViewModel}
         onCancelEdit={onToggleBeingEdited}
+        onUpdateItem={onUpdateItem}
+        onDeleteItem={onDeleteItem}
+      /> :
+      <ListItemDisplay
+        itemViewModel={itemViewModel}
+        onClick={onToggleBeingEdited}
       />
-    );
-  }
-
-  return <ListItemDisplay itemViewModel={itemViewModel} onClick={onToggleBeingEdited} />;
+  );
 };
 
 ListItem.displayName = 'ListItem';
@@ -24,4 +28,6 @@ ListItem.propTypes = {
     isBeingEdited: PropTypes.bool.isRequired,
   }).isRequired,
   onToggleBeingEdited: PropTypes.func.isRequired,
+  onUpdateItem: PropTypes.func.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
 };

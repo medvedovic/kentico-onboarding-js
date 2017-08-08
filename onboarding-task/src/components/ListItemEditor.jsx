@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { HotKeys } from 'react-hotkeys';
 import { isTextInputValid } from '../utils/isTextInputValid';
 
 export class ListItemEditor extends React.PureComponent {
@@ -24,21 +24,6 @@ export class ListItemEditor extends React.PureComponent {
     };
   }
 
-  _handleKeyboardInput = (e) => {
-    switch (e.key) {
-      case 'Escape':
-        this.props.onCancelEdit();
-        break;
-      case 'Enter':
-        if (document.activeElement === this.textInput) {
-          this._handleUpdateClick();
-        }
-        break;
-      default:
-        return;
-    }
-  };
-
   _handleItemNameChanged = (e) => {
     const { value } = e.target;
 
@@ -47,37 +32,51 @@ export class ListItemEditor extends React.PureComponent {
     }));
   };
 
-  _handleUpdateClick = () => {
+  _handleUpdate = () => {
     const { value } = this.state;
 
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(value);
+      this.props.onCancelEdit();
     }
-    this.props.onCancelEdit();
+    else {
+      this.errorElement.style.display = 'block';
+    }
   };
 
   render() {
-    const { value } = this.state;
+    const { onCancelEdit } = this.props;
+    const handlers = {
+      'saveKey': this._handleUpdate,
+      'cancelKey': onCancelEdit,
+    };
 
     return (
-      <div className="form-group">
-        <input
-          type="text"
-          className="form-control"
-          value={value}
-          onChange={this._handleItemNameChanged}
-          onKeyDown={this._handleKeyboardInput}
-          ref={(input) => {
-            this.textInput = input;
-          }}
-          autoFocus
-        />
-        <div className="btn-group" role="group">
-          <button type="button" className="btn btn-default" onClick={this._handleUpdateClick}>Save</button>
-          <button type="button" className="btn btn-default" onClick={this.props.onCancelEdit}>Cancel</button>
-          <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
+      <HotKeys handlers={handlers} >
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            value={this.state.value}
+            onChange={this._handleItemNameChanged}
+            ref={(input) => {
+              this.textInput = input;
+            }}
+            autoFocus
+          />
+          <div className="btn-group" role="group">
+            <button type="button" className="btn btn-default" onClick={this._handleUpdate}>Save</button>
+            <button type="button" className="btn btn-default" onClick={onCancelEdit}>Cancel</button>
+            <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
+          </div>
         </div>
-      </div>
+        <span
+          className="error"
+          ref={span => {
+            this.errorElement = span;
+          }}
+        >Invalid input!</span>
+      </HotKeys>
     );
   }
 }

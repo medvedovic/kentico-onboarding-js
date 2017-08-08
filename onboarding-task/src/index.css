@@ -21,17 +21,14 @@ body {
   font-size: 1.2em;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  line-height: 2.385em;
-  height: 2.385em;
 }
 
-.list span {
+.list > span {
   display: block;
 }
 
 .list span:hover {
   cursor: pointer;
-  /* text-shadow: 1px 1px 1px #66ccff; */
 }
 
 .list li:hover,
@@ -58,6 +55,13 @@ body {
 
 .list li .form-group {
   margin: 0;
+  line-height: 2.385em;
+  height: 2.385em;
+}
+
+.list li > span {
+  line-height: 2.385em;
+  height: 2.385em;
 }
 
 .list li .form-control {
@@ -93,4 +97,32 @@ input:focus {
 
 .enlarge:focus {
   width: 100% !important;
+}
+
+.error {
+  display: none;
+  color: #f44336;
+  font-size: 0.85em;
+}
+
+.btn-add {
+  width: 50px;
+}
+
+.add-input-error {
+  padding-left: 50px;
+  margin-top: .5em;
+}
+
+.shortcuts {
+  position: absolute;
+  bottom: 60px;
+}
+
+.shortcuts ul {
+  padding: 0;
+}
+
+.shortcuts code {
+  margin-right: .5em;
 }
