@@ -72,9 +72,6 @@ export class ListItemEditor extends React.PureComponent {
         </div>
         <span
           className="error"
-          style={{
-            display: 'none',
-          }}
           ref={span => {
             this.errorElement = span;
           }}

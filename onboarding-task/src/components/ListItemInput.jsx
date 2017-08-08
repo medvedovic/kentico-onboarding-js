@@ -26,6 +26,10 @@ export class ListItemInput extends React.PureComponent {
     if (isTextInputValid(value)) {
       const newItem = itemFactory(value);
       this.props.onCreateItem(newItem);
+      this._hideErrorMessage();
+    }
+    else {
+      this.errorElement.style.display = 'block';
     }
 
     this._resetInput();
@@ -45,6 +49,10 @@ export class ListItemInput extends React.PureComponent {
     }));
   };
 
+  _hideErrorMessage = () => {
+    this.errorElement.style.display = 'none';
+  };
+
   render() {
     const { value } = this.state;
     const globalHandlers = {
@@ -55,14 +63,14 @@ export class ListItemInput extends React.PureComponent {
     };
 
     return (
-      <div>
+      <div onBlur={this._hideErrorMessage}>
         <HotKeys handlers={globalHandlers} focused={true} attach={document} />
         <HotKeys handlers={handlers} >
           <div className="col-sm-12 top-offset">
             <form onSubmit={this._onSubmitForm}>
               <div className="input-group">
                 <span className="input-group-btn">
-                  <button type="submit" className="btn btn-default">Add</button>
+                  <button type="submit" className="btn btn-default btn-add">Add</button>
                 </span>
                 <input
                   type="text"
@@ -75,6 +83,12 @@ export class ListItemInput extends React.PureComponent {
                 />
               </div>
             </form>
+            <div
+              className="error add-input-error"
+              ref={div => {
+                this.errorElement = div;
+              }}
+            >Invalid input!</div>
           </div>
         </HotKeys>
       </div>
