@@ -18,19 +18,19 @@ export const initialState = {
     ]),
     byIds: new OrderedMap([
       [id1, new ListItemData({
-        guid: id1,
+        id: id1,
         value: 'Make coffee',
       })],
       [id2, new ListItemData({
-        guid: id2,
+        id: id2,
         value: 'Master React',
       })],
       [id3, new ListItemData({
-        guid: id3,
+        id: id3,
         value: '????',
       })],
       [id4, new ListItemData({
-        guid: id4,
+        id: id4,
         value: 'Profit',
       })],
     ]),

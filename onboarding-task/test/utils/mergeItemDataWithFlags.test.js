@@ -1,10 +1,10 @@
-import {memoizedMergeItemDataWithFlags, mergeItemDataWithFlags} from '../../src/utils/mergeItemDataWithFlags';
+import { memoizedMergeItemDataWithFlags, mergeItemDataWithFlags } from '../../src/utils/mergeItemDataWithFlags';
 import { ListItemData } from '../../src/models/ListItemData';
 import { ListItemFlag } from '../../src/models/ListItemFlag';
 
-const guid = 'xxxxxx-yyyyyy';
+const id = 'xxxxxx-yyyyyy';
 const item = new ListItemData({
-  guid,
+  id,
   value: 'Do stuff',
 });
 const itemFlags = new ListItemFlag();
@@ -12,7 +12,7 @@ const itemFlags = new ListItemFlag();
 describe('Merge Item Data With Flags', () => {
   it('Returns merged data with flags', () => {
     const expectedResult = {
-      guid,
+      id,
       value: 'Do stuff',
       isBeingEdited: false,
     };

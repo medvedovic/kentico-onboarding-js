@@ -7,10 +7,10 @@ import {
 export const ids = (state = new List(), action) => {
   switch (action.type) {
     case CREATE_ITEM:
-      return state.push(action.payload.item.guid);
+      return state.push(action.payload.item.id);
     case DELETE_ITEM:
       return state.filter(id => (
-        id !== action.payload.itemGuid
+        id !== action.payload.itemId
       ));
     default:
       return state;

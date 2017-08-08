@@ -12,9 +12,9 @@ export const List = ({ itemIds, onCreateItem }) => (
       <div className="col-sm-12 col-md-6">
         <ol className="list">
           {
-            itemIds.map(guid => (
-              <li key={guid}>
-                <ListItemContainer guid={guid} />
+            itemIds.map(id => (
+              <li key={id}>
+                <ListItemContainer id={id} />
               </li>
             ))
           }

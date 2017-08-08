@@ -7,26 +7,26 @@ export const createItem = (item) => ({
   },
 });
 
-export const updateItem = (guid, value) => ({
+export const updateItem = (id, value) => ({
   type: UPDATE_ITEM,
   payload: {
     item: {
-      guid,
+      id,
       value,
     },
   },
 });
 
-export const deleteItem = (itemGuid) => ({
+export const deleteItem = (itemId) => ({
   type: DELETE_ITEM,
   payload: {
-    itemGuid,
+    itemId,
   },
 });
 
-export const toggleBeingEdited = (itemGuid) => ({
+export const toggleBeingEdited = (itemId) => ({
   type: TOGGLE_BEING_EDITED,
   payload: {
-    itemGuid,
+    itemId,
   },
 });

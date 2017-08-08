@@ -9,19 +9,19 @@ import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags'
 import { isTextInputValid } from '../utils/isTextInputValid';
 
 const mapStateToProps = (store, props) => {
-  const item = store.items.byIds.get(props.guid);
-  const flags = store.items.flags.get(props.guid);
+  const item = store.items.byIds.get(props.id);
+  const flags = store.items.flags.get(props.id);
 
   return { itemViewModel: memoizedMergeItemDataWithFlags(item, flags) };
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-  const { guid } = props;
+  const { id } = props;
 
   return {
-    onToggleBeingEdited: () => dispatch(toggleBeingEdited(guid)),
-    onUpdateItem: (value) => dispatch(updateItem(guid, value)),
-    onDeleteItem: () => dispatch(deleteItem(guid)),
+    onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
+    onUpdateItem: (value) => dispatch(updateItem(id, value)),
+    onDeleteItem: () => dispatch(deleteItem(id)),
   };
 };
 

@@ -10,12 +10,12 @@ import {
 } from '../../src/constants/actionTypes';
 
 describe('User Actions', () => {
-  const _guid = 'b0771aeb-da9e-47e4-b3f0-c52856eaacb0';
+  const _id = 'b0771aeb-da9e-47e4-b3f0-c52856eaacb0';
   const _value = 'Go home';
 
   it('Returns "Creates item" action properly', () => {
     const _item = {
-      guid: _guid,
+      id: _id,
       value: _value,
     };
     const expectedAction = {
@@ -35,13 +35,13 @@ describe('User Actions', () => {
       type: UPDATE_ITEM,
       payload: {
         item: {
-          guid: _guid,
+          id: _id,
           value: _value,
         },
       },
     };
 
-    const resultAction = updateItem(_guid, _value);
+    const resultAction = updateItem(_id, _value);
 
     expect(resultAction).toEqual(expectedAction);
   });
@@ -50,11 +50,11 @@ describe('User Actions', () => {
     const expectedAction = {
       type: DELETE_ITEM,
       payload: {
-        itemGuid: _guid,
+        itemId: _id,
       },
     };
 
-    const resultAction = deleteItem(_guid);
+    const resultAction = deleteItem(_id);
 
     expect(resultAction).toEqual(expectedAction);
   });

@@ -1,7 +1,7 @@
 import { Record } from 'immutable';
 
 const defaultValues = {
-  guid: '',
+  id: '',
   value: '',
 };
 

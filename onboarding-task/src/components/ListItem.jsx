@@ -23,7 +23,7 @@ export const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onD
 ListItem.displayName = 'ListItem';
 ListItem.propTypes = {
   itemViewModel: PropTypes.shape({
-    guid: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
   }).isRequired,

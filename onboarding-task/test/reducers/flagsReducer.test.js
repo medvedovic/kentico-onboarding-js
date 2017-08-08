@@ -42,7 +42,7 @@ describe('Items Being Edited Reducer', () => {
       [dummyId, new ListItemFlag()],
     ]);
     const dummyItem = {
-      guid: dummyId,
+      id: dummyId,
       value: '',
     };
 
