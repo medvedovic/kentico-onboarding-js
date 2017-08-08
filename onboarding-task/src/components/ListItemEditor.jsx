@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
-import { keyMap } from '../constants/keyMap';
-
 export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
   static propTypes = {
@@ -52,35 +50,33 @@ export class ListItemEditor extends React.PureComponent {
     };
 
     return (
-      <HotKeys keyMap={keyMap}>
-        <HotKeys handlers={handlers} >
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.value}
-              onChange={this._handleItemNameChanged}
-              ref={(input) => {
-                this.textInput = input;
-              }}
-              autoFocus
-            />
-            <div className="btn-group" role="group">
-              <button type="button" className="btn btn-default" onClick={this._handleUpdate}>Save</button>
-              <button type="button" className="btn btn-default" onClick={onCancelEdit}>Cancel</button>
-              <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
-            </div>
+      <HotKeys handlers={handlers} >
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            value={this.state.value}
+            onChange={this._handleItemNameChanged}
+            ref={(input) => {
+              this.textInput = input;
+            }}
+            autoFocus
+          />
+          <div className="btn-group" role="group">
+            <button type="button" className="btn btn-default" onClick={this._handleUpdate}>Save</button>
+            <button type="button" className="btn btn-default" onClick={onCancelEdit}>Cancel</button>
+            <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
           </div>
-          <span
-            className="error"
-            style={{
-              display: 'none',
-            }}
-            ref={span => {
-              this.errorElement = span;
-            }}
-          >Invalid input!</span>
-        </HotKeys>
+        </div>
+        <span
+          className="error"
+          style={{
+            display: 'none',
+          }}
+          ref={span => {
+            this.errorElement = span;
+          }}
+        >Invalid input!</span>
       </HotKeys>
     );
   }
