@@ -13,6 +13,15 @@ export const App = () => (
         <ListContainer />
       </div>
 
+      <section className="shortcuts">
+        <h3>List of shortcuts</h3>
+        <ul>
+          <li><code>alt + n</code>Focus main input</li>
+          <li><code>escape</code>Cancel</li>
+        </ul>
+        <p>More to be added...</p>
+      </section>
+
     </div>
 
     <footer className="footer">

@@ -113,3 +113,16 @@ input:focus {
   padding-left: 50px;
   margin-top: .5em;
 }
+
+.shortcuts {
+  position: absolute;
+  bottom: 60px;
+}
+
+.shortcuts ul {
+  padding: 0;
+}
+
+.shortcuts code {
+  margin-right: .5em;
+}
