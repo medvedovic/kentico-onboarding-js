@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
 import { isTextInputValid } from '../utils/isTextInputValid';
+import { keyMap } from '../constants/keyMap';
 
 export class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
@@ -51,17 +52,13 @@ export class ListItemEditor extends React.PureComponent {
   render() {
     const { onCancelEdit } = this.props;
     const { value } = this.state;
-    const keys = {
-      'saveKey': 'enter',
-      'cancelKey': 'escape',
-    };
     const handlers = {
       'saveKey': this._handleUpdateClick,
       'cancelKey': onCancelEdit,
     };
 
     return (
-      <HotKeys keyMap={keys}>
+      <HotKeys keyMap={keyMap}>
         <HotKeys handlers={handlers} >
           <div className="form-group">
             <input
