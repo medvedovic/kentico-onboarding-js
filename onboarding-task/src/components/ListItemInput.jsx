@@ -23,12 +23,17 @@ export class ListItemInput extends React.PureComponent {
     e.preventDefault();
     const { value } = this.state;
 
+    setTimeout(() => {
+      this.errorElement.classList.remove('shake');
+    }, 300);
+
     if (isTextInputValid(value)) {
       const newItem = itemFactory(value);
       this.props.onCreateItem(newItem);
       this._hideErrorMessage();
     }
     else {
+      this.errorElement.classList.add('shake');
       this.errorElement.style.display = 'block';
     }
 

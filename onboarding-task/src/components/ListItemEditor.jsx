@@ -34,12 +34,16 @@ export class ListItemEditor extends React.PureComponent {
 
   _handleUpdate = () => {
     const { value } = this.state;
+    setTimeout(() => {
+      this.errorElement.classList.remove('shake');
+    }, 300);
 
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(value);
       this.props.onCancelEdit();
     }
     else {
+      this.errorElement.classList.add('shake');
       this.errorElement.style.display = 'block';
     }
   };
