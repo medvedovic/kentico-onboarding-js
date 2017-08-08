@@ -8,6 +8,10 @@ body {
   font-size: 14px;
 }
 
+*:focus {
+  outline: none;
+}
+
 .img--assignment {
   display: flex;
 }
@@ -62,6 +66,7 @@ body {
 .list li > span {
   line-height: 2.385em;
   height: 2.385em;
+  display: block;
 }
 
 .list li .form-control {
