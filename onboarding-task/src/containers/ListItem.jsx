@@ -5,7 +5,7 @@ import {
   toggleBeingEdited,
   updateItem,
   deleteItem,
-} from '../actions/userActions';
+} from '../actions/publicActions';
 import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
 
 const mapStateToProps = ({ items }, { id }) => {
