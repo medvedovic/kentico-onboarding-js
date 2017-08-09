@@ -28,6 +28,6 @@ export const List = ({ itemIds, onCreateItem }) => (
 List.displayName = 'List';
 
 List.propTypes = {
-  itemIds: PropTypes.array.isRequired,
+  itemIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCreateItem: PropTypes.func.isRequired,
 };
