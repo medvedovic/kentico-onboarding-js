@@ -5,8 +5,9 @@ import { HotKeys } from 'react-hotkeys';
 import { isTextInputValid } from '../utils/isTextInputValid';
 import { itemFactory } from '../utils/itemFactory';
 
-export class ListItemInput extends React.PureComponent {
+class ListItemInput extends React.PureComponent {
   static displayName = 'ListItemInput';
+
   static propTypes = {
     onCreateItem: PropTypes.func.isRequired,
   };
@@ -100,3 +101,5 @@ export class ListItemInput extends React.PureComponent {
     );
   }
 }
+
+export { ListItemInput };

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ListItemDisplay } from './ListItemDisplay';
 import { ListItemEditor } from './ListItemEditor';
 
-export const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
+const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
   return (
     itemViewModel.isBeingEdited ?
       <ListItemEditor
@@ -32,3 +32,5 @@ ListItem.propTypes = {
   onUpdateItem: PropTypes.func.isRequired,
   onDeleteItem: PropTypes.func.isRequired,
 };
+
+export { ListItem };

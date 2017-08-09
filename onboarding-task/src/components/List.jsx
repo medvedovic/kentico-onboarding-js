@@ -6,7 +6,7 @@ import { ListItemInput } from './ListItemInput';
 import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
 
-export const List = ({ itemIds, onCreateItem }) => (
+const List = ({ itemIds, onCreateItem }) => (
   <HotKeys keyMap={keyMap}>
     <div className="row">
       <div className="col-sm-12 col-md-6">
@@ -31,3 +31,5 @@ List.propTypes = {
   itemIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCreateItem: PropTypes.func.isRequired,
 };
+
+export { List };

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 import { isTextInputValid } from '../utils/isTextInputValid';
 
-export class ListItemEditor extends React.PureComponent {
+class ListItemEditor extends React.PureComponent {
   static displayName = 'ListItemEditor';
+
   static propTypes = {
     itemViewModel: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -25,15 +26,14 @@ export class ListItemEditor extends React.PureComponent {
   }
 
   _handleItemNameChanged = (e) => {
-    const { value } = e.target;
-
     this.setState(() => ({
-      value,
+      value: e.target,
     }));
   };
 
   _handleUpdate = () => {
     const { value } = this.state;
+
     setTimeout(() => {
       if (this.errorElement) {
         this.errorElement.classList.remove('shake');
@@ -86,4 +86,6 @@ export class ListItemEditor extends React.PureComponent {
     );
   }
 }
+
+export { ListItemEditor };
 

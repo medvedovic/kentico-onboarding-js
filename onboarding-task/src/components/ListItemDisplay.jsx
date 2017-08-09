@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ListItemDisplay = ({ itemViewModel: { value }, onClick }) => (
+const ListItemDisplay = ({ itemViewModel: { value }, onClick }) => (
   <span onClick={onClick}>{value}</span>
 );
 
@@ -15,3 +15,5 @@ ListItemDisplay.propTypes = {
     isBeingEdited: PropTypes.bool.isRequired,
   }).isRequired,
 };
+
+export { ListItemDisplay };
