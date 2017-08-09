@@ -4,7 +4,7 @@ import { List as ListComponent } from '../components/List';
 import { createItem } from '../actions/publicActions';
 
 const mapStateToProps = ({ items }) => ({
-  itemIds: items.ids.toArray(),
+  itemIds: items.ids,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
-
+import { List as ImmutableList } from 'immutable';
 import { ListItemInput } from './ListItemCreator';
 import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
@@ -28,7 +28,7 @@ const List = ({ itemIds, onCreateItem }) => (
 List.displayName = 'List';
 
 List.propTypes = {
-  itemIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  itemIds: PropTypes.instanceOf(ImmutableList).isRequired,
   onCreateItem: PropTypes.func.isRequired,
 };
 
