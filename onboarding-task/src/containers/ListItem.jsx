@@ -6,13 +6,13 @@ import {
   updateItem,
   deleteItem,
 } from '../actions/publicActions';
-import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
+import { memoizedCreateViewModel } from '../utils/createViewModel';
 
 const mapStateToProps = ({ items }, { id }) => {
   const item = items.data.get(id);
   const flags = items.flags.get(id);
 
-  return { itemViewModel: memoizedMergeItemDataWithFlags(item, flags) };
+  return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
 const mapDispatchToProps = (dispatch, { id }) => ({
