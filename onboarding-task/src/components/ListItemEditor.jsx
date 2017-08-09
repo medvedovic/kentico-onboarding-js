@@ -25,9 +25,9 @@ class ListItemEditor extends React.PureComponent {
     };
   }
 
-  _handleItemNameChanged = (e) => {
+  _handleItemNameChanged = ({ target: { value } }) => {
     this.setState(() => ({
-      value: e.target,
+      value,
     }));
   };
 
