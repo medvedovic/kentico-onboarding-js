@@ -1,10 +1,10 @@
 import { itemFactory } from '../../src/utils/itemFactory';
 
 describe('Item factory', () => {
-  it('generates new list item from value', () => {
+  it('no two items has the same id', () => {
     const newItem = itemFactory('Make a sandwich');
+    const newItem2 = itemFactory('Make a sandwich');
 
-    expect(newItem.value).toBe('Make a sandwich');
-    expect(newItem.guid.length).toBe(36);
+    expect(newItem.id).not.toEqual(newItem2.id);
   });
 });
