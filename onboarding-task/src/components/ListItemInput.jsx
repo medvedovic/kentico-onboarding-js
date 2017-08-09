@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
 import { isTextInputValid } from '../utils/isTextInputValid';
-import { itemFactory } from '../utils/itemFactory';
 
 class ListItemInput extends React.PureComponent {
   static displayName = 'ListItemInput';
@@ -29,8 +28,7 @@ class ListItemInput extends React.PureComponent {
     }, 300);
 
     if (isTextInputValid(value)) {
-      const newItem = itemFactory(value);
-      this.props.onCreateItem(newItem);
+      this.props.onCreateItem(value);
       this._hideErrorMessage();
     }
     else {
