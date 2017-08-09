@@ -1,5 +1,5 @@
-import { UPDATE_ITEM } from '../../constants/actionTypes';
-import { ListItemData } from '../../models/ListItemData';
+import { UPDATE_ITEM } from '../../../constants/actionTypes';
+import { ListItemData } from '../../../models/ListItemData';
 
 export const item = (state = {}, action) => {
   switch (action.type) {

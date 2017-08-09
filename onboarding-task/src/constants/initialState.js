@@ -16,7 +16,7 @@ export const initialState = {
       id3,
       id4,
     ]),
-    byIds: new OrderedMap([
+    data: new OrderedMap([
       [id1, new ListItemData({
         id: id1,
         value: 'Make coffee',

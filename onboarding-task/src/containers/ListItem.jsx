@@ -9,7 +9,7 @@ import {
 import { memoizedMergeItemDataWithFlags } from '../utils/mergeItemDataWithFlags';
 
 const mapStateToProps = ({ items }, { id }) => {
-  const item = items.byIds.get(id);
+  const item = items.data.get(id);
   const flags = items.flags.get(id);
 
   return { itemViewModel: memoizedMergeItemDataWithFlags(item, flags) };

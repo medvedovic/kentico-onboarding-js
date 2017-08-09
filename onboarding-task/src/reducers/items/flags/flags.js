@@ -2,7 +2,7 @@ import { Map } from 'immutable';
 import { CREATE_ITEM,
   DELETE_ITEM,
   TOGGLE_BEING_EDITED,
-} from '../../constants/actionTypes';
+} from '../../../constants/actionTypes';
 import { flag } from './flag';
 
 export const flags = (state = new Map(), action) => {

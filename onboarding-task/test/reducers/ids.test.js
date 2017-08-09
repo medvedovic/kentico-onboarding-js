@@ -1,6 +1,6 @@
 import { List } from 'immutable';
 import { generateGuid } from '../../src/utils/generateGuid';
-import { ids } from '../../src/reducers/ids';
+import { ids } from '../../src/reducers/items/ids';
 import { createItem, deleteItem } from '../../src/actions/userActions';
 import { itemFactory } from '../../src/utils/itemFactory';
 

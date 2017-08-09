@@ -1,7 +1,7 @@
 import { createItem, updateItem } from '../../src/actions/userActions';
 import { ListItemData as ListItemModel } from '../../src/models/ListItemData';
 import { generateGuid } from '../../src/utils/generateGuid';
-import { item } from '../../src/reducers/items/item';
+import { item } from '../../src/reducers/items/data/item';
 
 describe('Item Reducer', () => {
   const id = generateGuid();

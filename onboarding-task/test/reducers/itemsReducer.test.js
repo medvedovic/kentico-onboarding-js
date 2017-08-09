@@ -2,7 +2,7 @@ import { generateGuid } from '../../src/utils/generateGuid';
 import { ListItemData as ListItemModel } from '../../src/models/ListItemData';
 import { OrderedMap } from 'immutable';
 import { itemFactory } from '../../src/utils/itemFactory';
-import { items } from '../../src/reducers/items/items';
+import { data } from '../../src/reducers/items/data/data';
 import { createItem, deleteItem, updateItem } from '../../src/actions/userActions';
 
 describe('List App reducer', () => {
@@ -21,7 +21,7 @@ describe('List App reducer', () => {
       [newItem.id, newItem],
     ]);
 
-    const result = items(initialState, createItem(newItem));
+    const result = data(initialState, createItem(newItem));
 
     expect(result).toEqual(expectedStoreState);
   });
@@ -32,7 +32,7 @@ describe('List App reducer', () => {
       [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
     ]);
 
-    const testStore = items(initialState, updateItem(_id1, 'Do stuff'));
+    const testStore = data(initialState, updateItem(_id1, 'Do stuff'));
 
     expect(testStore).toEqual(expectedStoreState);
   });
@@ -42,7 +42,7 @@ describe('List App reducer', () => {
       [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
     ]);
 
-    const testStore = items(initialState, deleteItem(_id1));
+    const testStore = data(initialState, deleteItem(_id1));
 
     expect(testStore).toEqual(expectedStoreState);
   });

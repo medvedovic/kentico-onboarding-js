@@ -1,8 +1,8 @@
 import {
   CREATE_ITEM,
   TOGGLE_BEING_EDITED,
-} from '../../constants/actionTypes';
-import { ListItemFlag } from '../../models/ListItemFlag';
+} from '../../../constants/actionTypes';
+import { ListItemFlag } from '../../../models/ListItemFlag';
 
 export const flag = (state = new ListItemFlag(), action) => {
   switch (action.type) {

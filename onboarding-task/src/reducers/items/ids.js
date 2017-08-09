@@ -2,7 +2,7 @@ import { List } from 'immutable';
 import {
   CREATE_ITEM,
   DELETE_ITEM,
-} from '../constants/actionTypes';
+} from '../../constants/actionTypes';
 
 export const ids = (state = new List(), action) => {
   switch (action.type) {
