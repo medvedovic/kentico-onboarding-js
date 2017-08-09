@@ -1,6 +1,5 @@
-import { itemFactory } from '../../src/utils/itemFactory';
+import { itemFactoryBuilder } from '../../src/utils/itemFactory';
 import { ListItemData } from '../../src/models/ListItemData';
-import { generateGuid } from '../../src/utils/generateGuid';
 
 describe('Item factory', () => {
   it('returns new ListItemData correctly', () => {
@@ -12,7 +11,7 @@ describe('Item factory', () => {
       value: 'Make a sandwich',
     });
 
-    const newItem = itemFactory(dummyIdGenerator)('Make a sandwich');
+    const newItem = itemFactoryBuilder(dummyIdGenerator)('Make a sandwich');
 
     expect(newItem).toEqual(expectedResult);
   });
