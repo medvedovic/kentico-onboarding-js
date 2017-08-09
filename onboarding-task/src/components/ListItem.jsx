@@ -14,7 +14,7 @@ const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteIt
         onDeleteItem={onDeleteItem}
       /> :
       <ListItemDisplay
-        itemViewModel={itemViewModel}
+        value={itemViewModel.value}
         onClick={onToggleBeingEdited}
       />
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListItemDisplay = ({ itemViewModel: { value }, onClick }) => (
+const ListItemDisplay = ({ value, onClick }) => (
   <span onClick={onClick}>{value}</span>
 );
 
@@ -9,11 +9,7 @@ ListItemDisplay.displayName = 'ListItemDisplay';
 
 ListItemDisplay.propTypes = {
   onClick: PropTypes.func.isRequired,
-  itemViewModel: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    isBeingEdited: PropTypes.bool.isRequired,
-  }).isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export { ListItemDisplay };
