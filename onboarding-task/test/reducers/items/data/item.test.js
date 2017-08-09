@@ -1,4 +1,4 @@
-import { createItem, updateItem } from '../../../../src/actions/userActions';
+import { createItem, updateItem } from '../../../../src/actions/publicActions';
 import { ListItemData } from '../../../../src/models/ListItemData';
 import { item } from '../../../../src/reducers/items/data/item';
 

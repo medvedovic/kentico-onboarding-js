@@ -1,26 +1,34 @@
 import { List } from 'immutable';
-import { generateGuid } from '../../src/utils/generateGuid';
 import { ids } from '../../src/reducers/items/ids';
-import { createItem, deleteItem } from '../../src/actions/userActions';
-import { itemFactory } from '../../src/utils/itemFactory';
+import { deleteItem } from '../../src/actions/publicActions';
+import { ListItemData } from '../../src/models/ListItemData';
+import { createItemBuilder } from '../../src/actions/actionCreators';
 
-describe('Ids', () => {
-  const id = generateGuid();
-  const item = itemFactory('Do stuff');
-  it('Returns new state on create properly', () => {
+describe('Ids reducer', () => {
+  const id = 'adfdb758-2adb-43f5-8a67-c9186c109864';
+
+  it('returns new state on create properly', () => {
     const initialState = new List();
-    const expectedState = initialState.push(item.id);
+    const expectedState = initialState.push(id);
+    const dummyFactory = () => new ListItemData({ id });
+    const dummyCreateItem = createItemBuilder(dummyFactory);
 
-    const test = ids(initialState, createItem(item));
+    const test = ids(initialState, dummyCreateItem(''));
 
     expect(test).toEqual(expectedState);
   });
 
-  it('Returns new state on delete properly', () => {
+  it('returns new state on delete properly', () => {
     const initialState = new List([id]);
 
     const test = ids(initialState, deleteItem(id));
 
     expect(test.size).toEqual(0);
+  });
+
+  it('return default state on wrong input correctly', () => {
+    const test = ids(undefined, {});
+
+    expect(test).toBe(new List());
   });
 });

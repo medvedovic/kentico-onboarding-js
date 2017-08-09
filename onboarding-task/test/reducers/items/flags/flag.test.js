@@ -1,6 +1,6 @@
 import { ListItemFlag } from '../../../../src/models/ListItemFlag';
 import { flag } from '../../../../src/reducers/items/flags/flag';
-import { createItem, toggleBeingEdited } from '../../../../src/actions/userActions';
+import { createItem, toggleBeingEdited } from '../../../../src/actions/publicActions';
 
 describe('Flag Reducer', () => {
   it('returns new flags on create item', () => {

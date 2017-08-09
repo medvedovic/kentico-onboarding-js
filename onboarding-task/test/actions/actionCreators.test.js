@@ -1,5 +1,5 @@
 import { ListItemData } from '../../src/models/ListItemData';
-import { createItemBuider } from '../../src/actions/actionCreators';
+import { createItemBuilder } from '../../src/actions/actionCreators';
 import { CREATE_ITEM } from '../../src/constants/actionTypes';
 
 describe('Action creators', () => {
@@ -18,7 +18,7 @@ describe('Action creators', () => {
       value,
     });
 
-    const testAction = createItemBuider(dummyFactory)('Make a sandwich');
+    const testAction = createItemBuilder(dummyFactory)('Make a sandwich');
 
     expect(testAction).toEqual(expectedAction);
   });
