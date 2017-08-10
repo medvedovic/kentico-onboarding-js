@@ -18,6 +18,7 @@ export interface IdPayload {
   id: string;
 }
 
+/* Models */
 
 /**
  * List Item Data Model
@@ -27,4 +28,12 @@ export interface IListItemData {
   id: string;
   /** Value held by item */
   value: string;
+}
+
+/**
+ * List Item Flags Model
+ */
+export interface IListItemFlags {
+  /** Shows whether item is opened for editation */
+  isBeingEdited: boolean;
 }
