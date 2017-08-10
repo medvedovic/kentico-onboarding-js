@@ -5,9 +5,9 @@ import {
   UPDATE_ITEM,
 } from '../../../constants/actionTypes';
 import { item } from './item';
-import { Store } from '../../../interfaces';
+import { Reducer } from '../../../interfaces';
 
-export const data: Store.Data = (state = Map(), action) => {
+export const data: Reducer.Data = (state = Map(), action) => {
   switch (action.type) {
     case CREATE_ITEM: {
       const newItem = action.payload.item;

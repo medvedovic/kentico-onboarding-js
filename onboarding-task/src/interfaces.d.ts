@@ -55,6 +55,14 @@ export interface IReducer<T> {
   (state: T, action: IAction<ItemPayload & IdPayload>): T;
 }
 
+export namespace Reducer {
+  export type Root = IReducer<Store.Root>;
+  export type Items = IReducer<Store.Items>;
+  export type Ids = IReducer<Store.Ids>;
+  export type Data = IReducer<Store.Data>;
+  export type Flags = IReducer<Store.Flags>;
+}
+
 export namespace Store {
   export interface Root {
     items: Items;
