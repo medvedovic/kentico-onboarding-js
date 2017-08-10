@@ -66,8 +66,8 @@ export namespace Store {
     flags: Flags;
   }
 
-  export type Ids = IReducer<List<string>>;
-  export type Data = IReducer<Map<string, IListItemData>>;
-  export type Flags = IReducer<Map<string, IListItemFlags>>;
+  export type Ids = List<string>;
+  export type Data = Map<string, IListItemData>;
+  export type Flags = Map<string, IListItemFlags>;
 }
 

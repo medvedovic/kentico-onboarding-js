@@ -8,16 +8,22 @@ import {
 } from '../actions/publicActions';
 import { memoizedCreateViewModel } from '../utils/createViewModel';
 
-const mapStateToProps = ({ items }, { id }) => {
+import { Store } from '../interfaces';
+
+interface IListItemDataProps {
+  id: string;
+}
+
+const mapStateToProps = ({ items }: Store.Root, { id }: IListItemDataProps) => {
   const item = items.data.get(id);
   const flags = items.flags.get(id);
 
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch: any, { id }: IListItemDataProps) => ({
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
-  onUpdateItem: (value) => dispatch(updateItem(id, value)),
+  onUpdateItem: (value: string) => dispatch(updateItem(id, value)),
   onDeleteItem: () => dispatch(deleteItem(id)),
 });
 

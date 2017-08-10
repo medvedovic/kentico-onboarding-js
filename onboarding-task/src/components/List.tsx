@@ -2,12 +2,13 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 import { List as ImmutableList } from 'immutable';
+
 import { ListItemCreator } from './ListItemCreator';
 import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
 
 export interface IListDataProps {
-  itemIds: Array<string>;
+  itemIds: ImmutableList<string>;
 }
 
 export interface IListCallbacksProps {
@@ -22,7 +23,7 @@ const List: React.SFC<listProps> = ({ itemIds, onCreateItem }) => (
       <div className="col-sm-12 col-md-6">
         <ol className="list">
           {
-            itemIds.map(id => (
+            itemIds.map((id: string) => (
               <li key={id}>
                 <ListItem id={id} />
               </li>
