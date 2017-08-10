@@ -5,8 +5,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
 
 import { App } from './App.jsx';
-import { rootReducer } from './reducers/reducer';
-import { initialState } from './constants/initialState';
+import { rootReducer } from './reducers/reducer.ts';
+import { initialState } from './constants/initialState.ts';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/index.css';
