@@ -7,8 +7,10 @@ import { ListItemCreator } from './ListItemCreator';
 import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
 
+import { Store } from '../interfaces';
+
 export interface IListDataProps {
-  itemIds: ImmutableList<string>;
+  itemIds: Store.Ids;
 }
 
 export interface IListCallbacksProps {
