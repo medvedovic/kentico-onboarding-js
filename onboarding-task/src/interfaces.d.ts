@@ -58,6 +58,7 @@ export namespace Store {
   export interface Root {
     items: Items;
   }
+
   export interface Items {
     ids: IReducer<List<string>>;
     data: IReducer<Map<string, IListItemData>>;
