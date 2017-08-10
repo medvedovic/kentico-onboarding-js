@@ -1,12 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 import { List as ImmutableList } from 'immutable';
-import { ListItemInput } from './ListItemCreator';
+import { ListItemCreator } from './ListItemCreator';
 import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
 
-const List = ({ itemIds, onCreateItem }) => (
+export interface IListDataProps {
+  itemIds: Array<string>;
+}
+
+export interface IListCallbacksProps {
+  onCreateItem: (value?: string) => void;
+}
+
+export type listProps = IListDataProps & IListCallbacksProps;
+
+const List: React.SFC<listProps> = ({ itemIds, onCreateItem }) => (
   <HotKeys keyMap={keyMap}>
     <div className="row">
       <div className="col-sm-12 col-md-6">
@@ -19,7 +29,7 @@ const List = ({ itemIds, onCreateItem }) => (
             ))
           }
         </ol>
-        <ListItemInput onCreateItem={onCreateItem} />
+        <ListItemCreator onCreateItem={onCreateItem} />
       </div>
     </div>
   </HotKeys>

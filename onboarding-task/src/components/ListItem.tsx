@@ -1,17 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 import { ListItemDisplay } from './ListItemDisplay';
 import { ListItemEditor } from './ListItemEditor';
+import { IItemViewModel } from '../interfaces';
 
-const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
+export interface IListItemDataProps {
+  itemViewModel: IItemViewModel;
+}
+
+export interface IListCallbacksProps {
+  onDeleteItem: () => void;
+  onUpdateItem: (value: string) => void;
+  onToggleBeingEdited: () => void;
+}
+
+export type listItemProps = IListItemDataProps & IListCallbacksProps;
+
+const ListItem: React.SFC<listItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
   return (
     itemViewModel.isBeingEdited ?
       <ListItemEditor
         itemViewModel={itemViewModel}
         onCancelEdit={onToggleBeingEdited}
-        onUpdateItem={onUpdateItem}
         onDeleteItem={onDeleteItem}
+        onUpdateItem={onUpdateItem}
       /> :
       <ListItemDisplay
         value={itemViewModel.value}

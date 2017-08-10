@@ -1,17 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
 import { isTextInputValid } from '../utils/isTextInputValid';
 
-class ListItemInput extends React.PureComponent {
+interface IListItemCreatorCallbacksProps {
+  onCreateItem: (value: string) => void;
+}
+
+interface IListItemCreatorState {
+  value: string;
+}
+
+class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps, IListItemCreatorState> {
   static displayName = 'ListItemInput';
 
   static propTypes = {
     onCreateItem: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
+  private errorElement: any;
+  private textInput: any;
+
+  constructor(props: IListItemCreatorCallbacksProps) {
     super(props);
 
     this.state = {
@@ -19,19 +30,18 @@ class ListItemInput extends React.PureComponent {
     };
   }
 
-  _onSubmitForm = (e) => {
+  _onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { value } = this.state;
 
     setTimeout(() => {
       this.errorElement.classList.remove('shake');
-    }, 300);
+    },         300);
 
     if (isTextInputValid(value)) {
       this.props.onCreateItem(value);
       this._hideErrorMessage();
-    }
-    else {
+    } else {
       this.errorElement.classList.add('shake');
       this.errorElement.style.display = 'block';
     }
@@ -39,7 +49,7 @@ class ListItemInput extends React.PureComponent {
     this._resetInput();
   };
 
-  _handleInputChanged = (e) => {
+  _handleInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     this.setState(() => ({
@@ -100,4 +110,4 @@ class ListItemInput extends React.PureComponent {
   }
 }
 
-export { ListItemInput };
+export { ListItemCreator };

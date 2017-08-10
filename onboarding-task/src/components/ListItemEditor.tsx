@@ -1,9 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
+
 import { isTextInputValid } from '../utils/isTextInputValid';
 
-class ListItemEditor extends React.PureComponent {
+import { IItemViewModel } from '../interfaces';
+
+export interface IListItemEditorDataProps {
+  itemViewModel: IItemViewModel;
+}
+
+export interface IListItemEditorCallbacksProps {
+  onCancelEdit: () => void;
+  onUpdateItem: (value: string) => void;
+  onDeleteItem: () => void;
+}
+
+type listItemEditorProps = IListItemEditorDataProps & IListItemEditorCallbacksProps;
+
+interface IListItemEditorState {
+  value: string;
+}
+
+class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemEditorState> {
   static displayName = 'ListItemEditor';
 
   static propTypes = {
@@ -17,7 +36,10 @@ class ListItemEditor extends React.PureComponent {
     onCancelEdit: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
+  errorElement: any;
+  textInput: any;
+
+  constructor(props: listItemEditorProps) {
     super(props);
 
     this.state = {
@@ -25,7 +47,7 @@ class ListItemEditor extends React.PureComponent {
     };
   }
 
-  _handleItemNameChanged = ({ target: { value } }) => {
+  _handleItemNameChanged = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(() => ({
       value,
     }));
@@ -38,13 +60,12 @@ class ListItemEditor extends React.PureComponent {
       if (this.errorElement) {
         this.errorElement.classList.remove('shake');
       }
-    }, 300);
+    },         300);
 
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(value);
       this.props.onCancelEdit();
-    }
-    else {
+    } else {
       this.errorElement.classList.add('shake');
       this.errorElement.style.display = 'block';
     }
@@ -65,7 +86,7 @@ class ListItemEditor extends React.PureComponent {
             className="form-control"
             value={this.state.value}
             onChange={this._handleItemNameChanged}
-            ref={(input) => {
+            ref={input => {
               this.textInput = input;
             }}
             autoFocus
