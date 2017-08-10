@@ -5,8 +5,9 @@ import {
   UPDATE_ITEM,
 } from '../../../constants/actionTypes';
 import { item } from './item';
+import { IListItemData, IReducer } from '../../../interfaces';
 
-export const data = (state = new Map(), action) => {
+export const data: IReducer<Map<string, IListItemData>> = (state = Map(), action) => {
   switch (action.type) {
     case CREATE_ITEM: {
       const newItem = action.payload.item;
@@ -20,7 +21,7 @@ export const data = (state = new Map(), action) => {
       return state.set(action.payload.item.id, newItem);
     }
     case DELETE_ITEM:
-      return state.delete(action.payload.itemId);
+      return state.delete(action.payload.id);
     default:
       return state;
   }

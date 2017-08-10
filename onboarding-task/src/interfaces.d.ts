@@ -48,3 +48,7 @@ export interface IItemViewModel {
   /** Shows whether item is opened for editation */
   isBeingEdited: boolean;
 }
+
+export interface IReducer<T> {
+  (state: T, action: IAction<ItemPayload & IdPayload>): T;
+}
