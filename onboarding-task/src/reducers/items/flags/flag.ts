@@ -3,8 +3,9 @@ import {
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
 import { ListItemFlag } from '../../../models/ListItemFlag';
+import {IListItemFlags, IReducer} from "../../../interfaces";
 
-export const flag = (state = new ListItemFlag(), action) => {
+export const flag: IReducer<IListItemFlags> = (state = new ListItemFlag(), action) => {
   switch (action.type) {
     case CREATE_ITEM:
       return new ListItemFlag();
