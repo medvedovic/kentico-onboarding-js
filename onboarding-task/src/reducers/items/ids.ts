@@ -3,9 +3,9 @@ import {
   CREATE_ITEM,
   DELETE_ITEM,
 } from '../../constants/actionTypes';
-import { IReducer } from '../../interfaces';
+import { Store } from '../../interfaces';
 
-export const ids: IReducer<List<string>> = (state = List<string>(), action) => {
+export const ids: Store.Ids = (state = List<string>(), action) => {
   switch (action.type) {
     case CREATE_ITEM:
       return state.push(action.payload.item.id);

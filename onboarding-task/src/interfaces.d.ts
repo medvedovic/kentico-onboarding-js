@@ -38,6 +38,7 @@ export interface IListItemFlags {
   /** Shows whether item is opened for editation */
   isBeingEdited: boolean;
 }
+
 /**
  * Merged Item data with Flags
  */
@@ -60,9 +61,13 @@ export namespace Store {
   }
 
   export interface Items {
-    ids: IReducer<List<string>>;
-    data: IReducer<Map<string, IListItemData>>;
-    flags: IReducer<Map<string, IListItemFlags>>;
+    ids: Ids;
+    data: Data;
+    flags: Flags;
   }
+
+  export type Ids = IReducer<List<string>>;
+  export type Data = IReducer<Map<string, IListItemData>>;
+  export type Flags = IReducer<Map<string, IListItemFlags>>;
 }
 
