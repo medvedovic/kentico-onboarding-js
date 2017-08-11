@@ -36,9 +36,6 @@ class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemE
     onCancelEdit: PropTypes.func.isRequired,
   };
 
-  errorElement: any;
-  textInput: any;
-
   constructor(props: listItemEditorProps) {
     super(props);
 
@@ -56,18 +53,9 @@ class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemE
   _handleUpdate = () => {
     const { value } = this.state;
 
-    setTimeout(() => {
-      if (this.errorElement) {
-        this.errorElement.classList.remove('shake');
-      }
-    },         300);
-
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(value);
       this.props.onCancelEdit();
-    } else {
-      this.errorElement.classList.add('shake');
-      this.errorElement.style.display = 'block';
     }
   };
 
@@ -86,9 +74,6 @@ class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemE
             className="form-control"
             value={this.state.value}
             onChange={this._handleItemNameChanged}
-            ref={input => {
-              this.textInput = input;
-            }}
             autoFocus
           />
           <div className="btn-group" role="group">
@@ -97,12 +82,10 @@ class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemE
             <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
           </div>
         </div>
-        <span
-          className="error"
-          ref={span => {
-            this.errorElement = span;
-          }}
-        >Invalid input!</span>
+        {!this.state.value &&
+          <span className="error shake">Invalid input!</span>
+        }
+
       </HotKeys>
     );
   }
