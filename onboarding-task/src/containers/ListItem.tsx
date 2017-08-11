@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import {connect, Dispatch } from 'react-redux';
 
 import { ListItem as ListItemComponent } from '../components/ListItem';
 import {
@@ -8,23 +8,27 @@ import {
 } from '../actions/publicActions';
 import { memoizedCreateViewModel } from '../utils/createViewModel';
 
+import {
+  IListItemDataProps as IListItemComponentDataProps,
+  IListItemCallbacksProps as IListItemComponentCallbacksProps
+} from '../components/ListItem';
 import { Store } from '../interfaces';
 
 interface IListItemDataProps {
   id: string;
 }
 
-const mapStateToProps = ({ items }: Store.Root, { id }: IListItemDataProps) => {
+const mapStateToProps = ({ items }: Store.Root, { id }: IListItemDataProps): IListItemComponentDataProps => {
   const item = items.data.get(id);
   const flags = items.flags.get(id);
 
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch: any, { id }: IListItemDataProps) => ({
-  onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
-  onUpdateItem: (value: string) => dispatch(updateItem(id, value)),
+const mapDispatchToProps = (dispatch: Dispatch<any>, { id }: IListItemDataProps): IListItemComponentCallbacksProps => ({
   onDeleteItem: () => dispatch(deleteItem(id)),
+  onUpdateItem: (value: string) => dispatch(updateItem(id, value)),
+  onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
 });
 
 export const ListItem = connect(

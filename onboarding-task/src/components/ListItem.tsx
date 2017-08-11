@@ -9,13 +9,13 @@ export interface IListItemDataProps {
   itemViewModel: IItemViewModel;
 }
 
-export interface IListCallbacksProps {
+export interface IListItemCallbacksProps {
   onDeleteItem: () => void;
   onUpdateItem: (value: string) => void;
   onToggleBeingEdited: () => void;
 }
 
-export type listItemProps = IListItemDataProps & IListCallbacksProps;
+export type listItemProps = IListItemDataProps & IListItemCallbacksProps;
 
 const ListItem: React.SFC<listItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
   return (
