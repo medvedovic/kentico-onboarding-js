@@ -2,7 +2,7 @@ import { ListItemData } from '../models/ListItemData';
 import { generateGuid } from './generateGuid';
 import { IListItemData } from '../interfaces';
 
-type itemFactoryWithGenerator = {
+export type itemFactoryWithGenerator = {
   (value: string): IListItemData
 };
 
