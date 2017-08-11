@@ -10,6 +10,7 @@ interface IListItemCreatorCallbacksProps {
 
 interface IListItemCreatorState {
   value: string;
+  showError: boolean;
 }
 
 class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps, IListItemCreatorState> {
@@ -19,14 +20,14 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
     onCreateItem: PropTypes.func.isRequired,
   };
 
-  private errorElement: any;
-  private textInput: any;
+  private textInput: HTMLInputElement | null;
 
   constructor(props: IListItemCreatorCallbacksProps) {
     super(props);
 
     this.state = {
       value: '',
+      showError: false,
     };
   }
 
@@ -34,26 +35,23 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
     e.preventDefault();
     const { value } = this.state;
 
-    setTimeout(() => {
-      this.errorElement.classList.remove('shake');
-    },         300);
-
     if (isTextInputValid(value)) {
       this.props.onCreateItem(value);
-      this._hideErrorMessage();
-    } else {
-      this.errorElement.classList.add('shake');
-      this.errorElement.style.display = 'block';
     }
 
     this._resetInput();
   };
 
-  _handleInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
+  _handleInputChanged = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(() => ({
       value,
+      showError: !value,
+    }));
+  };
+
+  _hideError = () => {
+    this.setState(() => ({
+      showError: false,
     }));
   };
 
@@ -63,33 +61,46 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
     }));
   };
 
-  _hideErrorMessage = () => {
-    this.errorElement.style.display = 'none';
-  };
-
   render() {
     const { value } = this.state;
     const globalHandlers = {
-      'focusNewItemKey': () => this.textInput.focus(),
+      'focusNewItemKey': () => {
+        if (this.textInput) {
+          this.textInput.focus();
+        }
+      },
     };
     const handlers = {
-      'cancelKey': () => this.textInput.blur(),
+      'cancelKey': () => {
+        if (this.textInput) {
+          this.textInput.blur();
+        }
+      },
     };
 
     return (
-      <div onBlur={this._hideErrorMessage}>
-        <HotKeys handlers={globalHandlers} focused={true} attach={document} />
+      <div>
+        <HotKeys
+          handlers={globalHandlers}
+          focused={true}
+          attach={document}
+        />
         <HotKeys handlers={handlers} >
           <div className="col-sm-12 top-offset">
             <form onSubmit={this._onSubmitForm}>
               <div className="input-group">
                 <span className="input-group-btn">
-                  <button type="submit" className="btn btn-default btn-add">Add</button>
+                  <button
+                    type="submit"
+                    className="btn btn-default btn-add"
+                    disabled={!value}
+                  >Add</button>
                 </span>
                 <input
                   type="text"
                   className="form-control enlarge"
                   onChange={this._handleInputChanged}
+                  onBlur={this._hideError}
                   value={value}
                   ref={(input) => {
                     this.textInput = input;
@@ -97,12 +108,9 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
                 />
               </div>
             </form>
-            <div
-              className="error add-input-error"
-              ref={div => {
-                this.errorElement = div;
-              }}
-            >Invalid input!</div>
+            {this.state.showError &&
+              <div className="error add-input-error shake">Invalid input!</div>
+            }
           </div>
         </HotKeys>
       </div>
