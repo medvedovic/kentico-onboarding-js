@@ -6,4 +6,3 @@ export { updateItem };
 export { deleteItem };
 export { toggleBeingEdited };
 export const createItem = createItemBuilder(itemFactory);
-

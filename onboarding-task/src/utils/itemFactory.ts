@@ -2,11 +2,11 @@ import { ListItemData } from '../models/ListItemData';
 import { generateGuid } from './generateGuid';
 import { IListItemData } from '../interfaces';
 
-type itemFactoryWithGenerator = {
-  (value: string): IListItemData
-};
+export interface IItemFactoryWithGenerator {
+  (value: string): IListItemData;
+}
 
-export const itemFactoryBuilder = (idGenerator: () => string): itemFactoryWithGenerator  =>
+export const itemFactoryBuilder = (idGenerator: () => string): IItemFactoryWithGenerator  =>
   (value: string): IListItemData => (
     new ListItemData({
       id: idGenerator(),
