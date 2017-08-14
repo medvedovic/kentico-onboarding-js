@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
 
-import { App } from './App.jsx';
+import { App } from './App.tsx';
 import { rootReducer } from './reducers/reducer.ts';
 import { initialState } from './constants/initialState.ts';
 
