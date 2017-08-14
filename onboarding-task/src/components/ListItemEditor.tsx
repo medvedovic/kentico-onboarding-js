@@ -59,7 +59,7 @@ class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemE
     }
   };
 
-  render() {
+  render(): JSX.Element {
     const { onCancelEdit } = this.props;
     const handlers = {
       'saveKey': this._handleUpdate,

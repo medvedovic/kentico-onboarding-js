@@ -61,7 +61,7 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
     }));
   };
 
-  render() {
+  render(): JSX.Element {
     const { value } = this.state;
     const globalHandlers = {
       'focusNewItemKey': () => {
