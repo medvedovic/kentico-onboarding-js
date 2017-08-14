@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 
 import { items } from './items/items';
 
-import { Reducer } from '../interfaces';
+import { Store } from '../interfaces';
 
-export const rootReducer = combineReducers<Reducer.Root>({
+export const rootReducer = combineReducers<Store.Root>({
   items,
 });
