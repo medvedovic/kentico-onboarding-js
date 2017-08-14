@@ -7,7 +7,7 @@ describe('generateGuid', () => {
 
     const isMatch = regex.test(id);
 
-    expect(isMatch).toBe(true);
+    expect(isMatch).toBeTruthy();
   });
 
   it('provides correct length of id', () => {

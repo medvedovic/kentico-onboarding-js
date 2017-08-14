@@ -1,6 +1,5 @@
 import { ListItemData as ListItemModel } from '../../../../src/models/ListItemData';
-import { Map, OrderedMap } from 'immutable';
-import { itemFactory } from '../../../../src/utils/itemFactory';
+import { Map } from 'immutable';
 import { data } from '../../../../src/reducers/items/data/data';
 import { deleteItem, updateItem } from '../../../../src/actions/publicActions';
 import { createItemBuilder } from '../../../../src/actions/actionCreators';
@@ -20,8 +19,8 @@ describe('Data reducer', () => {
       [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
       [_id3, new ListItemModel({ id: _id3, value: 'Make a sandwich' })],
     ]);
-    const dummyIdGenerator = () => new ListItemModel({ id: _id3, value: 'Make a sandwich' });
-    const dummyCreateItem = createItemBuilder(dummyIdGenerator);
+    const dummyItemGenerator = () => new ListItemModel({ id: _id3, value: 'Make a sandwich' });
+    const dummyCreateItem = createItemBuilder(dummyItemGenerator);
 
     const result = data(initialState, dummyCreateItem('Make a sandwich'));
 
