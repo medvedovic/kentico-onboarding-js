@@ -1,69 +1,35 @@
 import React from 'react';
-import { initialItems } from '../constants/initialItems';
-import { ListItem } from './ListItem.jsx';
-import { ListItem as ListItemModel } from '../models/ListItem';
-import { ListItemInput } from './ListItemInput';
-import { generateGuid } from '../utils/generateGuid';
+import PropTypes from 'prop-types';
+import { HotKeys } from 'react-hotkeys';
+import { List as ImmutableList } from 'immutable';
+import { ListItemInput } from './ListItemCreator';
+import { ListItem } from '../containers/ListItem';
+import { keyMap } from '../constants/keyMap';
 
-export class List extends React.PureComponent {
-  static displayName = 'List';
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      items: initialItems,
-    };
-  }
-
-  _createNewItem = (value) => {
-    const guid = generateGuid();
-
-    this.setState(prevState => ({
-      items: prevState.items.set(guid, new ListItemModel({
-        guid,
-        value,
-      })),
-    }));
-  };
-
-  _updateItem = (key, value) => {
-    const prevItem = this.state.items.get(key);
-    const newItem = new ListItemModel({ ...prevItem.toJS(), value });
-
-    this.setState(prevState => ({
-      items: prevState.items.set(key, newItem),
-    }));
-  };
-
-  _deleteItem = (key) => {
-    this.setState(prevState => ({
-      items: prevState.items.delete(key),
-    }));
-  };
-
-  render() {
-    const { items } = this.state;
-
-    return (
-      <div className="row">
-        <div className="col-sm-12 col-md-6">
-          <ol className="list">
-            {
-              items.entrySeq().map(([guid, item]) => (
-                <li key={guid}>
-                  <ListItem
-                    item={item}
-                    onUpdateItem={this._updateItem}
-                    onDeleteItem={this._deleteItem}
-                  />
-                </li>
-              ))
-            }
-          </ol>
-          <ListItemInput onCreateItem={this._createNewItem} />
-        </div>
+const List = ({ itemIds, onCreateItem }) => (
+  <HotKeys keyMap={keyMap}>
+    <div className="row">
+      <div className="col-sm-12 col-md-6">
+        <ol className="list">
+          {
+            itemIds.map(id => (
+              <li key={id}>
+                <ListItem id={id} />
+              </li>
+            ))
+          }
+        </ol>
+        <ListItemInput onCreateItem={onCreateItem} />
       </div>
-    );
-  }
-}
+    </div>
+  </HotKeys>
+);
+
+List.displayName = 'List';
+
+List.propTypes = {
+  itemIds: PropTypes.instanceOf(ImmutableList).isRequired,
+  onCreateItem: PropTypes.func.isRequired,
+};
+
+export { List };

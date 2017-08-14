@@ -1,61 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListItemEditor } from './ListItemEditor';
+
 import { ListItemDisplay } from './ListItemDisplay';
+import { ListItemEditor } from './ListItemEditor';
 
-export class ListItem extends React.PureComponent {
-  static displayName = 'ListItem';
-  static propTypes = {
-    item: PropTypes.shape({
-      guid: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }).isRequired,
-    onDeleteItem: PropTypes.func.isRequired,
-    onUpdateItem: PropTypes.func.isRequired,
-  };
+const ListItem = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
+  return (
+    itemViewModel.isBeingEdited ?
+      <ListItemEditor
+        itemViewModel={itemViewModel}
+        onCancelEdit={onToggleBeingEdited}
+        onUpdateItem={onUpdateItem}
+        onDeleteItem={onDeleteItem}
+      /> :
+      <ListItemDisplay
+        value={itemViewModel.value}
+        onClick={onToggleBeingEdited}
+      />
+  );
+};
 
-  constructor(props) {
-    super(props);
+ListItem.displayName = 'ListItem';
 
-    this.state = {
-      isBeingEdited: false,
-    };
-  }
+ListItem.propTypes = {
+  itemViewModel: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    isBeingEdited: PropTypes.bool.isRequired,
+  }).isRequired,
+  onToggleBeingEdited: PropTypes.func.isRequired,
+  onUpdateItem: PropTypes.func.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
+};
 
-  _handleUpdateItemClick = (value) => {
-    const { guid } = this.props.item;
-
-    this._toggleBeingEdited();
-    this.props.onUpdateItem(guid, value);
-  };
-
-  _handleDeleteItemClick = () => {
-    const { guid } = this.props.item;
-
-    this.props.onDeleteItem(guid);
-  };
-
-  _toggleBeingEdited = () => {
-    this.setState(prevState => ({
-      isBeingEdited: !prevState.isBeingEdited,
-    }));
-  };
-
-  render() {
-    const { isBeingEdited } = this.state;
-    const { item } = this.props;
-
-    if (isBeingEdited) {
-      return (
-        <ListItemEditor
-          item={item}
-          onItemUpdate={this._handleUpdateItemClick}
-          onItemCancelEdit={this._toggleBeingEdited}
-          onItemDelete={this._handleDeleteItemClick}
-        />
-      );
-    }
-
-    return <ListItemDisplay item={item} onClick={this._toggleBeingEdited} />;
-  }
-}
+export { ListItem };
