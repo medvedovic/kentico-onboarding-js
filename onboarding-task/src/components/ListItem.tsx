@@ -17,21 +17,19 @@ export interface IListItemCallbacksProps {
 
 export type listItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.SFC<listItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => {
-  return (
-    itemViewModel.isBeingEdited ?
-      <ListItemEditor
-        itemViewModel={itemViewModel}
-        onCancelEdit={onToggleBeingEdited}
-        onDeleteItem={onDeleteItem}
-        onUpdateItem={onUpdateItem}
-      /> :
-      <ListItemDisplay
-        value={itemViewModel.value}
-        onClick={onToggleBeingEdited}
-      />
-  );
-};
+const ListItem: React.SFC<listItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }): JSX.Element  => (
+  itemViewModel.isBeingEdited
+    ? <ListItemEditor
+      itemViewModel={itemViewModel}
+      onCancelEdit={onToggleBeingEdited}
+      onDeleteItem={onDeleteItem}
+      onUpdateItem={onUpdateItem}
+    />
+    : <ListItemDisplay
+    value={itemViewModel.value}
+    onClick={onToggleBeingEdited}
+  />
+);
 
 ListItem.displayName = 'ListItem';
 
