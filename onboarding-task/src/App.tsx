@@ -1,8 +1,8 @@
 import './styles/sticky-footer.css';
-import React from 'react';
-import { List } from './containers/List.tsx';
+import * as React from 'react';
+import { List } from './containers/List';
 
-export const App = () => (
+export const App: React.SFC = () => (
   <div>
     <div className="container">
       <div className="header clearfix">
