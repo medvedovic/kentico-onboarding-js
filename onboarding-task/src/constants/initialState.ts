@@ -1,13 +1,16 @@
 import { OrderedMap, Map, List } from 'immutable';
+
 import { ListItemData } from '../models/ListItemData';
 import { ListItemFlag } from '../models/ListItemFlag';
+
+import { Store } from '../interfaces';
 
 const id1 = 'e5706eae-b328-4254-8daa-62080e993f04';
 const id2 = '69f87db6-a1bf-4490-a45f-0e9854483efa';
 const id3 = '5d42f9c0-57ed-4ae3-bbf9-8fa4584c6ff6';
 const id4 = '55469b04-d3c4-4a35-ad41-3452aabb4ce2';
 
-export const initialState = {
+export const initialState: Store.Root = {
   items: {
     ids: List([
       id1,
