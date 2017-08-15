@@ -3,9 +3,10 @@ import {
   DELETE_ITEM,
   TOGGLE_BEING_EDITED,
 } from '../constants/actionTypes';
-import { IAction, IdPayload, ItemPayload } from '../interfaces';
 
-export const updateItem = (id: string, value: string): IAction<ItemPayload> => ({
+import { IAction } from '../interfaces';
+
+export const updateItem = (id: string, value: string): IAction => ({
   type: UPDATE_ITEM,
   payload: {
     item: {
@@ -15,14 +16,14 @@ export const updateItem = (id: string, value: string): IAction<ItemPayload> => (
   },
 });
 
-export const deleteItem = (id: string): IAction<IdPayload> => ({
+export const deleteItem = (id: string): IAction => ({
   type: DELETE_ITEM,
   payload: {
     id,
   },
 });
 
-export const toggleBeingEdited = (id: string): IAction<IdPayload> => ({
+export const toggleBeingEdited = (id: string): IAction => ({
   type: TOGGLE_BEING_EDITED,
   payload: {
     id,
