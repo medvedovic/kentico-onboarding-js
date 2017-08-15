@@ -5,7 +5,7 @@ import { CREATE_ITEM,
 } from '../../../constants/actionTypes';
 import { flag } from './flag';
 import { Reducer } from '../../../interfaces';
-import {ListItemFlag} from "../../../models/ListItemFlag";
+import {ListItemFlag} from '../../../models/ListItemFlag';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {

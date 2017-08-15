@@ -3,7 +3,7 @@ import {
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
 import { ListItemFlag } from '../../../models/ListItemFlag';
-import {IListItemFlags, IReducer} from "../../../interfaces";
+import {IListItemFlags, IReducer} from '../../../interfaces';
 
 export const flag: IReducer<IListItemFlags> = (state = new ListItemFlag(), action) => {
   switch (action.type) {
