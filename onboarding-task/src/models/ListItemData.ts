@@ -1,5 +1,4 @@
 import { Record } from 'immutable';
-import { IListItemData } from '../interfaces';
 
 const defaultValues = {
   id: '',
@@ -10,6 +9,16 @@ type listItemDataParams = {
   id: string;
   value: string;
 };
+
+/**
+ * List Item Data Model
+ */
+export interface IListItemData extends Record<string, any> {
+  /** Id of item */
+  id: string;
+  /** Value held by item */
+  value: string;
+}
 
 /**
  * Represents a single item in the list

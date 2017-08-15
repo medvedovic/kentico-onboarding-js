@@ -1,5 +1,4 @@
 import { Record } from 'immutable';
-import { IListItemFlags } from '../interfaces';
 
 const defaultValues = {
   isBeingEdited: false,
@@ -8,6 +7,14 @@ const defaultValues = {
 type listItemFlagParams = {
   isBeingEdited: boolean;
 };
+
+/**
+ * List Item Flags Model
+ */
+export interface IListItemFlags extends Record<string, any> {
+  /** Shows whether item is opened for editation */
+  isBeingEdited: boolean;
+}
 
 /**
  * Represents flags on an item

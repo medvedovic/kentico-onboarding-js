@@ -1,5 +1,7 @@
 import * as memoize from 'memoizee';
-import { IItemViewModel, IListItemData, IListItemFlags } from '../interfaces';
+import { IItemViewModel} from '../interfaces';
+import { IListItemData } from '../models/ListItemData';
+import { IListItemFlags } from '../models/ListItemFlag';
 
 export const createViewModel = (item: IListItemData, flags: IListItemFlags): IItemViewModel => ({
   ...item.toJS(),

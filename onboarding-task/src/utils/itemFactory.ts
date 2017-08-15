@@ -1,6 +1,6 @@
 import { ListItemData } from '../models/ListItemData';
 import { generateGuid } from './generateGuid';
-import { IListItemData } from '../interfaces';
+import { IListItemData } from '../models/ListItemData';
 
 export interface IItemFactoryWithGenerator {
   (value: string): IListItemData;
