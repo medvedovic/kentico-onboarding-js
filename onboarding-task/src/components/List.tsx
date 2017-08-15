@@ -10,7 +10,7 @@ import { keyMap } from '../constants/keyMap';
 import { Store } from '../interfaces';
 
 export interface IListDataProps {
-  itemIds: Store.Ids;
+  itemIds: Store.IIds;
 }
 
 export interface IListCallbacksProps {

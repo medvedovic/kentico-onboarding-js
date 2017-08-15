@@ -58,19 +58,19 @@ export interface IItemViewModel {
  * Holds all stores used in application
  */
 export namespace Store {
-  export interface Root {
-    items: Items;
+  export interface IRoot {
+    items: IItems;
   }
 
-  export interface Items {
-    ids: Ids;
-    data: Data;
-    flags: Flags;
+  export interface IItems {
+    ids: IIds;
+    data: IData;
+    flags: IFlags;
   }
 
-  export type Ids = List<string>;
-  export type Data = Map<string, IListItemData>;
-  export type Flags = Map<string, IListItemFlags>;
+  export type IIds = List<string>;
+  export type IData = Map<string, IListItemData>;
+  export type IFlags = Map<string, IListItemFlags>;
 }
 
 /* Reducers */
@@ -88,9 +88,9 @@ export interface IReducer<T> {
  * Holds all reducers used in application
  */
 export namespace Reducer {
-  export type Root = IReducer<Store.Root>;
-  export type Items = IReducer<Store.Items>;
-  export type Ids = IReducer<Store.Ids>;
-  export type Data = IReducer<Store.Data>;
-  export type Flags = IReducer<Store.Flags>;
+  export type Root = IReducer<Store.IRoot>;
+  export type Items = IReducer<Store.IItems>;
+  export type Ids = IReducer<Store.IIds>;
+  export type Data = IReducer<Store.IData>;
+  export type Flags = IReducer<Store.IFlags>;
 }

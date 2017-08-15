@@ -6,7 +6,7 @@ import { createItem } from '../actions/publicActions';
 import { Store } from '../interfaces';
 
 
-const mapStateToProps = ({ items }: Store.Root): IListDataProps => ({
+const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
   itemIds: items.ids,
 });
 

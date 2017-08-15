@@ -18,7 +18,7 @@ interface IListItemDataProps {
   id: string;
 }
 
-const mapStateToProps = ({ items }: Store.Root, { id }: IListItemDataProps): IListItemComponentDataProps => {
+const mapStateToProps = ({ items }: Store.IRoot, { id }: IListItemDataProps): IListItemComponentDataProps => {
   const item = items.data.get(id);
   const flags = items.flags.get(id);
 
