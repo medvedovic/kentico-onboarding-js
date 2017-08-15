@@ -1,8 +1,10 @@
 import { List } from 'immutable';
+
 import {
   CREATE_ITEM,
   DELETE_ITEM,
 } from '../../constants/actionTypes';
+
 import { Reducer } from '../../interfaces';
 
 export const ids: Reducer.Ids = (state = List<string>(), action) => {

@@ -1,11 +1,14 @@
 import { Map } from 'immutable';
-import { CREATE_ITEM,
+
+import {
+  CREATE_ITEM,
   DELETE_ITEM,
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
 import { flag } from './flag';
+import { ListItemFlag } from '../../../models/ListItemFlag';
+
 import { Reducer } from '../../../interfaces';
-import {ListItemFlag} from '../../../models/ListItemFlag';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {

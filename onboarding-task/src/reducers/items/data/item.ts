@@ -3,6 +3,7 @@ import {
   IListItemData,
   ListItemData
 } from '../../../models/ListItemData';
+
 import { IReducer } from '../../../interfaces';
 
 export const item: IReducer<IListItemData> = (state = new ListItemData(), action) => {

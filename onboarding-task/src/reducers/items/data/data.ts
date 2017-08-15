@@ -1,10 +1,12 @@
 import { Map } from 'immutable';
+
 import {
   CREATE_ITEM,
   DELETE_ITEM,
   UPDATE_ITEM,
 } from '../../../constants/actionTypes';
 import { item } from './item';
+
 import { Reducer } from '../../../interfaces';
 
 export const data: Reducer.Data = (state = Map(), action) => {

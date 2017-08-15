@@ -6,7 +6,8 @@ import {
   IListItemFlags,
   ListItemFlag
 } from '../../../models/ListItemFlag';
-import {IReducer} from '../../../interfaces';
+
+import { IReducer } from '../../../interfaces';
 
 export const flag: IReducer<IListItemFlags> = (state = new ListItemFlag(), action) => {
   switch (action.type) {
