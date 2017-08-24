@@ -4,7 +4,7 @@ import {
   TOGGLE_BEING_EDITED,
 } from '../constants/actionTypes';
 
-import { IAction } from '../interfaces';
+import { IAction } from './IAction';
 
 export const updateItem = (id: string, value: string): IAction => ({
   type: UPDATE_ITEM,
