@@ -19,7 +19,7 @@ export interface IListCallbacksProps {
 
 export type listProps = IListDataProps & IListCallbacksProps;
 
-const List: React.SFC<listProps> = ({ itemIds, onCreateItem }): JSX.Element => (
+const List: React.SFC<listProps> = ({ itemIds, onCreateItem }) => (
   <HotKeys keyMap={keyMap}>
     <div className="row">
       <div className="col-sm-12 col-md-6">

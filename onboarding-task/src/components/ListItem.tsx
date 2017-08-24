@@ -17,7 +17,7 @@ export interface IListItemCallbacksProps {
 
 export type listItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.SFC<listItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }): JSX.Element  => (
+const ListItem: React.SFC<listItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => (
   itemViewModel.isBeingEdited
     ? <ListItemEditor
       itemViewModel={itemViewModel}
@@ -26,9 +26,9 @@ const ListItem: React.SFC<listItemProps> = ({ itemViewModel, onToggleBeingEdited
       onUpdateItem={onUpdateItem}
     />
     : <ListItemDisplay
-    value={itemViewModel.value}
-    onClick={onToggleBeingEdited}
-  />
+      value={itemViewModel.value}
+      onClick={onToggleBeingEdited}
+    />
 );
 
 ListItem.displayName = 'ListItem';
