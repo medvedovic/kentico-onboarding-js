@@ -6,7 +6,7 @@ import {
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
 import { flag } from './flag';
-import { ListItemFlag } from '../../../models/ListItemFlag';
+import { ListItemFlags } from '../../../models/ListItemFlags';
 
 import { Reducer } from '../../../interfaces';
 
@@ -19,7 +19,7 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
       return state.set(action.payload.id, newFlags);
     }
     case CREATE_ITEM: {
-      const newFlags = flag(new ListItemFlag(), action);
+      const newFlags = flag(new ListItemFlags(), action);
 
       return state.set(action.payload.item.id, newFlags);
     }

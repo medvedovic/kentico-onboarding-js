@@ -1,7 +1,7 @@
 import { OrderedMap, Map, List } from 'immutable';
 
 import { ListItemData } from '../models/ListItemData';
-import { ListItemFlag } from '../models/ListItemFlag';
+import { ListItemFlags } from '../models/ListItemFlags';
 
 import { Store } from '../interfaces';
 
@@ -37,10 +37,10 @@ export const initialState: Store.IRoot = {
       })],
     ]),
     flags: Map([
-      [id1, new ListItemFlag()],
-      [id2, new ListItemFlag()],
-      [id3, new ListItemFlag()],
-      [id4, new ListItemFlag()],
+      [id1, new ListItemFlags()],
+      [id2, new ListItemFlags()],
+      [id3, new ListItemFlags()],
+      [id4, new ListItemFlags()],
     ]),
   },
 };

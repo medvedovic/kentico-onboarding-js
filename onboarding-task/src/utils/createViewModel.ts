@@ -1,7 +1,7 @@
 import * as memoize from 'memoizee';
 
 import { IListItemData } from '../models/ListItemData';
-import { IListItemFlags } from '../models/ListItemFlag';
+import { IListItemFlags } from '../models/ListItemFlags';
 
 import { IItemViewModel} from '../interfaces';
 

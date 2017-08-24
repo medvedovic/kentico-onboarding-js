@@ -19,7 +19,7 @@ export interface IListItemFlags extends Record<string, any> {
 /**
  * Represents flags on an item
  */
-export class ListItemFlag extends Record(defaultValues) implements IListItemFlags {
+export class ListItemFlags extends Record(defaultValues) implements IListItemFlags {
   isBeingEdited: boolean;
   constructor(params?: listItemFlagParams) {
     params ? super({...params}) : super();

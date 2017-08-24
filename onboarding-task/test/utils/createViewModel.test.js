@@ -1,13 +1,13 @@
 import { memoizedCreateViewModel, createViewModel } from '../../src/utils/createViewModel';
 import { ListItemData } from '../../src/models/ListItemData';
-import { ListItemFlag } from '../../src/models/ListItemFlag';
+import { ListItemFlags } from '../../src/models/ListItemFlags';
 
 const id = 'xxxxxx-yyyyyy';
 const item = new ListItemData({
   id,
   value: 'Do stuff',
 });
-const itemFlags = new ListItemFlag();
+const itemFlags = new ListItemFlags();
 
 describe('CreateViewModel', () => {
   it('returns merged data with flags', () => {
