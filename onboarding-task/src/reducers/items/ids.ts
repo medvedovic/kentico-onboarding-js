@@ -5,7 +5,7 @@ import {
   DELETE_ITEM,
 } from '../../constants/actionTypes';
 
-import { Reducer } from '../../interfaces';
+import { Reducer } from '../reducers';
 
 export const ids: Reducer.Ids = (state = List<string>(), action) => {
   switch (action.type) {

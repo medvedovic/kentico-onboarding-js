@@ -7,7 +7,7 @@ import {
 } from '../../../constants/actionTypes';
 import { item } from './item';
 
-import { Reducer } from '../../../interfaces';
+import { Reducer } from '../../reducers';
 
 export const data: Reducer.Data = (state = Map(), action) => {
   switch (action.type) {

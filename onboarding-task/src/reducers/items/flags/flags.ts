@@ -8,7 +8,7 @@ import {
 import { flag } from './flag';
 import { ListItemFlags } from '../../../models/ListItemFlags';
 
-import { Reducer } from '../../../interfaces';
+import { Reducer } from '../../reducers';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {
