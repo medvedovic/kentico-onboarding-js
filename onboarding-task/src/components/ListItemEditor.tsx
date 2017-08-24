@@ -16,13 +16,13 @@ export interface IListItemEditorCallbacksProps {
   onDeleteItem: () => void;
 }
 
-type listItemEditorProps = IListItemEditorDataProps & IListItemEditorCallbacksProps;
+type ListItemEditorProps = IListItemEditorDataProps & IListItemEditorCallbacksProps;
 
 interface IListItemEditorState {
   value: string;
 }
 
-class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemEditorState> {
+class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemEditorState> {
   static displayName = 'ListItemEditor';
 
   static propTypes = {
@@ -36,7 +36,7 @@ class ListItemEditor extends React.PureComponent<listItemEditorProps, IListItemE
     onCancelEdit: PropTypes.func.isRequired,
   };
 
-  constructor(props: listItemEditorProps) {
+  constructor(props: ListItemEditorProps) {
     super(props);
 
     this.state = {

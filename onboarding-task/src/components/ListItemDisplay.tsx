@@ -9,9 +9,9 @@ export interface IListItemDisplayCallbacksProps {
   onClick: () => void;
 }
 
-type listItemDisplayProps = IListItemDisplayCallbacksProps & IListItemDisplayDataProps;
+type ListItemDisplayProps = IListItemDisplayCallbacksProps & IListItemDisplayDataProps;
 
-const ListItemDisplay: React.SFC<listItemDisplayProps> = ({ value, onClick }) => (
+const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, onClick }) => (
   <span onClick={onClick}>{value}</span>
 );
 
