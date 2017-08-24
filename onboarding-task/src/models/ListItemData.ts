@@ -1,32 +1,24 @@
-import { Record } from 'immutable';
-
-const defaultValues = {
-  id: '',
-  value: '',
-};
-
-type listItemDataParams = {
-  id: string;
-  value: string;
-};
+import { TypedRecord } from './TypedRecord';
 
 /**
  * List Item Data Model
  */
-export interface IListItemData extends Record<string, any> {
+interface IListItemData {
   /** Id of item */
-  id: string;
+  readonly id: string;
   /** Value held by item */
-  value: string;
+  readonly value: string;
 }
+
+const defaultValues: IListItemData = {
+  id: '',
+  value: '',
+};
 
 /**
  * Represents a single item in the list
  */
-export class ListItemData extends Record(defaultValues) implements IListItemData {
-  id: string;
-  value: string;
-  constructor(params?: listItemDataParams) {
-    params ? super({...params}) : super();
-  }
+export class ListItemData extends TypedRecord<IListItemData>(defaultValues) implements IListItemData {
+  readonly id: string;
+  readonly value: string;
 }

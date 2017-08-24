@@ -1,27 +1,20 @@
-import { Record } from 'immutable';
-
-const defaultValues = {
-  isBeingEdited: false,
-};
-
-type listItemFlagParams = {
-  isBeingEdited: boolean;
-};
+import { TypedRecord } from './TypedRecord';
 
 /**
  * List Item Flags Model
  */
-export interface IListItemFlags extends Record<string, any> {
-  /** Shows whether item is opened for editation */
-  isBeingEdited: boolean;
+interface IListItemFlags {
+  /** Shows whether the item is opened for editation */
+  readonly isBeingEdited: boolean;
 }
+
+const defaultValues: IListItemFlags = {
+  isBeingEdited: false,
+};
 
 /**
  * Represents flags on an item
  */
-export class ListItemFlags extends Record(defaultValues) implements IListItemFlags {
-  isBeingEdited: boolean;
-  constructor(params?: listItemFlagParams) {
-    params ? super({...params}) : super();
-  }
+export class ListItemFlags extends TypedRecord<IListItemFlags>(defaultValues) implements IListItemFlags {
+  readonly isBeingEdited: boolean;
 }
