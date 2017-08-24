@@ -1,7 +1,7 @@
 import { UPDATE_ITEM } from '../../../constants/actionTypes';
 import {  ListItemData } from '../../../models/ListItemData';
 
-import { IReducer } from '../../../interfaces';
+import { IReducer } from '../../IReducer';
 
 export const item: IReducer<ListItemData> = (state = new ListItemData(), action) => {
   switch (action.type) {

@@ -4,7 +4,7 @@ import {
 } from '../../../constants/actionTypes';
 
 import { ListItemFlags } from '../../../models/ListItemFlags';
-import { IReducer } from '../../../interfaces';
+import { IReducer } from '../../IReducer';
 
 export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), action) => {
   switch (action.type) {

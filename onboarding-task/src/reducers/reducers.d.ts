@@ -1,5 +1,5 @@
 import { Store } from './stores';
-import { IReducer } from '../interfaces';
+import { IReducer } from './IReducer';
 
 /**
  * Holds all reducers used in application
