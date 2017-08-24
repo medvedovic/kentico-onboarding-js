@@ -7,7 +7,7 @@ import { ListItemCreator } from './ListItemCreator';
 import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
 
-import { Store } from '../interfaces';
+import { Store } from '../reducers/stores';
 
 export interface IListDataProps {
   itemIds: Store.IIds;

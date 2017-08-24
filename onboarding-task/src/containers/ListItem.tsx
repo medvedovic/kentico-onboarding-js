@@ -12,7 +12,7 @@ import {
   IListItemDataProps as IListItemComponentDataProps,
   IListItemCallbacksProps as IListItemComponentCallbacksProps
 } from '../components/ListItem';
-import { Store } from '../interfaces';
+import { Store } from '../reducers/stores';
 
 interface IOwnProps {
   id: string;

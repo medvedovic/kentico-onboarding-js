@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../components/List';
 import { createItem } from '../actions/publicActions';
 
-import { Store } from '../interfaces';
+import { Store } from '../reducers/stores';
 
 
 const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({

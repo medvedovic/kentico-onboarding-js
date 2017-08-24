@@ -3,7 +3,7 @@ import { OrderedMap, Map, List } from 'immutable';
 import { ListItemData } from '../models/ListItemData';
 import { ListItemFlags } from '../models/ListItemFlags';
 
-import { Store } from '../interfaces';
+import { Store } from '../reducers/stores';
 
 const id1 = 'e5706eae-b328-4254-8daa-62080e993f04';
 const id2 = '69f87db6-a1bf-4490-a45f-0e9854483efa';
