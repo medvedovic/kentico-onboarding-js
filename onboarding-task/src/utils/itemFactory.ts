@@ -1,18 +1,17 @@
 import { ListItemData } from '../models/ListItemData';
 import { generateGuid } from './generateGuid';
-import { IListItemData } from '../models/ListItemData';
 
 export interface IItemFactoryWithGenerator {
-  (value: string): IListItemData;
+  (value: string): ListItemData;
 }
 
 export const itemFactoryBuilder = (idGenerator: () => string): IItemFactoryWithGenerator  =>
-  (value: string): IListItemData => (
+  (value: string): ListItemData => (
     new ListItemData({
       id: idGenerator(),
       value,
     })
   );
 
-export const itemFactory = (value: string): IListItemData =>
+export const itemFactory = (value: string): ListItemData =>
   itemFactoryBuilder(generateGuid)(value);
