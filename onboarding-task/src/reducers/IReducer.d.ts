@@ -6,5 +6,5 @@ import { IAction } from '../actions/IAction';
  * @param action - action to be executed
  */
 export interface IReducer<T> {
-  (state: T, action: IAction): T;
+  (state: T | undefined, action: IAction): T;
 }
