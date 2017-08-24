@@ -4,7 +4,7 @@ import { HotKeys } from 'react-hotkeys';
 
 import { isTextInputValid } from '../utils/isTextInputValid';
 
-import { IItemViewModel } from '../interfaces';
+import { IItemViewModel } from '../models/IItemViewModel';
 
 export interface IListItemEditorDataProps {
   itemViewModel: IItemViewModel;
