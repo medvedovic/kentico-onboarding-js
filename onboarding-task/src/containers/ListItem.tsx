@@ -14,18 +14,18 @@ import {
 } from '../components/ListItem';
 import { Store } from '../interfaces';
 
-interface IListItemDataProps {
+interface IOwnProps {
   id: string;
 }
 
-const mapStateToProps = ({ items }: Store.IRoot, { id }: IListItemDataProps): IListItemComponentDataProps => {
+const mapStateToProps = ({ items }: Store.IRoot, { id }: IOwnProps): IListItemComponentDataProps => {
   const item = items.data.get(id);
   const flags = items.flags.get(id);
 
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>, { id }: IListItemDataProps): IListItemComponentCallbacksProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<any>, { id }: IOwnProps): IListItemComponentCallbacksProps => ({
   onDeleteItem: () => dispatch(deleteItem(id)),
   onUpdateItem: (value: string) => dispatch(updateItem(id, value)),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
