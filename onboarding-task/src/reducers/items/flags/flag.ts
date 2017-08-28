@@ -10,10 +10,12 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
   switch (action.type) {
     case CREATE_ITEM:
       return state;
+
     case TOGGLE_BEING_EDITED:
       return state.alter({
         isBeingEdited: !state.isBeingEdited
       });
+
     default:
       return state;
   }

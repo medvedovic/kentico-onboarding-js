@@ -17,13 +17,16 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
 
       return state.set(action.payload.id, newFlags);
     }
+
     case CREATE_ITEM: {
       const newFlags = flag(undefined, action);
 
       return state.set(action.payload.item.id, newFlags);
     }
+
     case DELETE_ITEM:
       return state.delete(action.payload.id);
+
     default:
       return state;
   }

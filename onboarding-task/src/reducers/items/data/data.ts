@@ -16,14 +16,17 @@ export const data: Reducer.Data = (state = Map(), action) => {
 
       return state.set(newItem.id, newItem);
     }
+
     case UPDATE_ITEM: {
       const existingItem = state.get(action.payload.item.id);
       const newItem = item(existingItem, action);
 
       return state.set(action.payload.item.id, newItem);
     }
+
     case DELETE_ITEM:
       return state.delete(action.payload.id);
+
     default:
       return state;
   }

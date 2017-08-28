@@ -9,6 +9,7 @@ export const item: IReducer<ListItemData> = (state = new ListItemData(), action)
       return state.alter({
         value: action.payload.item.value
       });
+
     default:
       return state;
   }
