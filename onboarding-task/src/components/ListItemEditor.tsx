@@ -5,6 +5,7 @@ import { HotKeys } from 'react-hotkeys';
 import { isTextInputValid } from '../utils/isTextInputValid';
 
 import { IItemViewModel } from '../models/IItemViewModel';
+import { IKeyMapHandlers } from '../constants/keyMap';
 
 export interface IListItemEditorDataProps {
   itemViewModel: IItemViewModel;
@@ -61,9 +62,9 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
 
   render(): JSX.Element {
     const { onCancelEdit } = this.props;
-    const handlers = {
-      'saveKey': this._handleUpdate,
-      'cancelKey': onCancelEdit,
+    const handlers: Partial<IKeyMapHandlers> = {
+      saveKey: this._handleUpdate,
+      cancelKey: onCancelEdit,
     };
 
     return (

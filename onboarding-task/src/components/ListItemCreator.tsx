@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
 import { isTextInputValid } from '../utils/isTextInputValid';
+import { IKeyMapHandlers } from '../constants/keyMap';
 
 interface IListItemCreatorCallbacksProps {
   onCreateItem: (value: string) => void;
@@ -63,8 +64,8 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
 
   render(): JSX.Element {
     const { value } = this.state;
-    const globalHandlers = {
-      'focusNewItemKey': () => {
+    const globalHandlers: Partial<IKeyMapHandlers> = {
+      focusNewItemKey: () => {
         if (this.textInput) {
           this.textInput.focus();
         }
