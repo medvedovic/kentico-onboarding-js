@@ -71,8 +71,8 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
         }
       },
     };
-    const handlers = {
-      'cancelKey': () => {
+    const handlers: Partial<IKeyMapHandlers> = {
+      cancelKey: () => {
         if (this.textInput) {
           this.textInput.blur();
         }
