@@ -3,9 +3,9 @@
  */
 export interface IItemViewModel {
   /** Guid of item */
-  guid: string;
+  readonly guid: string;
   /** Value held by item */
-  value: string;
+  readonly value: string;
   /** Shows whether item is opened for editation */
-  isBeingEdited: boolean;
+  readonly isBeingEdited: boolean;
 }
