@@ -4,7 +4,9 @@ import { data } from './data/data';
 import { flags } from './flags/flags';
 import { ids } from './ids';
 
-export const items = combineReducers({
+import { Reducer } from '../reducers';
+
+export const items = combineReducers<Reducer.Items>({
   ids,
   data,
   flags,

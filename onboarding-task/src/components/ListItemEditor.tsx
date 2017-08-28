@@ -1,9 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
+
 import { isTextInputValid } from '../utils/isTextInputValid';
 
-class ListItemEditor extends React.PureComponent {
+import { IItemViewModel } from '../models/IItemViewModel';
+import { IKeyMapHandlers } from '../constants/keyMap';
+
+export interface IListItemEditorDataProps {
+  itemViewModel: IItemViewModel;
+}
+
+export interface IListItemEditorCallbacksProps {
+  onCancelEdit: () => void;
+  onUpdateItem: (value: string) => void;
+  onDeleteItem: () => void;
+}
+
+type ListItemEditorProps = IListItemEditorDataProps & IListItemEditorCallbacksProps;
+
+interface IListItemEditorState {
+  value: string;
+}
+
+class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemEditorState> {
   static displayName = 'ListItemEditor';
 
   static propTypes = {
@@ -17,7 +37,7 @@ class ListItemEditor extends React.PureComponent {
     onCancelEdit: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
+  constructor(props: ListItemEditorProps) {
     super(props);
 
     this.state = {
@@ -25,7 +45,7 @@ class ListItemEditor extends React.PureComponent {
     };
   }
 
-  _handleItemNameChanged = ({ target: { value } }) => {
+  _handleItemNameChanged = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(() => ({
       value,
     }));
@@ -34,27 +54,17 @@ class ListItemEditor extends React.PureComponent {
   _handleUpdate = () => {
     const { value } = this.state;
 
-    setTimeout(() => {
-      if (this.errorElement) {
-        this.errorElement.classList.remove('shake');
-      }
-    }, 300);
-
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(value);
       this.props.onCancelEdit();
     }
-    else {
-      this.errorElement.classList.add('shake');
-      this.errorElement.style.display = 'block';
-    }
   };
 
-  render() {
+  render(): JSX.Element {
     const { onCancelEdit } = this.props;
-    const handlers = {
-      'saveKey': this._handleUpdate,
-      'cancelKey': onCancelEdit,
+    const handlers: Partial<IKeyMapHandlers> = {
+      saveKey: this._handleUpdate,
+      cancelKey: onCancelEdit,
     };
 
     return (
@@ -65,9 +75,6 @@ class ListItemEditor extends React.PureComponent {
             className="form-control"
             value={this.state.value}
             onChange={this._handleItemNameChanged}
-            ref={(input) => {
-              this.textInput = input;
-            }}
             autoFocus
           />
           <div className="btn-group" role="group">
@@ -76,12 +83,10 @@ class ListItemEditor extends React.PureComponent {
             <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
           </div>
         </div>
-        <span
-          className="error"
-          ref={span => {
-            this.errorElement = span;
-          }}
-        >Invalid input!</span>
+        {!this.state.value &&
+          <span className="error shake">Invalid input!</span>
+        }
+
       </HotKeys>
     );
   }

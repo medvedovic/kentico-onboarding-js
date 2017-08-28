@@ -1,10 +1,8 @@
 import {
-  createItem,
   updateItem,
   deleteItem,
 } from '../../src/actions/publicActions';
 import {
-  CREATE_ITEM,
   UPDATE_ITEM,
   DELETE_ITEM,
 } from '../../src/constants/actionTypes';
@@ -33,7 +31,7 @@ describe('User Actions', () => {
     const expectedAction = {
       type: DELETE_ITEM,
       payload: {
-        itemId: _id,
+        id: _id,
       },
     };
 

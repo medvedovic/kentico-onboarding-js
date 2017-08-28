@@ -105,9 +105,9 @@ input:focus {
 }
 
 .error {
-  display: none;
   color: #f44336;
   font-size: 0.85em;
+  display: block;
 }
 
 .btn-add {

@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 
 import { items } from './items/items';
 
-export const rootReducer = combineReducers({
+import { Store } from './stores';
+
+export const rootReducer = combineReducers<Store.IRoot>({
   items,
 });
