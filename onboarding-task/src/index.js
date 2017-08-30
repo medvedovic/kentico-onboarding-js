@@ -9,7 +9,7 @@ import { rootReducer } from './reducers/reducer.ts';
 import { initialState } from './constants/initialState.ts';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import './styles/index.css';
+import './styles/index.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
