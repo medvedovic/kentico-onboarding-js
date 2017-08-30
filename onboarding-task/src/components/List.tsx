@@ -8,6 +8,7 @@ import { ListItem } from '../containers/ListItem';
 import { keyMap } from '../constants/keyMap';
 
 import { Store } from '../reducers/stores';
+import { Loader } from './Loader';
 
 export interface IListDataProps {
   itemIds: Store.IIds;
@@ -21,6 +22,7 @@ export type ListProps = IListDataProps & IListCallbacksProps;
 
 const List: React.SFC<ListProps> = ({ itemIds, onCreateItem }) => (
   <HotKeys keyMap={keyMap}>
+    <Loader />
     <div className="row">
       <div className="col-sm-12 col-md-6">
         <ol className="list">
