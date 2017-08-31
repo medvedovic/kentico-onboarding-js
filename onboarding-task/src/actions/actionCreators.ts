@@ -5,6 +5,7 @@ import {
 import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 
 import { IAction } from './IAction';
+import { Dispatch } from 'react-redux';
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
@@ -14,11 +15,11 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
     },
   });
 
-export const fetchHasFailed = (bool: boolean) => {
+export const fetchHasFailed = (errorMessage: string) => {
   return {
     type: FetchData.HAS_FAILED,
     payload: {
-      hasErrored: bool
+      errorMessage,
     }
   };
 };
@@ -35,8 +36,25 @@ export const fetchIsLoading = (bool: boolean) => {
 export const fetchHasSucceeded = (items: any) => {
   return {
     type: FetchData.HAS_SUCCEEDED,
-    payload : {
+    payload: {
       items
     }
+  };
+};
+
+
+export const fetchData = (url: string) => {
+  return (dispatch: Dispatch<any>) => {
+    dispatch(fetchIsLoading(true));
+
+    setTimeout(() => {
+      fetch(url)
+        .then(response => response.json())
+        .then(response => {
+          dispatch(fetchHasSucceeded(response));
+          dispatch(fetchIsLoading(false));
+        })
+        .catch(response => dispatch(fetchHasFailed(response.message)));
+    },         3000);
   };
 };
