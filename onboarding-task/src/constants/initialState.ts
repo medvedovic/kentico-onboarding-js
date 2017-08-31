@@ -4,6 +4,7 @@ import { ListItemData } from '../models/ListItemData';
 import { ListItemFlags } from '../models/ListItemFlags';
 
 import { Store } from '../reducers/stores';
+import { AppSettings } from '../reducers/app/settings';
 
 const id1 = 'e5706eae-b328-4254-8daa-62080e993f04';
 const id2 = '69f87db6-a1bf-4490-a45f-0e9854483efa';
@@ -43,4 +44,7 @@ export const initialState: Store.IRoot = {
       [id4, new ListItemFlags()],
     ]),
   },
+  app: {
+    settings: new AppSettings,
+  }
 };
