@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 
 import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../components/List';
-import { createItem } from '../actions/publicActions';
 
 import { Store } from '../reducers/stores';
 import {
   fetchData,
   fetchHasFailed,
   fetchHasSucceeded,
-  fetchIsLoading
+  fetchIsLoading,
+  postData
 } from '../actions/actionCreators';
 
 
@@ -17,7 +17,7 @@ const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
 });
 
 const mapDispatchToProps = (dispatch: any): IListCallbacksProps => ({
-  onCreateItem: (value: string) => dispatch(createItem(value)),
+  onCreateItem: (value: string) => dispatch(postData('http://localhost:49520/api/v1/Todos', value)),
   onFetchItemsIsLoading: (value: boolean) => dispatch(fetchIsLoading(value)),
   onFetchHasSucceeded: (items: any) => dispatch(fetchHasSucceeded(items)),
   onFetchHasFailed: (errorMessage: string) => dispatch(fetchHasFailed(errorMessage)),
