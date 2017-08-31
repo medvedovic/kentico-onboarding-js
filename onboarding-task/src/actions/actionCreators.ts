@@ -17,20 +17,26 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const fetchHasFailed = (bool: boolean) => {
   return {
     type: FetchData.HAS_FAILED,
-    hasErrored: bool
+    payload: {
+      hasErrored: bool
+    }
   };
 };
 
 export const fetchIsLoading = (bool: boolean) => {
   return {
     type: FetchData.IS_LOADING,
-    isLoading: bool
+    payload: {
+      isLoading: bool
+    }
   };
 };
 
 export const fetchHasSucceeded = (items: any) => {
   return {
     type: FetchData.HAS_SUCCEEDED,
-    items
+    payload : {
+      items
+    }
   };
 };
