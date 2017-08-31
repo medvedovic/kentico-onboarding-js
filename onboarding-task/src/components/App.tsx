@@ -3,7 +3,7 @@ import * as React from 'react';
 import { List } from '../containers/List';
 import { Loader } from './Loader';
 
-export const App: React.SFC = ({ showLoader }: any) => (
+export const App: React.SFC = ({ showLoader, apiEndpoint }: any) => (
   <div>
     <div className="container">
       <div className="header clearfix">
@@ -15,7 +15,7 @@ export const App: React.SFC = ({ showLoader }: any) => (
           showLoader &&
           <Loader />
         }
-        <List />
+        <List apiEndpoint={apiEndpoint} />
 
       </div>
 

@@ -16,12 +16,12 @@ const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
   itemIds: items.ids,
 });
 
-const mapDispatchToProps = (dispatch: any): IListCallbacksProps => ({
-  onCreateItem: (value: string) => dispatch(postData('http://localhost:49520/api/v1/Todos', value)),
+const mapDispatchToProps = (dispatch: any, ownProps: any): IListCallbacksProps => ({
+  onCreateItem: (value: string) => dispatch(postData(ownProps.apiEndpoint, value)),
   onFetchItemsIsLoading: (value: boolean) => dispatch(fetchIsLoading(value)),
   onFetchHasSucceeded: (items: any) => dispatch(fetchHasSucceeded(items)),
   onFetchHasFailed: (errorMessage: string) => dispatch(fetchHasFailed(errorMessage)),
-  onFetchData: (url: string) => dispatch(fetchData(url)),
+  onFetchData: () => dispatch(fetchData(ownProps.apiEndpoint)),
 });
 
 export const List = connect(

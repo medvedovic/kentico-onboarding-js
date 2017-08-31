@@ -18,7 +18,7 @@ export interface IListCallbacksProps {
   onFetchItemsIsLoading: (value: boolean) => void;
   onFetchHasSucceeded: (items: any) => void;
   onFetchHasFailed: (errorMessage: string) => void;
-  onFetchData: (url: string) => void;
+  onFetchData: () => void;
 }
 
 export type ListProps = IListDataProps & IListCallbacksProps;
@@ -38,7 +38,7 @@ class List extends React.PureComponent<ListProps> {
   }
 
   componentWillMount() {
-    this.props.onFetchData('http://localhost:49520/api/v1/Todos');
+    this.props.onFetchData();
   }
 
   render() {
