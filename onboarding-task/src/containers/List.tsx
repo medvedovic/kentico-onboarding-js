@@ -5,9 +5,6 @@ import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../c
 import { Store } from '../reducers/stores';
 import {
   fetchData,
-  fetchHasFailed,
-  fetchHasSucceeded,
-  fetchIsLoading,
   postData
 } from '../actions/actionCreators';
 
@@ -16,12 +13,13 @@ const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
   itemIds: items.ids,
 });
 
-const mapDispatchToProps = (dispatch: any, ownProps: any): IListCallbacksProps => ({
-  onCreateItem: (value: string) => dispatch(postData(ownProps.apiEndpoint, value)),
-  onFetchItemsIsLoading: (value: boolean) => dispatch(fetchIsLoading(value)),
-  onFetchHasSucceeded: (items: any) => dispatch(fetchHasSucceeded(items)),
-  onFetchHasFailed: (errorMessage: string) => dispatch(fetchHasFailed(errorMessage)),
-  onFetchData: () => dispatch(fetchData(ownProps.apiEndpoint)),
+// interface IOwnProps {
+//   apiEndpoint: string;
+// }
+
+const mapDispatchToProps = (dispatch: any, { apiEndpoint }: any): IListCallbacksProps => ({
+  onCreateItem: (value: string) => dispatch(postData(apiEndpoint, value)),
+  onFetchData: () => dispatch(fetchData(apiEndpoint)),
 });
 
 export const List = connect(

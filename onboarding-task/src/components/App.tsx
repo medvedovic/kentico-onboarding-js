@@ -2,8 +2,9 @@ import '../styles/sticky-footer.css';
 import * as React from 'react';
 import { List } from '../containers/List';
 import { Loader } from './Loader';
+import { IAppSettings } from '../reducers/app/settings';
 
-export const App: React.SFC = ({ showLoader, apiEndpoint }: any) => (
+export const App: React.SFC<IAppSettings> = ({ showLoader, apiEndpoint }: IAppSettings) => (
   <div>
     <div className="container">
       <div className="header clearfix">

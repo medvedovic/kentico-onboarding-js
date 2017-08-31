@@ -15,9 +15,6 @@ export interface IListDataProps {
 
 export interface IListCallbacksProps {
   onCreateItem: (value?: string) => void;
-  onFetchItemsIsLoading: (value: boolean) => void;
-  onFetchHasSucceeded: (items: any) => void;
-  onFetchHasFailed: (errorMessage: string) => void;
   onFetchData: () => void;
 }
 
@@ -30,7 +27,7 @@ class List extends React.PureComponent<ListProps> {
   static propTypes = {
     itemIds: PropTypes.instanceOf(ImmutableList).isRequired,
     onCreateItem: PropTypes.func.isRequired,
-    onFetchItemsIsLoading: PropTypes.func.isRequired,
+    onFetchData: PropTypes.func.isRequired
   };
 
   constructor(props: ListProps) {
