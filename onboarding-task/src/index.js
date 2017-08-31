@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
 
-import { App } from './App.tsx';
+import { App } from './containers/App.tsx';
 import { rootReducer } from './reducers/reducer.ts';
 import { initialState } from './constants/initialState.ts';
 
@@ -18,7 +19,7 @@ const store = createStore(
   rootReducer,
   initialState,
   composeEnhancers(
-    applyMiddleware(logger)
+    applyMiddleware(logger, thunk)
   )
 );
 

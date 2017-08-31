@@ -1,8 +1,9 @@
-import './styles/sticky-footer.css';
+import '../styles/sticky-footer.css';
 import * as React from 'react';
-import { List } from './containers/List';
+import { List } from '../containers/List';
+import { Loader } from './Loader';
 
-export const App: React.SFC = () => (
+export const App: React.SFC = ({ showLoader }: any) => (
   <div>
     <div className="container">
       <div className="header clearfix">
@@ -10,7 +11,12 @@ export const App: React.SFC = () => (
       </div>
 
       <div id="app-content">
+        {
+          showLoader &&
+          <Loader />
+        }
         <List />
+
       </div>
 
       <section className="shortcuts">
