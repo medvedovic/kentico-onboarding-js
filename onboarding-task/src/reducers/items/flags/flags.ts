@@ -3,11 +3,13 @@ import { Map } from 'immutable';
 import {
   CREATE_ITEM,
   DELETE_ITEM,
+  FetchData,
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
 import { flag } from './flag';
 
 import { Reducer } from '../../reducers';
+import { ListItemFlags } from '../../../models/ListItemFlags';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {
@@ -26,6 +28,14 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
 
     case DELETE_ITEM:
       return state.delete(action.payload.id);
+
+    case FetchData.HAS_SUCCEEDED: {
+      action.payload.items.forEach((item: any) => {
+        state = state.set(item.Id.toString(), new ListItemFlags());
+      });
+
+      return state;
+    }
 
     default:
       return state;
