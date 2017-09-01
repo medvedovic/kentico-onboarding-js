@@ -1,10 +1,9 @@
-import {connect, Dispatch } from 'react-redux';
+import {connect } from 'react-redux';
 
 import { ListItem as ListItemComponent } from '../components/ListItem';
 import {
   toggleBeingEdited,
   updateItem,
-  deleteItem,
 } from '../actions/publicActions';
 import { memoizedCreateViewModel } from '../utils/createViewModel';
 
@@ -13,9 +12,11 @@ import {
   IListItemCallbacksProps as IListItemComponentCallbacksProps
 } from '../components/ListItem';
 import { Store } from '../reducers/stores';
+import { deleteData } from '../actions/actionCreators';
 
 interface IOwnProps {
   id: string;
+  apiEndpoint: string;
 }
 
 const mapStateToProps = ({ items }: Store.IRoot, { id }: IOwnProps): IListItemComponentDataProps => {
@@ -25,9 +26,9 @@ const mapStateToProps = ({ items }: Store.IRoot, { id }: IOwnProps): IListItemCo
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>, { id }: IOwnProps): IListItemComponentCallbacksProps => ({
-  onDeleteItem: () => dispatch(deleteItem(id)),
+const mapDispatchToProps = (dispatch: any, { apiEndpoint, id }: IOwnProps): IListItemComponentCallbacksProps => ({
   onUpdateItem: (value: string) => dispatch(updateItem(id, value)),
+  onDeleteData: () => (dispatch(deleteData(apiEndpoint, id))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
 });
 

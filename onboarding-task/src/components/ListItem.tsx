@@ -10,20 +10,20 @@ export interface IListItemDataProps {
 }
 
 export interface IListItemCallbacksProps {
-  onDeleteItem: () => void;
+  onDeleteData: () => void;
   onUpdateItem: (value: string) => void;
   onToggleBeingEdited: () => void;
 }
 
 export type ListItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem }) => (
+const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteData }) => (
   itemViewModel.isBeingEdited
     ? <ListItemEditor
       itemViewModel={itemViewModel}
       onCancelEdit={onToggleBeingEdited}
-      onDeleteItem={onDeleteItem}
       onUpdateItem={onUpdateItem}
+      onDeleteData={onDeleteData}
     />
     : <ListItemDisplay
       value={itemViewModel.value}
@@ -41,7 +41,7 @@ ListItem.propTypes = {
   }).isRequired,
   onToggleBeingEdited: PropTypes.func.isRequired,
   onUpdateItem: PropTypes.func.isRequired,
-  onDeleteItem: PropTypes.func.isRequired,
+  onDeleteData: PropTypes.func.isRequired,
 };
 
 export { ListItem };

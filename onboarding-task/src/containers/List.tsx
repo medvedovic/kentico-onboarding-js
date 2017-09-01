@@ -9,8 +9,9 @@ import {
 } from '../actions/actionCreators';
 
 
-const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
+const mapStateToProps = ({ items, app }: Store.IRoot): IListDataProps => ({
   itemIds: items.ids,
+  apiEndpoint: app.settings.apiEndpoint,
 });
 
 // interface IOwnProps {
