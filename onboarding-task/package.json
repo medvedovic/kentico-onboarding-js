@@ -113,6 +113,7 @@
       "^react-native$": "react-native-web"
     }
   },
+  "proxy": "http://localhost:49520",
   "babel": {
     "presets": [
       "react-app"
