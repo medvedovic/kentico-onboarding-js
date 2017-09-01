@@ -10,6 +10,7 @@ import {
   fetchHasSucceeded,
   fetchIsLoading
 } from './fetchActions';
+import { deleteItem } from './userActions';
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
@@ -47,5 +48,17 @@ export const postData = (url: string, value: string) => {
       body: JSON.stringify(itemDto)
     }).then(response => response.json())
       .then(() => dispatch(createItem(value)));
+  };
+};
+
+export const deleteData = (url: string, id: string) => {
+  return (dispatch: Dispatch<any>) => {
+    fetch(url + '/' + id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(() => dispatch(deleteItem(id)))
+      .catch(response => dispatch(fetchHasFailed(response.message)));
   };
 };
