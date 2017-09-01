@@ -1,15 +1,15 @@
-import {
-  CREATE_ITEM,
-  FetchData
-} from '../constants/actionTypes';
+import { CREATE_ITEM } from '../constants/actionTypes';
 import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 
 import { IAction } from './IAction';
 import { Dispatch } from 'react-redux';
-import {
-  toItemDataDTO
-} from '../models/ItemDataDTO';
+import { toItemDataDTO } from '../models/ItemDataDTO';
 import { createItem } from './publicActions';
+import {
+  fetchHasFailed,
+  fetchHasSucceeded,
+  fetchIsLoading
+} from './fetchActions';
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
@@ -18,34 +18,6 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
       item: factory(value),
     },
   });
-
-export const fetchHasFailed = (errorMessage: string) => {
-  return {
-    type: FetchData.HAS_FAILED,
-    payload: {
-      errorMessage,
-    }
-  };
-};
-
-export const fetchIsLoading = (bool: boolean) => {
-  return {
-    type: FetchData.IS_LOADING,
-    payload: {
-      isLoading: bool
-    }
-  };
-};
-
-export const fetchHasSucceeded = (items: any) => {
-  return {
-    type: FetchData.HAS_SUCCEEDED,
-    payload: {
-      items
-    }
-  };
-};
-
 
 export const fetchData = (url: string) => {
   return (dispatch: Dispatch<any>) => {
