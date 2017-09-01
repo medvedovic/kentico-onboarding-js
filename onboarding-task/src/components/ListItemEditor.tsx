@@ -15,6 +15,7 @@ export interface IListItemEditorCallbacksProps {
   onCancelEdit: () => void;
   onUpdateItem: (value: string) => void;
   onDeleteData: () => void;
+  onUpdateData: (value: string) => void;
 }
 
 type ListItemEditorProps = IListItemEditorDataProps & IListItemEditorCallbacksProps;
@@ -55,7 +56,7 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
     const { value } = this.state;
 
     if (isTextInputValid(value)) {
-      this.props.onUpdateItem(value);
+      this.props.onUpdateData(value);
       this.props.onCancelEdit();
     }
   };

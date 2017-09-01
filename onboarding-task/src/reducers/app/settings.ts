@@ -5,7 +5,7 @@ import { TypedRecord } from '../../models/TypedRecord';
 
 const defaultValues: IAppSettings = {
   showLoader: false,
-  apiEndpoint: 'http://localhost:49520/api/v1/Todos',
+  apiEndpoint: 'api/v1/Todos',
   fetchHasFailed: false,
 };
 

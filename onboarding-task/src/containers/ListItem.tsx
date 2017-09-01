@@ -12,7 +12,10 @@ import {
   IListItemCallbacksProps as IListItemComponentCallbacksProps
 } from '../components/ListItem';
 import { Store } from '../reducers/stores';
-import { deleteData } from '../actions/actionCreators';
+import {
+  deleteData,
+  updateData
+} from '../actions/actionCreators';
 
 interface IOwnProps {
   id: string;
@@ -28,6 +31,7 @@ const mapStateToProps = ({ items }: Store.IRoot, { id }: IOwnProps): IListItemCo
 
 const mapDispatchToProps = (dispatch: any, { apiEndpoint, id }: IOwnProps): IListItemComponentCallbacksProps => ({
   onUpdateItem: (value: string) => dispatch(updateItem(id, value)),
+  onUpdateData: (value: string) => dispatch(updateData(apiEndpoint, id, value)),
   onDeleteData: () => (dispatch(deleteData(apiEndpoint, id))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
 });
