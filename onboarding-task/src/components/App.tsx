@@ -4,7 +4,7 @@ import { List } from '../containers/List';
 import { Loader } from './Loader';
 import { IAppSettings } from '../reducers/app/settings';
 
-export const App: React.SFC<IAppSettings> = ({ showLoader, apiEndpoint }: IAppSettings) => (
+export const App: React.SFC<IAppSettings> = ({ showLoader, apiEndpoint, fetchHasFailed }: IAppSettings) => (
   <div>
     <div className="container">
       <div className="header clearfix">
@@ -17,8 +17,18 @@ export const App: React.SFC<IAppSettings> = ({ showLoader, apiEndpoint }: IAppSe
           <Loader />
         }
         <List apiEndpoint={apiEndpoint} />
-
       </div>
+
+      {
+        fetchHasFailed &&
+        <div className="error-wrapper">
+          <div className="error-message">
+            <i>X</i>
+            <b>Something went wrong :(</b>
+            <p>Hit "F5" to reload application</p>
+          </div>
+        </div>
+      }
 
       <section className="shortcuts">
         <h3>List of shortcuts</h3>

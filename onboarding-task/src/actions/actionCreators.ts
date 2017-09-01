@@ -34,7 +34,10 @@ export const fetchData = (url: string) => {
           dispatch(fetchHasSucceeded(response));
           dispatch(fetchIsLoading(false));
         })
-        .catch(response => dispatch(fetchHasFailed(response.message)));
+        .catch(response => {
+          dispatch(fetchIsLoading(false));
+          dispatch(fetchHasFailed(response.message));
+        });
     },         3000);
   };
 };
@@ -62,7 +65,10 @@ export const deleteData = (url: string, id: string) => {
         'Content-Type': 'application/json'
       }
     }).then(() => dispatch(deleteItem(id)))
-      .catch(response => dispatch(fetchHasFailed(response.message)));
+      .catch(response => {
+        dispatch(fetchIsLoading(false));
+        dispatch(fetchHasFailed(response.message));
+      });
   };
 };
 
