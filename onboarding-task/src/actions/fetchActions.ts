@@ -1,4 +1,8 @@
 import { FetchData } from '../constants/actionTypes';
+import { IItemDataDTO } from '../models/ItemDataDTO';
+import { IAction } from './IAction';
+import { ListItemData } from '../models/ListItemData';
+
 export const fetchHasFailed = (errorMessage: string) => {
   return {
     type: FetchData.HAS_FAILED,
@@ -25,3 +29,27 @@ export const fetchHasSucceeded = (items: any) => {
     }
   };
 };
+
+export function actionBuilder(type: string, status: string, params: IItemDataDTO): IAction;
+export function actionBuilder(type: string, status: string, params: string): IAction;
+export function actionBuilder(type: string, status: string, params: IItemDataDTO | string) {
+  return typeof params === 'string' ?
+    {
+      type,
+      status,
+      payload: {
+        error: params
+      }
+    }
+    :
+    {
+      type,
+      status,
+      payload: {
+        item: new ListItemData({
+          id: (params.Id === undefined) ? '0' : params.Id.toString(),
+          value: params.Value,
+        })
+      }
+    };
+}

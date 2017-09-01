@@ -1,4 +1,8 @@
-import { CREATE_ITEM } from '../constants/actionTypes';
+import {
+  CREATE_ITEM,
+  HttpAction,
+  HttpActionStatus
+} from '../constants/actionTypes';
 import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 
 import { IAction } from './IAction';
@@ -6,6 +10,7 @@ import { Dispatch } from 'react-redux';
 import { toItemDataDTO } from '../models/ItemDataDTO';
 import { createItem } from './publicActions';
 import {
+  actionBuilder,
   fetchHasFailed,
   fetchHasSucceeded,
   fetchIsLoading
@@ -84,5 +89,24 @@ export const updateData = (url: string, id: string, value: string) => {
       body: JSON.stringify(itemDto)
     }).then(() => dispatch(updateItem(id, value)))
       .catch(response => dispatch(fetchHasFailed(response.message)));
+  };
+};
+
+
+export const tryPostData = (url: string, value: string) => {
+  return (dispatch: Dispatch<any>) => {
+    const itemDto = toItemDataDTO(value);
+
+    fetch(url, {
+      method: HttpAction.POST,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(itemDto)
+    }).then(response => response.json())
+      .then((response) =>
+        dispatch(actionBuilder(HttpAction.POST, HttpActionStatus.SUCCESS, response)))
+      .catch((response) =>
+        dispatch(actionBuilder(HttpAction.POST, HttpActionStatus.ERROR, response.message)));
   };
 };

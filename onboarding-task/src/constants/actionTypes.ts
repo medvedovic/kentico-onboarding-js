@@ -7,3 +7,12 @@ export namespace FetchData {
   export const HAS_FAILED = 'HAS_FAILED';
   export const HAS_SUCCEEDED = 'HAS_SUCCEEDED';
 }
+
+export namespace HttpAction {
+  export const POST = 'POST';
+}
+
+export namespace HttpActionStatus {
+  export const SUCCESS = 'SUCCESS';
+  export const ERROR = 'ERROR';
+}

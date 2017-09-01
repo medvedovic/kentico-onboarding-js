@@ -5,7 +5,7 @@ import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../c
 import { Store } from '../reducers/stores';
 import {
   fetchData,
-  postData
+  tryPostData
 } from '../actions/actionCreators';
 
 
@@ -19,7 +19,7 @@ const mapStateToProps = ({ items, app }: Store.IRoot): IListDataProps => ({
 // }
 
 const mapDispatchToProps = (dispatch: any, { apiEndpoint }: any): IListCallbacksProps => ({
-  onCreateItem: (value: string) => dispatch(postData(apiEndpoint, value)),
+  onCreateItem: (value: string) => dispatch(tryPostData(apiEndpoint, value)),
   onFetchData: () => dispatch(fetchData(apiEndpoint)),
 });
 

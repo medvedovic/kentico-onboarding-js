@@ -1,5 +1,6 @@
 import {
   CREATE_ITEM,
+  HttpAction,
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
 
@@ -8,6 +9,7 @@ import { IReducer } from '../../IReducer';
 
 export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), action) => {
   switch (action.type) {
+    case HttpAction.POST:
     case CREATE_ITEM:
       return state;
 

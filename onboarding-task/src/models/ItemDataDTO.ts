@@ -1,4 +1,5 @@
 export interface IItemDataDTO {
+  Id?: number;
   Value: string;
 }
 

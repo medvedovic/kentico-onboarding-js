@@ -4,6 +4,7 @@ import {
   CREATE_ITEM,
   DELETE_ITEM,
   FetchData,
+  HttpAction,
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
 import { flag } from './flag';
@@ -20,6 +21,7 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
       return state.set(action.payload.id, newFlags);
     }
 
+    case HttpAction.POST:
     case CREATE_ITEM: {
       const newFlags = flag(undefined, action);
 
