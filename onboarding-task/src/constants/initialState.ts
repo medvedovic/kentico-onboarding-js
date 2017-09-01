@@ -1,7 +1,7 @@
 import { OrderedMap, Map, List } from 'immutable';
 
 import { Store } from '../reducers/stores';
-import { AppSettings } from '../reducers/app/settings';
+import { AppSettings } from './AppSettings';
 
 export const initialState: Store.IRoot = {
   items: {

@@ -1,25 +1,6 @@
 import { IReducer } from '../IReducer';
 import { FetchData } from '../../constants/actionTypes';
-import { TypedRecord } from '../../models/TypedRecord';
-
-
-const defaultValues: IAppSettings = {
-  showLoader: false,
-  apiEndpoint: 'api/v1/Todos',
-  fetchHasFailed: false,
-};
-
-export interface IAppSettings {
-  showLoader: boolean;
-  apiEndpoint: string;
-  fetchHasFailed: boolean;
-}
-
-export class AppSettings extends TypedRecord<IAppSettings>(defaultValues) implements IAppSettings {
-  public showLoader: boolean;
-  public apiEndpoint: string;
-  public fetchHasFailed: boolean;
-}
+import { AppSettings } from '../../constants/AppSettings';
 
 
 export const settings: IReducer<AppSettings> = (state = new AppSettings(), action) => {
