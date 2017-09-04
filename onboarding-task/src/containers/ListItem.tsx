@@ -18,22 +18,22 @@ import {
 } from '../actions/actionCreators';
 
 interface IOwnProps {
-  id: string;
+  localId: string;
   apiEndpoint: string;
 }
 
-const mapStateToProps = ({ items }: Store.IRoot, { id }: IOwnProps): IListItemComponentDataProps => {
-  const item = items.data.get(id);
-  const flags = items.flags.get(id);
+const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListItemComponentDataProps => {
+  const item = items.data.get(localId);
+  const flags = items.flags.get(localId);
 
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch: any, { apiEndpoint, id }: IOwnProps): IListItemComponentCallbacksProps => ({
-  onUpdateItem: (value: string) => dispatch(updateItem(id, value)),
-  onUpdateData: (value: string) => dispatch(updateData(apiEndpoint, id, value)),
-  onDeleteData: () => (dispatch(deleteData(apiEndpoint, id))),
-  onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
+const mapDispatchToProps = (dispatch: any, { apiEndpoint, localId }: IOwnProps): IListItemComponentCallbacksProps => ({
+  onUpdateItem: (value: string) => dispatch(updateItem(localId, value)),
+  onUpdateData: (value: string) => dispatch(updateData(apiEndpoint, localId, value)),
+  onDeleteData: () => (dispatch(deleteData(apiEndpoint, localId))),
+  onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
 });
 
 export const ListItem = connect(

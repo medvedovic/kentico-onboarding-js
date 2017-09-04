@@ -47,9 +47,9 @@ class List extends React.PureComponent<ListProps> {
           <div className="col-sm-12 col-md-6">
             <ol className="list">
               {
-                this.props.itemIds.map((id: string) => (
-                  <li key={id}>
-                    <ListItem id={id} apiEndpoint={this.props.apiEndpoint} />
+                this.props.itemIds.map((localId: string) => (
+                  <li key={localId}>
+                    <ListItem localId={localId} apiEndpoint={this.props.apiEndpoint} />
                   </li>
                 ))
               }
