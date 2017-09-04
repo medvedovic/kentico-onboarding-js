@@ -30,9 +30,9 @@ export const fetchHasSucceeded = (items: any) => {
   };
 };
 
-export function actionBuilder(type: string, status: string, params: IItemDataDTO): IAction;
-export function actionBuilder(type: string, status: string, params: string): IAction;
-export function actionBuilder(type: string, status: string, params: IItemDataDTO | string) {
+export function fetchActionBuilder(type: string, status: string, params: IItemDataDTO): IAction;
+export function fetchActionBuilder(type: string, status: string, params: string): IAction;
+export function fetchActionBuilder(type: string, status: string, params: IItemDataDTO | string) {
   return typeof params === 'string' ?
     {
       type,
@@ -47,8 +47,8 @@ export function actionBuilder(type: string, status: string, params: IItemDataDTO
       status,
       payload: {
         item: new ListItemData({
-          id: (params.Id === undefined) ? '0' : params.Id.toString(),
-          value: params.Value,
+          id: (params.id === undefined) ? '0' : params.id.toString(),
+          value: params.value,
         })
       }
     };
