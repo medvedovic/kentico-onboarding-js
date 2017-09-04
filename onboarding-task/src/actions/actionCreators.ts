@@ -8,17 +8,17 @@ import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 import { IAction } from './IAction';
 import { Dispatch } from 'react-redux';
 import { toItemDataDTO } from '../models/ItemDataDTO';
-import { createItem } from './publicActions';
 import {
-  actionBuilder,
+  fetchActionBuilder,
   fetchHasFailed,
   fetchHasSucceeded,
   fetchIsLoading
 } from './fetchActions';
 import {
   deleteItem,
-  updateItem
-} from './userActions';
+  // createItem,
+  // updateItem
+} from './publicActions';
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
@@ -47,21 +47,6 @@ export const fetchData = (url: string) => {
   };
 };
 
-export const postData = (url: string, value: string) => {
-  return (dispatch: Dispatch<any>) => {
-    const itemDto = toItemDataDTO(value);
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(itemDto)
-    }).then(response => response.json())
-      .then(() => dispatch(createItem(value)));
-  };
-};
-
 export const deleteData = (url: string, id: string) => {
   return (dispatch: Dispatch<any>) => {
     fetch(url + '/' + id, {
@@ -87,13 +72,16 @@ export const updateData = (url: string, id: string, value: string) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(itemDto)
-    }).then(() => dispatch(updateItem(id, value)))
-      .catch(response => dispatch(fetchHasFailed(response.message)));
+    }).then(response => response.json())
+      .then((response) =>
+        dispatch(fetchActionBuilder(HttpAction.PUT, HttpActionStatus.SUCCESS, response)))
+      .catch(response =>
+        dispatch(fetchActionBuilder(HttpAction.PUT, HttpActionStatus.ERROR, response.message)));
   };
 };
 
 
-export const tryPostData = (url: string, value: string) => {
+export const postData = (url: string, value: string) => {
   return (dispatch: Dispatch<any>) => {
     const itemDto = toItemDataDTO(value);
 
@@ -105,8 +93,8 @@ export const tryPostData = (url: string, value: string) => {
       body: JSON.stringify(itemDto)
     }).then(response => response.json())
       .then((response) =>
-        dispatch(actionBuilder(HttpAction.POST, HttpActionStatus.SUCCESS, response)))
+        dispatch(fetchActionBuilder(HttpAction.POST, HttpActionStatus.SUCCESS, response)))
       .catch((response) =>
-        dispatch(actionBuilder(HttpAction.POST, HttpActionStatus.ERROR, response.message)));
+        dispatch(fetchActionBuilder(HttpAction.POST, HttpActionStatus.ERROR, response.message)));
   };
 };
