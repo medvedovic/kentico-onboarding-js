@@ -21,6 +21,7 @@ export const data: Reducer.Data = (state = Map(), action) => {
       return state.set(newItem.id, newItem);
     }
 
+    case HttpAction.PUT:
     case UPDATE_ITEM: {
       const existingItem = state.get(action.payload.item.id);
       const newItem = item(existingItem, action);
@@ -40,8 +41,8 @@ export const data: Reducer.Data = (state = Map(), action) => {
     case FetchData.HAS_SUCCEEDED: {
       action.payload.items.forEach((item: any) => {
         const newItem = new ListItemData({
-          id: item.Id.toString(),
-          value: item.Value,
+          id: item.id.toString(),
+          value: item.value,
         });
         state = state.set(newItem.id.toString(), newItem);
       });

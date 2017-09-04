@@ -33,7 +33,7 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
 
     case FetchData.HAS_SUCCEEDED: {
       action.payload.items.forEach((item: any) => {
-        state = state.set(item.Id.toString(), new ListItemFlags());
+        state = state.set(item.id.toString(), new ListItemFlags());
       });
 
       return state;

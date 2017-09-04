@@ -1,10 +1,14 @@
-import { UPDATE_ITEM } from '../../../constants/actionTypes';
+import {
+  HttpAction,
+  UPDATE_ITEM
+} from '../../../constants/actionTypes';
 import {  ListItemData } from '../../../models/ListItemData';
 
 import { IReducer } from '../../IReducer';
 
 export const item: IReducer<ListItemData> = (state = new ListItemData(), action) => {
   switch (action.type) {
+    case HttpAction.PUT:
     case UPDATE_ITEM:
       return state.alter({
         value: action.payload.item.value
