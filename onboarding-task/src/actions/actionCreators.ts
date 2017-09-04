@@ -12,12 +12,11 @@ import {
   fetchActionBuilder,
   fetchHasFailed,
   fetchHasSucceeded,
-  fetchIsLoading
+  fetchStartLoading,
+  fetchStopLoading
 } from './fetchActions';
 import {
   deleteItem,
-  // createItem,
-  // updateItem
 } from './publicActions';
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
@@ -30,17 +29,17 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 
 export const fetchData = (url: string) => {
   return (dispatch: Dispatch<any>) => {
-    dispatch(fetchIsLoading(true));
+    dispatch(fetchStartLoading());
 
     setTimeout(() => {
       fetch(url)
         .then(response => response.json())
         .then(response => {
           dispatch(fetchHasSucceeded(response));
-          dispatch(fetchIsLoading(false));
+          dispatch(fetchStopLoading());
         })
         .catch(response => {
-          dispatch(fetchIsLoading(false));
+          dispatch(fetchStopLoading());
           dispatch(fetchHasFailed(response.message));
         });
     },         3000);
@@ -56,7 +55,6 @@ export const deleteData = (url: string, id: string) => {
       }
     }).then(() => dispatch(deleteItem(id)))
       .catch(response => {
-        dispatch(fetchIsLoading(false));
         dispatch(fetchHasFailed(response.message));
       });
   };

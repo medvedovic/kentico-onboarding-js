@@ -12,7 +12,7 @@ export const fetchHasFailed = (errorMessage: string) => {
   };
 };
 
-export const fetchIsLoading = (bool: boolean) => {
+const fetchIsLoading = (bool: boolean) => {
   return {
     type: FetchData.IS_LOADING,
     payload: {
@@ -20,6 +20,9 @@ export const fetchIsLoading = (bool: boolean) => {
     }
   };
 };
+
+export const fetchStartLoading = () => fetchIsLoading(true);
+export const fetchStopLoading = () => fetchIsLoading(false);
 
 export const fetchHasSucceeded = (items: any) => {
   return {
