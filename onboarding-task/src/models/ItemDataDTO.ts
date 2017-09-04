@@ -3,6 +3,7 @@ export interface IItemDataDTO {
   value: string;
 }
 
-export const toItemDataDTO = (value: string): IItemDataDTO => ({
-  value: value,
+export const toItemDataDTO = (value: string, id: number = 0): IItemDataDTO => ({
+  id,
+  value
 });
