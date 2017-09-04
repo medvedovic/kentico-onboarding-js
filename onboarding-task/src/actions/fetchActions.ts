@@ -1,4 +1,7 @@
-import { FetchData } from '../constants/actionTypes';
+import {
+  EHttpActionStatus,
+  FetchData
+} from '../constants/actionTypes';
 import { IItemDataDTO } from '../models/ItemDataDTO';
 import { IAction } from './IAction';
 import { ListItemData } from '../models/ListItemData';
@@ -33,15 +36,18 @@ export const fetchHasSucceeded = (items: any) => {
   };
 };
 
-export function fetchActionBuilder(type: string, status: string, params: IItemDataDTO): IAction;
-export function fetchActionBuilder(type: string, status: string, params: string): IAction;
-export function fetchActionBuilder(type: string, status: string, params: IItemDataDTO | string) {
+export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: IItemDataDTO): IAction;
+export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: string): IAction;
+export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: IItemDataDTO | string) {
   return typeof params === 'string' ?
     {
       type,
       status,
       payload: {
-        error: params
+        error: params,
+        item: {
+          localId
+        }
       }
     }
     :
@@ -52,6 +58,7 @@ export function fetchActionBuilder(type: string, status: string, params: IItemDa
         item: new ListItemData({
           id: (params.id === undefined) ? '0' : params.id.toString(),
           value: params.value,
+          localId,
         })
       }
     };

@@ -15,17 +15,17 @@ import { ListItemFlags } from '../../../models/ListItemFlags';
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {
     case TOGGLE_BEING_EDITED: {
-      const existingFlags = state.get(action.payload.id);
+      const existingFlags = state.get(action.payload.localId);
       const newFlags = flag(existingFlags, action);
 
-      return state.set(action.payload.id, newFlags);
+      return state.set(action.payload.localId, newFlags);
     }
 
     case HttpAction.POST:
     case CREATE_ITEM: {
       const newFlags = flag(undefined, action);
 
-      return state.set(action.payload.item.id, newFlags);
+      return state.set(action.payload.item.localId, newFlags);
     }
 
     case DELETE_ITEM:

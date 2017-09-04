@@ -14,29 +14,23 @@ import { ListItemData } from '../../../models/ListItemData';
 
 export const data: Reducer.Data = (state = Map(), action) => {
   switch (action.type) {
-    case HttpAction.POST:
     case CREATE_ITEM: {
       const newItem = action.payload.item;
 
-      return state.set(newItem.id, newItem);
+      return state.set(newItem.localId, newItem);
     }
 
+    case HttpAction.POST:
     case HttpAction.PUT:
     case UPDATE_ITEM: {
-      const existingItem = state.get(action.payload.item.id);
+      const existingItem = state.get(action.payload.item.localId);
       const newItem = item(existingItem, action);
 
-      return state.set(action.payload.item.id, newItem);
+      return state.set(action.payload.item.localId, newItem);
     }
 
     case DELETE_ITEM:
       return state.delete(action.payload.id);
-
-    // case HttpAction.POST: {
-    //   const newItem = new ListItemData(action.payload.item);
-    //
-    //   return state.set(action.payload.item.id, newItem);
-    // }
 
     case FetchData.HAS_SUCCEEDED: {
       action.payload.items.forEach((item: any) => {

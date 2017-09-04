@@ -1,5 +1,6 @@
 import {
   CREATE_ITEM,
+  EHttpActionStatus,
   HttpAction,
   TOGGLE_BEING_EDITED,
 } from '../../../constants/actionTypes';
@@ -11,6 +12,12 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
   switch (action.type) {
     case HttpAction.POST:
     case CREATE_ITEM:
+
+      if (action.status === EHttpActionStatus.error) {
+        return new ListItemFlags({
+          isSavedSuccess: false
+        });
+      }
       return state;
 
     case TOGGLE_BEING_EDITED:
