@@ -10,6 +10,7 @@ import { IReducer } from '../../IReducer';
 
 export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), action) => {
   switch (action.type) {
+    case HttpAction.PUT:
     case HttpAction.POST:
     case CREATE_ITEM:
 

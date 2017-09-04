@@ -6,11 +6,11 @@ import {
 
 import { IAction } from './IAction';
 
-export const updateItem = (id: string, value: string): IAction => ({
+export const updateItem = (localId: string, value: string): IAction => ({
   type: UPDATE_ITEM,
   payload: {
     item: {
-      id,
+      localId,
       value,
     },
   },

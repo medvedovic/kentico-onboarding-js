@@ -25,7 +25,7 @@ import {
   createItem,
   deleteItem,
 } from './publicActions';
-import { generateGuid } from '../utils/generateGuid';
+import { updateItem } from './userActions';
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
@@ -70,24 +70,45 @@ export const deleteData = (url: string, id: string) => {
   };
 };
 
-export const updateData = (url: string, id: string, value: string) => {
-  return (dispatch: Dispatch<any>) => {
-    const itemDto = toItemDataDTO(value);
-    const localId = generateGuid();
-
-    fetch(url + '/' + id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(itemDto)
-    }).then(response => response.json())
-      .then((response: IItemDataDTO) =>
-        dispatch(fetchActionBuilder(HttpAction.PUT, EHttpActionStatus.success, localId, response)))
-      .catch((response: Error) =>
-        dispatch(fetchActionBuilder(HttpAction.PUT, EHttpActionStatus.error, localId, response.message)));
-  };
+const put = (url: string, id: number, value: string) => {
+  // create dto
+  const itemDto = toItemDataDTO(value, id);
+  // send request
+  return fetch(url + '/' + id, {
+    method: HttpAction.PUT,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(itemDto)
+  });
 };
+
+export const updateData = (url: string, localId: string, value: string) =>
+  (dispatch: Dispatch<any>, getState: any) => {
+    const { id } = getState().items.data.get(localId);
+    // update locally
+    dispatch(updateItem(localId, value));
+
+    put(url, id, value)
+      .then(response => response.json())
+      .then((response: IItemDataDTO) =>
+        dispatch(
+          fetchActionBuilder(
+            HttpAction.PUT,
+            EHttpActionStatus.success,
+            localId,
+            response
+          )))
+      .catch((response: Error) =>
+        dispatch(
+          fetchActionBuilder(
+            HttpAction.PUT,
+            EHttpActionStatus.error,
+            localId,
+            response.message
+          )));
+  };
+
 
 const post = (url: string, value: string) => {
   // create item dto

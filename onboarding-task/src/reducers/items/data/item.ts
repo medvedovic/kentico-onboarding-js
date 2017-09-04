@@ -10,8 +10,7 @@ import { IReducer } from '../../IReducer';
 export const item: IReducer<ListItemData> = (state = new ListItemData(), action) => {
   switch (action.type) {
     case HttpAction.POST:
-    case HttpAction.PUT:
-    case UPDATE_ITEM:
+    case HttpAction.PUT: {
       if (action.status === EHttpActionStatus.success) {
         return state.alter({
           id: action.payload.item.id,
@@ -19,6 +18,13 @@ export const item: IReducer<ListItemData> = (state = new ListItemData(), action)
         });
       }
       return state;
+    }
+
+    case UPDATE_ITEM:
+      return state.alter({
+        id: action.payload.item.id,
+        value: action.payload.item.value
+      });
 
     default:
       return state;
