@@ -14,7 +14,6 @@ export namespace HttpAction {
   export const PUT = 'PUT';
 }
 
-export namespace HttpActionStatus {
-  export const SUCCESS = 'SUCCESS';
-  export const ERROR = 'ERROR';
+export enum EHttpActionStatus {
+  success, error
 }
