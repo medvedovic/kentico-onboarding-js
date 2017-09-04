@@ -10,6 +10,8 @@ export namespace FetchData {
 
 export namespace HttpAction {
   export const POST = 'POST';
+  export const DELETE = 'DELETE';
+  export const PUT = 'PUT';
 }
 
 export namespace HttpActionStatus {
