@@ -23,9 +23,9 @@ export const deleteItem = (id: string): IAction => ({
   },
 });
 
-export const toggleBeingEdited = (id: string): IAction => ({
+export const toggleBeingEdited = (localId: string): IAction => ({
   type: TOGGLE_BEING_EDITED,
   payload: {
-    id,
+    localId,
   },
 });

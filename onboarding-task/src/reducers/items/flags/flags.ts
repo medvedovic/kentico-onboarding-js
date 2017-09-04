@@ -11,6 +11,7 @@ import { flag } from './flag';
 
 import { Reducer } from '../../reducers';
 import { ListItemFlags } from '../../../models/ListItemFlags';
+import { ListItemData } from '../../../models/ListItemData';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {
@@ -32,8 +33,8 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
       return state.delete(action.payload.id);
 
     case FetchData.HAS_SUCCEEDED: {
-      action.payload.items.forEach((item: any) => {
-        state = state.set(item.id.toString(), new ListItemFlags());
+      action.payload.items.forEach((item: ListItemData) => {
+        state = state.set(item.localId, new ListItemFlags());
       });
 
       return state;

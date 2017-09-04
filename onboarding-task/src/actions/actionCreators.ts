@@ -3,7 +3,10 @@ import {
   EHttpActionStatus,
   HttpAction,
 } from '../constants/actionTypes';
-import { IItemFactoryWithGenerator } from '../utils/itemFactory';
+import {
+  IItemFactoryWithGenerator,
+  itemFactory
+} from '../utils/itemFactory';
 
 import { IAction } from './IAction';
 import { Dispatch } from 'react-redux';
@@ -32,24 +35,26 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
     },
   });
 
-export const fetchData = (url: string) => {
-  return (dispatch: Dispatch<any>) => {
+export const fetchData = (url: string) =>
+  (dispatch: Dispatch<any>) => {
     dispatch(fetchStartLoading());
 
     setTimeout(() => {
       fetch(url)
         .then(response => response.json())
-        .then(response => {
+        .then((response: Array<IItemDataDTO>) => {
+          response = response.map((item: IItemDataDTO) =>
+            itemFactory(item.value, item.id)
+          );
           dispatch(fetchHasSucceeded(response));
           dispatch(fetchStopLoading());
         })
-        .catch(response => {
+        .catch((response: Error) => {
           dispatch(fetchStopLoading());
           dispatch(fetchHasFailed(response.message));
         });
     },         3000);
   };
-};
 
 export const deleteData = (url: string, id: string) => {
   return (dispatch: Dispatch<any>) => {

@@ -5,7 +5,7 @@ import { TypedRecord } from './TypedRecord';
  */
 interface IListItemData {
   /** Id of item */
-  readonly id: string;
+  readonly id: number;
   /** Value held by item */
   readonly value: string;
   /** Id representation saved in store */
@@ -13,7 +13,7 @@ interface IListItemData {
 }
 
 const defaultValues: IListItemData = {
-  id: '',
+  id: 0,
   value: '',
   localId: '',
 };
@@ -22,7 +22,7 @@ const defaultValues: IListItemData = {
  * Represents a single item in the list
  */
 export class ListItemData extends TypedRecord<IListItemData>(defaultValues) implements IListItemData {
-  readonly id: string;
+  readonly id: number;
   readonly value: string;
   readonly localId: string;
 }

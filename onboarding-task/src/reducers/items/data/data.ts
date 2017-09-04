@@ -33,12 +33,8 @@ export const data: Reducer.Data = (state = Map(), action) => {
       return state.delete(action.payload.id);
 
     case FetchData.HAS_SUCCEEDED: {
-      action.payload.items.forEach((item: any) => {
-        const newItem = new ListItemData({
-          id: item.id.toString(),
-          value: item.value,
-        });
-        state = state.set(newItem.id.toString(), newItem);
+      action.payload.items.forEach((item: ListItemData) => {
+        state = state.set(item.localId, item);
       });
 
       return state;

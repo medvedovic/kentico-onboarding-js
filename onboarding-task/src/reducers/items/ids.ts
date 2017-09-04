@@ -20,7 +20,7 @@ export const ids: Reducer.Ids = (state = List<string>(), action) => {
 
     case FetchData.HAS_SUCCEEDED: {
       action.payload.items.forEach((item: any) => {
-        state = state.push(item.id.toString());
+        state = state.push(item.localId);
       });
 
       return state;

@@ -27,7 +27,7 @@ const fetchIsLoading = (bool: boolean) => {
 export const fetchStartLoading = () => fetchIsLoading(true);
 export const fetchStopLoading = () => fetchIsLoading(false);
 
-export const fetchHasSucceeded = (items: any) => {
+export const fetchHasSucceeded = (items: Array<IItemDataDTO>) => {
   return {
     type: FetchData.HAS_SUCCEEDED,
     payload: {
@@ -56,7 +56,7 @@ export function fetchActionBuilder(type: string, status: EHttpActionStatus, loca
       status,
       payload: {
         item: new ListItemData({
-          id: (params.id === undefined) ? '0' : params.id.toString(),
+          id: params.id,
           value: params.value,
           localId,
         })

@@ -29,8 +29,9 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
 
   static propTypes = {
     itemViewModel: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
       value: PropTypes.string.isRequired,
+      localId: PropTypes.string.isRequired,
       isBeingEdited: PropTypes.bool.isRequired,
     }).isRequired,
     onUpdateItem: PropTypes.func.isRequired,
