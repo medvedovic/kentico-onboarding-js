@@ -31,7 +31,7 @@ describe('Settings reducer', () => {
   it('Sets correct state on failure', () => {
     const initialState = new AppSettings();
 
-    const result = settings(initialState, fetchHasFailed('Error message'));
+    const result = settings(initialState, fetchHasFailed(new Error('Error message')));
 
     expect(result.fetchHasFailed).toBeTruthy();
   });

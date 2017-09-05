@@ -1,15 +1,12 @@
+import { Dispatch } from 'react-redux';
 import {
   CREATE_ITEM,
   EHttpActionStatus,
   HttpAction,
 } from '../constants/actionTypes';
-import {
-  IItemFactoryWithGenerator,
-  itemFactory
-} from '../utils/itemFactory';
+import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 
 import { IAction } from './IAction';
-import { Dispatch } from 'react-redux';
 import {
   IItemDataDTO,
   toItemDataDTO
@@ -21,8 +18,10 @@ import {
   fetchStartLoading,
   fetchStopLoading
 } from './fetchActions';
-import { deleteItem, } from './publicActions';
-import { updateItem } from './userActions';
+import {
+  deleteItem,
+  updateItem
+} from './userActions';
 import {
   post,
   postAndSaveData,
@@ -30,6 +29,9 @@ import {
   postError,
   postSuccess
 } from './postDataActionFactory';
+import { fetchDataActionFactory } from './fetchDataActionFactory';
+
+const fetch = require('isomorphic-fetch');
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
@@ -39,27 +41,6 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
     },
   });
 
-export const fetchData = (url: string) =>
-  (dispatch: Dispatch<any>) => {
-    dispatch(fetchStartLoading());
-
-    setTimeout(() => {
-      fetch(url)
-        .then(response => response.json())
-        .then((response: Array<IItemDataDTO>) => {
-          response = response.map((item: IItemDataDTO) =>
-            itemFactory(item.value, item.id)
-          );
-          dispatch(fetchHasSucceeded(response));
-          dispatch(fetchStopLoading());
-        })
-        .catch((response: Error) => {
-          dispatch(fetchStopLoading());
-          dispatch(fetchHasFailed(response.message));
-        });
-    },         3000);
-  };
-
 export const deleteData = (url: string, id: string) => {
   return (dispatch: Dispatch<any>) => {
     fetch(url + '/' + id, {
@@ -68,8 +49,8 @@ export const deleteData = (url: string, id: string) => {
         'Content-Type': 'application/json'
       }
     }).then(() => dispatch(deleteItem(id)))
-      .catch(response => {
-        dispatch(fetchHasFailed(response.message));
+      .catch((response: Error) => {
+        dispatch(fetchHasFailed(response));
       });
   };
 };
@@ -94,7 +75,7 @@ export const updateData = (url: string, localId: string, value: string) =>
     dispatch(updateItem(localId, value));
 
     put(url, id, value)
-      .then(response => response.json())
+      .then((response: Response) => response.json())
       .then((response: IItemDataDTO) =>
         dispatch(
           fetchActionBuilder(
@@ -123,4 +104,12 @@ export const repostData = postAndSaveData({
   postOperation: post,
   onPostSuccess: postSuccess,
   onPostError: postError,
+});
+
+export const fetchData = fetchDataActionFactory({
+  fetchOperation: fetch,
+  startLoader: fetchStartLoading,
+  stopLoader: fetchStopLoading,
+  onFetchSucceeded: fetchHasSucceeded,
+  onFetchFailed: fetchHasFailed
 });

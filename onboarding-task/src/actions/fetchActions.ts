@@ -5,11 +5,12 @@ import {
 import { IItemDataDTO } from '../models/ItemDataDTO';
 import { IAction } from './IAction';
 import { ListItemData } from '../models/ListItemData';
+import { itemFactory } from '../utils/itemFactory';
 
-export const fetchHasFailed = (errorMessage: string) => ({
+export const fetchHasFailed = (error: Error) => ({
   type: FetchData.HAS_FAILED,
   payload: {
-    errorMessage,
+    error,
   }
 });
 
@@ -23,12 +24,15 @@ const fetchIsLoading = (bool: boolean) => ({
 export const fetchStartLoading = () => fetchIsLoading(true);
 export const fetchStopLoading = () => fetchIsLoading(false);
 
-export const fetchHasSucceeded = (items: Array<IItemDataDTO>) => ({
-  type: FetchData.HAS_SUCCEEDED,
-  payload: {
-    items
-  }
-});
+export const fetchHasSucceededBuilder = (factory: (value: string, id: number) => ListItemData) =>
+  (items: Array<IItemDataDTO>) => ({
+    type: FetchData.HAS_SUCCEEDED,
+    payload: {
+      items: items.map(item => factory(item.value, item.id))
+    }
+  });
+
+export const fetchHasSucceeded = fetchHasSucceededBuilder(itemFactory);
 
 export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: IItemDataDTO): IAction;
 export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: string): IAction;

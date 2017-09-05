@@ -9,4 +9,8 @@ export {
   toggleBeingEdited
 } from './userActions';
 
-export { postData, repostData } from './actionCreators';
+export {
+  postData,
+  repostData,
+  fetchData
+} from './actionCreators';
