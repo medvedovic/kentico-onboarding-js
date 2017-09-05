@@ -1,5 +1,8 @@
 import { Dispatch } from 'react-redux';
-import { deleteItem } from './userActions';
+import {
+  deleteItem,
+  toggleBeingEdited
+} from './userActions';
 import { fetchActionBuilderComposed } from './fetchActions';
 import { IAction } from './IAction';
 import {
@@ -30,9 +33,13 @@ export const deleteDataActionFactory = (dependencies: IDeleteDataActionFactory) 
       const { id } = getState().items.data.get(localId);
 
       dependencies.deleteOperation(url, id)
-        .then(() => dispatch(deleteItem(localId)))
-        .catch((response: Error) =>
-          dispatch(dependencies.onDeleteError(localId, response)));
+        .then((response: Response) => response.json())
+        .then(() =>
+          dispatch(deleteItem(localId)))
+        .catch((response: Error) => {
+          dispatch(toggleBeingEdited(localId));
+          dispatch(dependencies.onDeleteError(localId, response));
+        });
     };
 
 

@@ -1,9 +1,12 @@
-import {connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { ListItem as ListItemComponent } from '../components/ListItem';
 import {
   toggleBeingEdited,
   updateItem,
+  repostData,
+  putData,
+  deleteData
 } from '../actions/publicActions';
 import { memoizedCreateViewModel } from '../utils/createViewModel';
 
@@ -11,11 +14,8 @@ import {
   IListItemDataProps as IListItemComponentDataProps,
   IListItemCallbacksProps as IListItemComponentCallbacksProps
 } from '../components/ListItem';
+
 import { Store } from '../reducers/stores';
-import {
-  repostData} from '../actions/actionCreators';
-import { putData } from '../actions/actionCreators';
-import { deleteData } from '../actions/actionCreators';
 
 interface IOwnProps {
   localId: string;
