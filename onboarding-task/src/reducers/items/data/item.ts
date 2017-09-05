@@ -22,7 +22,6 @@ export const item: IReducer<ListItemData> = (state = new ListItemData(), action)
 
     case UPDATE_ITEM:
       return state.alter({
-        id: action.payload.item.id,
         value: action.payload.item.value
       });
 

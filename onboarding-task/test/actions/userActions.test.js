@@ -16,7 +16,7 @@ describe('User Actions', () => {
       type: UPDATE_ITEM,
       payload: {
         item: {
-          id: _id,
+          localId: _id,
           value: _value,
         },
       },
