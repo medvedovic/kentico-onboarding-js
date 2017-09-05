@@ -33,9 +33,11 @@ export const post = (url: string, value: string) => {
 };
 
 export const postAndSaveData = (dependencies: IPostDataActionFactoryDependencies) =>
-  (url: string, value: string, localId: string) =>
-    (dispatch: Dispatch<any>) => {
-      dependencies.postOperation(url, value)
+  (url: string, localId: string) =>
+    (dispatch: Dispatch<any>, getState: any) => {
+      const item = getState().items.data.get(localId);
+
+      dependencies.postOperation(url, item.value)
         .then(response => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPostSuccess(localId, response)))
