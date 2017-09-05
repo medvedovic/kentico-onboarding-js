@@ -2,9 +2,11 @@ import { memoizedCreateViewModel, createViewModel } from '../../src/utils/create
 import { ListItemData } from '../../src/models/ListItemData';
 import { ListItemFlags } from '../../src/models/ListItemFlags';
 
-const id = 'xxxxxx-yyyyyy';
+const id = '50';
+const localId = 'xxxxxxxx-yyyy-zzzz-yyyy-xxxxxxxxxxxx'
 const item = new ListItemData({
   id,
+  localId,
   value: 'Do stuff',
 });
 const itemFlags = new ListItemFlags();
@@ -13,8 +15,10 @@ describe('CreateViewModel', () => {
   it('returns merged data with flags', () => {
     const expectedResult = {
       id,
+      localId,
       value: 'Do stuff',
       isBeingEdited: false,
+      isSavedSuccess: true,
     };
 
     const test = createViewModel(item, itemFlags);
