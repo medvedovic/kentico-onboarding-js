@@ -1,4 +1,3 @@
-import { Dispatch } from 'react-redux';
 import { CREATE_ITEM, } from '../constants/actionTypes';
 import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 
@@ -9,7 +8,6 @@ import {
   fetchStartLoading,
   fetchStopLoading
 } from './fetchActions';
-import { deleteItem } from './userActions';
 import {
   post,
   postAndSaveData,
@@ -24,6 +22,11 @@ import {
   putError,
   putSuccess
 } from './putDataActionFactory';
+import {
+  deleteDataActionFactory,
+  deleteError,
+  deleteHttp
+} from './deleteDataActionFactory';
 
 const fetch = require('isomorphic-fetch');
 
@@ -34,20 +37,6 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
       item: factory(value),
     },
   });
-
-export const deleteData = (url: string, id: string) => {
-  return (dispatch: Dispatch<any>) => {
-    fetch(url + '/' + id, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(() => dispatch(deleteItem(id)))
-      .catch((response: Error) => {
-        dispatch(fetchHasFailed(response));
-      });
-  };
-};
 
 export const postData = postDataActionFactory({
   postOperation: post,
@@ -73,4 +62,9 @@ export const putData = putDataActionFactory({
   putOperation: put,
   onPutSuccess: putSuccess,
   onPutError: putError
+});
+
+export const deleteData = deleteDataActionFactory({
+  deleteOperation: deleteHttp,
+  onDeleteError: deleteError
 });

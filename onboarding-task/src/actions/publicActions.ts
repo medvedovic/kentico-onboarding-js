@@ -10,8 +10,9 @@ export {
 } from './userActions';
 
 export {
+  fetchData,
   postData,
   repostData,
-  fetchData,
-  putData
+  putData,
+  deleteData
 } from './actionCreators';

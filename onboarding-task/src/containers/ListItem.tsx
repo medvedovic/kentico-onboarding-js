@@ -13,9 +13,9 @@ import {
 } from '../components/ListItem';
 import { Store } from '../reducers/stores';
 import {
-  deleteData,
   repostData} from '../actions/actionCreators';
 import { putData } from '../actions/actionCreators';
+import { deleteData } from '../actions/actionCreators';
 
 interface IOwnProps {
   localId: string;
