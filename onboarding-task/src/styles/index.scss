@@ -3,6 +3,8 @@
 
 $xfont: 'Lato';
 
+$default-item-height: 38px; // 2.385em
+
 body {
   margin: 0;
   padding: 0;
@@ -20,7 +22,9 @@ body {
 }
 
 .list {
+  padding-left: 0;
   margin-bottom: 0;
+  list-style-type: none;
 }
 
 .list li {
@@ -28,6 +32,10 @@ body {
   font-size: 1.2em;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  padding: 0 1em;
+  & > .error-message-item {
+    margin: 0 -1em;
+  }
 }
 
 .list > span {
@@ -45,6 +53,12 @@ body {
   background-color: transparent;
 }
 
+.list {
+  li:hover {
+    // background-color: darken(#fff, 3);
+  }
+}
+
 .btn-default {
   transition: .3s all linear;
   color: #808080;
@@ -60,15 +74,21 @@ body {
   clear: both;
 }
 
+.list li {
+  line-height: $default-item-height;
+  height: $default-item-height;
+  padding: 1px 1em;
+}
+
 .list li .form-group {
   margin: 0;
-  line-height: 2.385em;
-  height: 2.385em;
+  line-height: $default-item-height;
+  height: $default-item-height;
 }
 
 .list li > span {
-  line-height: 2.385em;
-  height: 2.385em;
+  line-height: $default-item-height;
+  height: $default-item-height;
   display: block;
 }
 

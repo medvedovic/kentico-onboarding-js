@@ -4,19 +4,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(51,51,51,.8);
+  background-color: rgba(255, 255, 255, .8);
   z-index: 1000;
   .error-message {
     font-family: $xfont;
     text-align: center;
-    //color: #a94442;
     color: #333;
-    //background-color: #f2dede;
-    background-color: #ebccd1;
+    background-color: rgba(235, 204, 209, .25);
     padding: 30px;
-    border: 1px solid transparent;
-    //border-color: #ebccd1;
-    border-color: #500;
+    border-radius: 10px;
+    border: 2px solid #b00;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -36,5 +33,32 @@
     p {
       margin: 0;
     }
+  }
+}
+
+$error-message-side-offset: 1em;
+
+.error-message-item {
+  position: relative;
+  border: 1px solid #b00;
+  padding-left: $error-message-side-offset;
+  //line-height: 2.385em;
+  //height: 2.385em;
+  height: 36px;
+  span {
+    vertical-align: top;
+    display: inline-block;
+    padding-right: $error-message-side-offset;
+    color: #550000;
+    line-height: 34px;
+  }
+  button {
+    margin-right: $error-message-side-offset;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
   }
 }
