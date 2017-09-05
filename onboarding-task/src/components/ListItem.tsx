@@ -28,6 +28,7 @@ const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited
       onDeleteData={onDeleteData}
     />
     : <ListItemDisplay
+      isSavedSuccess={itemViewModel.isSavedSuccess}
       value={itemViewModel.value}
       onClick={onToggleBeingEdited}
     />

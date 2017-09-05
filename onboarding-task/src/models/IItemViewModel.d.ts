@@ -8,4 +8,6 @@ export interface IItemViewModel {
   readonly value: string;
   /** Shows whether item is opened for editation */
   readonly isBeingEdited: boolean;
+
+  readonly isSavedSuccess: boolean;
 }
