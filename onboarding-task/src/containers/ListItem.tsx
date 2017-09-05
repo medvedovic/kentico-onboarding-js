@@ -14,6 +14,7 @@ import {
 import { Store } from '../reducers/stores';
 import {
   deleteData,
+  repostData,
   updateData
 } from '../actions/actionCreators';
 
@@ -34,6 +35,7 @@ const mapDispatchToProps = (dispatch: any, { apiEndpoint, localId }: IOwnProps):
   onUpdateData: (value: string) => dispatch(updateData(apiEndpoint, localId, value)),
   onDeleteData: () => (dispatch(deleteData(apiEndpoint, localId))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
+  onRepostData: () => (dispatch(repostData(apiEndpoint, localId)))
 });
 
 export const ListItem = connect(

@@ -7,13 +7,19 @@ export interface IListItemDisplayDataProps {
 }
 
 export interface IListItemDisplayCallbacksProps {
+  onRepostData: () => void;
   onClick: () => void;
 }
 
 type ListItemDisplayProps = IListItemDisplayCallbacksProps & IListItemDisplayDataProps;
 
-const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, isSavedSuccess, onClick }) => (
-  <span className={isSavedSuccess ? '' : 'alert alert-danger'} onClick={onClick}>{value}</span>
+const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, isSavedSuccess, onClick, onRepostData }) => (
+  isSavedSuccess
+    ? <span onClick={onClick}>{value}</span>
+    : <div className="error-message-item">
+      <span onClick={onClick}>{value}</span>
+      <button onClick={onRepostData}>Resend</button>
+    </div>
 );
 
 ListItemDisplay.displayName = 'ListItemDisplay';

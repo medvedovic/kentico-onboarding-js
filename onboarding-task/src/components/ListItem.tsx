@@ -14,11 +14,12 @@ export interface IListItemCallbacksProps {
   onUpdateItem: (value: string) => void;
   onUpdateData: (value: string) => void;
   onToggleBeingEdited: () => void;
+  onRepostData: () => void;
 }
 
 export type ListItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onUpdateData, onDeleteData }) => (
+const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onUpdateData, onDeleteData, onRepostData }) => (
   itemViewModel.isBeingEdited
     ? <ListItemEditor
       onUpdateData={onUpdateData}
@@ -31,6 +32,7 @@ const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited
       isSavedSuccess={itemViewModel.isSavedSuccess}
       value={itemViewModel.value}
       onClick={onToggleBeingEdited}
+      onRepostData={onRepostData}
     />
 );
 
