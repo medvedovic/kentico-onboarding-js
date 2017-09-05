@@ -28,6 +28,6 @@ describe('isTextInputValid', () => {
   it('returns true for a valid string', () => {
     const isValid = isTextInputValid('Hello world');
 
-    expect(isValid).toBeFalsy();
+    expect(isValid).toBeTruthy();
   });
 });
