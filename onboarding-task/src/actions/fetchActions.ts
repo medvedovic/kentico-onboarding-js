@@ -6,35 +6,29 @@ import { IItemDataDTO } from '../models/ItemDataDTO';
 import { IAction } from './IAction';
 import { ListItemData } from '../models/ListItemData';
 
-export const fetchHasFailed = (errorMessage: string) => {
-  return {
-    type: FetchData.HAS_FAILED,
-    payload: {
-      errorMessage,
-    }
-  };
-};
+export const fetchHasFailed = (errorMessage: string) => ({
+  type: FetchData.HAS_FAILED,
+  payload: {
+    errorMessage,
+  }
+});
 
-const fetchIsLoading = (bool: boolean) => {
-  return {
-    type: FetchData.IS_LOADING,
-    payload: {
-      isLoading: bool
-    }
-  };
-};
+const fetchIsLoading = (bool: boolean) => ({
+  type: FetchData.IS_LOADING,
+  payload: {
+    isLoading: bool
+  }
+});
 
 export const fetchStartLoading = () => fetchIsLoading(true);
 export const fetchStopLoading = () => fetchIsLoading(false);
 
-export const fetchHasSucceeded = (items: Array<IItemDataDTO>) => {
-  return {
-    type: FetchData.HAS_SUCCEEDED,
-    payload: {
-      items
-    }
-  };
-};
+export const fetchHasSucceeded = (items: Array<IItemDataDTO>) => ({
+  type: FetchData.HAS_SUCCEEDED,
+  payload: {
+    items
+  }
+});
 
 export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: IItemDataDTO): IAction;
 export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: string): IAction;
