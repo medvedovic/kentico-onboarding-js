@@ -21,11 +21,15 @@ import {
   fetchStartLoading,
   fetchStopLoading
 } from './fetchActions';
-import {
-  createItem,
-  deleteItem,
-} from './publicActions';
+import { deleteItem, } from './publicActions';
 import { updateItem } from './userActions';
+import {
+  post,
+  postAndSaveData,
+  postDataActionFactory,
+  postError,
+  postSuccess
+} from './postDataActionFactory';
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
@@ -109,43 +113,14 @@ export const updateData = (url: string, localId: string, value: string) =>
           )));
   };
 
+export const postData = postDataActionFactory({
+  postOperation: post,
+  onPostSuccess: postSuccess,
+  onPostError: postError
+});
 
-const post = (url: string, value: string) => {
-  // create item dto
-  const itemDto = toItemDataDTO(value);
-  // send item to server via fetch
-  return fetch(url, {
-    method: HttpAction.POST,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(itemDto)
-  });
-};
-
-export const postData = (url: string, value: string) => {
-  return (dispatch: Dispatch<any>) => {
-    // creates new item locally
-    const { payload: { item: { localId } } } = dispatch(createItem(value));
-
-    post(url, value)
-      .then(response => response.json())
-      .then((response: IItemDataDTO) =>
-        dispatch(
-          fetchActionBuilder(
-            HttpAction.POST,
-            EHttpActionStatus.success,
-            localId,
-            response
-          )))
-      .catch((response: Error) =>
-        dispatch(
-          fetchActionBuilder(
-            HttpAction.POST,
-            EHttpActionStatus.error,
-            localId,
-            response.message
-          )));
-  };
-};
-
+export const repostData = postAndSaveData({
+  postOperation: post,
+  onPostSuccess: postSuccess,
+  onPostError: postError,
+});

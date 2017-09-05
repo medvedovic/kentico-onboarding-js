@@ -4,9 +4,8 @@ import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../c
 
 import { Store } from '../reducers/stores';
 import {
-  fetchData,
-  postData
-} from '../actions/actionCreators';
+  fetchData} from '../actions/actionCreators';
+import { postData } from '../actions/actionCreators';
 
 
 const mapStateToProps = ({ items, app }: Store.IRoot): IListDataProps => ({

@@ -63,3 +63,33 @@ export function fetchActionBuilder(type: string, status: EHttpActionStatus, loca
       }
     };
 }
+
+interface IFetchActionBuilder {
+  (localId: string, params: IItemDataDTO | Error): IAction;
+}
+
+export const fetchActionBuilderComposed = (type: string, status: EHttpActionStatus): IFetchActionBuilder => {
+  return status === EHttpActionStatus.success ?
+    (localId: string, params: IItemDataDTO) => ({
+      type,
+      status,
+      payload: {
+        item: new ListItemData({
+          id: params.id,
+          value: params.value,
+          localId,
+        })
+      }
+    })
+    :
+    (localId: string, params: Error) => ({
+      type,
+      status,
+      payload: {
+        error: params,
+        item: {
+          localId
+        }
+      }
+    });
+};
