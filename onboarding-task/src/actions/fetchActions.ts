@@ -7,13 +7,6 @@ import { IAction } from './IAction';
 import { ListItemData } from '../models/ListItemData';
 import { itemFactory } from '../utils/itemFactory';
 
-export const fetchHasFailed = (error: Error) => ({
-  type: FetchData.HAS_FAILED,
-  payload: {
-    error,
-  }
-});
-
 const fetchIsLoading = (bool: boolean) => ({
   type: FetchData.IS_LOADING,
   payload: {
@@ -24,7 +17,14 @@ const fetchIsLoading = (bool: boolean) => ({
 export const fetchStartLoading = () => fetchIsLoading(true);
 export const fetchStopLoading = () => fetchIsLoading(false);
 
-export const fetchHasSucceededBuilder = (factory: (value: string, id: number) => ListItemData) =>
+export const fetchHasFailed = (error: Error) => ({
+  type: FetchData.HAS_FAILED,
+  payload: {
+    error,
+  }
+});
+
+const fetchHasSucceededBuilder = (factory: (value: string, id: number) => ListItemData) =>
   (items: Array<IItemDataDTO>) => ({
     type: FetchData.HAS_SUCCEEDED,
     payload: {
@@ -33,34 +33,6 @@ export const fetchHasSucceededBuilder = (factory: (value: string, id: number) =>
   });
 
 export const fetchHasSucceeded = fetchHasSucceededBuilder(itemFactory);
-
-export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: IItemDataDTO): IAction;
-export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: string): IAction;
-export function fetchActionBuilder(type: string, status: EHttpActionStatus, localId: string, params: IItemDataDTO | string) {
-  return typeof params === 'string' ?
-    {
-      type,
-      status,
-      payload: {
-        error: params,
-        item: {
-          localId
-        }
-      }
-    }
-    :
-    {
-      type,
-      status,
-      payload: {
-        item: new ListItemData({
-          id: params.id,
-          value: params.value,
-          localId,
-        })
-      }
-    };
-}
 
 interface IFetchActionBuilder {
   (localId: string, params: IItemDataDTO | Error): IAction;

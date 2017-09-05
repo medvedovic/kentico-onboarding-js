@@ -1,27 +1,15 @@
 import { Dispatch } from 'react-redux';
-import {
-  CREATE_ITEM,
-  EHttpActionStatus,
-  HttpAction,
-} from '../constants/actionTypes';
+import { CREATE_ITEM, } from '../constants/actionTypes';
 import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 
 import { IAction } from './IAction';
 import {
-  IItemDataDTO,
-  toItemDataDTO
-} from '../models/ItemDataDTO';
-import {
-  fetchActionBuilder,
   fetchHasFailed,
   fetchHasSucceeded,
   fetchStartLoading,
   fetchStopLoading
 } from './fetchActions';
-import {
-  deleteItem,
-  updateItem
-} from './userActions';
+import { deleteItem } from './userActions';
 import {
   post,
   postAndSaveData,
@@ -30,6 +18,12 @@ import {
   postSuccess
 } from './postDataActionFactory';
 import { fetchDataActionFactory } from './fetchDataActionFactory';
+import {
+  put,
+  putDataActionFactory,
+  putError,
+  putSuccess
+} from './putDataActionFactory';
 
 const fetch = require('isomorphic-fetch');
 
@@ -55,45 +49,6 @@ export const deleteData = (url: string, id: string) => {
   };
 };
 
-const put = (url: string, id: number, value: string) => {
-  // create dto
-  const itemDto = toItemDataDTO(value, id);
-  // send request
-  return fetch(url + '/' + id, {
-    method: HttpAction.PUT,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(itemDto)
-  });
-};
-
-export const updateData = (url: string, localId: string, value: string) =>
-  (dispatch: Dispatch<any>, getState: any) => {
-    const { id } = getState().items.data.get(localId);
-    // update locally
-    dispatch(updateItem(localId, value));
-
-    put(url, id, value)
-      .then((response: Response) => response.json())
-      .then((response: IItemDataDTO) =>
-        dispatch(
-          fetchActionBuilder(
-            HttpAction.PUT,
-            EHttpActionStatus.success,
-            localId,
-            response
-          )))
-      .catch((response: Error) =>
-        dispatch(
-          fetchActionBuilder(
-            HttpAction.PUT,
-            EHttpActionStatus.error,
-            localId,
-            response.message
-          )));
-  };
-
 export const postData = postDataActionFactory({
   postOperation: post,
   onPostSuccess: postSuccess,
@@ -112,4 +67,10 @@ export const fetchData = fetchDataActionFactory({
   stopLoader: fetchStopLoading,
   onFetchSucceeded: fetchHasSucceeded,
   onFetchFailed: fetchHasFailed
+});
+
+export const putData = putDataActionFactory({
+  putOperation: put,
+  onPutSuccess: putSuccess,
+  onPutError: putError
 });

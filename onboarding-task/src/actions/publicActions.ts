@@ -12,5 +12,6 @@ export {
 export {
   postData,
   repostData,
-  fetchData
+  fetchData,
+  putData
 } from './actionCreators';

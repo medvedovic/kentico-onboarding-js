@@ -14,9 +14,8 @@ import {
 import { Store } from '../reducers/stores';
 import {
   deleteData,
-  repostData,
-  updateData
-} from '../actions/actionCreators';
+  repostData} from '../actions/actionCreators';
+import { putData } from '../actions/actionCreators';
 
 interface IOwnProps {
   localId: string;
@@ -32,7 +31,7 @@ const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListI
 
 const mapDispatchToProps = (dispatch: any, { apiEndpoint, localId }: IOwnProps): IListItemComponentCallbacksProps => ({
   onUpdateItem: (value: string) => dispatch(updateItem(localId, value)),
-  onUpdateData: (value: string) => dispatch(updateData(apiEndpoint, localId, value)),
+  onUpdateData: (value: string) => dispatch(putData(apiEndpoint, localId, value)),
   onDeleteData: () => (dispatch(deleteData(apiEndpoint, localId))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
   onRepostData: () => (dispatch(repostData(apiEndpoint, localId)))
