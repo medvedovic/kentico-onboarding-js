@@ -6,7 +6,7 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import { App } from './containers/App.tsx';
-import { rootReducer } from './reducers/reducer.ts';
+import { rootReducer } from './reducers/rootReducer.ts';
 import { initialState } from './constants/initialState.ts';
 
 import 'bootstrap/dist/css/bootstrap.css';
