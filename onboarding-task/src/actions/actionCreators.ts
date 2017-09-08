@@ -3,11 +3,7 @@ import { IItemFactoryWithGenerator } from '../utils/itemFactory';
 
 import { IAction } from './IAction';
 import {
-  fetchHasFailed,
-  fetchHasSucceeded,
-  fetchStartLoading,
-  fetchStopLoading
-} from './fetchActions';
+  fetchHasFailed} from './fetchActions';
 import {
   post,
   postAndSaveData,
@@ -27,6 +23,11 @@ import {
   deleteError,
   deleteHttp
 } from './deleteDataActionFactory';
+import {
+  fetchHasSucceeded,
+  fetchStartLoading,
+  fetchStopLoading
+} from './publicActions';
 
 const fetch = require('isomorphic-fetch');
 

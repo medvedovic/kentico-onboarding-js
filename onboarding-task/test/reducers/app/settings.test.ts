@@ -1,12 +1,13 @@
 import { settings } from '../../../src/reducers/app/settings';
 import {
-  fetchHasFailed,
+  fetchHasFailed} from '../../../src/actions/fetchActions';
+import { AppSettings } from '../../../src/constants/AppSettings';
+import { deleteItem } from '../../../src/actions/userActions';
+import {
   fetchHasSucceeded,
   fetchStartLoading,
   fetchStopLoading
-} from '../../../src/actions/fetchActions';
-import { AppSettings } from '../../../src/constants/AppSettings';
-import { deleteItem } from '../../../src/actions/userActions';
+} from '../../../src/actions/publicActions';
 
 describe('Settings reducer', () => {
 

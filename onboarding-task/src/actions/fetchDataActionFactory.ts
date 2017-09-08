@@ -1,5 +1,5 @@
 import { Dispatch } from 'react-redux';
-import { fetchStartLoading } from './fetchActions';
+import { fetchStartLoading } from './publicActions';
 import { IItemDataDTO } from '../models/ItemDataDTO';
 import { IAction } from './IAction';
 
