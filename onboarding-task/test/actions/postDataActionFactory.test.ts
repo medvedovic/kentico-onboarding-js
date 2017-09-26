@@ -2,9 +2,13 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
 
-import { postDataActionFactory } from '../../src/actions/postDataActionFactory';
+import {
+  postAndSaveData,
+  postDataActionFactory
+} from '../../src/actions/postDataActionFactory';
 import { IItemDataDTO } from '../../src/models/ItemDataDTO';
 import { EHttpActionStatus } from '../../src/constants/actionTypes';
+import { OrderedMap } from 'immutable';
 
 
 const middlewares = [thunk];
@@ -77,7 +81,6 @@ describe('postDataActionFactory', () => {
       createItemOperation: mockCreateItem
     };
     const store = mockStore({});
-    console.log(store.getActions());
     const postExpectedResult = {
       type: 'POST',
       status: EHttpActionStatus.error,
@@ -95,6 +98,60 @@ describe('postDataActionFactory', () => {
       .catch(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(createItemExpectedResult);
+        expect(actions).toContainEqual(postExpectedResult);
+      });
+  });
+});
+
+
+describe('postAndSaveData', () => {
+  it('returns correct actions on success', () => {
+    const mockInitialState = {
+      items: {
+        data: OrderedMap([['1234', { value: 'Go home' }]]),
+      }
+    };
+    const store = mockStore(mockInitialState);
+    const dependencies = {
+      postOperation: mockSuccessPost,
+      onPostSuccess,
+      onPostError
+    };
+    const postExpectedResult = {
+      type: 'POST',
+      status: EHttpActionStatus.success,
+      payload: undefined
+    };
+
+    return store.dispatch(postAndSaveData(dependencies)('', '1234'))
+      .then(() => {
+        const actions = store.getActions();
+        expect(actions).toContainEqual(postExpectedResult);
+      });
+  });
+
+  it('returns correct actions on failure', () => {
+    const mockInitialState = {
+      items: {
+        data: OrderedMap([['1234', { value: 'Go home' }]]),
+      }
+    };
+    const store = mockStore(mockInitialState);
+    const dependencies = {
+      postOperation: mockErrorPost,
+      onPostSuccess,
+      onPostError
+    };
+    const postExpectedResult = {
+      type: 'POST',
+      status: EHttpActionStatus.error,
+      payload: undefined
+    };
+
+
+    return store.dispatch(postAndSaveData(dependencies)('', '1234'))
+      .catch(() => {
+        const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
       });
   });

@@ -40,7 +40,7 @@ export const postAndSaveData = (dependencies: IPostAndSaveDataDependencies) =>
     (dispatch: Dispatch<any>, getState: any) => {
       const item = getState().items.data.get(localId);
 
-      dependencies.postOperation(url, item.value)
+      return dependencies.postOperation(url, item.value)
         .then(response => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPostSuccess(localId, response)))
