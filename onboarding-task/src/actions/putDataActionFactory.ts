@@ -1,5 +1,4 @@
 import { Dispatch } from 'react-redux';
-import { updateItem } from './userActions';
 import {
   IItemDataDTO,
   toItemDataDTO
@@ -17,6 +16,7 @@ interface IPutDataActionFactory {
   putOperation: (url: string, id: string, value: string) => Promise<Response>;
   onPutSuccess: (localId: string, response: IItemDataDTO) => IAction;
   onPutError: (localId: string, response: Error) => IAction;
+  updateItemOperation: (localId: string, value: string) => IAction;
 }
 
 export const putSuccess = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.success);
@@ -38,9 +38,9 @@ export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
   (url: string, localId: string, value: string) =>
     (dispatch: Dispatch<any>, getState: any) => {
       const { id } = getState().items.data.get(localId);
-      dispatch(updateItem(localId, value));
+      dispatch(dependencies.updateItemOperation(localId, value));
 
-      dependencies.putOperation(url, id, value)
+      return dependencies.putOperation(url, id, value)
         .then((response: Response) => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPutSuccess(localId, response)))
