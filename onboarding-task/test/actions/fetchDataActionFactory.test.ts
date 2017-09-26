@@ -9,7 +9,11 @@ import { fetchHasFailed } from '../../src/actions/fetchActions';
 import {
   fetchStartLoading,
   fetchStopLoading
-} from '../../src/actions/publicActions';
+} from '../../src/actions/actionCreators';
+// import {
+//   fetchStartLoading,
+//   fetchStopLoading
+// } from '../../src/actions/publicActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

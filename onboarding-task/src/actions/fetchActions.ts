@@ -6,12 +6,13 @@ import { IItemDataDTO } from '../models/ItemDataDTO';
 import { IAction } from './IAction';
 import { ListItemData } from '../models/ListItemData';
 
-export const fetchIsLoading = (bool: boolean) => ({
-  type: FetchData.IS_LOADING,
-  payload: {
-    isLoading: bool
-  }
-});
+export const fetchIsLoading = (bool: boolean) =>
+  () => ({
+    type: FetchData.IS_LOADING,
+    payload: {
+      isLoading: bool
+    }
+  });
 
 export const fetchHasFailed = (error: Error) => ({
   type: FetchData.HAS_FAILED,

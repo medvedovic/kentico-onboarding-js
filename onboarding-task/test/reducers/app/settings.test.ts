@@ -7,7 +7,7 @@ import {
   fetchHasSucceeded,
   fetchStartLoading,
   fetchStopLoading
-} from '../../../src/actions/publicActions';
+} from '../../../src/actions/actionCreators';
 
 describe('Settings reducer', () => {
 
