@@ -38,7 +38,7 @@ describe('Fetch Has Failed', () => {
   });
 });
 
-const mockFactory = (value: string, id: number) =>
+const mockFactory = (value: string, id: string) =>
   new ListItemData({
     id,
     value,
@@ -47,7 +47,7 @@ const mockFactory = (value: string, id: number) =>
 describe('Fetch Has Succeeded Builder', () => {
   it('Does returns correct payload and type', () => {
     const input = {
-      id: 1,
+      id: '00000000-0000-0000-0000-000000000000',
       value: 'Go home'
     };
     const fetchHasSucceeded = fetchHasSucceededBuilder(mockFactory);
@@ -72,7 +72,7 @@ describe('Fetch Has Succeeded Builder', () => {
         status: EHttpActionStatus.success,
         payload: {
           item: new ListItemData({
-            id: 1,
+            id: '00000000-0000-0000-0000-000000000000',
             value: 'Go home',
             localId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
           })
@@ -80,7 +80,7 @@ describe('Fetch Has Succeeded Builder', () => {
       };
       const fetchSucceeded = fetchActionBuilderComposed('POST', EHttpActionStatus.success);
 
-      const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', { value: 'Go home', id: 1 });
+      const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', { value: 'Go home', id: '00000000-0000-0000-0000-000000000000' });
 
       expect(result).toEqual(expectedResult);
     });

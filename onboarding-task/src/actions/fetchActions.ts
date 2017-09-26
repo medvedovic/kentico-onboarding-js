@@ -21,7 +21,7 @@ export const fetchHasFailed = (error: Error) => ({
   }
 });
 
-export const fetchHasSucceededBuilder = (factory: (value: string, id: number) => ListItemData) =>
+export const fetchHasSucceededBuilder = (factory: (value: string, id: string) => ListItemData) =>
   (items: Array<IItemDataDTO>) => ({
     type: FetchData.HAS_SUCCEEDED,
     payload: {

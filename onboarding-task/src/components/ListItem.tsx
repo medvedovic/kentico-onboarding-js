@@ -40,7 +40,7 @@ ListItem.displayName = 'ListItem';
 
 ListItem.propTypes = {
   itemViewModel: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     localId: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,

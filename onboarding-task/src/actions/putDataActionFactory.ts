@@ -14,7 +14,7 @@ import { IAction } from './IAction';
 const fetch = require('isomorphic-fetch');
 
 interface IPutDataActionFactory {
-  putOperation: (url: string, id: number, value: string) => Promise<Response>;
+  putOperation: (url: string, id: string, value: string) => Promise<Response>;
   onPutSuccess: (localId: string, response: IItemDataDTO) => IAction;
   onPutError: (localId: string, response: Error) => IAction;
 }
@@ -22,7 +22,7 @@ interface IPutDataActionFactory {
 export const putSuccess = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.success);
 export const putError = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.error);
 
-export const put = (url: string, id: number, value: string) => {
+export const put = (url: string, id: string, value: string) => {
   const itemDto = toItemDataDTO(value, id);
 
   return fetch(url + '/' + id, {

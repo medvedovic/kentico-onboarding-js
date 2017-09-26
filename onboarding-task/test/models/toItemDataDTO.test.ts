@@ -7,9 +7,9 @@ describe('toItemDataDto', () => {
   it('Converts value to itemDto correctly', () => {
     const expectedResult: IItemDataDTO = {
       value: 'Go home',
-      id: 50
+      id: '00000000-0000-0000-0000-000000000000'
     };
-    const result = toItemDataDTO('Go home', 50);
+    const result = toItemDataDTO('Go home', '00000000-0000-0000-0000-000000000000');
 
     expect(expectedResult).toEqual(result);
   });
@@ -17,7 +17,7 @@ describe('toItemDataDto', () => {
   it('Sets default id', () => {
     const expectedResult: IItemDataDTO = {
       value: 'Go home',
-      id: 0
+      id: '00000000-0000-0000-0000-000000000000'
     };
 
     const result = toItemDataDTO('Go home');

@@ -16,7 +16,7 @@ interface IPostAndSaveDataDependencies {
   onPostError: (localId: string, response: Error) => IAction;
 }
 
-interface IPostDataActionFactoryDependencies extends IPostAndSaveDataDependencies{
+interface IPostDataActionFactoryDependencies extends IPostAndSaveDataDependencies {
   createItemOperation: (value: string) => IAction;
 }
 
