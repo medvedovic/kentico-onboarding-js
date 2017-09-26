@@ -24,6 +24,7 @@ import {
   deleteHttp
 } from './deleteDataActionFactory';
 import {
+  createItem,
   fetchHasSucceeded,
   fetchStartLoading,
   fetchStopLoading
@@ -42,7 +43,8 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const postData = postDataActionFactory({
   postOperation: post,
   onPostSuccess: postSuccess,
-  onPostError: postError
+  onPostError: postError,
+  createItemOperation: createItem
 });
 
 export const repostData = postAndSaveData({

@@ -7,14 +7,17 @@ import {
   EHttpActionStatus,
   HttpAction
 } from '../constants/actionTypes';
-import { createItem } from './publicActions';
 import { fetchActionBuilderComposed } from './fetchActions';
 import { IAction } from './IAction';
 
-interface IPostDataActionFactoryDependencies {
+interface IPostAndSaveDataDependencies {
   postOperation: (url: string, value: string) => Promise<Response>;
   onPostSuccess: (localId: string, response: IItemDataDTO) => IAction;
   onPostError: (localId: string, response: Error) => IAction;
+}
+
+interface IPostDataActionFactoryDependencies extends IPostAndSaveDataDependencies{
+  createItemOperation: (value: string) => IAction;
 }
 
 export const postSuccess = fetchActionBuilderComposed(HttpAction.POST, EHttpActionStatus.success);
@@ -32,7 +35,7 @@ export const post = (url: string, value: string) => {
   });
 };
 
-export const postAndSaveData = (dependencies: IPostDataActionFactoryDependencies) =>
+export const postAndSaveData = (dependencies: IPostAndSaveDataDependencies) =>
   (url: string, localId: string) =>
     (dispatch: Dispatch<any>, getState: any) => {
       const item = getState().items.data.get(localId);
@@ -48,9 +51,9 @@ export const postAndSaveData = (dependencies: IPostDataActionFactoryDependencies
 export const postDataActionFactory = (dependencies: IPostDataActionFactoryDependencies) =>
   (url: string, value: string) =>
     (dispatch: Dispatch<any>) => {
-      const { payload: { item: { localId } } } = dispatch(createItem(value));
+      const { payload: { item: { localId } } } = dispatch(dependencies.createItemOperation(value));
 
-      dependencies.postOperation(url, value)
+      return dependencies.postOperation(url, value)
         .then((response) => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPostSuccess(localId, response)))
