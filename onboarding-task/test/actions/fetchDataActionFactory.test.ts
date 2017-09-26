@@ -14,14 +14,15 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+
 const items = [
   { 'id': 1, 'value': 'Do stuff' },
   { 'id': 2, 'value': 'Go Home' }
 ];
-const mockSuccessPromise = (url: string) => Promise.resolve(
+const mockSuccessPromise = (_url: string) => Promise.resolve(
   new Response(JSON.stringify(items))
 );
-const mockErrorPromise = (url: string) => Promise.reject(
+const mockErrorPromise = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
 );
 const startLoader = () => fetchStartLoading();
@@ -33,6 +34,7 @@ const onFetchSucceeded = (input: Array<IItemDataDTO>) => ({
   }
 });
 const onFetchFailed = (error: Error) => fetchHasFailed(error);
+
 
 describe('fetchDataActionFactory', () => {
   it('dispatches correct actions', () => {
@@ -49,6 +51,7 @@ describe('fetchDataActionFactory', () => {
       { type: 'HAS_SUCCEEDED', payload: { items } },
       { type: 'IS_LOADING', payload: { isLoading: false } }
     ];
+
 
     return store.dispatch(fetchDataActionFactory(dependencies)(''))
       .then(() => {
@@ -75,6 +78,7 @@ describe('fetchDataActionFactory', () => {
       },
       { type: 'IS_LOADING', payload: { isLoading: false } }
     ];
+
 
     return store.dispatch(fetchDataActionFactory(dependencies)(''))
       .then(() => {
