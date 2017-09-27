@@ -1,8 +1,4 @@
 import { Dispatch } from 'react-redux';
-import {
-  deleteItem,
-  toggleBeingEdited
-} from './userActions';
 import { fetchActionBuilderComposed } from './fetchActions';
 import { IAction } from './IAction';
 import {
@@ -14,6 +10,7 @@ const fetch = require('isomorphic-fetch');
 
 interface IDeleteDataActionFactory {
   deleteOperation: (url: string, id: number) => Promise<Response>;
+  onDeleteSuccess: (localId: string) => IAction;
   onDeleteError: (localId: string, response: Error) => IAction;
 }
 
@@ -23,7 +20,12 @@ export const deleteHttp = (url: string, id: number) =>
     headers: {
       'Content-Type': 'application/json'
     }
-  });
+  })
+    .then((response: Response) => {
+      if (response.status === 500)
+        throw new Error(response.statusText + ' at ' + response.url);
+      return response;
+    });
 
 export const deleteError = fetchActionBuilderComposed(HttpAction.DELETE, EHttpActionStatus.error);
 
@@ -32,12 +34,10 @@ export const deleteDataActionFactory = (dependencies: IDeleteDataActionFactory) 
     (dispatch: Dispatch<any>, getState: any) => {
       const { id } = getState().items.data.get(localId);
 
-      dependencies.deleteOperation(url, id)
-        .then((response: Response) => response.json())
+      return dependencies.deleteOperation(url, id)
         .then(() =>
-          dispatch(deleteItem(localId)))
+          dispatch(dependencies.onDeleteSuccess(localId)))
         .catch((response: Error) => {
-          dispatch(toggleBeingEdited(localId));
           dispatch(dependencies.onDeleteError(localId, response));
         });
     };

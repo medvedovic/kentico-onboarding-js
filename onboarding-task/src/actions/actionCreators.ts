@@ -29,7 +29,10 @@ import {
   deleteError,
   deleteHttp
 } from './deleteDataActionFactory';
-import { updateItem } from './userActions';
+import {
+  deleteItem,
+  updateItem
+} from './userActions';
 
 const fetch = require('isomorphic-fetch');
 
@@ -77,5 +80,6 @@ export const putData = putDataActionFactory({
 
 export const deleteData = deleteDataActionFactory({
   deleteOperation: deleteHttp,
-  onDeleteError: deleteError
+  onDeleteError: deleteError,
+  onDeleteSuccess: deleteItem
 });
