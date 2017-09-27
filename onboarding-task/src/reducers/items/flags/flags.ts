@@ -22,6 +22,7 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
       return state.set(action.payload.localId, newFlags);
     }
 
+    case HttpAction.DELETE:
     case HttpAction.PUT:
     case HttpAction.POST:
     case CREATE_ITEM: {
