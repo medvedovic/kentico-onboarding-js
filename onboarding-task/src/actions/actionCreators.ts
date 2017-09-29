@@ -11,7 +11,6 @@ import {
   fetchIsLoading
 } from './fetchActions';
 import {
-  post,
   postAndSaveData,
   postDataActionFactory,
   postError,
@@ -19,20 +18,23 @@ import {
 } from './postDataActionFactory';
 import { fetchDataActionFactory } from './fetchDataActionFactory';
 import {
-  put,
   putDataActionFactory,
   putError,
   putSuccess
 } from './putDataActionFactory';
 import {
   deleteDataActionFactory,
-  deleteError,
-  deleteHttp
+  deleteError
 } from './deleteDataActionFactory';
 import {
   deleteItem,
   updateItem
 } from './userActions';
+import {
+  deleteAction,
+  postAction,
+  putAction
+} from './httpActionBuilder';
 
 const fetch = require('isomorphic-fetch');
 
@@ -51,14 +53,14 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const createItem = createItemBuilder(itemFactory);
 
 export const postData = postDataActionFactory({
-  postOperation: post,
+  postOperation: postAction,
   onPostSuccess: postSuccess,
   onPostError: postError,
   createItemOperation: createItem
 });
 
 export const repostData = postAndSaveData({
-  postOperation: post,
+  postOperation: postAction,
   onPostSuccess: postSuccess,
   onPostError: postError,
 });
@@ -72,14 +74,14 @@ export const fetchData = fetchDataActionFactory({
 });
 
 export const putData = putDataActionFactory({
-  putOperation: put,
+  putOperation: putAction,
   onPutSuccess: putSuccess,
   onPutError: putError,
   updateItemOperation: updateItem
 });
 
 export const deleteData = deleteDataActionFactory({
-  deleteOperation: deleteHttp,
+  deleteOperation: deleteAction,
   onDeleteError: deleteError,
   onDeleteSuccess: deleteItem
 });
