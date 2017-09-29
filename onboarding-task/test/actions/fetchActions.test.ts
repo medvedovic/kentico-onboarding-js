@@ -16,7 +16,7 @@ describe('Fetch is loading', () => {
       }
     };
 
-    const action = fetchIsLoading(true);
+    const action = fetchIsLoading(true)();
 
     expect(action).toEqual(expectedResult);
   });
@@ -64,44 +64,44 @@ describe('Fetch Has Succeeded Builder', () => {
 
     expect(result).toEqual(expectedResult);
   });
+});
 
-  describe('Fetch Action Builder Composed', () => {
-    it('Constructs success action correctly', () => {
-      const expectedResult = {
-        type: 'POST',
-        status: EHttpActionStatus.success,
-        payload: {
-          item: new ListItemData({
-            id: '00000000-0000-0000-0000-000000000000',
-            value: 'Go home',
-            localId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-          })
+describe('Fetch Action Builder Composed', () => {
+  it('Constructs success action correctly', () => {
+    const expectedResult = {
+      type: 'POST',
+      status: EHttpActionStatus.success,
+      payload: {
+        item: new ListItemData({
+          id: '00000000-0000-0000-0000-000000000000',
+          value: 'Go home',
+          localId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+        })
+      }
+    };
+    const fetchSucceeded = fetchActionBuilderComposed('POST', EHttpActionStatus.success);
+
+    const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', { value: 'Go home', id: '00000000-0000-0000-0000-000000000000' });
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  it('Constructs error action correctly', () => {
+    const error = new Error('Nasty shit happened');
+    const expectedResult = {
+      type: 'POST',
+      status: EHttpActionStatus.error,
+      payload: {
+        error,
+        item: {
+          localId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
         }
-      };
-      const fetchSucceeded = fetchActionBuilderComposed('POST', EHttpActionStatus.success);
+      }
+    };
+    const fetchSucceeded = fetchActionBuilderComposed('POST', EHttpActionStatus.error);
 
-      const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', { value: 'Go home', id: '00000000-0000-0000-0000-000000000000' });
+    const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', error);
 
-      expect(result).toEqual(expectedResult);
-    });
-
-    it('Constructs error action correctly', () => {
-      const error = new Error('Nasty shit happened');
-      const expectedResult = {
-        type: 'POST',
-        status: EHttpActionStatus.error,
-        payload: {
-          error,
-          item: {
-            localId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-          }
-        }
-      };
-      const fetchSucceeded = fetchActionBuilderComposed('POST', EHttpActionStatus.error);
-
-      const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', error);
-
-      expect(result).toEqual(expectedResult);
-    });
+    expect(result).toEqual(expectedResult);
   });
 });
