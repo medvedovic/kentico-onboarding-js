@@ -23,7 +23,7 @@ export const deleteHttp = (url: string, id: string) =>
     }
   })
     .then((response: Response) => {
-      if (response.status === 500)
+      if (!response.ok)
         throw new Error(response.statusText + ' at ' + response.url);
       return response;
     });
