@@ -19,10 +19,10 @@ const mockInitialState = () => ({
   }
 });
 
-const mockDeleteSuccess = (_url: string, _id: number) => Promise.resolve(
+const mockDeleteSuccess = (_url: string, _id: string) => Promise.resolve(
   new Response()
 );
-const mockDeleteError = (_url: string, _id: number) => Promise.reject(
+const mockDeleteError = (_url: string, _id: string) => Promise.reject(
   'Error occurred'
 );
 const onDeleteError = (_localId: string, _response: Error) => ({

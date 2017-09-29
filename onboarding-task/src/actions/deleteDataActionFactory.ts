@@ -5,16 +5,17 @@ import {
   EHttpActionStatus,
   HttpAction
 } from '../constants/actionTypes';
+import { Store } from '../reducers/stores';
 
 const fetch = require('isomorphic-fetch');
 
 interface IDeleteDataActionFactory {
-  deleteOperation: (url: string, id: number) => Promise<Response>;
+  deleteOperation: (url: string, id: string) => Promise<Response>;
   onDeleteSuccess: (localId: string) => IAction;
   onDeleteError: (localId: string, response: Error) => IAction;
 }
 
-export const deleteHttp = (url: string, id: number) =>
+export const deleteHttp = (url: string, id: string) =>
   fetch(url + '/' + id, {
     method: HttpAction.DELETE,
     headers: {
@@ -31,7 +32,7 @@ export const deleteError = fetchActionBuilderComposed(HttpAction.DELETE, EHttpAc
 
 export const deleteDataActionFactory = (dependencies: IDeleteDataActionFactory) =>
   (url: string, localId: string) =>
-    (dispatch: Dispatch<any>, getState: any) => {
+    (dispatch: Dispatch<any>, getState: () => Store.IRoot) => {
       const { id } = getState().items.data.get(localId);
 
       return dependencies.deleteOperation(url, id)
