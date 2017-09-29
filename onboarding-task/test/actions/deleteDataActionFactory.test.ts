@@ -44,7 +44,7 @@ describe('deleteDataActionFactory', () => {
       onDeleteSuccess,
       onDeleteError
     };
-    const expextedAction = {
+    const expectedAction = {
       type: DELETE_ITEM,
       payload: '1234'
     };
@@ -53,7 +53,7 @@ describe('deleteDataActionFactory', () => {
     return store.dispatch(deleteDataActionFactory(dependencies)('url', '1234'))
       .then(() => {
         const actions = store.getActions();
-        expect(actions).toContainEqual(expextedAction);
+        expect(actions).toContainEqual(expectedAction);
       });
   });
 
