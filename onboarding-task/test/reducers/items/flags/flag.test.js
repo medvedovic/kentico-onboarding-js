@@ -1,6 +1,10 @@
 import { ListItemFlags } from '../../../../src/models/ListItemFlags';
 import { flag } from '../../../../src/reducers/items/flags/flag';
-import { createItem, toggleBeingEdited } from '../../../../src/actions/publicActions';
+import { toggleBeingEdited } from '../../../../src/actions/publicActions';
+import { ListItemData } from '../../../../src/models/ListItemData';
+
+const createItem = (value) =>
+  new ListItemData({ id: '982f42cd-106e-4530-b6bc-bcdfe7fecbb9', value });
 
 describe('Flag Reducer', () => {
   it('returns new flags on create item', () => {
