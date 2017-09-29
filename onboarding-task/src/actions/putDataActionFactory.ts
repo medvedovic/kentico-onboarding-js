@@ -1,16 +1,11 @@
 import { Dispatch } from 'react-redux';
-import {
-  IItemDataDTO,
-  toItemDataDTO
-} from '../models/ItemDataDTO';
+import { IItemDataDTO } from '../models/ItemDataDTO';
 import { fetchActionBuilderComposed } from './fetchActions';
 import {
   EHttpActionStatus,
   HttpAction
 } from '../constants/actionTypes';
 import { IAction } from './IAction';
-
-const fetch = require('isomorphic-fetch');
 
 interface IPutDataActionFactory {
   putOperation: (url: string, id: string, value: string) => Promise<Response>;
@@ -21,18 +16,6 @@ interface IPutDataActionFactory {
 
 export const putSuccess = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.success);
 export const putError = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.error);
-
-export const put = (url: string, id: string, value: string) => {
-  const itemDto = toItemDataDTO(value, id);
-
-  return fetch(url + '/' + id, {
-    method: HttpAction.PUT,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(itemDto)
-  });
-};
 
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
   (url: string, localId: string, value: string) =>

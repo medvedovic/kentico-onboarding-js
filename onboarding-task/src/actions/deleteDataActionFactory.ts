@@ -7,26 +7,11 @@ import {
 } from '../constants/actionTypes';
 import { Store } from '../reducers/stores';
 
-const fetch = require('isomorphic-fetch');
-
 interface IDeleteDataActionFactory {
   deleteOperation: (url: string, id: string) => Promise<Response>;
   onDeleteSuccess: (localId: string) => IAction;
   onDeleteError: (localId: string, response: Error) => IAction;
 }
-
-export const deleteHttp = (url: string, id: string) =>
-  fetch(url + '/' + id, {
-    method: HttpAction.DELETE,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((response: Response) => {
-      if (!response.ok)
-        throw new Error(response.statusText + ' at ' + response.url);
-      return response;
-    });
 
 export const deleteError = fetchActionBuilderComposed(HttpAction.DELETE, EHttpActionStatus.error);
 

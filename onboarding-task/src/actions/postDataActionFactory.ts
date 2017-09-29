@@ -1,8 +1,5 @@
 import { Dispatch } from 'react-redux';
-import {
-  IItemDataDTO,
-  toItemDataDTO
-} from '../models/ItemDataDTO';
+import { IItemDataDTO } from '../models/ItemDataDTO';
 import {
   EHttpActionStatus,
   HttpAction
@@ -22,18 +19,6 @@ interface IPostDataActionFactoryDependencies extends IPostAndSaveDataDependencie
 
 export const postSuccess = fetchActionBuilderComposed(HttpAction.POST, EHttpActionStatus.success);
 export const postError = fetchActionBuilderComposed(HttpAction.POST, EHttpActionStatus.error);
-
-export const post = (url: string, value: string) => {
-  const itemDto = toItemDataDTO(value);
-
-  return fetch(url, {
-    method: HttpAction.POST,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(itemDto)
-  });
-};
 
 export const postAndSaveData = (dependencies: IPostAndSaveDataDependencies) =>
   (url: string, localId: string) =>
