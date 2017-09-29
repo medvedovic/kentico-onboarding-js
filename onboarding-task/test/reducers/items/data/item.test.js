@@ -1,11 +1,12 @@
-import { createItem, updateItem } from '../../../../src/actions/publicActions';
-import { ListItemData } from '../../../../src/models/ListItemData';
-import { item } from '../../../../src/reducers/items/data/item';
+import { updateItem } from '../../../../src/actions/publicActions.ts';
+import { ListItemData } from '../../../../src/models/ListItemData.ts';
+import { item } from '../../../../src/reducers/items/data/item.ts';
 
 describe('Item Reducer', () => {
   const id = '650cb02b-de56-41a6-8693-50fbf3e40192';
+  const createItem = (_value) =>
+    new ListItemData({ id, value: 'Make tea' });
   const initialItem = new ListItemData({ localId: id, value: 'Make coffee' });
-  const createItemAction = createItem(new ListItemData({ id, value: 'Make tea' }));
 
   it('Returns new updated item', () => {
     const action = updateItem(id, 'Make tea');
@@ -19,13 +20,13 @@ describe('Item Reducer', () => {
   });
 
   it('Returns the same item on wrong action', () => {
-    const resultItem = item(initialItem, createItemAction);
+    const resultItem = item(initialItem, createItem);
 
     expect(resultItem).toBe(initialItem);
   });
 
   it('Returns default state on wrong input', () => {
-    const resultState = item(undefined, createItemAction);
+    const resultState = item(undefined, createItem);
 
     expect(resultState).toEqual(new ListItemData());
   });
