@@ -13,12 +13,8 @@ const mapStateToProps = ({ items, app }: Store.IRoot): IListDataProps => ({
   apiEndpoint: app.settings.apiEndpoint,
 });
 
-// interface IOwnProps {
-//   apiEndpoint: string;
-// }
-
-const mapDispatchToProps = (dispatch: any, { apiEndpoint }: any): IListCallbacksProps => ({
-  onCreateItem: (value: string) => dispatch(postData(apiEndpoint, value)),
+const mapDispatchToProps = (dispatch: any): IListCallbacksProps => ({
+  onCreateItem: (value: string) => dispatch(postData(value)),
   onFetchData: () => dispatch(fetchData()),
 });
 

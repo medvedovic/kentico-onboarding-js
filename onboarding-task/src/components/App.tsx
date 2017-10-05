@@ -4,7 +4,7 @@ import { List } from '../containers/List';
 import { Loader } from './Loader';
 import { IAppSettings } from '../constants/AppSettings';
 
-export const App: React.SFC<IAppSettings> = ({ showLoader, apiEndpoint, fetchHasFailed }: IAppSettings) => (
+export const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAppSettings) => (
   <div>
     <div className="container">
       <div className="header clearfix">
@@ -16,7 +16,7 @@ export const App: React.SFC<IAppSettings> = ({ showLoader, apiEndpoint, fetchHas
           showLoader &&
           <Loader />
         }
-        <List apiEndpoint={apiEndpoint} />
+        <List/>
       </div>
 
       {

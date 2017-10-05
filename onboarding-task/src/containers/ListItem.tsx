@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch: any, { apiEndpoint, localId }: IOwnProps):
   onUpdateData: (value: string) => dispatch(putData(apiEndpoint, localId, value)),
   onDeleteData: () => (dispatch(deleteData(apiEndpoint, localId))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
-  onRepostData: () => (dispatch(repostData(apiEndpoint, localId)))
+  onRepostData: () => (dispatch(repostData(localId)))
 });
 
 export const ListItem = connect(

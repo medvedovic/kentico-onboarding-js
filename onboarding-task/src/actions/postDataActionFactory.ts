@@ -7,13 +7,14 @@ import {
 import { fetchActionBuilderComposed } from './fetchActions';
 import { IAction } from './IAction';
 
-interface IPostAndSaveDataDependencies {
+interface IRepostItemDataActionFactoryDependencies {
   postOperation: (url: string, value: string) => Promise<Response>;
   onPostSuccess: (localId: string, response: IItemDataDTO) => IAction;
   onPostError: (localId: string, response: Error) => IAction;
+  apiEndpoint: string;
 }
 
-interface IPostDataActionFactoryDependencies extends IPostAndSaveDataDependencies {
+interface IPostItemDataActionFactoryDependencies extends IRepostItemDataActionFactoryDependencies {
   createItemOperation: (value: string) => IAction;
 }
 
@@ -23,12 +24,12 @@ export const postError = fetchActionBuilderComposed(HttpAction.POST, EHttpAction
 /**
  * Resends item to server
  */
-export const repostItemDataActionFactory = (dependencies: IPostAndSaveDataDependencies) =>
-  (url: string, localId: string) =>
+export const repostItemDataActionFactory = (dependencies: IRepostItemDataActionFactoryDependencies) =>
+  (localId: string) =>
     (dispatch: Dispatch<any>, getState: any) => {
       const item = getState().items.data.get(localId);
 
-      return dependencies.postOperation(url, item.value)
+      return dependencies.postOperation(dependencies.apiEndpoint, item.value)
         .then(response => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPostSuccess(localId, response)))
@@ -39,12 +40,12 @@ export const repostItemDataActionFactory = (dependencies: IPostAndSaveDataDepend
 /**
  * Creates and sends item to server
  */
-export const postItemDataActionFactory = (dependencies: IPostDataActionFactoryDependencies) =>
-  (url: string, value: string) =>
+export const postItemDataActionFactory = (dependencies: IPostItemDataActionFactoryDependencies) =>
+  (value: string) =>
     (dispatch: Dispatch<any>) => {
       const { payload: { item: { localId } } } = dispatch(dependencies.createItemOperation(value));
 
-      return dependencies.postOperation(url, value)
+      return dependencies.postOperation(dependencies.apiEndpoint, value)
         .then((response) => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPostSuccess(localId, response)))

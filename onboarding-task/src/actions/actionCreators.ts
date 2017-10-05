@@ -57,13 +57,15 @@ export const postData = postItemDataActionFactory({
   postOperation: postAction,
   onPostSuccess: postSuccess,
   onPostError: postError,
-  createItemOperation: createItem
+  createItemOperation: createItem,
+  apiEndpoint
 });
 
 export const repostData = repostItemDataActionFactory({
   postOperation: postAction,
   onPostSuccess: postSuccess,
   onPostError: postError,
+  apiEndpoint
 });
 
 export const fetchData = fetchDataActionFactory({

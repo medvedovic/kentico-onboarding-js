@@ -49,7 +49,8 @@ describe('postDataActionFactory', () => {
       postOperation: mockSuccessPost,
       onPostSuccess,
       onPostError,
-      createItemOperation: mockCreateItem
+      createItemOperation: mockCreateItem,
+      apiEndpoint: ''
     };
     const store = mockStore({});
     const createItemExpectedResult = {
@@ -65,7 +66,7 @@ describe('postDataActionFactory', () => {
     };
 
 
-    return store.dispatch(postItemDataActionFactory(dependencies)('', 'Do stuff'))
+    return store.dispatch(postItemDataActionFactory(dependencies)('Do stuff'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(createItemExpectedResult);
@@ -78,7 +79,8 @@ describe('postDataActionFactory', () => {
       postOperation: mockErrorPost,
       onPostSuccess,
       onPostError,
-      createItemOperation: mockCreateItem
+      createItemOperation: mockCreateItem,
+      apiEndpoint: ''
     };
     const store = mockStore({});
     const postExpectedResult = {
@@ -94,7 +96,7 @@ describe('postDataActionFactory', () => {
     };
 
 
-    return store.dispatch(postItemDataActionFactory(dependencies)('', 'Do stuff'))
+    return store.dispatch(postItemDataActionFactory(dependencies)('Do stuff'))
       .catch(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(createItemExpectedResult);
@@ -115,7 +117,8 @@ describe('postAndSaveData', () => {
     const dependencies = {
       postOperation: mockSuccessPost,
       onPostSuccess,
-      onPostError
+      onPostError,
+      apiEndpoint: ''
     };
     const postExpectedResult = {
       type: 'POST',
@@ -123,7 +126,7 @@ describe('postAndSaveData', () => {
       payload: undefined
     };
 
-    return store.dispatch(repostItemDataActionFactory(dependencies)('', '1234'))
+    return store.dispatch(repostItemDataActionFactory(dependencies)('1234'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
@@ -140,7 +143,8 @@ describe('postAndSaveData', () => {
     const dependencies = {
       postOperation: mockErrorPost,
       onPostSuccess,
-      onPostError
+      onPostError,
+      apiEndpoint: ''
     };
     const postExpectedResult = {
       type: 'POST',
@@ -149,7 +153,7 @@ describe('postAndSaveData', () => {
     };
 
 
-    return store.dispatch(repostItemDataActionFactory(dependencies)('', '1234'))
+    return store.dispatch(repostItemDataActionFactory(dependencies)('1234'))
       .catch(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
