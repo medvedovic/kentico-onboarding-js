@@ -29,10 +29,10 @@ const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListI
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch: any, { apiEndpoint, localId }: IOwnProps): IListItemComponentCallbacksProps => ({
+const mapDispatchToProps = (dispatch: any, { localId }: IOwnProps): IListItemComponentCallbacksProps => ({
   onUpdateItem: (value: string) => dispatch(updateItem(localId, value)),
   onUpdateData: (value: string) => dispatch(putData(localId, value)),
-  onDeleteData: () => (dispatch(deleteData(apiEndpoint, localId))),
+  onDeleteData: () => (dispatch(deleteData(localId))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
   onRepostData: () => (dispatch(repostData(localId)))
 });

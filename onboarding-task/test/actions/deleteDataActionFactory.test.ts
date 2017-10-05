@@ -42,7 +42,8 @@ describe('deleteDataActionFactory', () => {
     const dependencies = {
       deleteOperation: mockDeleteSuccess,
       onDeleteSuccess,
-      onDeleteError
+      onDeleteError,
+      apiEndpoint: ''
     };
     const expectedAction = {
       type: DELETE_ITEM,
@@ -50,7 +51,7 @@ describe('deleteDataActionFactory', () => {
     };
 
 
-    return store.dispatch(deleteDataActionFactory(dependencies)('url', '1234'))
+    return store.dispatch(deleteDataActionFactory(dependencies)('1234'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedAction);
@@ -67,11 +68,12 @@ describe('deleteDataActionFactory', () => {
     const dependencies = {
       deleteOperation: mockDeleteError,
       onDeleteSuccess,
-      onDeleteError
+      onDeleteError,
+      apiEndpoint: ''
     };
 
 
-    return store.dispatch(deleteDataActionFactory(dependencies)('url', '1234'))
+    return store.dispatch(deleteDataActionFactory(dependencies)('1234'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedAction);

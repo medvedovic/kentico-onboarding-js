@@ -88,5 +88,6 @@ export const putData = putDataActionFactory({
 export const deleteData = deleteDataActionFactory({
   deleteOperation: deleteAction,
   onDeleteError: deleteError,
-  onDeleteSuccess: deleteItem
+  onDeleteSuccess: deleteItem,
+  apiEndpoint
 });
