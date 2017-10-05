@@ -1,5 +1,7 @@
 import { TypedRecord } from '../models/TypedRecord';
 
+export const apiEndpoint = 'api/v1/todos';
+
 const defaultValues: IAppSettings = {
   showLoader: false,
   apiEndpoint: 'api/v1/Todos',
