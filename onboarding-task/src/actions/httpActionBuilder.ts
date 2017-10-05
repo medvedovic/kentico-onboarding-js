@@ -4,7 +4,7 @@ import { toItemDataDTO } from '../models/ItemDataDTO';
 const fetch = require('isomorphic-fetch');
 
 export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Promise<Response>) =>
-  (url: string, httpMethod: string, body?: any) => {
+  (url: string, httpMethod: string = 'GET', body?: any) => {
     const requestParameters = {
       method: httpMethod,
       headers: {
@@ -21,6 +21,9 @@ export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Pr
         return response;
     });
   };
+
+export const getItemsAction = (url: string) =>
+  httpActionBuilder(fetch)(url);
 
 export const deleteAction = (url: string, id: string) =>
   httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.DELETE);
