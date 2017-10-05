@@ -1,5 +1,6 @@
 import {
   EHttpActionStatus,
+  HttpAction,
   ItemActions,
   LocalItemActions,
 } from '../constants/actionTypes';
@@ -26,12 +27,9 @@ import {
   deleteItem,
   updateItem
 } from './userActions';
-import {
-  deleteAction,
-  postAction,
-  putAction
-} from './httpActionBuilder';
 import { apiEndpoint } from '../constants/AppSettings';
+import { httpActionBuilder } from './httpActionBuilder';
+import { toItemDataDTO } from '../models/ItemDataDTO';
 
 
 const fetch = require('isomorphic-fetch');
@@ -52,8 +50,27 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const createItem = createItemBuilder(itemFactory);
 
 
+const getItemsAction = (url: string) =>
+  httpActionBuilder(fetch)(url);
+
+const deleteAction = (url: string, id: string) =>
+  httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.DELETE);
+
+const postAction = (url: string, value: string) => {
+  const itemDto = toItemDataDTO(value);
+
+  return httpActionBuilder(fetch)(url, HttpAction.POST, JSON.stringify(itemDto));
+};
+
+const putAction = (url: string, id: string, value: string) => {
+  const itemDto = toItemDataDTO(value, id);
+
+  return httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.PUT, JSON.stringify(itemDto));
+};
+
+
 export const fetchData = fetchDataActionFactory({
-  fetchOperation: fetch,
+  fetchOperation: getItemsAction,
   startLoader: fetchStartLoading,
   stopLoader: fetchStopLoading,
   onFetchSucceeded: fetchHasSucceeded,
