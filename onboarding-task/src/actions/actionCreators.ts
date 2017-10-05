@@ -11,8 +11,8 @@ import {
   fetchIsLoading
 } from './fetchActions';
 import {
-  postAndSaveData,
-  postDataActionFactory,
+  repostItemDataActionFactory,
+  postItemDataActionFactory,
   postError,
   postSuccess
 } from './postDataActionFactory';
@@ -52,14 +52,14 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 
 export const createItem = createItemBuilder(itemFactory);
 
-export const postData = postDataActionFactory({
+export const postData = postItemDataActionFactory({
   postOperation: postAction,
   onPostSuccess: postSuccess,
   onPostError: postError,
   createItemOperation: createItem
 });
 
-export const repostData = postAndSaveData({
+export const repostData = repostItemDataActionFactory({
   postOperation: postAction,
   onPostSuccess: postSuccess,
   onPostError: postError,

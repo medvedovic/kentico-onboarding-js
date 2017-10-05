@@ -20,7 +20,10 @@ interface IPostDataActionFactoryDependencies extends IPostAndSaveDataDependencie
 export const postSuccess = fetchActionBuilderComposed(HttpAction.POST, EHttpActionStatus.success);
 export const postError = fetchActionBuilderComposed(HttpAction.POST, EHttpActionStatus.error);
 
-export const postAndSaveData = (dependencies: IPostAndSaveDataDependencies) =>
+/**
+ * Resends item to server
+ */
+export const repostItemDataActionFactory = (dependencies: IPostAndSaveDataDependencies) =>
   (url: string, localId: string) =>
     (dispatch: Dispatch<any>, getState: any) => {
       const item = getState().items.data.get(localId);
@@ -33,7 +36,10 @@ export const postAndSaveData = (dependencies: IPostAndSaveDataDependencies) =>
           dispatch(dependencies.onPostError(localId, response)));
     };
 
-export const postDataActionFactory = (dependencies: IPostDataActionFactoryDependencies) =>
+/**
+ * Creates and sends item to server
+ */
+export const postItemDataActionFactory = (dependencies: IPostDataActionFactoryDependencies) =>
   (url: string, value: string) =>
     (dispatch: Dispatch<any>) => {
       const { payload: { item: { localId } } } = dispatch(dependencies.createItemOperation(value));

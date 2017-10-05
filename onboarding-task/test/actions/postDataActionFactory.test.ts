@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
 
 import {
-  postAndSaveData,
-  postDataActionFactory
+  repostItemDataActionFactory,
+  postItemDataActionFactory
 } from '../../src/actions/postDataActionFactory';
 import { IItemDataDTO } from '../../src/models/ItemDataDTO';
 import { EHttpActionStatus } from '../../src/constants/actionTypes';
@@ -65,7 +65,7 @@ describe('postDataActionFactory', () => {
     };
 
 
-    return store.dispatch(postDataActionFactory(dependencies)('', 'Do stuff'))
+    return store.dispatch(postItemDataActionFactory(dependencies)('', 'Do stuff'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(createItemExpectedResult);
@@ -94,7 +94,7 @@ describe('postDataActionFactory', () => {
     };
 
 
-    return store.dispatch(postDataActionFactory(dependencies)('', 'Do stuff'))
+    return store.dispatch(postItemDataActionFactory(dependencies)('', 'Do stuff'))
       .catch(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(createItemExpectedResult);
@@ -123,7 +123,7 @@ describe('postAndSaveData', () => {
       payload: undefined
     };
 
-    return store.dispatch(postAndSaveData(dependencies)('', '1234'))
+    return store.dispatch(repostItemDataActionFactory(dependencies)('', '1234'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
@@ -149,7 +149,7 @@ describe('postAndSaveData', () => {
     };
 
 
-    return store.dispatch(postAndSaveData(dependencies)('', '1234'))
+    return store.dispatch(repostItemDataActionFactory(dependencies)('', '1234'))
       .catch(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
