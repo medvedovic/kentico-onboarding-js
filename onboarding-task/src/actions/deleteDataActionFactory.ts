@@ -14,7 +14,9 @@ export const deleteDataActionFactory = (dependencies: IDeleteDataActionFactory) 
     (dispatch: Dispatch<any>, getState: () => Store.IRoot) => {
       const { id } = getState().items.data.get(localId);
 
-      return dependencies.deleteOperation(dependencies.apiEndpoint, id)
+      const url = `${dependencies.apiEndpoint}/${id}`;
+
+      return dependencies.deleteOperation(url, id)
         .then(() =>
           dispatch(dependencies.onDeleteSuccess(localId)))
         .catch((response: Error) => {

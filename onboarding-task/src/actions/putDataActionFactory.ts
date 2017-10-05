@@ -16,7 +16,9 @@ export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
       const { id } = getState().items.data.get(localId);
       dispatch(dependencies.updateItemOperation(localId, value));
 
-      return dependencies.putOperation(dependencies.apiEndpoint, id, value)
+      const url = `${dependencies.apiEndpoint}/${id}`;
+
+      return dependencies.putOperation(url, id, value)
         .then((response: Response) => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPutSuccess(localId, response)))

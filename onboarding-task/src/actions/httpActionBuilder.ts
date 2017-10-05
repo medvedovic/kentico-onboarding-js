@@ -22,8 +22,8 @@ export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Pr
     });
   };
 
-export const deleteAction = (url: string, id: string) =>
-  httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.DELETE);
+export const deleteAction = (url: string) =>
+  httpActionBuilder(fetch)(url, HttpAction.DELETE);
 
 export const postAction = (url: string, value: string) => {
   const itemDto = toItemDataDTO(value);
@@ -34,5 +34,5 @@ export const postAction = (url: string, value: string) => {
 export const putAction = (url: string, id: string, value: string) => {
   const itemDto = toItemDataDTO(value, id);
 
-  return httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.PUT, JSON.stringify(itemDto));
+  return httpActionBuilder(fetch)(url, HttpAction.PUT, JSON.stringify(itemDto));
 };
