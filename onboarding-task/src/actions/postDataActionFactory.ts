@@ -14,6 +14,17 @@ interface IPostItemDataActionFactoryDependencies extends IRepostItemDataActionFa
 }
 
 /**
+ * Core function used in both derived functions
+ */
+const postItemDataCore = (dependencies: IRepostItemDataActionFactoryDependencies, dispatch: Dispatch<any>, value: string,  localId: string) =>
+  dependencies.postOperation(dependencies.apiEndpoint, value)
+    .then(response => response.json())
+    .then((response: IItemDataDTO) =>
+      dispatch(dependencies.onPostSuccess(localId, response)))
+    .catch((response: Error) =>
+      dispatch(dependencies.onPostError(localId, response)));
+
+/**
  * Resends item to server
  */
 export const repostItemDataActionFactory = (dependencies: IRepostItemDataActionFactoryDependencies) =>
@@ -21,12 +32,7 @@ export const repostItemDataActionFactory = (dependencies: IRepostItemDataActionF
     (dispatch: Dispatch<any>, getState: any) => {
       const item = getState().items.data.get(localId);
 
-      return dependencies.postOperation(dependencies.apiEndpoint, item.value)
-        .then(response => response.json())
-        .then((response: IItemDataDTO) =>
-          dispatch(dependencies.onPostSuccess(localId, response)))
-        .catch((response: Error) =>
-          dispatch(dependencies.onPostError(localId, response)));
+      return postItemDataCore(dependencies, dispatch, item.value, localId);
     };
 
 /**
@@ -37,12 +43,7 @@ export const postItemDataActionFactory = (dependencies: IPostItemDataActionFacto
     (dispatch: Dispatch<any>) => {
       const { payload: { item: { localId } } } = dispatch(dependencies.createItemOperation(value));
 
-      return dependencies.postOperation(dependencies.apiEndpoint, value)
-        .then((response) => response.json())
-        .then((response: IItemDataDTO) =>
-          dispatch(dependencies.onPostSuccess(localId, response)))
-        .catch((response: Error) =>
-          dispatch(dependencies.onPostError(localId, response)));
+      return postItemDataCore(dependencies, dispatch, value, localId);
     };
 
 
