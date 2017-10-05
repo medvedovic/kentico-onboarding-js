@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ListItem as ListItemComponent } from '../components/ListItem';
 import {
   toggleBeingEdited,
-  updateItem,
   repostData,
   putData,
   deleteData
@@ -29,7 +28,6 @@ const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListI
 };
 
 const mapDispatchToProps = (dispatch: any, { localId }: IOwnProps): IListItemComponentCallbacksProps => ({
-  onUpdateItem: (value: string) => dispatch(updateItem(localId, value)),
   onUpdateData: (value: string) => dispatch(putData(localId, value)),
   onDeleteData: () => (dispatch(deleteData(localId))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),

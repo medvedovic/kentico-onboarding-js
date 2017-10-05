@@ -13,7 +13,6 @@ export interface IListItemEditorDataProps {
 
 export interface IListItemEditorCallbacksProps {
   onCancelEdit: () => void;
-  onUpdateItem: (value: string) => void;
   onDeleteData: () => void;
   onUpdateData: (value: string) => void;
 }
@@ -34,7 +33,6 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
       localId: PropTypes.string.isRequired,
       isBeingEdited: PropTypes.bool.isRequired,
     }).isRequired,
-    onUpdateItem: PropTypes.func.isRequired,
     onDeleteData: PropTypes.func.isRequired,
     onCancelEdit: PropTypes.func.isRequired,
   };
