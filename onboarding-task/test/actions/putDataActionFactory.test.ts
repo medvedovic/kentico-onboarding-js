@@ -54,7 +54,8 @@ describe('putDataActionFactory', () => {
       putOperation: mockPutSuccess,
       onPutSuccess,
       onPutError,
-      updateItemOperation
+      updateItemOperation,
+      apiEndpoint: ''
     };
     const updateResult = {
       type: UPDATE_ITEM,
@@ -70,7 +71,7 @@ describe('putDataActionFactory', () => {
     };
 
 
-    return store.dispatch(putDataActionFactory(dependencies)('url', '1234', 'Go home'))
+    return store.dispatch(putDataActionFactory(dependencies)('1234', 'Go home'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(updateResult);
@@ -84,7 +85,8 @@ describe('putDataActionFactory', () => {
       putOperation: mockPutError,
       onPutSuccess,
       onPutError,
-      updateItemOperation
+      updateItemOperation,
+      apiEndpoint: ''
     };
     const expectedResult = {
       type: HttpAction.PUT,
@@ -93,7 +95,7 @@ describe('putDataActionFactory', () => {
     };
 
 
-    return store.dispatch(putDataActionFactory(dependencies)('url', '1234', 'Go home'))
+    return store.dispatch(putDataActionFactory(dependencies)('1234', 'Go home'))
       .catch(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedResult);

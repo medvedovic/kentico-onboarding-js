@@ -31,7 +31,7 @@ const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListI
 
 const mapDispatchToProps = (dispatch: any, { apiEndpoint, localId }: IOwnProps): IListItemComponentCallbacksProps => ({
   onUpdateItem: (value: string) => dispatch(updateItem(localId, value)),
-  onUpdateData: (value: string) => dispatch(putData(apiEndpoint, localId, value)),
+  onUpdateData: (value: string) => dispatch(putData(localId, value)),
   onDeleteData: () => (dispatch(deleteData(apiEndpoint, localId))),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
   onRepostData: () => (dispatch(repostData(localId)))

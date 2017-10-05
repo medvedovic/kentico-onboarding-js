@@ -81,7 +81,8 @@ export const putData = putDataActionFactory({
   putOperation: putAction,
   onPutSuccess: putSuccess,
   onPutError: putError,
-  updateItemOperation: updateItem
+  updateItemOperation: updateItem,
+  apiEndpoint
 });
 
 export const deleteData = deleteDataActionFactory({

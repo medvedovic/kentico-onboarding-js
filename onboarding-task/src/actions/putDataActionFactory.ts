@@ -12,18 +12,19 @@ interface IPutDataActionFactory {
   onPutSuccess: (localId: string, response: IItemDataDTO) => IAction;
   onPutError: (localId: string, response: Error) => IAction;
   updateItemOperation: (localId: string, value: string) => IAction;
+  apiEndpoint: string;
 }
 
 export const putSuccess = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.success);
 export const putError = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.error);
 
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
-  (url: string, localId: string, value: string) =>
+  (localId: string, value: string) =>
     (dispatch: Dispatch<any>, getState: any) => {
       const { id } = getState().items.data.get(localId);
       dispatch(dependencies.updateItemOperation(localId, value));
 
-      return dependencies.putOperation(url, id, value)
+      return dependencies.putOperation(dependencies.apiEndpoint, id, value)
         .then((response: Response) => response.json())
         .then((response: IItemDataDTO) =>
           dispatch(dependencies.onPutSuccess(localId, response)))
