@@ -1,10 +1,5 @@
 import { Dispatch } from 'react-redux';
-import { fetchActionBuilderComposed } from './fetchActions';
 import { IAction } from './IAction';
-import {
-  EHttpActionStatus,
-  ItemActions
-} from '../constants/actionTypes';
 import { Store } from '../reducers/stores';
 
 interface IDeleteDataActionFactory {
@@ -13,8 +8,6 @@ interface IDeleteDataActionFactory {
   onDeleteError: (localId: string, response: Error) => IAction;
   apiEndpoint: string;
 }
-
-export const deleteError = fetchActionBuilderComposed(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const deleteDataActionFactory = (dependencies: IDeleteDataActionFactory) =>
   (localId: string) =>

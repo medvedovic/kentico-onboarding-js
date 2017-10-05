@@ -1,10 +1,5 @@
 import { Dispatch } from 'react-redux';
 import { IItemDataDTO } from '../models/ItemDataDTO';
-import { fetchActionBuilderComposed } from './fetchActions';
-import {
-  EHttpActionStatus,
-  ItemActions
-} from '../constants/actionTypes';
 import { IAction } from './IAction';
 
 interface IPutDataActionFactory {
@@ -14,9 +9,6 @@ interface IPutDataActionFactory {
   updateItemOperation: (localId: string, value: string) => IAction;
   apiEndpoint: string;
 }
-
-export const putSuccess = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.success);
-export const putError = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
   (localId: string, value: string) =>
