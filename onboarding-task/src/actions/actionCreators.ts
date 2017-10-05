@@ -53,8 +53,8 @@ export const createItem = createItemBuilder(itemFactory);
 const getItemsAction = (url: string) =>
   httpActionBuilder(fetch)(url);
 
-const deleteAction = (url: string, id: string) =>
-  httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.DELETE);
+const deleteAction = (url: string) =>
+  httpActionBuilder(fetch)(url, HttpAction.DELETE);
 
 const postAction = (url: string, value: string) => {
   const itemDto = toItemDataDTO(value);
@@ -65,7 +65,7 @@ const postAction = (url: string, value: string) => {
 const putAction = (url: string, id: string, value: string) => {
   const itemDto = toItemDataDTO(value, id);
 
-  return httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.PUT, JSON.stringify(itemDto));
+  return httpActionBuilder(fetch)(url, HttpAction.PUT, JSON.stringify(itemDto));
 };
 
 
