@@ -35,6 +35,7 @@ import {
   postAction,
   putAction
 } from './httpActionBuilder';
+import { apiEndpoint } from '../constants/AppSettings';
 
 const fetch = require('isomorphic-fetch');
 
@@ -70,7 +71,8 @@ export const fetchData = fetchDataActionFactory({
   startLoader: fetchStartLoading,
   stopLoader: fetchStopLoading,
   onFetchSucceeded: fetchHasSucceeded,
-  onFetchFailed: fetchHasFailed
+  onFetchFailed: fetchHasFailed,
+  apiEndpoint
 });
 
 export const putData = putDataActionFactory({

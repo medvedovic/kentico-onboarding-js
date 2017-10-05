@@ -19,7 +19,7 @@ const mapStateToProps = ({ items, app }: Store.IRoot): IListDataProps => ({
 
 const mapDispatchToProps = (dispatch: any, { apiEndpoint }: any): IListCallbacksProps => ({
   onCreateItem: (value: string) => dispatch(postData(apiEndpoint, value)),
-  onFetchData: () => dispatch(fetchData(apiEndpoint)),
+  onFetchData: () => dispatch(fetchData()),
 });
 
 export const List = connect(

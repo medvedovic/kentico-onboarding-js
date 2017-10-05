@@ -9,14 +9,15 @@ interface IFetchDataActionFactory {
   stopLoader: () => IAction;
   onFetchSucceeded: (items: Array<IItemDataDTO>) => IAction;
   onFetchFailed: (error: Error) => IAction;
+  apiEndpoint: string;
 }
 
 export const fetchDataActionFactory = (dependencies: IFetchDataActionFactory ) =>
-  (url: string) =>
+  () =>
     (dispatch: Dispatch<any>) => {
       dispatch(dependencies.startLoader());
 
-      return dependencies.fetchOperation(url)
+      return dependencies.fetchOperation(dependencies.apiEndpoint)
         .then((response: Response) => response.json())
         .then((response: Array<IItemDataDTO>) => {
           dispatch(dependencies.onFetchSucceeded(response));

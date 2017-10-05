@@ -10,10 +10,6 @@ import {
   fetchStartLoading,
   fetchStopLoading
 } from '../../src/actions/actionCreators';
-// import {
-//   fetchStartLoading,
-//   fetchStopLoading
-// } from '../../src/actions/publicActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -48,6 +44,7 @@ describe('fetchDataActionFactory', () => {
       stopLoader,
       onFetchSucceeded,
       onFetchFailed,
+      apiEndpoint: ''
     };
     const store = mockStore({});
     const expectedResult = [
@@ -57,7 +54,7 @@ describe('fetchDataActionFactory', () => {
     ];
 
 
-    return store.dispatch(fetchDataActionFactory(dependencies)(''))
+    return store.dispatch(fetchDataActionFactory(dependencies)())
       .then(() => {
         const actions = store.getActions();
         expect(actions).toEqual(expectedResult);
@@ -71,6 +68,7 @@ describe('fetchDataActionFactory', () => {
       stopLoader,
       onFetchSucceeded,
       onFetchFailed,
+      apiEndpoint: ''
     };
     const store = mockStore({});
     const expectedResult = [
@@ -84,7 +82,7 @@ describe('fetchDataActionFactory', () => {
     ];
 
 
-    return store.dispatch(fetchDataActionFactory(dependencies)(''))
+    return store.dispatch(fetchDataActionFactory(dependencies)())
       .then(() => {
         const actions = store.getActions();
         expect(actions).toEqual(expectedResult);
