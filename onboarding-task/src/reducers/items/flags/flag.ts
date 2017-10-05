@@ -1,8 +1,7 @@
 import {
-  CREATE_ITEM,
   EHttpActionStatus,
-  HttpAction,
-  TOGGLE_BEING_EDITED,
+  ItemActions,
+  LocalItemActions,
 } from '../../../constants/actionTypes';
 
 import { ListItemFlags } from '../../../models/ListItemFlags';
@@ -10,9 +9,9 @@ import { IReducer } from '../../IReducer';
 
 export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), action) => {
   switch (action.type) {
-    case HttpAction.PUT:
-    case HttpAction.POST:
-    case CREATE_ITEM: {
+    case ItemActions.PUT_ITEM_TO_SERVER:
+    case ItemActions.POST_ITEM_TO_SERVER:
+    case LocalItemActions.CREATE_ITEM: {
       if (action.status === EHttpActionStatus.error) {
         return new ListItemFlags({
           isSavedSuccess: false
@@ -21,7 +20,7 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
       return state;
     }
 
-    case HttpAction.DELETE: {
+    case ItemActions.DELETE_ITEM_TO_SERVER: {
       if (action.status === EHttpActionStatus.error) {
         return state.alter({
           isBeingEdited: false
@@ -30,7 +29,7 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
       return state;
     }
 
-    case TOGGLE_BEING_EDITED:
+    case LocalItemActions.TOGGLE_BEING_EDITED:
       return state.alter({
         isBeingEdited: !state.isBeingEdited
       });

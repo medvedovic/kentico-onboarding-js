@@ -1,11 +1,11 @@
-import { ListItemData } from '../../src/models/ListItemData';
-import { createItemBuilder } from '../../src/actions/actionCreators';
-import { CREATE_ITEM } from '../../src/constants/actionTypes';
+import { ListItemData } from '../../src/models/ListItemData.ts';
+import { createItemBuilder } from '../../src/actions/actionCreators.ts';
+import { LocalItemActions } from '../../src/constants/actionTypes.ts';
 
 describe('Action creators', () => {
   it('builds createItem action properly', () => {
     const expectedAction = {
-      type: CREATE_ITEM,
+      type: LocalItemActions.CREATE_ITEM,
       payload: {
         item: new ListItemData({
           id: 'xxyy',

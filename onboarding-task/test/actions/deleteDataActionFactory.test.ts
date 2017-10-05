@@ -3,9 +3,9 @@ import thunk from 'redux-thunk';
 import { deleteDataActionFactory } from '../../src/actions/deleteDataActionFactory';
 import { Promise } from 'es6-promise';
 import {
-  DELETE_ITEM,
   EHttpActionStatus,
-  HttpAction
+  HttpAction,
+  LocalItemActions
 } from '../../src/constants/actionTypes';
 import { OrderedMap } from 'immutable';
 
@@ -31,7 +31,7 @@ const onDeleteError = (_localId: string, _response: Error) => ({
   payload: 'Error occurred'
 });
 const onDeleteSuccess = (_localId: string) => ({
-  type: DELETE_ITEM,
+  type: LocalItemActions.DELETE_ITEM,
   payload: _localId
 });
 
@@ -46,7 +46,7 @@ describe('deleteDataActionFactory', () => {
       apiEndpoint: ''
     };
     const expectedAction = {
-      type: DELETE_ITEM,
+      type: LocalItemActions.DELETE_ITEM,
       payload: '1234'
     };
 

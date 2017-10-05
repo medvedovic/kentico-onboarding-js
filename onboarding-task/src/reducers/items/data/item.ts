@@ -1,7 +1,7 @@
 import {
   EHttpActionStatus,
-  HttpAction,
-  UPDATE_ITEM
+  ItemActions,
+  LocalItemActions,
 } from '../../../constants/actionTypes';
 import {  ListItemData } from '../../../models/ListItemData';
 
@@ -9,8 +9,8 @@ import { IReducer } from '../../IReducer';
 
 export const item: IReducer<ListItemData> = (state = new ListItemData(), action) => {
   switch (action.type) {
-    case HttpAction.POST:
-    case HttpAction.PUT: {
+    case ItemActions.POST_ITEM_TO_SERVER:
+    case ItemActions.PUT_ITEM_TO_SERVER: {
       if (action.status === EHttpActionStatus.success) {
         return state.alter({
           id: action.payload.item.id,
@@ -20,7 +20,7 @@ export const item: IReducer<ListItemData> = (state = new ListItemData(), action)
       return state;
     }
 
-    case UPDATE_ITEM:
+    case LocalItemActions.UPDATE_ITEM:
       return state.alter({
         value: action.payload.item.value
       });

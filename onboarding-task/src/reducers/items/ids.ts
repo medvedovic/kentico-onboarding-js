@@ -1,19 +1,18 @@
 import { List } from 'immutable';
 
 import {
-  CREATE_ITEM,
-  DELETE_ITEM,
   FetchData,
+  LocalItemActions,
 } from '../../constants/actionTypes';
 
 import { Reducer } from '../reducers';
 
 export const ids: Reducer.Ids = (state = List<string>(), action) => {
   switch (action.type) {
-    case CREATE_ITEM:
+    case LocalItemActions.CREATE_ITEM:
       return state.push(action.payload.item.localId);
 
-    case DELETE_ITEM:
+    case LocalItemActions.DELETE_ITEM:
       return state.filter(id => (
         id !== action.payload.id
       )).toList();

@@ -6,7 +6,7 @@ import { IItemDataDTO } from '../../src/models/ItemDataDTO';
 import {
   EHttpActionStatus,
   HttpAction,
-  UPDATE_ITEM
+  LocalItemActions,
 } from '../../src/constants/actionTypes';
 import { OrderedMap } from 'immutable';
 
@@ -39,7 +39,7 @@ const onPutError = (_localId: string, _response: Error) => ({
 });
 
 const updateItemOperation = (localId: string, value: string) => ({
-  type: UPDATE_ITEM,
+  type: LocalItemActions.UPDATE_ITEM,
   payload: {
     localId,
     value
@@ -58,7 +58,7 @@ describe('putDataActionFactory', () => {
       apiEndpoint: ''
     };
     const updateResult = {
-      type: UPDATE_ITEM,
+      type: LocalItemActions.UPDATE_ITEM,
       payload: {
         localId: '1234',
         value: 'Go home'

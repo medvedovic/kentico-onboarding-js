@@ -2,7 +2,7 @@ import { Dispatch } from 'react-redux';
 import { IItemDataDTO } from '../models/ItemDataDTO';
 import {
   EHttpActionStatus,
-  HttpAction
+  ItemActions
 } from '../constants/actionTypes';
 import { fetchActionBuilderComposed } from './fetchActions';
 import { IAction } from './IAction';
@@ -18,8 +18,8 @@ interface IPostItemDataActionFactoryDependencies extends IRepostItemDataActionFa
   createItemOperation: (value: string) => IAction;
 }
 
-export const postSuccess = fetchActionBuilderComposed(HttpAction.POST, EHttpActionStatus.success);
-export const postError = fetchActionBuilderComposed(HttpAction.POST, EHttpActionStatus.error);
+export const postSuccess = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success);
+export const postError = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 /**
  * Resends item to server

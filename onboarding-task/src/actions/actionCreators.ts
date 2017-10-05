@@ -1,4 +1,6 @@
-import { CREATE_ITEM, } from '../constants/actionTypes';
+import {
+  LocalItemActions,
+} from '../constants/actionTypes';
 import {
   IItemFactoryWithGenerator,
   itemFactory
@@ -45,7 +47,7 @@ export const fetchHasSucceeded = fetchHasSucceededBuilder(itemFactory);
 
 export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
-    type: CREATE_ITEM,
+    type: LocalItemActions.CREATE_ITEM,
     payload: {
       item: factory(value),
     },

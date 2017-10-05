@@ -3,7 +3,7 @@ import { fetchActionBuilderComposed } from './fetchActions';
 import { IAction } from './IAction';
 import {
   EHttpActionStatus,
-  HttpAction
+  ItemActions
 } from '../constants/actionTypes';
 import { Store } from '../reducers/stores';
 
@@ -14,7 +14,7 @@ interface IDeleteDataActionFactory {
   apiEndpoint: string;
 }
 
-export const deleteError = fetchActionBuilderComposed(HttpAction.DELETE, EHttpActionStatus.error);
+export const deleteError = fetchActionBuilderComposed(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const deleteDataActionFactory = (dependencies: IDeleteDataActionFactory) =>
   (localId: string) =>

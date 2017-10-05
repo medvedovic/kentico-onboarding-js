@@ -3,7 +3,7 @@ import { IItemDataDTO } from '../models/ItemDataDTO';
 import { fetchActionBuilderComposed } from './fetchActions';
 import {
   EHttpActionStatus,
-  HttpAction
+  ItemActions
 } from '../constants/actionTypes';
 import { IAction } from './IAction';
 
@@ -15,8 +15,8 @@ interface IPutDataActionFactory {
   apiEndpoint: string;
 }
 
-export const putSuccess = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.success);
-export const putError = fetchActionBuilderComposed(HttpAction.PUT, EHttpActionStatus.error);
+export const putSuccess = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.success);
+export const putError = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
   (localId: string, value: string) =>

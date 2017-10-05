@@ -1,13 +1,11 @@
 import {
-  UPDATE_ITEM,
-  DELETE_ITEM,
-  TOGGLE_BEING_EDITED,
+  LocalItemActions,
 } from '../constants/actionTypes';
 
 import { IAction } from './IAction';
 
 export const updateItem = (localId: string, value: string): IAction => ({
-  type: UPDATE_ITEM,
+  type: LocalItemActions.UPDATE_ITEM,
   payload: {
     item: {
       localId,
@@ -17,14 +15,14 @@ export const updateItem = (localId: string, value: string): IAction => ({
 });
 
 export const deleteItem = (id: string): IAction => ({
-  type: DELETE_ITEM,
+  type: LocalItemActions.DELETE_ITEM,
   payload: {
     id,
   },
 });
 
 export const toggleBeingEdited = (localId: string): IAction => ({
-  type: TOGGLE_BEING_EDITED,
+  type: LocalItemActions.TOGGLE_BEING_EDITED,
   payload: {
     localId,
   },
