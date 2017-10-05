@@ -19,7 +19,6 @@ import { Store } from '../reducers/stores';
 
 interface IOwnProps {
   localId: string;
-  apiEndpoint: string;
 }
 
 const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListItemComponentDataProps => {

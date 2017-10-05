@@ -8,9 +8,8 @@ import {
 import { postData } from '../actions/actionCreators';
 
 
-const mapStateToProps = ({ items, app }: Store.IRoot): IListDataProps => ({
+const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
   itemIds: items.ids,
-  apiEndpoint: app.settings.apiEndpoint,
 });
 
 const mapDispatchToProps = (dispatch: any): IListCallbacksProps => ({

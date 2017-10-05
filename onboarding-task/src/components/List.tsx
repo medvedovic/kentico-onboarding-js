@@ -11,7 +11,6 @@ import { Store } from '../reducers/stores';
 
 export interface IListDataProps {
   itemIds: Store.IIds;
-  apiEndpoint: string;
 }
 
 export interface IListCallbacksProps {
@@ -27,7 +26,6 @@ class List extends React.PureComponent<ListProps> {
 
   static propTypes = {
     itemIds: PropTypes.instanceOf(ImmutableList).isRequired,
-    apiEndpoint: PropTypes.string.isRequired,
     onCreateItem: PropTypes.func.isRequired,
     onFetchData: PropTypes.func.isRequired,
   };
@@ -49,7 +47,7 @@ class List extends React.PureComponent<ListProps> {
               {
                 this.props.itemIds.map((localId: string) => (
                   <li key={localId}>
-                    <ListItem localId={localId} apiEndpoint={this.props.apiEndpoint} />
+                    <ListItem localId={localId} />
                   </li>
                 ))
               }
