@@ -1,4 +1,4 @@
-import { settings } from '../../../src/reducers/app/settings';
+import { settings } from '../../../src/reducers/app/list/settings';
 import {
   fetchHasFailed} from '../../../src/actions/fetchActions';
 import { AppSettings } from '../../../src/constants/AppSettings';

@@ -10,6 +10,6 @@ export const initialState: Store.IRoot = {
     flags: Map(),
   },
   app: {
-    settings: new AppSettings,
+    list: new AppSettings,
   }
 };

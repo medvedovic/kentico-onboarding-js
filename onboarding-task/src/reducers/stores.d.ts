@@ -22,7 +22,7 @@ export namespace Store {
   }
 
   export interface IApp {
-    settings: IAppSettings;
+    list: IAppSettings;
   }
 
   export type IIds = List<string>;
