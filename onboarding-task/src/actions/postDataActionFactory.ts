@@ -1,39 +1,31 @@
 import { Dispatch } from 'react-redux';
-import { IItemDataDTO } from '../models/ItemDataDTO';
+import {
+  IItemDataDTO,
+  toItemDataDTO
+} from '../models/ItemDataDTO';
 import { IAction } from './IAction';
+import { IItemDataActionDependencies } from './itemDataActionFactory';
 
-interface IRepostItemDataActionFactoryDependencies {
-  postOperation: (url: string, value: string) => Promise<Response>;
-  onPostSuccess: (localId: string, response: IItemDataDTO) => IAction;
-  onPostError: (localId: string, response: Error) => IAction;
-  apiEndpoint: string;
-}
-
-interface IPostItemDataActionFactoryDependencies extends IRepostItemDataActionFactoryDependencies {
+interface IPostItemDataActionFactoryDependencies extends IItemDataActionDependencies {
   createItemOperation: (value: string) => IAction;
 }
 
 /**
  * Core function used in both derived functions
  */
-const postItemDataCore = (dependencies: IRepostItemDataActionFactoryDependencies, dispatch: Dispatch<any>, value: string,  localId: string) =>
-  dependencies.postOperation(dependencies.apiEndpoint, value)
+export const postItemDataCore = (
+  dependencies: IItemDataActionDependencies,
+  dispatch: Dispatch<any>,
+  url: string,
+  localId: string,
+  itemDto: IItemDataDTO | undefined
+) =>
+  dependencies.operation(url, itemDto)
     .then(response => response.json())
     .then((response: IItemDataDTO) =>
-      dispatch(dependencies.onPostSuccess(localId, response)))
+      dispatch(dependencies.onSuccess(localId, response)))
     .catch((response: Error) =>
-      dispatch(dependencies.onPostError(localId, response)));
-
-/**
- * Resends item to server
- */
-export const repostItemDataActionFactory = (dependencies: IRepostItemDataActionFactoryDependencies) =>
-  (localId: string) =>
-    (dispatch: Dispatch<any>, getState: any) => {
-      const item = getState().items.data.get(localId);
-
-      return postItemDataCore(dependencies, dispatch, item.value, localId);
-    };
+      dispatch(dependencies.onError(localId, response)));
 
 /**
  * Creates and sends item to server
@@ -41,9 +33,13 @@ export const repostItemDataActionFactory = (dependencies: IRepostItemDataActionF
 export const postItemDataActionFactory = (dependencies: IPostItemDataActionFactoryDependencies) =>
   (value: string) =>
     (dispatch: Dispatch<any>) => {
-      const { payload: { item: { localId } } } = dispatch(dependencies.createItemOperation(value));
+      const { payload: { item } } = dispatch(dependencies.createItemOperation(value));
 
-      return postItemDataCore(dependencies, dispatch, value, localId);
+      const itemDto = toItemDataDTO(item);
+
+      const url = dependencies.apiEndpoint;
+
+      return postItemDataCore(dependencies, dispatch, url, item.localId, itemDto);
     };
 
 

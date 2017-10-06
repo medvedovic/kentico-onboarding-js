@@ -18,18 +18,27 @@ import {
 } from './fetchActions';
 import {
   postItemDataActionFactory,
-  repostItemDataActionFactory
+  postItemDataCore,
 } from './postDataActionFactory';
 import { fetchDataActionFactory } from './fetchDataActionFactory';
-import { putDataActionFactory } from './putDataActionFactory';
-import { deleteDataActionFactory } from './deleteDataActionFactory';
+import {
+  putDataActionFactory,
+  putDataActionFactoryCore
+} from './putDataActionFactory';
+import {
+  deleteDataActionFactoryCore
+} from './deleteDataActionFactory';
 import {
   deleteItem,
   updateItem
 } from './userActions';
 import { apiEndpoint } from '../constants/AppSettings';
 import { httpActionBuilder } from './httpActionBuilder';
-import { toItemDataDTO } from '../models/ItemDataDTO';
+import {
+  IItemDataDTO,
+  toItemDataDTO
+} from '../models/ItemDataDTO';
+import { itemDataActionFactory } from './itemDataActionFactory';
 
 
 const fetch = require('isomorphic-fetch');
@@ -50,23 +59,19 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const createItem = createItemBuilder(itemFactory);
 
 
+const httpActionBuilderWithFetch = httpActionBuilder(fetch);
+
 const getItemsAction = (url: string) =>
-  httpActionBuilder(fetch)(url);
+  httpActionBuilderWithFetch(url);
 
 const deleteAction = (url: string) =>
-  httpActionBuilder(fetch)(url, HttpAction.DELETE);
+  httpActionBuilderWithFetch(url, HttpAction.DELETE);
 
-const postAction = (url: string, value: string) => {
-  const itemDto = toItemDataDTO(value);
+const postAction = (url: string, itemDto: IItemDataDTO) =>
+  httpActionBuilderWithFetch(url, HttpAction.POST, itemDto);
 
-  return httpActionBuilder(fetch)(url, HttpAction.POST, JSON.stringify(itemDto));
-};
-
-const putAction = (url: string, id: string, value: string) => {
-  const itemDto = toItemDataDTO(value, id);
-
-  return httpActionBuilder(fetch)(url, HttpAction.PUT, JSON.stringify(itemDto));
-};
+const putAction = (url: string, itemDto: IItemDataDTO) =>
+  httpActionBuilderWithFetch(url, HttpAction.PUT, itemDto);
 
 
 export const fetchData = fetchDataActionFactory({
@@ -83,17 +88,18 @@ const postSuccess = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, 
 const postError = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const postData = postItemDataActionFactory({
-  postOperation: postAction,
-  onPostSuccess: postSuccess,
-  onPostError: postError,
+  operation: postAction,
+  onSuccess: postSuccess,
+  onError: postError,
   createItemOperation: createItem,
   apiEndpoint
 });
 
-export const repostData = repostItemDataActionFactory({
-  postOperation: postAction,
-  onPostSuccess: postSuccess,
-  onPostError: postError,
+export const repostData = itemDataActionFactory(postItemDataCore, {
+  operation: postAction,
+  transformDataToDto: toItemDataDTO,
+  onSuccess: postSuccess,
+  onError: postError,
   apiEndpoint
 });
 
@@ -102,19 +108,27 @@ const putSuccess = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EH
 const putError = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const putData = putDataActionFactory({
-  putOperation: putAction,
-  onPutSuccess: putSuccess,
-  onPutError: putError,
+  operation: putAction,
+  onSuccess: putSuccess,
+  onError: putError,
   updateItemOperation: updateItem,
+  apiEndpoint
+});
+
+export const reputData = itemDataActionFactory(putDataActionFactoryCore, {
+  operation: putAction,
+  transformDataToDto: toItemDataDTO,
+  onSuccess: putSuccess,
+  onError: putError,
   apiEndpoint
 });
 
 
 const deleteError = fetchActionBuilderComposed(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
 
-export const deleteData = deleteDataActionFactory({
-  deleteOperation: deleteAction,
-  onDeleteError: deleteError,
-  onDeleteSuccess: deleteItem,
+export const deleteData = itemDataActionFactory(deleteDataActionFactoryCore, {
+  operation: deleteAction,
+  onError: deleteError,
+  onSuccess: deleteItem,
   apiEndpoint
 });
