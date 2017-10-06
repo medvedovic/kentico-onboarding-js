@@ -11,7 +11,6 @@ import {
 
 import { IAction } from './IAction';
 import {
-  fetchActionBuilderComposed,
   fetchHasFailed,
   fetchHasSucceededBuilder,
   fetchIsLoading
@@ -39,6 +38,7 @@ import {
   toItemDataDTO
 } from '../models/ItemDataDTO';
 import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
+import { httpStatusActionBuilder } from './httpActionFactories/httpStatusActionBuilder';
 
 
 const fetch = require('isomorphic-fetch');
@@ -84,8 +84,8 @@ export const fetchData = fetchDataActionFactory({
 });
 
 
-const postSuccess = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success);
-const postError = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error);
+const postSuccess = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success);
+const postError = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const postData = postItemDataActionFactory({
   operation: postAction,
@@ -104,8 +104,8 @@ export const repostData = itemDataActionFactory(postItemDataCore, {
 });
 
 
-const putSuccess = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.success);
-const putError = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
+const putSuccess = httpStatusActionBuilder(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.success);
+const putError = httpStatusActionBuilder(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const putData = putDataActionFactory({
   operation: putAction,
@@ -124,7 +124,7 @@ export const reputData = itemDataActionFactory(putDataActionFactoryCore, {
 });
 
 
-const deleteError = fetchActionBuilderComposed(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
+const deleteError = httpStatusActionBuilder(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const deleteData = itemDataActionFactory(deleteDataActionFactoryCore, {
   operation: deleteAction,
