@@ -11,19 +11,11 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
   switch (action.type) {
     case ItemActions.PUT_ITEM_TO_SERVER:
     case ItemActions.POST_ITEM_TO_SERVER:
+    case ItemActions.DELETE_ITEM_TO_SERVER:
     case LocalItemActions.CREATE_ITEM: {
       if (action.status === EHttpActionStatus.error) {
         return new ListItemFlags({
           isSavedSuccess: false
-        });
-      }
-      return state;
-    }
-
-    case ItemActions.DELETE_ITEM_TO_SERVER: {
-      if (action.status === EHttpActionStatus.error) {
-        return state.alter({
-          isBeingEdited: false
         });
       }
       return state;
