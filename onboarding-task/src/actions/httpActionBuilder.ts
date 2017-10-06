@@ -5,7 +5,7 @@ export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Pr
       headers: {
         'Content-Type': 'application/json'
       },
-      body
+      body: JSON.stringify(body)
     };
 
     return injectedFetch(url, requestParameters)
@@ -14,5 +14,5 @@ export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Pr
           throw new Error(response.statusText + ' at ' + response.url);
 
         return response;
-    });
+      });
   };
