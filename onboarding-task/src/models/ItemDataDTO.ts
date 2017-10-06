@@ -1,9 +1,11 @@
+import { ListItemData } from './ListItemData';
+
 export interface IItemDataDTO {
   id: string;
   value: string;
 }
 
-export const toItemDataDTO = (value: string, id: string = '00000000-0000-0000-0000-000000000000'): IItemDataDTO => ({
+export const toItemDataDTO = ({ id, value }: ListItemData): IItemDataDTO => ({
   id,
-  value
+  value,
 });
