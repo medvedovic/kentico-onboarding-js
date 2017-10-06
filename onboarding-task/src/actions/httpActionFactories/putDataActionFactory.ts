@@ -2,9 +2,9 @@ import { Dispatch } from 'react-redux';
 import {
   IItemDataDTO,
   toItemDataDTO
-} from '../models/ItemDataDTO';
-import { IAction } from './IAction';
-import { Store } from '../reducers/stores';
+} from '../../models/ItemDataDTO';
+import { IAction } from '../IAction';
+import { Store } from '../../reducers/stores';
 import { IItemDataActionDependencies } from './itemDataActionFactory';
 
 interface IPutDataActionFactory extends IItemDataActionDependencies {

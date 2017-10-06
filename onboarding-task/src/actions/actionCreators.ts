@@ -19,26 +19,26 @@ import {
 import {
   postItemDataActionFactory,
   postItemDataCore,
-} from './postDataActionFactory';
-import { fetchDataActionFactory } from './fetchDataActionFactory';
+} from './httpActionFactories/postDataActionFactory';
+import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
 import {
   putDataActionFactory,
   putDataActionFactoryCore
-} from './putDataActionFactory';
+} from './httpActionFactories/putDataActionFactory';
 import {
   deleteDataActionFactoryCore
-} from './deleteDataActionFactory';
+} from './httpActionFactories/deleteDataActionFactory';
 import {
   deleteItem,
   updateItem
 } from './userActions';
 import { apiEndpoint } from '../constants/AppSettings';
-import { httpActionBuilder } from './httpActionBuilder';
+import { httpActionBuilder } from './httpActionFactories/httpActionBuilder';
 import {
   IItemDataDTO,
   toItemDataDTO
 } from '../models/ItemDataDTO';
-import { itemDataActionFactory } from './itemDataActionFactory';
+import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
 
 
 const fetch = require('isomorphic-fetch');

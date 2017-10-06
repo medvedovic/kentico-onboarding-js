@@ -1,8 +1,8 @@
 import { Dispatch } from 'react-redux';
-import { IAction } from './IAction';
-import { IItemDataDTO } from '../models/ItemDataDTO';
-import { Store } from '../reducers/stores';
-import { ListItemData } from '../models/ListItemData';
+import { IAction } from '../IAction';
+import { IItemDataDTO } from '../../models/ItemDataDTO';
+import { Store } from '../../reducers/stores';
+import { ListItemData } from '../../models/ListItemData';
 
 export interface IItemDataActionDependencies {
   operation: (_url: string, _itemDto?: IItemDataDTO) => Promise<Response>;
