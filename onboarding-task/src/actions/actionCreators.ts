@@ -33,7 +33,7 @@ import {
   updateItem
 } from './userActions';
 import { apiEndpoint } from '../constants/AppSettings';
-import { httpActionBuilder } from './httpActionFactories/httpActionBuilder';
+import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import {
   IItemDataDTO,
   toItemDataDTO
@@ -59,7 +59,7 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const createItem = createItemBuilder(itemFactory);
 
 
-const httpActionBuilderWithFetch = httpActionBuilder(fetch);
+const httpActionBuilderWithFetch = fetchBuilder(fetch);
 
 const getItemsAction = (url: string) =>
   httpActionBuilderWithFetch(url);

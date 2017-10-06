@@ -1,4 +1,4 @@
-export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Promise<Response>) =>
+export const fetchBuilder = (injectedFetch: (url: string, init?: any) => Promise<Response>) =>
   (url: string, httpMethod: string = 'GET', body?: any) => {
     const requestParameters = {
       method: httpMethod,
