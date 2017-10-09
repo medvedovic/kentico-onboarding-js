@@ -14,7 +14,7 @@ import {
   fetchHasFailed,
   fetchHasSucceededBuilder,
   fetchIsLoading
-} from './fetchActions';
+} from './httpActionFactories/fetchDataActionCreators';
 import {
   postItemDataActionFactory,
   postItemDataCore,

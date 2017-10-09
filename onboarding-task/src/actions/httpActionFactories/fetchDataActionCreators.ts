@@ -1,6 +1,6 @@
-import { FetchData } from '../constants/actionTypes';
-import { IItemDataDTO } from '../models/ItemDataDTO';
-import { ListItemData } from '../models/ListItemData';
+import { FetchData } from '../../constants/actionTypes';
+import { IItemDataDTO } from '../../models/ItemDataDTO';
+import { ListItemData } from '../../models/ListItemData';
 
 export const fetchIsLoading = (bool: boolean) =>
   () => ({
