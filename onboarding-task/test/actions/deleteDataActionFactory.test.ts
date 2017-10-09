@@ -1,21 +1,23 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { deleteDataActionFactory } from '../../src/actions/deleteDataActionFactory';
 import { Promise } from 'es6-promise';
+import { deleteDataActionFactoryCore } from '../../src/actions/httpActionFactories/deleteDataActionFactory';
 import {
   EHttpActionStatus,
   HttpAction,
   LocalItemActions
 } from '../../src/constants/actionTypes';
 import { OrderedMap } from 'immutable';
+import { itemDataActionFactory } from '../../src/actions/httpActionFactories/itemDataActionFactory';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 
+const localId = '1234';
 const mockInitialState = () => ({
   items: {
-    data: OrderedMap([['1234', { id: '1234', value: 'Do stuff' }]])
+    data: OrderedMap([[localId, { id: localId, value: 'Do stuff' }]])
   }
 });
 
@@ -40,9 +42,9 @@ describe('deleteDataActionFactory', () => {
   it('returns correct actions on success', () => {
     const store = mockStore(mockInitialState());
     const dependencies = {
-      deleteOperation: mockDeleteSuccess,
-      onDeleteSuccess,
-      onDeleteError,
+      operation: mockDeleteSuccess,
+      onSuccess: onDeleteSuccess,
+      onError: onDeleteError,
       apiEndpoint: ''
     };
     const expectedAction = {
@@ -51,7 +53,7 @@ describe('deleteDataActionFactory', () => {
     };
 
 
-    return store.dispatch(deleteDataActionFactory(dependencies)('1234'))
+    return store.dispatch(itemDataActionFactory(deleteDataActionFactoryCore, { ...dependencies })(localId))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedAction);
@@ -66,14 +68,14 @@ describe('deleteDataActionFactory', () => {
       payload: 'Error occurred'
     };
     const dependencies = {
-      deleteOperation: mockDeleteError,
-      onDeleteSuccess,
-      onDeleteError,
+      operation: mockDeleteError,
+      onSuccess: onDeleteSuccess,
+      onError: onDeleteError,
       apiEndpoint: ''
     };
 
 
-    return store.dispatch(deleteDataActionFactory(dependencies)('1234'))
+    return store.dispatch(itemDataActionFactory(deleteDataActionFactoryCore, { ...dependencies })(localId))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedAction);

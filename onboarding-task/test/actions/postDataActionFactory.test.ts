@@ -1,44 +1,53 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
+import { OrderedMap } from 'immutable';
 
 import {
-  repostItemDataActionFactory,
-  postItemDataActionFactory
-} from '../../src/actions/postDataActionFactory';
+  postItemDataActionFactory,
+  postItemDataCore
+} from '../../src/actions/httpActionFactories/postDataActionFactory';
+import {
+  itemDataActionFactory
+} from '../../src/actions/httpActionFactories/itemDataActionFactory';
+
 import { IItemDataDTO } from '../../src/models/ItemDataDTO';
-import { EHttpActionStatus } from '../../src/constants/actionTypes';
-import { OrderedMap } from 'immutable';
+import {
+  EHttpActionStatus,
+  HttpAction,
+  LocalItemActions
+} from '../../src/constants/actionTypes';
 
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-
-const mockSuccessPost = (_url: string, _value: string) => Promise.resolve(
-  new Response()
+const id = '1234';
+const mockSuccessPost = (_url: string) => Promise.resolve(
+  new Response(JSON.stringify({ id, value: 'Go home' }))
 );
 
-const mockErrorPost = (_url: string, _value: string) => Promise.reject(
+const mockErrorPost = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
 );
 
 const onPostSuccess = (_localId: string, _response: IItemDataDTO) => ({
-  type: 'POST',
-  status: EHttpActionStatus.error,
-  payload: undefined
+  type: HttpAction.POST,
+  status: EHttpActionStatus.success,
+  payload: _response
 });
 
 const onPostError = (_localId: string, _response: Error) => ({
-  type: 'POST',
-  status: EHttpActionStatus.success,
-  payload: undefined
+  type: HttpAction.POST,
+  status: EHttpActionStatus.error,
+  payload: _response
 });
 
+
 const mockCreateItem = (value: string) => ({
-  type: 'CREATE_ITEM',
+  type: LocalItemActions.CREATE_ITEM,
   payload: {
-    item: value
+    item: { id, value }
   }
 });
 
@@ -46,27 +55,27 @@ const mockCreateItem = (value: string) => ({
 describe('postDataActionFactory', () => {
   it('returns correct actions on success', () => {
     const dependencies = {
-      postOperation: mockSuccessPost,
-      onPostSuccess,
-      onPostError,
+      operation: mockSuccessPost,
+      onSuccess: onPostSuccess,
+      onError: onPostError,
       createItemOperation: mockCreateItem,
       apiEndpoint: ''
     };
     const store = mockStore({});
     const createItemExpectedResult = {
-      type: 'CREATE_ITEM',
+      type: LocalItemActions.CREATE_ITEM,
       payload: {
-        item: 'Do stuff'
+        item: { id, value: 'Go home' }
       }
     };
     const postExpectedResult = {
-      type: 'POST',
+      type: HttpAction.POST,
       status: EHttpActionStatus.success,
-      payload: undefined
+      payload: { id, value: 'Go home' }
     };
 
 
-    return store.dispatch(postItemDataActionFactory(dependencies)('Do stuff'))
+    return store.dispatch(postItemDataActionFactory(dependencies)('Go home'))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(createItemExpectedResult);
@@ -76,28 +85,28 @@ describe('postDataActionFactory', () => {
 
   it('returns correct actions on failure', () => {
     const dependencies = {
-      postOperation: mockErrorPost,
-      onPostSuccess,
-      onPostError,
+      operation: mockErrorPost,
+      onSuccess: onPostSuccess,
+      onError: onPostError,
       createItemOperation: mockCreateItem,
       apiEndpoint: ''
     };
     const store = mockStore({});
     const postExpectedResult = {
-      type: 'POST',
+      type: HttpAction.POST,
       status: EHttpActionStatus.error,
-      payload: undefined
+      payload: new Error('Some nasty shit happened')
     };
     const createItemExpectedResult = {
-      type: 'CREATE_ITEM',
+      type: LocalItemActions.CREATE_ITEM,
       payload: {
-        item: 'Do stuff'
+        item: { id, value: 'Do stuff' }
       }
     };
 
 
     return store.dispatch(postItemDataActionFactory(dependencies)('Do stuff'))
-      .catch(() => {
+      .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(createItemExpectedResult);
         expect(actions).toContainEqual(postExpectedResult);
@@ -105,28 +114,28 @@ describe('postDataActionFactory', () => {
   });
 });
 
+describe('repostData', () => {
+  const mockInitialState = () => ({
+    items: {
+      data: OrderedMap([[id, { value: 'Go home' }]])
+    }
+  });
 
-describe('postAndSaveData', () => {
   it('returns correct actions on success', () => {
-    const mockInitialState = {
-      items: {
-        data: OrderedMap([['1234', { value: 'Go home' }]]),
-      }
-    };
-    const store = mockStore(mockInitialState);
+    const store = mockStore(mockInitialState());
     const dependencies = {
-      postOperation: mockSuccessPost,
-      onPostSuccess,
-      onPostError,
+      operation: mockSuccessPost,
+      onSuccess: onPostSuccess,
+      onError: onPostError,
       apiEndpoint: ''
     };
     const postExpectedResult = {
-      type: 'POST',
+      type: HttpAction.POST,
       status: EHttpActionStatus.success,
-      payload: undefined
+      payload:  { id, value: 'Go home' }
     };
 
-    return store.dispatch(repostItemDataActionFactory(dependencies)('1234'))
+    return store.dispatch(itemDataActionFactory(postItemDataCore, { ...dependencies })(id))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
@@ -134,27 +143,22 @@ describe('postAndSaveData', () => {
   });
 
   it('returns correct actions on failure', () => {
-    const mockInitialState = {
-      items: {
-        data: OrderedMap([['1234', { value: 'Go home' }]]),
-      }
-    };
-    const store = mockStore(mockInitialState);
+    const store = mockStore(mockInitialState());
     const dependencies = {
-      postOperation: mockErrorPost,
-      onPostSuccess,
-      onPostError,
+      operation: mockErrorPost,
+      onSuccess: onPostSuccess,
+      onError: onPostError,
       apiEndpoint: ''
     };
     const postExpectedResult = {
-      type: 'POST',
+      type: HttpAction.POST,
       status: EHttpActionStatus.error,
-      payload: undefined
+      payload: new Error('Some nasty shit happened')
     };
 
 
-    return store.dispatch(repostItemDataActionFactory(dependencies)('1234'))
-      .catch(() => {
+    return store.dispatch(itemDataActionFactory(postItemDataCore, { ...dependencies })(id))
+      .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
       });
