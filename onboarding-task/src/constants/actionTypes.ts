@@ -6,9 +6,9 @@ export namespace LocalItemActions {
 }
 
 export namespace FetchData {
-  export const IS_LOADING = 'IS_LOADING';
-  export const HAS_FAILED = 'HAS_FAILED';
-  export const HAS_SUCCEEDED = 'HAS_SUCCEEDED';
+  export const IS_LOADING = 'FETCH_IS_LOADING';
+  export const HAS_FAILED = 'FETCH_HAS_FAILED';
+  export const HAS_SUCCEEDED = 'FETCH_HAS_SUCCEEDED';
 }
 
 export namespace ItemActions {
