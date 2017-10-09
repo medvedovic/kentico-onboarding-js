@@ -29,10 +29,10 @@ export const putDataActionFactoryCore = (
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
   (localId: string, value: string) =>
     (dispatch: Dispatch<any>, getState: () => Store.IRoot) => {
+      dispatch(dependencies.updateItemOperation(localId, value));
+
       const item = getState().items.data.get(localId);
       const itemDto = toItemDataDTO(item);
-
-      dispatch(dependencies.updateItemOperation(localId, value));
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
