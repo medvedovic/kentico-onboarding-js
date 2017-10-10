@@ -13,7 +13,7 @@ interface IListItemData {
 }
 
 const defaultValues: IListItemData = {
-  id: '00000000-0000-0000-0000-000000000000',
+  id: '',
   value: 'unknown',
   localId: '00000000-0000-0000-0000-000000000000',
 };
