@@ -1,5 +1,6 @@
 import {
   EHttpActionStatus,
+  FetchData,
   HttpAction,
   ItemActions,
   LocalItemActions,
@@ -11,11 +12,6 @@ import {
 
 import { IAction } from './IAction';
 import {
-  fetchHasFailed,
-  fetchHasSucceededBuilder,
-  fetchIsLoading
-} from './httpActionFactories/fetchDataActionCreators';
-import {
   postItemDataActionFactory,
   postItemDataCore,
 } from './httpActionFactories/postDataActionFactory';
@@ -24,9 +20,7 @@ import {
   putDataActionFactory,
   putDataActionFactoryCore
 } from './httpActionFactories/putDataActionFactory';
-import {
-  deleteDataActionFactoryCore
-} from './httpActionFactories/deleteDataActionFactory';
+import { deleteDataActionFactoryCore } from './httpActionFactories/deleteDataActionFactory';
 import {
   deleteItem,
   updateItem
@@ -39,9 +33,33 @@ import {
 } from '../models/ItemDataDTO';
 import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
 import { httpStatusActionBuilder } from './httpActionFactories/httpStatusActionBuilder';
+import { ListItemData } from '../models/ListItemData';
 
 
 const fetch = require('isomorphic-fetch');
+
+export const fetchIsLoading = (bool: boolean) =>
+  () => ({
+    type: FetchData.IS_LOADING,
+    payload: {
+      isLoading: bool
+    }
+  });
+
+export const fetchHasFailed = (error: Error) => ({
+  type: FetchData.HAS_FAILED,
+  payload: {
+    error,
+  }
+});
+
+export const fetchHasSucceededBuilder = (factory: (value: string, id: string) => ListItemData) =>
+  (items: Array<IItemDataDTO>) => ({
+    type: FetchData.HAS_SUCCEEDED,
+    payload: {
+      items: items.map(item => factory(item.value, item.id))
+    }
+  });
 
 export const fetchStartLoading = fetchIsLoading(true);
 export const fetchStopLoading = fetchIsLoading(false);

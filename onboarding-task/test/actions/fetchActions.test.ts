@@ -1,14 +1,15 @@
 import {
-  fetchHasFailed,
-  fetchHasSucceededBuilder,
-  fetchIsLoading
-} from '../../src/actions/httpActionFactories/fetchDataActionCreators';
+  fetchHasSucceededBuilder} from '../../src/actions/actionCreators';
 import { ListItemData } from '../../src/models/ListItemData';
 import {
   EHttpActionStatus,
   FetchData
 } from '../../src/constants/actionTypes';
 import { httpStatusActionBuilder } from '../../src/actions/httpActionFactories/httpStatusActionBuilder';
+import {
+  fetchHasFailed,
+  fetchIsLoading
+} from '../../src/actions/actionCreators';
 
 describe('Fetch is loading', () => {
   it('Constructs action correctly', () => {

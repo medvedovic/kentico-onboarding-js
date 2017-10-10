@@ -5,7 +5,7 @@ import { fetchDataActionFactory } from '../../src/actions/httpActionFactories/fe
 import { Promise } from 'es6-promise';
 import { FetchData } from '../../src/constants/actionTypes';
 import { IItemDataDTO } from '../../src/models/ItemDataDTO';
-import { fetchHasFailed } from '../../src/actions/httpActionFactories/fetchDataActionCreators';
+import { fetchHasFailed } from '../../src/actions/actionCreators';
 import {
   fetchStartLoading,
   fetchStopLoading
