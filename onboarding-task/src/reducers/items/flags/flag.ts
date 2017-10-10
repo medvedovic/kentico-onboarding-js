@@ -15,7 +15,8 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
     case LocalItemActions.CREATE_ITEM: {
       if (action.status === EHttpActionStatus.error) {
         return new ListItemFlags({
-          isSavedSuccess: false
+          isSavedSuccess: false,
+          failedHttpAction: action.type
         });
       }
       return state;

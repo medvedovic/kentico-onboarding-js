@@ -10,4 +10,6 @@ export interface IItemViewModel {
   readonly isBeingEdited: boolean;
 
   readonly isSavedSuccess: boolean;
+
+  readonly failedHttpAction: string;
 }
