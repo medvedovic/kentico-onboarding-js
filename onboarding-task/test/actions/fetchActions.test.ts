@@ -1,16 +1,19 @@
 import {
-  fetchActionBuilderComposed,
   fetchHasFailed,
   fetchHasSucceededBuilder,
   fetchIsLoading
-} from '../../src/actions/fetchActions';
+} from '../../src/actions/httpActionFactories/fetchDataActionCreators';
 import { ListItemData } from '../../src/models/ListItemData';
-import { EHttpActionStatus } from '../../src/constants/actionTypes';
+import {
+  EHttpActionStatus,
+  FetchData
+} from '../../src/constants/actionTypes';
+import { httpStatusActionBuilder } from '../../src/actions/httpActionFactories/httpStatusActionBuilder';
 
 describe('Fetch is loading', () => {
   it('Constructs action correctly', () => {
     const expectedResult = {
-      type: 'IS_LOADING',
+      type: FetchData.IS_LOADING,
       payload: {
         isLoading: true
       }
@@ -26,7 +29,7 @@ describe('Fetch Has Failed', () => {
   it('Constructs action correctly', () => {
     const error = new Error('Nasty shit happened');
     const expectedResult = {
-      type: 'HAS_FAILED',
+      type: FetchData.HAS_FAILED,
       payload: {
        error
       }
@@ -52,7 +55,7 @@ describe('Fetch Has Succeeded Builder', () => {
     };
     const fetchHasSucceeded = fetchHasSucceededBuilder(mockFactory);
     const expectedResult = {
-      type: 'HAS_SUCCEEDED',
+      type: FetchData.HAS_SUCCEEDED,
       payload: {
         items: [
           mockFactory(input.value, input.id),
@@ -79,7 +82,7 @@ describe('Fetch Action Builder Composed', () => {
         })
       }
     };
-    const fetchSucceeded = fetchActionBuilderComposed('POST', EHttpActionStatus.success);
+    const fetchSucceeded = httpStatusActionBuilder('POST', EHttpActionStatus.success);
 
     const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', { value: 'Go home', id: '00000000-0000-0000-0000-000000000000' });
 
@@ -98,7 +101,7 @@ describe('Fetch Action Builder Composed', () => {
         }
       }
     };
-    const fetchSucceeded = fetchActionBuilderComposed('POST', EHttpActionStatus.error);
+    const fetchSucceeded = httpStatusActionBuilder('POST', EHttpActionStatus.error);
 
     const result = fetchSucceeded('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', error);
 
