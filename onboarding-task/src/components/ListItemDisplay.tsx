@@ -16,10 +16,10 @@ type ListItemDisplayProps = IListItemDisplayCallbacksProps & IListItemDisplayDat
 
 const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, method, isSavedSuccess, onClick, onResendRequest }) => (
   isSavedSuccess
-    ? <span onClick={onClick}>{value}</span>
+    ? <span className="list-clickable" onClick={onClick}>{value}</span>
     : <div className="error-message-item">
-      <span onClick={onClick}>{value}</span>
-      <button onClick={() => onResendRequest(method)}>Resend</button>
+      <span>{value}</span>
+      <button className="btn btn-default btn-custom" onClick={() => onResendRequest(method)}>Resend</button>
     </div>
 );
 
