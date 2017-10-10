@@ -7,7 +7,8 @@ export {
 export {
   fetchData,
   postData,
-  repostData,
   putData,
-  deleteData
+  deleteData,
+  repostData,
+  reputData
 } from './actionCreators';
