@@ -40,25 +40,27 @@ $error-message-side-offset: 1em;
 
 .error-message-item {
   position: relative;
-  border: 1px solid #b00;
-  padding-left: $error-message-side-offset;
+  border: none;
   //line-height: 2.385em;
   //height: 2.385em;
-  height: 36px;
+  height: 38px;
   span {
     vertical-align: top;
     display: inline-block;
-    padding-right: $error-message-side-offset;
     color: #550000;
-    line-height: 34px;
+    line-height: 36px;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   button {
-    margin-right: $error-message-side-offset;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
     background: transparent;
-    border: none;
+    border: 1px solid #ccc;
   }
 }
