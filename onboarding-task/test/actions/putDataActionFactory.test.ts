@@ -129,7 +129,6 @@ describe('reput', () => {
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedResult);
-        console.log(actions);
       });
   });
 
