@@ -1,6 +1,11 @@
 import { updateItem } from '../../../../src/actions/publicActions.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { item } from '../../../../src/reducers/items/data/item.ts';
+import { httpStatusActionBuilder } from '../../../../src/actions/httpActionFactories/httpStatusActionBuilder.ts';
+import {
+  EHttpActionStatus,
+  ItemActions,
+} from '../../../../src/constants/actionTypes.ts';
 
 describe('Item Reducer', () => {
   const id = '650cb02b-de56-41a6-8693-50fbf3e40192';
@@ -29,5 +34,21 @@ describe('Item Reducer', () => {
     const resultState = item(undefined, createItem);
 
     expect(resultState).toEqual(new ListItemData());
+  });
+
+  it('Perform post and put to server correctly', () => {
+    const expectedResult = new ListItemData({
+      localId: id,
+      id: '79c63dd4-b96f-4c6d-b505-0574f1344e70',
+      value: 'Go home',
+    });
+    const action = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success)('dbd223d5-0951-42db-8f8c-9d1c4eec68c4', {
+      id: '79c63dd4-b96f-4c6d-b505-0574f1344e70',
+      value: 'Go home',
+    });
+
+    const testResult = item(initialItem, action);
+
+    expect(testResult).toEqual(expectedResult);
   });
 });
