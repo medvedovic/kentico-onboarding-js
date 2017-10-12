@@ -6,17 +6,17 @@ import { OrderedMap } from 'immutable';
 import {
   postItemDataActionFactory,
   postItemDataCore
-} from '../../src/actions/httpActionFactories/postDataActionFactory';
+} from '../../../src/actions/httpActionFactories/postDataActionFactory';
 import {
   itemDataActionFactory
-} from '../../src/actions/httpActionFactories/itemDataActionFactory';
+} from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 
-import { IItemDataDTO } from '../../src/models/ItemDataDTO';
+import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
 import {
   EHttpActionStatus,
   HttpAction,
   LocalItemActions
-} from '../../src/constants/actionTypes';
+} from '../../../src/constants/actionTypes';
 
 
 const middlewares = [thunk];

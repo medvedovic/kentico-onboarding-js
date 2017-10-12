@@ -1,5 +1,5 @@
 import { Promise } from 'es6-promise';
-import { fetchBuilder } from '../../src/actions/httpActionFactories/fetchBuilder';
+import { fetchBuilder } from '../../../src/actions/httpActionFactories/fetchBuilder';
 
 const mockResponse = (status: number, statusText: string, response: any) =>
   new Response(response, {

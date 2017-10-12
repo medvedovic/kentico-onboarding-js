@@ -1,14 +1,14 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
-import { deleteDataActionFactoryCore } from '../../src/actions/httpActionFactories/deleteDataActionFactory';
+import { deleteDataActionFactoryCore } from '../../../src/actions/httpActionFactories/deleteDataActionFactory';
 import {
   EHttpActionStatus,
   HttpAction,
   LocalItemActions
-} from '../../src/constants/actionTypes';
+} from '../../../src/constants/actionTypes';
 import { OrderedMap } from 'immutable';
-import { itemDataActionFactory } from '../../src/actions/httpActionFactories/itemDataActionFactory';
+import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

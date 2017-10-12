@@ -1,15 +1,15 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { fetchDataActionFactory } from '../../src/actions/httpActionFactories/fetchDataActionFactory';
+import { fetchDataActionFactory } from '../../../src/actions/httpActionFactories/fetchDataActionFactory';
 import { Promise } from 'es6-promise';
-import { FetchData } from '../../src/constants/actionTypes';
-import { IItemDataDTO } from '../../src/models/ItemDataDTO';
-import { fetchHasFailed } from '../../src/actions/actionCreators';
+import { FetchData } from '../../../src/constants/actionTypes';
+import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
+import { fetchHasFailed } from '../../../src/actions/actionCreators';
 import {
   fetchStartLoading,
   fetchStopLoading
-} from '../../src/actions/actionCreators';
+} from '../../../src/actions/actionCreators';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
