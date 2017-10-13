@@ -14,14 +14,20 @@ export interface IListItemDisplayCallbacksProps {
 
 type ListItemDisplayProps = IListItemDisplayCallbacksProps & IListItemDisplayDataProps;
 
-const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, method, isSavedSuccess, onClick, onResendRequest }) => (
-  isSavedSuccess
-    ? <span className="list-clickable" onClick={onClick}>{value}</span>
-    : <div className="error-message-item">
-      <span>{value}</span>
-      <button className="btn btn-default btn-custom" onClick={() => onResendRequest(method)}>Resend</button>
-    </div>
-);
+const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, method, isSavedSuccess, onClick, onResendRequest }) => {
+  const callOnResendRequest = () => {
+    onResendRequest(method);
+  };
+
+  return (
+    isSavedSuccess
+      ? <span className="list-clickable" onClick={onClick}>{value}</span>
+      : <div className="error-message-item">
+        <span>{value}</span>
+        <button className="btn btn-default btn-custom" onClick={callOnResendRequest}>Resend</button>
+      </div>
+  );
+};
 
 ListItemDisplay.displayName = 'ListItemDisplay';
 
