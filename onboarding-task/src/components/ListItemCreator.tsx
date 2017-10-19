@@ -93,13 +93,13 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
                 <span className="input-group-btn">
                   <button
                     type="submit"
-                    className="btn btn-default btn-add"
+                    className="btn btn-default btn-add no-border-radius btn-custom"
                     disabled={!value}
                   >Add</button>
                 </span>
                 <input
                   type="text"
-                  className="form-control enlarge"
+                  className="form-control enlarge main-input no-border-radius"
                   onChange={this._handleInputChanged}
                   onBlur={this._hideError}
                   value={value}

@@ -1,8 +1,14 @@
-import { ListItemData as ListItemModel } from '../../../../src/models/ListItemData';
+import { ListItemData as ListItemModel } from '../../../../src/models/ListItemData.ts';
 import { Map } from 'immutable';
-import { data } from '../../../../src/reducers/items/data/data';
-import { deleteItem, updateItem } from '../../../../src/actions/publicActions';
-import { createItemBuilder } from '../../../../src/actions/actionCreators';
+import { data } from '../../../../src/reducers/items/data/data.ts';
+import {
+  deleteItem,
+  updateItem,
+} from '../../../../src/actions/publicActions.ts';
+import {
+  createItemBuilder,
+  fetchHasSucceededBuilder,
+} from '../../../../src/actions/actionCreators.ts';
 
 describe('Data reducer', () => {
   const _id1 = '9406272b-46bb-4bf2-9e6f-902683bbcae0';
@@ -52,5 +58,23 @@ describe('Data reducer', () => {
     const resultState = data(undefined, deleteItem(_id1));
 
     expect(resultState).toEqual(new Map());
+  });
+
+  it('stores new items from fetch correctly', () => {
+    const mockResponse = [
+      { id: _id1, value: 'Make coffee' },
+      { id: _id2, value: 'Master React' },
+    ];
+    const expectedStoreState = new Map([
+      [_id1, new ListItemModel({ localId: _id1, id: _id1, value: 'Make coffee' })],
+      [_id2, new ListItemModel({ localId: _id2, id: _id2, value: 'Master React' })],
+    ]);
+
+    const mockParse = (value, id) => new ListItemModel({ id, value, localId: id });
+    const fetch = fetchHasSucceededBuilder(mockParse)(mockResponse);
+
+    const testResult = data(undefined, fetch);
+
+    expect(testResult).toEqual(expectedStoreState);
   });
 });

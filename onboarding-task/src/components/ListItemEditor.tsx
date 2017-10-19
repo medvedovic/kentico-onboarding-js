@@ -13,7 +13,6 @@ export interface IListItemEditorDataProps {
 
 export interface IListItemEditorCallbacksProps {
   onCancelEdit: () => void;
-  onUpdateItem: (value: string) => void;
   onDeleteData: () => void;
   onUpdateData: (value: string) => void;
 }
@@ -34,7 +33,6 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
       localId: PropTypes.string.isRequired,
       isBeingEdited: PropTypes.bool.isRequired,
     }).isRequired,
-    onUpdateItem: PropTypes.func.isRequired,
     onDeleteData: PropTypes.func.isRequired,
     onCancelEdit: PropTypes.func.isRequired,
   };
@@ -80,9 +78,9 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
             autoFocus
           />
           <div className="btn-group" role="group">
-            <button type="button" className="btn btn-default" onClick={this._handleUpdate}>Save</button>
-            <button type="button" className="btn btn-default" onClick={onCancelEdit}>Cancel</button>
-            <button type="button" className="btn btn-default" onClick={this.props.onDeleteData}>Delete</button>
+            <button type="button" className="btn btn-default btn-custom" onClick={this._handleUpdate}>Save</button>
+            <button type="button" className="btn btn-default btn-custom" onClick={onCancelEdit}>Cancel</button>
+            <button type="button" className="btn btn-default delete-btn btn-custom" onClick={this.props.onDeleteData}>Delete</button>
           </div>
         </div>
         {!this.state.value &&

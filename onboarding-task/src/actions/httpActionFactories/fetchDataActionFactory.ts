@@ -1,7 +1,7 @@
 import { Dispatch } from 'react-redux';
 
-import { IItemDataDTO } from '../models/ItemDataDTO';
-import { IAction } from './IAction';
+import { IItemDataDTO } from '../../models/ItemDataDTO';
+import { IAction } from '../IAction';
 
 interface IFetchDataActionFactory {
   fetchOperation: (value: string) => Promise<Response>;

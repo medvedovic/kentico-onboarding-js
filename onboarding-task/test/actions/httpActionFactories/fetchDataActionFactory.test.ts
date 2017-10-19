@@ -1,15 +1,15 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { fetchDataActionFactory } from '../../src/actions/fetchDataActionFactory';
+import { fetchDataActionFactory } from '../../../src/actions/httpActionFactories/fetchDataActionFactory';
 import { Promise } from 'es6-promise';
-import { FetchData } from '../../src/constants/actionTypes';
-import { IItemDataDTO } from '../../src/models/ItemDataDTO';
-import { fetchHasFailed } from '../../src/actions/fetchActions';
+import { FetchData } from '../../../src/constants/actionTypes';
+import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
+import { fetchHasFailed } from '../../../src/actions/actionCreators';
 import {
   fetchStartLoading,
   fetchStopLoading
-} from '../../src/actions/actionCreators';
+} from '../../../src/actions/actionCreators';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -37,7 +37,7 @@ const onFetchFailed = (error: Error) => fetchHasFailed(error);
 
 
 describe('fetchDataActionFactory', () => {
-  it('dispatches correct actions', () => {
+  it('dispatches correct actions on success', () => {
     const dependencies = {
       fetchOperation: mockSuccessPromise,
       startLoader,
@@ -48,9 +48,9 @@ describe('fetchDataActionFactory', () => {
     };
     const store = mockStore({});
     const expectedResult = [
-      { type: 'IS_LOADING', payload: { isLoading: true } },
-      { type: 'HAS_SUCCEEDED', payload: { items } },
-      { type: 'IS_LOADING', payload: { isLoading: false } }
+      { type: FetchData.IS_LOADING, payload: { isLoading: true } },
+      { type: FetchData.HAS_SUCCEEDED, payload: { items } },
+      { type: FetchData.IS_LOADING, payload: { isLoading: false } }
     ];
 
 
@@ -61,7 +61,7 @@ describe('fetchDataActionFactory', () => {
       });
   });
 
-  it('does stuff', () => {
+  it('dispatches correct actions on failure', () => {
     const dependencies = {
       fetchOperation: mockErrorPromise,
       startLoader,
@@ -72,13 +72,13 @@ describe('fetchDataActionFactory', () => {
     };
     const store = mockStore({});
     const expectedResult = [
-      { type: 'IS_LOADING', payload: { isLoading: true } },
+      { type: FetchData.IS_LOADING, payload: { isLoading: true } },
       {
-        type: 'HAS_FAILED', payload: {
+        type: FetchData.HAS_FAILED, payload: {
         error: new Error('Some nasty shit happened')
       }
       },
-      { type: 'IS_LOADING', payload: { isLoading: false } }
+      { type: FetchData.IS_LOADING, payload: { isLoading: false } }
     ];
 
 

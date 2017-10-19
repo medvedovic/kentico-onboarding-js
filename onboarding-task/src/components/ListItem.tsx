@@ -11,28 +11,27 @@ export interface IListItemDataProps {
 
 export interface IListItemCallbacksProps {
   onDeleteData: () => void;
-  onUpdateItem: (value: string) => void;
   onUpdateData: (value: string) => void;
   onToggleBeingEdited: () => void;
-  onRepostData: () => void;
+  onResendRequest: (method: string) => void;
 }
 
 export type ListItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onUpdateData, onDeleteData, onRepostData }) => (
+const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateData, onDeleteData, onResendRequest }) => (
   itemViewModel.isBeingEdited
     ? <ListItemEditor
       onUpdateData={onUpdateData}
       itemViewModel={itemViewModel}
       onCancelEdit={onToggleBeingEdited}
-      onUpdateItem={onUpdateItem}
       onDeleteData={onDeleteData}
     />
     : <ListItemDisplay
       isSavedSuccess={itemViewModel.isSavedSuccess}
       value={itemViewModel.value}
+      method={itemViewModel.failedHttpAction}
       onClick={onToggleBeingEdited}
-      onRepostData={onRepostData}
+      onResendRequest={onResendRequest}
     />
 );
 
@@ -40,13 +39,12 @@ ListItem.displayName = 'ListItem';
 
 ListItem.propTypes = {
   itemViewModel: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     value: PropTypes.string.isRequired,
     localId: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
   }).isRequired,
   onToggleBeingEdited: PropTypes.func.isRequired,
-  onUpdateItem: PropTypes.func.isRequired,
   onDeleteData: PropTypes.func.isRequired,
 };
 

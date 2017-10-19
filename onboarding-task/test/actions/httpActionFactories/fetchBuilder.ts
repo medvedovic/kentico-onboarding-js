@@ -1,5 +1,5 @@
 import { Promise } from 'es6-promise';
-import { httpActionBuilder } from '../../src/actions/httpActionBuilder';
+import { fetchBuilder } from '../../../src/actions/httpActionFactories/fetchBuilder';
 
 const mockResponse = (status: number, statusText: string, response: any) =>
   new Response(response, {
@@ -17,7 +17,7 @@ describe('httpActionBuilder', () => {
       Promise.resolve(mockResponse(201, 'Created', JSON.stringify(mockBody))));
 
 
-    const mockFetch = httpActionBuilder(myFetch);
+    const mockFetch = fetchBuilder(myFetch);
 
     return mockFetch('', '', undefined)
       .then((response: Response) => {
@@ -33,7 +33,7 @@ describe('httpActionBuilder', () => {
       Promise.reject(mockResponse(500, 'Internal server error', undefined)));
 
 
-    const result = httpActionBuilder(myFetch)('', '');
+    const result = fetchBuilder(myFetch)('', '');
 
 
     expect(result).toThrow();

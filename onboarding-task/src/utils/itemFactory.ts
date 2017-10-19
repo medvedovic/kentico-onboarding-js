@@ -6,7 +6,7 @@ export interface IItemFactoryWithGenerator {
 }
 
 export const itemFactoryBuilder = (idGenerator: () => string): IItemFactoryWithGenerator  =>
-  (value: string, id: string = '00000000-0000-0000-0000-000000000000'): ListItemData => (
+  (value: string, id: string): ListItemData => (
     new ListItemData({
       id,
       localId: idGenerator(),
@@ -14,5 +14,5 @@ export const itemFactoryBuilder = (idGenerator: () => string): IItemFactoryWithG
     })
   );
 
-export const itemFactory = (value: string, id: string = '00000000-0000-0000-0000-000000000000'): ListItemData =>
+export const itemFactory = (value: string, id: string): ListItemData =>
   itemFactoryBuilder(generateGuid)(value, id);

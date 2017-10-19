@@ -1,5 +1,7 @@
 import {
   EHttpActionStatus,
+  FetchData,
+
   HttpAction,
   ItemActions,
   LocalItemActions,
@@ -11,28 +13,55 @@ import {
 
 import { IAction } from './IAction';
 import {
-  fetchActionBuilderComposed,
-  fetchHasFailed,
-  fetchHasSucceededBuilder,
-  fetchIsLoading
-} from './fetchActions';
-import {
   postItemDataActionFactory,
-  repostItemDataActionFactory
-} from './postDataActionFactory';
-import { fetchDataActionFactory } from './fetchDataActionFactory';
-import { putDataActionFactory } from './putDataActionFactory';
-import { deleteDataActionFactory } from './deleteDataActionFactory';
+  postItemDataCore,
+} from './httpActionFactories/postDataActionFactory';
+import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
+import {
+  putDataActionFactory,
+  putDataActionFactoryCore
+} from './httpActionFactories/putDataActionFactory';
+import { deleteDataActionFactoryCore } from './httpActionFactories/deleteDataActionFactory';
 import {
   deleteItem,
   updateItem
 } from './userActions';
 import { apiEndpoint } from '../constants/AppSettings';
-import { httpActionBuilder } from './httpActionBuilder';
-import { toItemDataDTO } from '../models/ItemDataDTO';
+
+import { fetchBuilder } from './httpActionFactories/fetchBuilder';
+import {
+  IItemDataDTO,
+  toItemDataDTO
+} from '../models/ItemDataDTO';
+import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
+import { httpStatusActionBuilder } from './httpActionFactories/httpStatusActionBuilder';
+import { ListItemData } from '../models/ListItemData';
 
 
 const fetch = require('isomorphic-fetch');
+
+export const fetchIsLoading = (bool: boolean) =>
+  () => ({
+    type: FetchData.IS_LOADING,
+    payload: {
+      isLoading: bool
+    }
+  });
+
+export const fetchHasFailed = (error: Error) => ({
+  type: FetchData.HAS_FAILED,
+  payload: {
+    error,
+  }
+});
+
+export const fetchHasSucceededBuilder = (factory: (value: string, id: string) => ListItemData) =>
+  (items: Array<IItemDataDTO>) => ({
+    type: FetchData.HAS_SUCCEEDED,
+    payload: {
+      items: items.map(item => factory(item.value, item.id))
+    }
+  });
 
 export const fetchStartLoading = fetchIsLoading(true);
 export const fetchStopLoading = fetchIsLoading(false);
@@ -50,23 +79,20 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const createItem = createItemBuilder(itemFactory);
 
 
+
+const httpActionBuilderWithFetch = fetchBuilder(fetch);
+
 const getItemsAction = (url: string) =>
-  httpActionBuilder(fetch)(url);
+  httpActionBuilderWithFetch(url);
 
-const deleteAction = (url: string, id: string) =>
-  httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.DELETE);
+const deleteAction = (url: string) =>
+  httpActionBuilderWithFetch(url, HttpAction.DELETE);
 
-const postAction = (url: string, value: string) => {
-  const itemDto = toItemDataDTO(value);
+const postAction = (url: string, itemDto: IItemDataDTO) =>
+  httpActionBuilderWithFetch(url, HttpAction.POST, itemDto);
 
-  return httpActionBuilder(fetch)(url, HttpAction.POST, JSON.stringify(itemDto));
-};
-
-const putAction = (url: string, id: string, value: string) => {
-  const itemDto = toItemDataDTO(value, id);
-
-  return httpActionBuilder(fetch)(`${url}/${id}`, HttpAction.PUT, JSON.stringify(itemDto));
-};
+const putAction = (url: string, itemDto: IItemDataDTO) =>
+  httpActionBuilderWithFetch(url, HttpAction.PUT, itemDto);
 
 
 export const fetchData = fetchDataActionFactory({
@@ -79,42 +105,51 @@ export const fetchData = fetchDataActionFactory({
 });
 
 
-const postSuccess = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success);
-const postError = fetchActionBuilderComposed(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error);
+const postSuccess = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success);
+const postError = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const postData = postItemDataActionFactory({
-  postOperation: postAction,
-  onPostSuccess: postSuccess,
-  onPostError: postError,
+  operation: postAction,
+  onSuccess: postSuccess,
+  onError: postError,
   createItemOperation: createItem,
   apiEndpoint
 });
 
-export const repostData = repostItemDataActionFactory({
-  postOperation: postAction,
-  onPostSuccess: postSuccess,
-  onPostError: postError,
+export const repostData = itemDataActionFactory(postItemDataCore, {
+  operation: postAction,
+  transformDataToDto: toItemDataDTO,
+  onSuccess: postSuccess,
+  onError: postError,
   apiEndpoint
 });
 
 
-const putSuccess = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.success);
-const putError = fetchActionBuilderComposed(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
+const putSuccess = httpStatusActionBuilder(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.success);
+const putError = httpStatusActionBuilder(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
 
 export const putData = putDataActionFactory({
-  putOperation: putAction,
-  onPutSuccess: putSuccess,
-  onPutError: putError,
+  operation: putAction,
+  onSuccess: putSuccess,
+  onError: putError,
   updateItemOperation: updateItem,
   apiEndpoint
 });
 
+export const reputData = itemDataActionFactory(putDataActionFactoryCore, {
+  operation: putAction,
+  transformDataToDto: toItemDataDTO,
+  onSuccess: putSuccess,
+  onError: putError,
+  apiEndpoint
+});
 
-const deleteError = fetchActionBuilderComposed(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
 
-export const deleteData = deleteDataActionFactory({
-  deleteOperation: deleteAction,
-  onDeleteError: deleteError,
-  onDeleteSuccess: deleteItem,
+const deleteError = httpStatusActionBuilder(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
+
+export const deleteData = itemDataActionFactory(deleteDataActionFactoryCore, {
+  operation: deleteAction,
+  onError: deleteError,
+  onSuccess: deleteItem,
   apiEndpoint
 });

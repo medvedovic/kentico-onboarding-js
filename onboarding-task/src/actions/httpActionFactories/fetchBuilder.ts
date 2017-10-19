@@ -1,11 +1,11 @@
-export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Promise<Response>) =>
+export const fetchBuilder = (injectedFetch: (url: string, init?: any) => Promise<Response>) =>
   (url: string, httpMethod: string = 'GET', body?: any) => {
     const requestParameters = {
       method: httpMethod,
       headers: {
         'Content-Type': 'application/json'
       },
-      body
+      body: JSON.stringify(body)
     };
 
     return injectedFetch(url, requestParameters)
@@ -14,5 +14,5 @@ export const httpActionBuilder = (injectedFetch: (url: string, init?: any) => Pr
           throw new Error(response.statusText + ' at ' + response.url);
 
         return response;
-    });
+      });
   };
