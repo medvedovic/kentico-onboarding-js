@@ -1,44 +1,40 @@
+import 'isomorphic-fetch';
 import {
-  EHttpActionStatus,
-  FetchData,
-
-  HttpAction,
-  ItemActions,
-  LocalItemActions,
+EHttpActionStatus,
+FetchData,
+HttpAction,
+ItemActions,
+LocalItemActions,
 } from '../constants/actionTypes';
 import {
-  IItemFactoryWithGenerator,
-  itemFactory
+IItemFactoryWithGenerator,
+itemFactory
 } from '../utils/itemFactory';
-
 import { IAction } from './IAction';
 import {
-  postItemDataActionFactory,
-  postItemDataCore,
+postItemDataActionFactory,
+postItemDataCore,
 } from './httpActionFactories/postDataActionFactory';
 import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
 import {
-  putDataActionFactory,
-  putDataActionFactoryCore
+putDataActionFactory,
+putDataActionFactoryCore
 } from './httpActionFactories/putDataActionFactory';
 import { deleteDataActionFactoryCore } from './httpActionFactories/deleteDataActionFactory';
 import {
-  deleteItem,
-  updateItem
+deleteItem,
+updateItem
 } from './userActions';
 import { apiEndpoint } from '../constants/AppSettings';
-
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import {
-  IItemDataDTO,
-  toItemDataDTO
+IItemDataDTO,
+toItemDataDTO
 } from '../models/ItemDataDTO';
 import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
 import { httpStatusActionBuilder } from './httpActionFactories/httpStatusActionBuilder';
 import { ListItemData } from '../models/ListItemData';
 
-
-const fetch = require('isomorphic-fetch');
 
 export const fetchIsLoading = (bool: boolean) =>
   () => ({

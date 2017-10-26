@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "@types/immutable": "^3.8.7",
+    "@types/isomorphic-fetch": "0.0.34",
     "@types/jest": "^18.1.1",
     "@types/memoizee": "^0.4.1",
     "@types/node": "^7.0.41",
