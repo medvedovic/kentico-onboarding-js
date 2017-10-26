@@ -36,12 +36,9 @@ import { EHttpActionStatus } from '../constants/EHttpActionStatus';
 import { HttpAction } from '../constants/HttpAction';
 
 
-export const fetchIsLoading = (bool: boolean) =>
-  () => ({
+export const fetchIsLoading = () => ({
     type: FetchData.IS_LOADING,
-    payload: {
-      isLoading: bool
-    }
+    payload: undefined
   });
 
 export const fetchHasFailed = (error: Error) => ({
@@ -59,8 +56,7 @@ export const fetchHasSucceededBuilder = (factory: (value: string, id: string) =>
     }
   });
 
-export const fetchStartLoading = fetchIsLoading(true);
-export const fetchStopLoading = fetchIsLoading(false);
+
 export const fetchHasSucceeded = fetchHasSucceededBuilder(itemFactory);
 
 
@@ -90,8 +86,7 @@ const putAction = (url: string, itemDto: IItemDataDTO) =>
 
 export const fetchData = fetchDataActionFactory({
   fetchOperation: getItemsAction,
-  startLoader: fetchStartLoading,
-  stopLoader: fetchStopLoading,
+  startLoader: fetchIsLoading,
   onFetchSucceeded: fetchHasSucceeded,
   onFetchFailed: fetchHasFailed,
   apiEndpoint

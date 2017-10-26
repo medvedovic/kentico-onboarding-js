@@ -5,10 +5,9 @@ import { fetchDataActionFactory } from '../../../src/actions/httpActionFactories
 import { Promise } from 'es6-promise';
 import { FetchData } from '../../../src/constants/actionTypes';
 import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
-import { fetchHasFailed } from '../../../src/actions/actionCreators';
 import {
-  fetchStartLoading,
-  fetchStopLoading
+  fetchHasFailed,
+  fetchIsLoading
 } from '../../../src/actions/actionCreators';
 
 const middlewares = [thunk];
@@ -25,8 +24,7 @@ const mockSuccessPromise = (_url: string) => Promise.resolve(
 const mockErrorPromise = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
 );
-const startLoader = () => fetchStartLoading();
-const stopLoader = () => fetchStopLoading();
+
 const onFetchSucceeded = (input: Array<IItemDataDTO>) => ({
   type: FetchData.HAS_SUCCEEDED,
   payload: {
@@ -40,8 +38,7 @@ describe('fetchDataActionFactory', () => {
   it('dispatches correct actions on success', () => {
     const dependencies = {
       fetchOperation: mockSuccessPromise,
-      startLoader,
-      stopLoader,
+      startLoader: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
       apiEndpoint: ''
@@ -64,8 +61,7 @@ describe('fetchDataActionFactory', () => {
   it('dispatches correct actions on failure', () => {
     const dependencies = {
       fetchOperation: mockErrorPromise,
-      startLoader,
-      stopLoader,
+      startLoader: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
       apiEndpoint: ''

@@ -7,18 +7,20 @@ export const settings: IReducer<AppSettings> = (state = new AppSettings(), actio
   switch (action.type) {
     case FetchData.IS_LOADING: {
       return state.alter({
-        showLoader: action.payload.isLoading,
+        showLoader: true,
       });
     }
 
     case FetchData.HAS_SUCCEEDED: {
       return state.alter({
+        showLoader: false,
         fetchHasFailed: false,
       });
     }
 
     case FetchData.HAS_FAILED: {
       return state.alter({
+        showLoader: false,
         fetchHasFailed: true,
       });
     }

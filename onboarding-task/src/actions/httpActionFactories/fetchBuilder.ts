@@ -13,6 +13,6 @@ export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Prom
         if (!response.ok)
           throw new Error(response.statusText + ' at ' + response.url);
 
-        return response.json();
+        return response;
       });
   };

@@ -4,16 +4,15 @@ import { AppSettings } from '../../../src/constants/AppSettings';
 import { deleteItem } from '../../../src/actions/userActions';
 import {
   fetchHasSucceeded,
-  fetchStartLoading,
-  fetchStopLoading
 } from '../../../src/actions/actionCreators';
+import { FetchData } from '../../../src/constants/actionTypes';
 
 describe('Settings reducer', () => {
 
   it('Sets loader on correctly', () => {
     const initialState = new AppSettings();
 
-    const result = settings(initialState, fetchStartLoading());
+    const result = settings(initialState, { type: FetchData.IS_LOADING, payload: undefined });
 
     expect(result.showLoader).toBeTruthy();
   });
@@ -23,7 +22,7 @@ describe('Settings reducer', () => {
       showLoader: true,
     });
 
-    const result = settings(initialState, fetchStopLoading());
+    const result = settings(initialState, { type: FetchData.HAS_SUCCEEDED, payload: undefined });
 
     expect(result.showLoader).toBeFalsy();
   });
