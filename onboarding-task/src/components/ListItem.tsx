@@ -4,6 +4,7 @@ import * as PropTypes from 'prop-types';
 import { ListItemDisplay } from './ListItemDisplay';
 import { ListItemEditor } from './ListItemEditor';
 import { IItemViewModel } from '../models/IItemViewModel';
+import { ListItemDisplayWithRedo } from './ListItemDisplayWithRedo';
 
 export interface IListItemDataProps {
   itemViewModel: IItemViewModel;
@@ -26,11 +27,18 @@ const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited
       onCancelEdit={onToggleBeingEdited}
       onDeleteData={onDeleteData}
     />
-    : <ListItemDisplay
+    : itemViewModel.isSavedSuccess ?
+    <ListItemDisplay
       isSavedSuccess={itemViewModel.isSavedSuccess}
       value={itemViewModel.value}
       method={itemViewModel.failedHttpAction}
       onClick={onToggleBeingEdited}
+      onResendRequest={onResendRequest}
+    />
+    :
+    <ListItemDisplayWithRedo
+      value={itemViewModel.value}
+      method={itemViewModel.failedHttpAction}
       onResendRequest={onResendRequest}
     />
 );
