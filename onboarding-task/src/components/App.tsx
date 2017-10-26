@@ -3,8 +3,9 @@ import * as React from 'react';
 import { List } from '../containers/List';
 import { Loader } from './Loader';
 import { IAppSettings } from '../constants/AppSettings';
+import { PropTypes } from 'react';
 
-export const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAppSettings) => (
+const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAppSettings) => (
   <div>
     <div className="container">
       <div className="header clearfix">
@@ -48,3 +49,10 @@ export const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAp
 );
 
 App.displayName = 'App';
+
+App.propTypes = {
+  showLoader: PropTypes.bool.isRequired,
+  fetchHasFailed: PropTypes.bool.isRequired
+};
+
+export { App }
