@@ -3,8 +3,6 @@ import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
 import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
 import {
-  EHttpActionStatus,
-  HttpAction,
   LocalItemActions,
 } from '../../../src/constants/actionTypes';
 import { Map } from 'immutable';
@@ -14,6 +12,8 @@ import {
 } from '../../../src/actions/httpActionFactories/putDataActionFactory';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
+import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
+import { HttpAction } from '../../../src/constants/HttpAction';
 
 
 const middlewares = [thunk];

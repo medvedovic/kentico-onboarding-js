@@ -1,4 +1,4 @@
-import { EHttpActionStatus } from '../../constants/actionTypes';
+import { EHttpActionStatus } from '../../constants/EHttpActionStatus';
 import { IItemDataDTO } from '../../models/ItemDataDTO';
 import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';

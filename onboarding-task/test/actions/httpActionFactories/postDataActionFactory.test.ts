@@ -13,10 +13,10 @@ import {
 
 import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
 import {
-  EHttpActionStatus,
-  HttpAction,
   LocalItemActions
 } from '../../../src/constants/actionTypes';
+import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
+import { HttpAction } from '../../../src/constants/HttpAction';
 
 
 const middlewares = [thunk];

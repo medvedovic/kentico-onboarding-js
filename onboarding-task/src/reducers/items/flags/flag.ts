@@ -1,11 +1,11 @@
 import {
-  EHttpActionStatus,
   ItemActions,
   LocalItemActions,
 } from '../../../constants/actionTypes';
 
 import { ListItemFlags } from '../../../models/ListItemFlags';
 import { IReducer } from '../../IReducer';
+import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
 
 export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), action) => {
   switch (action.type) {

@@ -1,5 +1,5 @@
 import { httpStatusActionBuilder } from '../../../src/actions/httpActionFactories/httpStatusActionBuilder';
-import { EHttpActionStatus } from '../../../src/constants/actionTypes';
+import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { IAction } from '../../../src/actions/IAction';
 

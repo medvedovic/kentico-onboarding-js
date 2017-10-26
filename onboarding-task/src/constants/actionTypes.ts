@@ -17,12 +17,3 @@ export namespace ItemActions {
   export const PUT_ITEM_TO_SERVER = 'PUT_ITEM_TO_SERVER';
 }
 
-export namespace HttpAction {
-  export const POST = 'POST';
-  export const DELETE = 'DELETE';
-  export const PUT = 'PUT';
-}
-
-export enum EHttpActionStatus {
-  success, error
-}

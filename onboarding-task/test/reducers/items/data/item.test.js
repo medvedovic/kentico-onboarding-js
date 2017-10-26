@@ -3,9 +3,9 @@ import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { item } from '../../../../src/reducers/items/data/item.ts';
 import { httpStatusActionBuilder } from '../../../../src/actions/httpActionFactories/httpStatusActionBuilder.ts';
 import {
-  EHttpActionStatus,
   ItemActions,
 } from '../../../../src/constants/actionTypes.ts';
+import { EHttpActionStatus } from '../../../../src/constants/EHttpActionStatus';
 
 describe('Item Reducer', () => {
   const id = '650cb02b-de56-41a6-8693-50fbf3e40192';

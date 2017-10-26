@@ -1,8 +1,6 @@
 import 'isomorphic-fetch';
 import {
-EHttpActionStatus,
 FetchData,
-HttpAction,
 ItemActions,
 LocalItemActions,
 } from '../constants/actionTypes';
@@ -34,6 +32,8 @@ toItemDataDTO
 import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
 import { httpStatusActionBuilder } from './httpActionFactories/httpStatusActionBuilder';
 import { ListItemData } from '../models/ListItemData';
+import { EHttpActionStatus } from '../constants/EHttpActionStatus';
+import { HttpAction } from '../constants/HttpAction';
 
 
 export const fetchIsLoading = (bool: boolean) =>

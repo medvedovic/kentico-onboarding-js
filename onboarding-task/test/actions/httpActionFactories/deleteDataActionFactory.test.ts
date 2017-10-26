@@ -3,12 +3,12 @@ import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
 import { deleteDataActionFactoryCore } from '../../../src/actions/httpActionFactories/deleteDataActionFactory';
 import {
-  EHttpActionStatus,
-  HttpAction,
   LocalItemActions
 } from '../../../src/constants/actionTypes';
 import { OrderedMap } from 'immutable';
 import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
+import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
+import { HttpAction } from '../../../src/constants/HttpAction';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

@@ -4,9 +4,9 @@ import { toggleBeingEdited } from '../../../../src/actions/publicActions.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { httpStatusActionBuilder } from '../../../../src/actions/httpActionFactories/httpStatusActionBuilder.ts';
 import {
-  EHttpActionStatus,
   ItemActions,
 } from '../../../../src/constants/actionTypes.ts';
+import { EHttpActionStatus } from '../../../../src/constants/EHttpActionStatus';
 
 const createItem = (value) =>
   new ListItemData({ id: '982f42cd-106e-4530-b6bc-bcdfe7fecbb9', value });
