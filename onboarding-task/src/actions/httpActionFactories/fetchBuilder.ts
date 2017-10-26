@@ -1,5 +1,5 @@
-export const fetchBuilder = (injectedFetch: (url: string, init?: any) => Promise<Response>) =>
-  (url: string, httpMethod: string = 'GET', body?: any) => {
+export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Promise<Response>) =>
+  (url: string, httpMethod: string, body?: T) => {
     const requestParameters = {
       method: httpMethod,
       headers: {
@@ -9,10 +9,10 @@ export const fetchBuilder = (injectedFetch: (url: string, init?: any) => Promise
     };
 
     return injectedFetch(url, requestParameters)
-      .then((response: Response) => {
+      .then((response) => {
         if (!response.ok)
           throw new Error(response.statusText + ' at ' + response.url);
 
-        return response;
+        return response.json();
       });
   };

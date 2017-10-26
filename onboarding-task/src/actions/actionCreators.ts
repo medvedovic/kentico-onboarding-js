@@ -75,20 +75,17 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const createItem = createItemBuilder(itemFactory);
 
 
-
-const httpActionBuilderWithFetch = fetchBuilder(fetch);
-
 const getItemsAction = (url: string) =>
-  httpActionBuilderWithFetch(url);
+  fetchBuilder(fetch)(url, HttpAction.GET);
 
 const deleteAction = (url: string) =>
-  httpActionBuilderWithFetch(url, HttpAction.DELETE);
+  fetchBuilder(fetch)(url, HttpAction.DELETE);
 
 const postAction = (url: string, itemDto: IItemDataDTO) =>
-  httpActionBuilderWithFetch(url, HttpAction.POST, itemDto);
+  fetchBuilder<IItemDataDTO>(fetch)(url, HttpAction.POST, itemDto);
 
 const putAction = (url: string, itemDto: IItemDataDTO) =>
-  httpActionBuilderWithFetch(url, HttpAction.PUT, itemDto);
+  fetchBuilder<IItemDataDTO>(fetch)(url, HttpAction.PUT, itemDto);
 
 
 export const fetchData = fetchDataActionFactory({
