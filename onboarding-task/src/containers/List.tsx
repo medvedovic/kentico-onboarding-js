@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../components/List';
 
 import { Store } from '../reducers/stores';
-import {
-  fetchData} from '../actions/actionCreators';
-import { postData } from '../actions/actionCreators';
+import { fetchData, postData} from '../actions/actionCreators';
 
 
 const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({

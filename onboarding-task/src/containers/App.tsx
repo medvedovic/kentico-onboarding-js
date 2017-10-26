@@ -8,8 +8,7 @@ const mapStateToProps = ({ app: { list: { showLoader, fetchHasFailed } } }: Stor
 });
 
 const App = connect(
-  mapStateToProps,
-  {}
+  mapStateToProps
 )(AppComponent);
 
 export { App };
