@@ -3,7 +3,6 @@ import { IAction } from '../IAction';
 import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { Store } from '../../reducers/stores';
 import { ListItemData } from '../../models/ListItemData';
-import { apiEndpointBuilder } from '../../utils/apiEndpointBuilder';
 
 export interface IItemDataActionDependencies {
   operation: (_url: string, _itemDto?: IServerItemDataViewModel) => Promise<Response>;
@@ -26,7 +25,7 @@ export const itemDataActionFactory = (
       const item = getState().items.data.get(localId);
       const itemDto = dependencies.transformDataToDto && dependencies.transformDataToDto(item);
 
-      const url = apiEndpointBuilder(dependencies.apiEndpoint, item.id);
+      const url = item.id ? `${dependencies.apiEndpoint}/${item.id}` : dependencies.apiEndpoint;
 
       return core(dependencies, dispatch, url, localId, itemDto);
     };
