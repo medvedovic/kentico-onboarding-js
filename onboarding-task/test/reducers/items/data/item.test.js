@@ -2,7 +2,7 @@ import { updateItem } from '../../../../src/actions/publicActions.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { item } from '../../../../src/reducers/items/data/item.ts';
 import { ItemActions } from '../../../../src/constants/actionTypes.ts';
-import { httpActionSuccessFactory } from '../../../../src/actions/httpActionFactories/httpStatusActionBuilder.ts';
+import { httpActionSuccessFactory } from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
 
 describe('Item Reducer', () => {
   const id = '650cb02b-de56-41a6-8693-50fbf3e40192';

@@ -1,7 +1,7 @@
 import {
   httpActionErrorFactory,
   httpActionSuccessFactory
-} from '../../../src/actions/httpActionFactories/httpStatusActionBuilder';
+} from '../../../src/actions/httpActionFactories/httpActionStatusFactories';
 import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { IAction } from '../../../src/actions/IAction';

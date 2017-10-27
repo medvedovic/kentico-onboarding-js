@@ -6,7 +6,7 @@ import { ItemActions } from '../../../../src/constants/actionTypes.ts';
 import {
   httpActionErrorFactory,
   httpActionSuccessFactory,
-} from '../../../../src/actions/httpActionFactories/httpStatusActionBuilder.ts';
+} from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
 
 const createItem = (value) =>
   new ListItemData({ id: '982f42cd-106e-4530-b6bc-bcdfe7fecbb9', value });

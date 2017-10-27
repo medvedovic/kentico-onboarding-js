@@ -33,7 +33,7 @@ import { itemDataActionFactory } from './httpActionFactories/itemDataActionFacto
 import {
   httpActionErrorFactory,
   httpActionSuccessFactory
-} from './httpActionFactories/httpStatusActionBuilder';
+} from './httpActionFactories/httpActionStatusFactories';
 import { ListItemData } from '../models/ListItemData';
 import { HttpAction } from '../constants/HttpAction';
 
