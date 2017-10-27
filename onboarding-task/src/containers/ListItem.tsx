@@ -17,21 +17,21 @@ import { Store } from '../reducers/stores';
 import { httpActionDispatcher } from '../utils/httpActionsDispatcher';
 
 interface IOwnProps {
-  localId: string;
+  id: string;
 }
 
-const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListItemComponentDataProps => {
-  const item = items.data.get(localId);
-  const flags = items.flags.get(localId);
+const mapStateToProps = ({ items }: Store.IRoot, { id }: IOwnProps): IListItemComponentDataProps => {
+  const item = items.data.get(id);
+  const flags = items.flags.get(id);
 
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch: any, { localId }: IOwnProps): IListItemComponentCallbacksProps => ({
-  onUpdateItem: (value: string) => dispatch(putData(localId, value)),
-  onDeleteItem: () => dispatch(deleteData(localId)),
-  onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
-  onResendRequest: (method: string) => dispatch(httpActionDispatcher(localId, method))
+const mapDispatchToProps = (dispatch: any, { id }: IOwnProps): IListItemComponentCallbacksProps => ({
+  onUpdateItem: (value: string) => dispatch(putData(id, value)),
+  onDeleteItem: () => dispatch(deleteData(id)),
+  onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
+  onResendRequest: (method: string) => dispatch(httpActionDispatcher(id, method))
 });
 
 export const ListItem = connect(

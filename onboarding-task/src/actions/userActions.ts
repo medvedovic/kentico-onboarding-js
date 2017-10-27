@@ -4,11 +4,11 @@ import {
 
 import { IAction } from './IAction';
 
-export const updateItem = (localId: string, value: string): IAction => ({
+export const updateItem = (id: string, value: string): IAction => ({
   type: LocalItemActions.UPDATE_ITEM,
   payload: {
     item: {
-      localId,
+      id,
       value,
     },
   },
@@ -21,9 +21,9 @@ export const deleteItem = (id: string): IAction => ({
   },
 });
 
-export const toggleBeingEdited = (localId: string): IAction => ({
+export const toggleBeingEdited = (id: string): IAction => ({
   type: LocalItemActions.TOGGLE_BEING_EDITED,
   payload: {
-    localId,
+    id,
   },
 });

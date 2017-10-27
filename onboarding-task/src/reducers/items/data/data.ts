@@ -15,16 +15,24 @@ export const data: Reducer.Data = (state = Map(), action) => {
     case LocalItemActions.CREATE_ITEM: {
       const newItem = action.payload.item;
 
-      return state.set(newItem.localId, newItem);
+      return state.set(action.payload.item.id, newItem);
     }
 
-    case ItemActions.POST_ITEM_TO_SERVER:
-    case ItemActions.PUT_ITEM_TO_SERVER:
-    case LocalItemActions.UPDATE_ITEM: {
-      const existingItem = state.get(action.payload.item.localId);
+    case ItemActions.POST_ITEM_TO_SERVER: {
+      const existingItem = state.get(action.payload.localId);
       const newItem = item(existingItem, action);
 
-      return state.set(action.payload.item.localId, newItem);
+      return state
+        .delete(action.payload.localId)
+        .set(action.payload.item.id, newItem);
+    }
+
+    case ItemActions.PUT_ITEM_TO_SERVER:
+    case LocalItemActions.UPDATE_ITEM: {
+      const existingItem = state.get(action.payload.item.id);
+      const newItem = item(existingItem, action);
+
+      return state.set(action.payload.item.id, newItem);
     }
 
     case LocalItemActions.DELETE_ITEM:
@@ -32,7 +40,7 @@ export const data: Reducer.Data = (state = Map(), action) => {
 
     case FetchData.HAS_SUCCEEDED: {
       action.payload.items.forEach((item: ListItemData) => {
-        state = state.set(item.localId, item);
+        state = state.set(item.id, item);
       });
 
       return state;

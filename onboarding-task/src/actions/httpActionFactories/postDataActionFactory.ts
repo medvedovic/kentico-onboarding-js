@@ -39,7 +39,7 @@ export const postItemDataActionFactory = (dependencies: IPostItemDataActionFacto
 
       const url = dependencies.apiEndpoint;
 
-      return postItemDataCore(dependencies, dispatch, url, item.localId, itemDto);
+      return postItemDataCore(dependencies, dispatch, url, item.id, itemDto);
     };
 
 

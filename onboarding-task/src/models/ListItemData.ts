@@ -8,14 +8,11 @@ interface IListItemData {
   readonly id: string;
   /** Value held by item */
   readonly value: string;
-  /** Id representation saved in store */
-  readonly localId: string;
 }
 
 const defaultValues: IListItemData = {
   id: '',
   value: 'unknown',
-  localId: '00000000-0000-0000-0000-000000000000',
 };
 
 /**
@@ -24,5 +21,4 @@ const defaultValues: IListItemData = {
 export class ListItemData extends TypedRecord<IListItemData>(defaultValues) implements IListItemData {
   readonly id: string;
   readonly value: string;
-  readonly localId: string;
 }

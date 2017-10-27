@@ -21,7 +21,6 @@ describe('httpActionSuccessFactory', () => {
         item: new ListItemData({
           id: params.id,
           value: params.value,
-          localId: guid
         })
       }
     };
@@ -40,7 +39,7 @@ describe('httpActionErrorFactory', () => {
       payload: {
         error: new Error('failure'),
         item: {
-          localId: guid
+          id: guid
         }
       }
     };

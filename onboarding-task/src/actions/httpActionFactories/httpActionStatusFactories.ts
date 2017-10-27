@@ -5,26 +5,26 @@ import { ListItemData } from '../../models/ListItemData';
 
 
 export const httpActionSuccessFactory = (type: string) =>
-  (localId: string, params: IServerItemDataViewModel): IAction => ({
+  (id: string, params: IServerItemDataViewModel): IAction => ({
     type,
     status: EHttpActionStatus.success,
     payload: {
+      id,
       item: new ListItemData({
         id: params.id,
         value: params.value,
-        localId
       })
     }
   });
 
 export const httpActionErrorFactory = (type: string) =>
-  (localId: string, params: Error): IAction => ({
+  (id: string, params: Error): IAction => ({
     type,
     status: EHttpActionStatus.error,
     payload: {
       error: params,
       item: {
-        localId
+        id
       }
     }
   });

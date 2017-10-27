@@ -8,8 +8,7 @@ export interface IItemFactoryWithGenerator {
 export const itemFactoryBuilder = (idGenerator: () => string): IItemFactoryWithGenerator  =>
   (value: string, id: string): ListItemData => (
     new ListItemData({
-      id,
-      localId: idGenerator(),
+      id: id || idGenerator(),
       value,
     })
   );

@@ -49,7 +49,6 @@ ListItem.propTypes = {
   itemViewModel: PropTypes.shape({
     id: PropTypes.string,
     value: PropTypes.string.isRequired,
-    localId: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
   }).isRequired,
   onToggleBeingEdited: PropTypes.func.isRequired,

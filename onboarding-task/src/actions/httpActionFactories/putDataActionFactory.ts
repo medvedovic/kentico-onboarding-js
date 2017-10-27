@@ -15,26 +15,26 @@ export const putDataActionFactoryCore = (
   dependencies: IItemDataActionDependencies,
   dispatch: Dispatch<any>,
   url: string,
-  localId: string,
+  id: string,
   itemDto: IServerItemDataViewModel | undefined
 ) =>
   dependencies.operation(url, itemDto)
     .then((response: Response) => response.json())
     .then((response: IServerItemDataViewModel) =>
-      dispatch(dependencies.onSuccess(localId, response)))
+      dispatch(dependencies.onSuccess(id, response)))
     .catch((response: Error) =>
-      dispatch(dependencies.onError(localId, response)));
+      dispatch(dependencies.onError(id, response)));
 
 
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
-  (localId: string, value: string) =>
+  (id: string, value: string) =>
     (dispatch: Dispatch<any>, getState: () => Store.IRoot) => {
-      dispatch(dependencies.updateItemOperation(localId, value));
+      dispatch(dependencies.updateItemOperation(id, value));
 
-      const item = getState().items.data.get(localId);
+      const item = getState().items.data.get(id);
       const itemDto = toServerItemDataViewModel(item);
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
-      return putDataActionFactoryCore(dependencies, dispatch, url, localId, itemDto);
+      return putDataActionFactoryCore(dependencies, dispatch, url, id, itemDto);
     };
