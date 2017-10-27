@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
-import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
+import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
 import {
   LocalItemActions,
 } from '../../../src/constants/actionTypes';
@@ -28,13 +28,13 @@ const mockInitialState = () => ({
 });
 
 
-const mockPutSuccess = (_url: string, _dto: IItemDataDTO) => Promise.resolve(
+const mockPutSuccess = (_url: string, _dto: IServerItemDataViewModel) => Promise.resolve(
   new Response(JSON.stringify({ id, value: 'Go home' }))
 );
-const mockPutError = (_url: string, _dto: IItemDataDTO) => Promise.reject(
+const mockPutError = (_url: string, _dto: IServerItemDataViewModel) => Promise.reject(
   new Error('Some nasty shit happened')
 );
-const onPutSuccess = (_localId: string, _response: IItemDataDTO) => ({
+const onPutSuccess = (_localId: string, _response: IServerItemDataViewModel) => ({
   type: HttpAction.PUT,
   status: EHttpActionStatus.success,
   payload: undefined

@@ -11,7 +11,7 @@ import {
   itemDataActionFactory
 } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 
-import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
+import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
 import {
   LocalItemActions
 } from '../../../src/constants/actionTypes';
@@ -31,7 +31,7 @@ const mockErrorPost = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
 );
 
-const onPostSuccess = (_localId: string, _response: IItemDataDTO) => ({
+const onPostSuccess = (_localId: string, _response: IServerItemDataViewModel) => ({
   type: HttpAction.POST,
   status: EHttpActionStatus.success,
   payload: _response

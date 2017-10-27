@@ -1,8 +1,8 @@
 import { Dispatch } from 'react-redux';
 import {
-  IItemDataDTO,
-  toItemDataDTO
-} from '../../models/ItemDataDTO';
+  IServerItemDataViewModel,
+  toServerItemDataViewModel
+} from '../../models/IServerItemDataViewModel';
 import { IAction } from '../IAction';
 import { Store } from '../../reducers/stores';
 import { IItemDataActionDependencies } from './itemDataActionFactory';
@@ -16,11 +16,11 @@ export const putDataActionFactoryCore = (
   dispatch: Dispatch<any>,
   url: string,
   localId: string,
-  itemDto: IItemDataDTO | undefined
+  itemDto: IServerItemDataViewModel | undefined
 ) =>
   dependencies.operation(url, itemDto)
     .then((response: Response) => response.json())
-    .then((response: IItemDataDTO) =>
+    .then((response: IServerItemDataViewModel) =>
       dispatch(dependencies.onSuccess(localId, response)))
     .catch((response: Error) =>
       dispatch(dependencies.onError(localId, response)));
@@ -32,7 +32,7 @@ export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
       dispatch(dependencies.updateItemOperation(localId, value));
 
       const item = getState().items.data.get(localId);
-      const itemDto = toItemDataDTO(item);
+      const itemDto = toServerItemDataViewModel(item);
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 

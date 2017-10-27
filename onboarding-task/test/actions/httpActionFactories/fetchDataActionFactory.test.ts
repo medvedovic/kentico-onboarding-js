@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { fetchDataActionFactory } from '../../../src/actions/httpActionFactories/fetchDataActionFactory';
 import { Promise } from 'es6-promise';
 import { FetchData } from '../../../src/constants/actionTypes';
-import { IItemDataDTO } from '../../../src/models/ItemDataDTO';
+import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
 import {
   fetchHasFailed,
   fetchIsLoading
@@ -25,7 +25,7 @@ const mockErrorPromise = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
 );
 
-const onFetchSucceeded = (input: Array<IItemDataDTO>) => ({
+const onFetchSucceeded = (input: Array<IServerItemDataViewModel>) => ({
   type: FetchData.HAS_SUCCEEDED,
   payload: {
     items: input

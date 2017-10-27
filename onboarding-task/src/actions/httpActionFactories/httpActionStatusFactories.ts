@@ -1,11 +1,11 @@
 import { EHttpActionStatus } from '../../constants/EHttpActionStatus';
-import { IItemDataDTO } from '../../models/ItemDataDTO';
+import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
 
 
 export const httpActionSuccessFactory = (type: string) =>
-  (localId: string, params: IItemDataDTO): IAction => ({
+  (localId: string, params: IServerItemDataViewModel): IAction => ({
     type,
     status: EHttpActionStatus.success,
     payload: {

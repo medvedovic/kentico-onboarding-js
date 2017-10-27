@@ -1,15 +1,15 @@
 import { Dispatch } from 'react-redux';
 import { IAction } from '../IAction';
-import { IItemDataDTO } from '../../models/ItemDataDTO';
+import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { Store } from '../../reducers/stores';
 import { ListItemData } from '../../models/ListItemData';
 import { apiEndpointBuilder } from '../../utils/apiEndpointBuilder';
 
 export interface IItemDataActionDependencies {
-  operation: (_url: string, _itemDto?: IItemDataDTO) => Promise<Response>;
-  transformDataToDto?: (item: ListItemData) => IItemDataDTO;
-  onSuccess: (_localId: string, _response?: IItemDataDTO | Error) => IAction;
-  onError: (_localId: string, _error: IItemDataDTO | Error) => IAction;
+  operation: (_url: string, _itemDto?: IServerItemDataViewModel) => Promise<Response>;
+  transformDataToDto?: (item: ListItemData) => IServerItemDataViewModel;
+  onSuccess: (_localId: string, _response?: IServerItemDataViewModel | Error) => IAction;
+  onError: (_localId: string, _error: IServerItemDataViewModel | Error) => IAction;
   apiEndpoint: string;
 }
 
@@ -19,7 +19,7 @@ export const itemDataActionFactory = (
     dispatch: Dispatch<any>,
     url: string,
     localId: string,
-    itemDto: IItemDataDTO | undefined
+    itemDto: IServerItemDataViewModel | undefined
   ) => Promise<IAction>, dependencies: IItemDataActionDependencies) =>
   (localId: string) =>
     (dispatch: Dispatch<any>, getState: () => Store.IRoot) => {

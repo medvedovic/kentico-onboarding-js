@@ -1,7 +1,7 @@
 import {
-  IItemDataDTO,
-  toItemDataDTO
-} from '../../src/models/ItemDataDTO';
+  IServerItemDataViewModel,
+  toServerItemDataViewModel
+} from '../../src/models/IServerItemDataViewModel';
 import { ListItemData } from '../../src/models/ListItemData';
 
 describe('toItemDataDto', () => {
@@ -10,12 +10,12 @@ describe('toItemDataDto', () => {
       id: '00000000-0000-0000-0000-000000000000',
       value: 'Go home'
     });
-    const expectedResult: IItemDataDTO = {
+    const expectedResult: IServerItemDataViewModel = {
       value: 'Go home',
       id: '00000000-0000-0000-0000-000000000000'
     };
 
-    const result = toItemDataDTO(testItem);
+    const result = toServerItemDataViewModel(testItem);
 
     expect(expectedResult).toEqual(result);
   });

@@ -26,9 +26,9 @@ import {
 import { apiEndpoint } from '../constants/apiEndpoint';
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import {
-  IItemDataDTO,
-  toItemDataDTO
-} from '../models/ItemDataDTO';
+  IServerItemDataViewModel,
+  toServerItemDataViewModel
+} from '../models/IServerItemDataViewModel';
 import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
 import {
   httpActionErrorFactory,
@@ -51,7 +51,7 @@ export const fetchHasFailed = (error: Error) => ({
 });
 
 export const fetchHasSucceededBuilder = (factory: (value: string, id: string) => ListItemData) =>
-  (items: Array<IItemDataDTO>) => ({
+  (items: Array<IServerItemDataViewModel>) => ({
     type: FetchData.HAS_SUCCEEDED,
     payload: {
       items: items.map(item => factory(item.value, item.id))
@@ -79,11 +79,11 @@ const getItemsFromServer = (url: string) =>
 const removeItemOnServer = (url: string) =>
   fetchBuilder(fetch)(url, HttpAction.DELETE);
 
-const createItemOnServer = (url: string, itemDto: IItemDataDTO) =>
-  fetchBuilder<IItemDataDTO>(fetch)(url, HttpAction.POST, itemDto);
+const createItemOnServer = (url: string, itemDto: IServerItemDataViewModel) =>
+  fetchBuilder<IServerItemDataViewModel>(fetch)(url, HttpAction.POST, itemDto);
 
-const updateItemOnServer = (url: string, itemDto: IItemDataDTO) =>
-  fetchBuilder<IItemDataDTO>(fetch)(url, HttpAction.PUT, itemDto);
+const updateItemOnServer = (url: string, itemDto: IServerItemDataViewModel) =>
+  fetchBuilder<IServerItemDataViewModel>(fetch)(url, HttpAction.PUT, itemDto);
 
 
 export const fetchData = fetchDataActionFactory({
@@ -105,7 +105,7 @@ export const postData = postItemDataActionFactory({
 
 export const repostData = itemDataActionFactory(postItemDataCore, {
   operation: createItemOnServer,
-  transformDataToDto: toItemDataDTO,
+  transformDataToDto: toServerItemDataViewModel,
   onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
   onError: httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER),
   apiEndpoint
@@ -122,7 +122,7 @@ export const putData = putDataActionFactory({
 
 export const reputData = itemDataActionFactory(putDataActionFactoryCore, {
   operation: updateItemOnServer,
-  transformDataToDto: toItemDataDTO,
+  transformDataToDto: toServerItemDataViewModel,
   onSuccess: httpActionSuccessFactory(ItemActions.PUT_ITEM_TO_SERVER),
   onError: httpActionErrorFactory(ItemActions.PUT_ITEM_TO_SERVER),
   apiEndpoint
