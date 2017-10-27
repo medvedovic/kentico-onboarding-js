@@ -20,7 +20,7 @@ export const ids: Reducer.Ids = (state = List<string>(), action) => {
 
     case ItemActions.POST_ITEM_TO_SERVER: {
       return state.filter(id => (
-        id !== action.payload.localId
+        id !== action.payload.id
       )).toList().push(action.payload.item.id);
     }
 

@@ -19,11 +19,11 @@ export const data: Reducer.Data = (state = Map(), action) => {
     }
 
     case ItemActions.POST_ITEM_TO_SERVER: {
-      const existingItem = state.get(action.payload.localId);
+      const existingItem = state.get(action.payload.id);
       const newItem = item(existingItem, action);
 
       return state
-        .delete(action.payload.localId)
+        .delete(action.payload.id)
         .set(action.payload.item.id, newItem);
     }
 
