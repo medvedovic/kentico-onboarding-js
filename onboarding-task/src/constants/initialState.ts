@@ -1,7 +1,6 @@
 import { Map, List } from 'immutable';
 
 import { Store } from '../reducers/stores';
-import { AppSettings } from '../models/AppSettings';
 
 export const initialState: Store.IRoot = {
   items: {
@@ -10,6 +9,9 @@ export const initialState: Store.IRoot = {
     flags: Map(),
   },
   app: {
-    list: new AppSettings,
+    list: {
+      showLoader: true,
+      fetchHasFailed: false,
+    }
   }
 };
