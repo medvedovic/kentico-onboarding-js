@@ -2,11 +2,11 @@ import { ListItemFlags } from '../../../../src/models/ListItemFlags.ts';
 import { flag } from '../../../../src/reducers/items/flags/flag.ts';
 import { toggleBeingEdited } from '../../../../src/actions/publicActions.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
-import { httpStatusActionBuilder } from '../../../../src/actions/httpActionFactories/httpStatusActionBuilder.ts';
+import { ItemActions } from '../../../../src/constants/actionTypes.ts';
 import {
-  ItemActions,
-} from '../../../../src/constants/actionTypes.ts';
-import { EHttpActionStatus } from '../../../../src/constants/EHttpActionStatus';
+  httpActionErrorFactory,
+  httpActionSuccessFactory,
+} from '../../../../src/actions/httpActionFactories/httpStatusActionBuilder.ts';
 
 const createItem = (value) =>
   new ListItemData({ id: '982f42cd-106e-4530-b6bc-bcdfe7fecbb9', value });
@@ -42,7 +42,7 @@ describe('Flag Reducer', () => {
       isSavedSuccess: false,
       failedHttpAction: ItemActions.POST_ITEM_TO_SERVER,
     });
-    const action = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error)('id', new Error());
+    const action = httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER)('id', new Error());
 
     const testResult = flag(undefined, action);
 
@@ -55,7 +55,7 @@ describe('Flag Reducer', () => {
       isSavedSuccess: true,
       failedHttpAction: undefined,
     });
-    const action = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success)('id', new Error());
+    const action = httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER)('id', new Error());
 
     const testResult = flag(undefined, action);
 

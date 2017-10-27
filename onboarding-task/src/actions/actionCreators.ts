@@ -1,45 +1,47 @@
 import 'isomorphic-fetch';
 import {
-FetchData,
-ItemActions,
-LocalItemActions,
+  FetchData,
+  ItemActions,
+  LocalItemActions,
 } from '../constants/actionTypes';
 import {
-IItemFactoryWithGenerator,
-itemFactory
+  IItemFactoryWithGenerator,
+  itemFactory
 } from '../utils/itemFactory';
 import { IAction } from './IAction';
 import {
-postItemDataActionFactory,
-postItemDataCore,
+  postItemDataActionFactory,
+  postItemDataCore,
 } from './httpActionFactories/postDataActionFactory';
 import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
 import {
-putDataActionFactory,
-putDataActionFactoryCore
+  putDataActionFactory,
+  putDataActionFactoryCore
 } from './httpActionFactories/putDataActionFactory';
 import { deleteDataActionFactoryCore } from './httpActionFactories/deleteDataActionFactory';
 import {
-deleteItem,
-updateItem
+  deleteItem,
+  updateItem
 } from './userActions';
 import { apiEndpoint } from '../constants/AppSettings';
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import {
-IItemDataDTO,
-toItemDataDTO
+  IItemDataDTO,
+  toItemDataDTO
 } from '../models/ItemDataDTO';
 import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
-import { httpStatusActionBuilder } from './httpActionFactories/httpStatusActionBuilder';
+import {
+  httpActionErrorFactory,
+  httpActionSuccessFactory
+} from './httpActionFactories/httpStatusActionBuilder';
 import { ListItemData } from '../models/ListItemData';
-import { EHttpActionStatus } from '../constants/EHttpActionStatus';
 import { HttpAction } from '../constants/HttpAction';
 
 
 export const fetchIsLoading = () => ({
-    type: FetchData.IS_LOADING,
-    payload: undefined
-  });
+  type: FetchData.IS_LOADING,
+  payload: undefined
+});
 
 export const fetchHasFailed = (error: Error) => ({
   type: FetchData.HAS_FAILED,
@@ -71,21 +73,21 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
 export const createItem = createItemBuilder(itemFactory);
 
 
-const getItemsAction = (url: string) =>
+const getItemsFromServer = (url: string) =>
   fetchBuilder(fetch)(url, HttpAction.GET);
 
-const deleteAction = (url: string) =>
+const removeItemOnServer = (url: string) =>
   fetchBuilder(fetch)(url, HttpAction.DELETE);
 
-const postAction = (url: string, itemDto: IItemDataDTO) =>
+const createItemOnServer = (url: string, itemDto: IItemDataDTO) =>
   fetchBuilder<IItemDataDTO>(fetch)(url, HttpAction.POST, itemDto);
 
-const putAction = (url: string, itemDto: IItemDataDTO) =>
+const updateItemOnServer = (url: string, itemDto: IItemDataDTO) =>
   fetchBuilder<IItemDataDTO>(fetch)(url, HttpAction.PUT, itemDto);
 
 
 export const fetchData = fetchDataActionFactory({
-  fetchOperation: getItemsAction,
+  fetchOperation: getItemsFromServer,
   startLoader: fetchIsLoading,
   onFetchSucceeded: fetchHasSucceeded,
   onFetchFailed: fetchHasFailed,
@@ -93,51 +95,43 @@ export const fetchData = fetchDataActionFactory({
 });
 
 
-const postSuccess = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.success);
-const postError = httpStatusActionBuilder(ItemActions.POST_ITEM_TO_SERVER, EHttpActionStatus.error);
-
 export const postData = postItemDataActionFactory({
-  operation: postAction,
-  onSuccess: postSuccess,
-  onError: postError,
+  operation: createItemOnServer,
+  onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
+  onError: httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER),
   createItemOperation: createItem,
   apiEndpoint
 });
 
 export const repostData = itemDataActionFactory(postItemDataCore, {
-  operation: postAction,
+  operation: createItemOnServer,
   transformDataToDto: toItemDataDTO,
-  onSuccess: postSuccess,
-  onError: postError,
+  onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
+  onError: httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER),
   apiEndpoint
 });
 
 
-const putSuccess = httpStatusActionBuilder(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.success);
-const putError = httpStatusActionBuilder(ItemActions.PUT_ITEM_TO_SERVER, EHttpActionStatus.error);
-
 export const putData = putDataActionFactory({
-  operation: putAction,
-  onSuccess: putSuccess,
-  onError: putError,
+  operation: updateItemOnServer,
+  onSuccess: httpActionSuccessFactory(ItemActions.PUT_ITEM_TO_SERVER),
+  onError: httpActionErrorFactory(ItemActions.PUT_ITEM_TO_SERVER),
   updateItemOperation: updateItem,
   apiEndpoint
 });
 
 export const reputData = itemDataActionFactory(putDataActionFactoryCore, {
-  operation: putAction,
+  operation: updateItemOnServer,
   transformDataToDto: toItemDataDTO,
-  onSuccess: putSuccess,
-  onError: putError,
+  onSuccess: httpActionSuccessFactory(ItemActions.PUT_ITEM_TO_SERVER),
+  onError: httpActionErrorFactory(ItemActions.PUT_ITEM_TO_SERVER),
   apiEndpoint
 });
 
 
-const deleteError = httpStatusActionBuilder(ItemActions.DELETE_ITEM_TO_SERVER, EHttpActionStatus.error);
-
 export const deleteData = itemDataActionFactory(deleteDataActionFactoryCore, {
-  operation: deleteAction,
-  onError: deleteError,
+  operation: removeItemOnServer,
+  onError: httpActionErrorFactory(ItemActions.DELETE_ITEM_TO_SERVER),
   onSuccess: deleteItem,
   apiEndpoint
 });
