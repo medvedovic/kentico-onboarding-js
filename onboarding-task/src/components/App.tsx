@@ -2,7 +2,7 @@ import '../styles/sticky-footer.css';
 import * as React from 'react';
 import { List } from '../containers/List';
 import { Loader } from './Loader';
-import { IAppSettings } from '../models/AppSettings';
+import { IAppSettings } from '../models/IAppSettings';
 import * as PropTypes from 'prop-types';
 
 const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAppSettings) => (

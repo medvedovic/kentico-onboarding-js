@@ -4,7 +4,7 @@ import {
 } from 'immutable';
 import { ListItemData } from '../models/ListItemData';
 import { ListItemFlags } from '../models/ListItemFlags';
-import { IAppSettings } from '../models/AppSettings';
+import { IAppSettings } from '../models/IAppSettings';
 
 /**
  * Holds all stores used in application
