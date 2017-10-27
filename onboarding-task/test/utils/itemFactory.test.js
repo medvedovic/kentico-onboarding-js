@@ -1,4 +1,4 @@
-import { itemFactoryBuilder } from '../../src/utils/itemFactory.ts';
+import { listItemDataConverterBuilder } from '../../src/utils/itemFactory.ts';
 import { ListItemData } from '../../src/models/ListItemData.ts';
 
 describe('Item factory', () => {
@@ -11,7 +11,7 @@ describe('Item factory', () => {
       value: 'Make a sandwich',
     });
 
-    const newItem = itemFactoryBuilder(dummyIdGenerator)('Make a sandwich');
+    const newItem = listItemDataConverterBuilder(dummyIdGenerator)('Make a sandwich');
 
     expect(newItem).toEqual(expectedResult);
   });

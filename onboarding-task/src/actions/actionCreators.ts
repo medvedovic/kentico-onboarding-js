@@ -5,8 +5,8 @@ import {
   LocalItemActions,
 } from '../constants/actionTypes';
 import {
-  IItemFactoryWithGenerator,
-  itemFactory
+  IListItemDataConverterWithGenerator,
+  listItemDataConverter
 } from '../utils/itemFactory';
 import { IAction } from './IAction';
 import {
@@ -59,10 +59,10 @@ export const fetchHasSucceededBuilder = (factory: (value: string, id: string) =>
   });
 
 
-export const fetchHasSucceeded = fetchHasSucceededBuilder(itemFactory);
+export const fetchHasSucceeded = fetchHasSucceededBuilder(listItemDataConverter);
 
 
-export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: string) => IAction =>
+export const createItemBuilder = (factory: IListItemDataConverterWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
     type: LocalItemActions.CREATE_ITEM,
     payload: {
@@ -70,7 +70,7 @@ export const createItemBuilder = (factory: IItemFactoryWithGenerator): (value: s
     },
   });
 
-export const createItem = createItemBuilder(itemFactory);
+export const createItem = createItemBuilder(listItemDataConverter);
 
 
 const getItemsFromServer = (url: string) =>
