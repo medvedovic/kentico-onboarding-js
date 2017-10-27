@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { settings } from './list/settings';
+import { list } from './list/list';
 
 export const app = combineReducers({
-  list: settings,
+  list,
 });
