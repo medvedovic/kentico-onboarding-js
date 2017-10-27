@@ -15,17 +15,17 @@ describe('Data reducer', () => {
   const _id2 = '3f7e95fc-551a-426c-9d58-6df2633ea56f';
   const _id3 = 'adfdb758-2adb-43f5-8a67-c9186c109864';
   const initialState = new Map([
-    [_id1, new ListItemModel({ localId: _id1, value: 'Make coffee' })],
-    [_id2, new ListItemModel({ localId: _id2, value: 'Master React' })],
+    [_id1, new ListItemModel({ id: _id1, value: 'Make coffee' })],
+    [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
   ]);
 
   it('creates new item properly', () => {
     const expectedStoreState = new Map([
-      [_id1, new ListItemModel({ localId: _id1, value: 'Make coffee' })],
-      [_id2, new ListItemModel({ localId: _id2, value: 'Master React' })],
-      [_id3, new ListItemModel({ localId: _id3, value: 'Make a sandwich' })],
+      [_id1, new ListItemModel({ id: _id1, value: 'Make coffee' })],
+      [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
+      [_id3, new ListItemModel({ id: _id3, value: 'Make a sandwich' })],
     ]);
-    const dummyItemGenerator = () => new ListItemModel({ localId: _id3, value: 'Make a sandwich' });
+    const dummyItemGenerator = () => new ListItemModel({ id: _id3, value: 'Make a sandwich' });
     const dummyCreateItem = createItemBuilder(dummyItemGenerator);
 
     const result = data(initialState, dummyCreateItem('Make a sandwich'));
@@ -35,8 +35,8 @@ describe('Data reducer', () => {
 
   it('updates item properly', () => {
     const expectedStoreState = new Map([
-      [_id1, new ListItemModel({ localId: _id1, value: 'Do stuff' })],
-      [_id2, new ListItemModel({ localId: _id2, value: 'Master React' })],
+      [_id1, new ListItemModel({ id: _id1, value: 'Do stuff' })],
+      [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
     ]);
 
     const testStore = data(initialState, updateItem(_id1, 'Do stuff'));
@@ -46,7 +46,7 @@ describe('Data reducer', () => {
 
   it('deletes item properly', () => {
     const expectedStoreState = new Map([
-      [_id2, new ListItemModel({ localId: _id2, value: 'Master React' })],
+      [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
     ]);
 
     const testStore = data(initialState, deleteItem(_id1));
@@ -66,11 +66,11 @@ describe('Data reducer', () => {
       { id: _id2, value: 'Master React' },
     ];
     const expectedStoreState = new Map([
-      [_id1, new ListItemModel({ localId: _id1, id: _id1, value: 'Make coffee' })],
-      [_id2, new ListItemModel({ localId: _id2, id: _id2, value: 'Master React' })],
+      [_id1, new ListItemModel({ id: _id1, value: 'Make coffee' })],
+      [_id2, new ListItemModel({ id: _id2, value: 'Master React' })],
     ]);
 
-    const mockParse = (value, id) => new ListItemModel({ id, value, localId: id });
+    const mockParse = (value, id) => new ListItemModel({ id, value });
     const fetch = fetchHasSucceededBuilder(mockParse)(mockResponse);
 
     const testResult = data(undefined, fetch);

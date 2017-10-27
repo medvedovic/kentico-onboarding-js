@@ -45,9 +45,8 @@ describe('fetchDataActionFactory', () => {
     };
     const store = mockStore({});
     const expectedResult = [
-      { type: FetchData.IS_LOADING, payload: { isLoading: true } },
-      { type: FetchData.HAS_SUCCEEDED, payload: { items } },
-      { type: FetchData.IS_LOADING, payload: { isLoading: false } }
+      { type: FetchData.IS_LOADING, payload: undefined },
+      { type: FetchData.HAS_SUCCEEDED, payload: { items } }
     ];
 
 
@@ -68,13 +67,12 @@ describe('fetchDataActionFactory', () => {
     };
     const store = mockStore({});
     const expectedResult = [
-      { type: FetchData.IS_LOADING, payload: { isLoading: true } },
+      { type: FetchData.IS_LOADING, payload: undefined },
       {
         type: FetchData.HAS_FAILED, payload: {
         error: new Error('Some nasty shit happened')
       }
-      },
-      { type: FetchData.IS_LOADING, payload: { isLoading: false } }
+      }
     ];
 
 

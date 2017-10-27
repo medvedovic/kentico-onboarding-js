@@ -18,6 +18,7 @@ describe('httpActionSuccessFactory', () => {
       type: 'GET',
       status: EHttpActionStatus.success,
       payload: {
+        id: guid,
         item: new ListItemData({
           id: params.id,
           value: params.value,

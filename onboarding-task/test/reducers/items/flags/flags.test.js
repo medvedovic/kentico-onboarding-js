@@ -25,7 +25,7 @@ describe('Flags reducer', () => {
       [id2, new ListItemFlags()],
       ['xxyyzz', new ListItemFlags()],
     ]);
-    const dummyFactory = () => new ListItemData({ localId: 'xxyyzz' });
+    const dummyFactory = () => new ListItemData({ id: 'xxyyzz' });
     const dummyCreateItem = createItemBuilder(dummyFactory);
 
     const result = flags(initialState, dummyCreateItem(''));

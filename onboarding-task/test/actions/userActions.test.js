@@ -13,7 +13,7 @@ describe('User Actions', () => {
       type: LocalItemActions.UPDATE_ITEM,
       payload: {
         item: {
-          localId: _id,
+          id: _id,
           value: _value,
         },
       },

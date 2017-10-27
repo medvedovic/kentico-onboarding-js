@@ -37,12 +37,10 @@ describe('fetchIsLoading', () => {
   it('returns correctly built action', () => {
     const expectedResult = {
       type: FetchData.IS_LOADING,
-      payload: {
-        isLoading: true,
-      },
+      payload: undefined,
     };
 
-    const testResult = fetchIsLoading(true)();
+    const testResult = fetchIsLoading();
 
     expect(testResult).toEqual(expectedResult);
   });

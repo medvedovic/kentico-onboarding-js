@@ -10,7 +10,7 @@ describe('Ids reducer', () => {
   it('returns new state on create properly', () => {
     const initialState = new List();
     const expectedState = initialState.push(id);
-    const dummyFactory = () => new ListItemData({ localId: id });
+    const dummyFactory = () => new ListItemData({ id });
     const dummyCreateItem = createItemBuilder(dummyFactory);
 
     const test = ids(initialState, dummyCreateItem(''));
