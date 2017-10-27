@@ -28,8 +28,8 @@ const mapStateToProps = ({ items }: Store.IRoot, { localId }: IOwnProps): IListI
 };
 
 const mapDispatchToProps = (dispatch: any, { localId }: IOwnProps): IListItemComponentCallbacksProps => ({
-  onUpdateData: (value: string) => dispatch(putData(localId, value)),
-  onDeleteData: () => dispatch(deleteData(localId)),
+  onUpdateItem: (value: string) => dispatch(putData(localId, value)),
+  onDeleteItem: () => dispatch(deleteData(localId)),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(localId)),
   onResendRequest: (method: string) => dispatch(httpActionDispatcher(localId, method))
 });
