@@ -23,7 +23,7 @@ import {
   deleteItem,
   updateItem
 } from './userActions';
-import { apiEndpoint } from '../constants/AppSettings';
+import { apiEndpoint } from '../constants/apiEndpoint';
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import {
   IItemDataDTO,

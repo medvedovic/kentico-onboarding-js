@@ -1,6 +1,6 @@
 import { settings } from '../../../src/reducers/app/list/settings';
 import { fetchHasFailed} from '../../../src/actions/actionCreators';
-import { AppSettings } from '../../../src/constants/AppSettings';
+import { AppSettings } from '../../../src/models/AppSettings';
 import { deleteItem } from '../../../src/actions/userActions';
 import {
   fetchHasSucceeded,

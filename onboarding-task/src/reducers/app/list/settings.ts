@@ -1,6 +1,6 @@
 import { IReducer } from '../../IReducer';
 import { FetchData } from '../../../constants/actionTypes';
-import { AppSettings } from '../../../constants/AppSettings';
+import { AppSettings } from '../../../models/AppSettings';
 
 
 export const settings: IReducer<AppSettings> = (state = new AppSettings(), action) => {
