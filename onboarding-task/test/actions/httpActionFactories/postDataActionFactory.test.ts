@@ -5,7 +5,7 @@ import { OrderedMap } from 'immutable';
 
 import {
   postItemDataActionFactory,
-  postItemDataCore
+  postItemData
 } from '../../../src/actions/httpActionFactories/postDataActionFactory';
 import {
   itemDataActionFactory
@@ -135,7 +135,7 @@ describe('repostData', () => {
       payload:  { id, value: 'Go home' }
     };
 
-    return store.dispatch(itemDataActionFactory(postItemDataCore, { ...dependencies })(id))
+    return store.dispatch(itemDataActionFactory(postItemData, { ...dependencies })(id))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);
@@ -157,7 +157,7 @@ describe('repostData', () => {
     };
 
 
-    return store.dispatch(itemDataActionFactory(postItemDataCore, { ...dependencies })(id))
+    return store.dispatch(itemDataActionFactory(postItemData, { ...dependencies })(id))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(postExpectedResult);

@@ -13,7 +13,7 @@ interface IPostItemDataActionFactoryDependencies extends IItemDataActionDependen
 /**
  * Core function used in both derived functions
  */
-export const postItemDataCore = (
+export const postItemData = (
   dependencies: IItemDataActionDependencies,
   dispatch: Dispatch<any>,
   url: string,
@@ -39,7 +39,7 @@ export const postItemDataActionFactory = (dependencies: IPostItemDataActionFacto
 
       const url = dependencies.apiEndpoint;
 
-      return postItemDataCore(dependencies, dispatch, url, item.id, itemDto);
+      return postItemData(dependencies, dispatch, url, item.id, itemDto);
     };
 
 

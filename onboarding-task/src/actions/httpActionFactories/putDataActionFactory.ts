@@ -11,7 +11,7 @@ interface IPutDataActionFactory extends IItemDataActionDependencies {
   updateItemOperation: (localId: string, value: string) => IAction;
 }
 
-export const putDataActionFactoryCore = (
+export const putItemData = (
   dependencies: IItemDataActionDependencies,
   dispatch: Dispatch<any>,
   url: string,
@@ -36,5 +36,5 @@ export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
-      return putDataActionFactoryCore(dependencies, dispatch, url, id, itemDto);
+      return putItemData(dependencies, dispatch, url, id, itemDto);
     };

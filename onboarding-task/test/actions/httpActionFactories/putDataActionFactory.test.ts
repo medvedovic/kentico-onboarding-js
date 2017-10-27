@@ -8,7 +8,7 @@ import {
 import { Map } from 'immutable';
 import {
   putDataActionFactory,
-  putDataActionFactoryCore
+  putItemData
 } from '../../../src/actions/httpActionFactories/putDataActionFactory';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
@@ -125,7 +125,7 @@ describe('reput', () => {
       payload: undefined
     };
 
-    return store.dispatch(itemDataActionFactory(putDataActionFactoryCore, { ...dependencies })(id))
+    return store.dispatch(itemDataActionFactory(putItemData, { ...dependencies })(id))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedResult);
@@ -146,7 +146,7 @@ describe('reput', () => {
       payload: new Error('Some nasty shit happened')
     };
 
-    return store.dispatch(itemDataActionFactory(putDataActionFactoryCore, { ...dependencies })(id))
+    return store.dispatch(itemDataActionFactory(putItemData, { ...dependencies })(id))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedResult);

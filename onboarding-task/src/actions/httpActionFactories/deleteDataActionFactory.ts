@@ -2,7 +2,7 @@ import { Dispatch } from 'react-redux';
 import { IItemDataActionDependencies } from './itemDataActionFactory';
 
 
-export const deleteDataActionFactoryCore = (
+export const deleteItemData = (
   dependencies: IItemDataActionDependencies,
   dispatch: Dispatch<any>,
   url: string,

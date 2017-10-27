@@ -11,14 +11,14 @@ import {
 import { IAction } from './IAction';
 import {
   postItemDataActionFactory,
-  postItemDataCore,
+  postItemData,
 } from './httpActionFactories/postDataActionFactory';
 import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
 import {
   putDataActionFactory,
-  putDataActionFactoryCore
+  putItemData
 } from './httpActionFactories/putDataActionFactory';
-import { deleteDataActionFactoryCore } from './httpActionFactories/deleteDataActionFactory';
+import { deleteItemData } from './httpActionFactories/deleteDataActionFactory';
 import {
   deleteItem,
   updateItem
@@ -103,7 +103,7 @@ export const postData = postItemDataActionFactory({
   apiEndpoint
 });
 
-export const repostData = itemDataActionFactory(postItemDataCore, {
+export const repostData = itemDataActionFactory(postItemData, {
   operation: createItemOnServer,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
@@ -120,7 +120,7 @@ export const putData = putDataActionFactory({
   apiEndpoint
 });
 
-export const reputData = itemDataActionFactory(putDataActionFactoryCore, {
+export const reputData = itemDataActionFactory(putItemData, {
   operation: updateItemOnServer,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: httpActionSuccessFactory(ItemActions.PUT_ITEM_TO_SERVER),
@@ -129,7 +129,7 @@ export const reputData = itemDataActionFactory(putDataActionFactoryCore, {
 });
 
 
-export const deleteData = itemDataActionFactory(deleteDataActionFactoryCore, {
+export const deleteData = itemDataActionFactory(deleteItemData, {
   operation: removeItemOnServer,
   onError: httpActionErrorFactory(ItemActions.DELETE_ITEM_TO_SERVER),
   onSuccess: deleteItem,

@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Promise } from 'es6-promise';
-import { deleteDataActionFactoryCore } from '../../../src/actions/httpActionFactories/deleteDataActionFactory';
+import { deleteItemData } from '../../../src/actions/httpActionFactories/deleteDataActionFactory';
 import {
   LocalItemActions
 } from '../../../src/constants/actionTypes';
@@ -53,7 +53,7 @@ describe('deleteDataActionFactory', () => {
     };
 
 
-    return store.dispatch(itemDataActionFactory(deleteDataActionFactoryCore, { ...dependencies })(localId))
+    return store.dispatch(itemDataActionFactory(deleteItemData, { ...dependencies })(localId))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedAction);
@@ -75,7 +75,7 @@ describe('deleteDataActionFactory', () => {
     };
 
 
-    return store.dispatch(itemDataActionFactory(deleteDataActionFactoryCore, { ...dependencies })(localId))
+    return store.dispatch(itemDataActionFactory(deleteItemData, { ...dependencies })(localId))
       .then(() => {
         const actions = store.getActions();
         expect(actions).toContainEqual(expectedAction);
