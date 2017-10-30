@@ -1,10 +1,12 @@
-import { Dispatch } from 'react-redux';
 import {
   IServerItemDataViewModel,
   toServerItemDataViewModel
 } from '../../models/IServerItemDataViewModel';
+
+import { Dispatch } from '../../Dispatch';
 import { IAction } from '../IAction';
 import { IItemDataActionDependencies } from './itemDataActionFactory';
+
 
 interface IPostItemDataActionFactoryDependencies extends IItemDataActionDependencies {
   createItemOperation: (value: string) => IAction;
@@ -15,7 +17,7 @@ interface IPostItemDataActionFactoryDependencies extends IItemDataActionDependen
  */
 export const postItemData = (
   dependencies: IItemDataActionDependencies,
-  dispatch: Dispatch<any>,
+  dispatch: Dispatch,
   url: string,
   localId: string,
   itemDto: IServerItemDataViewModel | undefined
@@ -32,7 +34,7 @@ export const postItemData = (
  */
 export const postItemDataActionFactory = (dependencies: IPostItemDataActionFactoryDependencies) =>
   (value: string) =>
-    (dispatch: Dispatch<any>) => {
+    (dispatch: Dispatch) => {
       const { payload: { item } } = dispatch(dependencies.createItemOperation(value));
 
       const itemDto = toServerItemDataViewModel(item);

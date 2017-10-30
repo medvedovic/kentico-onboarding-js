@@ -1,7 +1,6 @@
-import { Dispatch } from 'react-redux';
-
 import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { IAction } from '../IAction';
+import { Dispatch } from '../../Dispatch';
 
 interface IFetchDataActionFactory {
   fetchOperation: (value: string) => Promise<Response>;
@@ -13,7 +12,7 @@ interface IFetchDataActionFactory {
 
 export const fetchDataActionFactory = (dependencies: IFetchDataActionFactory ) =>
   () =>
-    (dispatch: Dispatch<any>) => {
+    (dispatch: Dispatch) => {
       dispatch(dependencies.startLoader());
 
       return dependencies.fetchOperation(dependencies.apiEndpoint)

@@ -1,11 +1,13 @@
-import { Dispatch } from 'react-redux';
 import {
   IServerItemDataViewModel,
   toServerItemDataViewModel
 } from '../../models/IServerItemDataViewModel';
+
+import { Dispatch } from '../../Dispatch';
 import { IAction } from '../IAction';
 import { Store } from '../../reducers/stores';
 import { IItemDataActionDependencies } from './itemDataActionFactory';
+
 
 interface IPutDataActionFactory extends IItemDataActionDependencies {
   updateItemOperation: (localId: string, value: string) => IAction;
@@ -13,7 +15,7 @@ interface IPutDataActionFactory extends IItemDataActionDependencies {
 
 export const putItemData = (
   dependencies: IItemDataActionDependencies,
-  dispatch: Dispatch<any>,
+  dispatch: Dispatch,
   url: string,
   id: string,
   itemDto: IServerItemDataViewModel | undefined
@@ -28,7 +30,7 @@ export const putItemData = (
 
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
   (id: string, value: string) =>
-    (dispatch: Dispatch<any>, getState: () => Store.IRoot) => {
+    (dispatch: Dispatch, getState: () => Store.IRoot) => {
       dispatch(dependencies.updateItemOperation(id, value));
 
       const item = getState().items.data.get(id);

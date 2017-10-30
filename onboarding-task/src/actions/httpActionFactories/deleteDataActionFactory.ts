@@ -1,10 +1,11 @@
-import { Dispatch } from 'react-redux';
+
 import { IItemDataActionDependencies } from './itemDataActionFactory';
+import { Dispatch } from '../../Dispatch';
 
 
 export const deleteItemData = (
   dependencies: IItemDataActionDependencies,
-  dispatch: Dispatch<any>,
+  dispatch: Dispatch,
   url: string,
   localId: string
 ) =>

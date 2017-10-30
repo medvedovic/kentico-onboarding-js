@@ -15,6 +15,8 @@ import {
 
 import { Store } from '../reducers/stores';
 import { httpActionDispatcher } from '../utils/httpActionsDispatcher';
+import { Dispatch } from '../Dispatch';
+
 
 interface IOwnProps {
   id: string;
@@ -27,7 +29,7 @@ const mapStateToProps = ({ items }: Store.IRoot, { id }: IOwnProps): IListItemCo
   return { itemViewModel: memoizedCreateViewModel(item, flags) };
 };
 
-const mapDispatchToProps = (dispatch: any, { id }: IOwnProps): IListItemComponentCallbacksProps => ({
+const mapDispatchToProps = (dispatch: Dispatch, { id }: IOwnProps): IListItemComponentCallbacksProps => ({
   onUpdateItem: (value: string) => dispatch(putData(id, value)),
   onDeleteItem: () => dispatch(deleteData(id)),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),

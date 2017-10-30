@@ -1,8 +1,10 @@
-import { Dispatch } from 'react-redux';
+import { ListItemData } from '../../models/ListItemData';
+
 import { IAction } from '../IAction';
 import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { Store } from '../../reducers/stores';
-import { ListItemData } from '../../models/ListItemData';
+import { Dispatch } from '../../Dispatch';
+
 
 export interface IItemDataActionDependencies {
   operation: (_url: string, _itemDto?: IServerItemDataViewModel) => Promise<Response>;
@@ -15,13 +17,13 @@ export interface IItemDataActionDependencies {
 export const itemDataActionFactory = (
   core: (
     dependencies: IItemDataActionDependencies,
-    dispatch: Dispatch<any>,
+    dispatch: Dispatch,
     url: string,
     localId: string,
     itemDto: IServerItemDataViewModel | undefined
   ) => Promise<IAction>, dependencies: IItemDataActionDependencies) =>
   (localId: string) =>
-    (dispatch: Dispatch<any>, getState: () => Store.IRoot) => {
+    (dispatch: Dispatch, getState: () => Store.IRoot) => {
       const item = getState().items.data.get(localId);
       const itemDto = dependencies.transformDataToDto && dependencies.transformDataToDto(item);
 

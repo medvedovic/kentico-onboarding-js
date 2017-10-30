@@ -5,6 +5,7 @@ import {
   reputData
 } from '../actions/publicActions';
 
+
 export const httpActionDispatcher = (localId: string, method: string) => {
   switch (method) {
     case ItemActions.POST_ITEM_TO_SERVER:
@@ -17,6 +18,6 @@ export const httpActionDispatcher = (localId: string, method: string) => {
       return deleteData(localId);
 
     default:
-      return;
+      throw new Error('Missing method');
   }
 };
