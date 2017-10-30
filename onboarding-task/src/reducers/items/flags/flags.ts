@@ -10,6 +10,7 @@ import { flag } from './flag';
 import { Reducer } from '../../reducers';
 import { ListItemFlags } from '../../../models/ListItemFlags';
 import { ListItemData } from '../../../models/ListItemData';
+import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {
@@ -23,8 +24,12 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
     case ItemActions.POST_ITEM_TO_SERVER: {
       const newFlags = flag(undefined, action);
 
+      if (action.status === EHttpActionStatus.error) {
+        return state.set(action.payload.item.id, newFlags);
+      }
+
       return state
-        .delete(action.payload.localId)
+        .delete(action.payload.id)
         .set(action.payload.item.id, newFlags);
     }
     case ItemActions.DELETE_ITEM_TO_SERVER:

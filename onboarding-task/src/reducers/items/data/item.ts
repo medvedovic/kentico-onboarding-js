@@ -10,7 +10,6 @@ import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
 export const item: IReducer<ListItemData> = (state = new ListItemData(), action) => {
   switch (action.type) {
     case ItemActions.POST_ITEM_TO_SERVER: {
-    // case ItemActions.PUT_ITEM_TO_SERVER: {
       if (action.status === EHttpActionStatus.success) {
         return state.alter({
           id: action.payload.item.id,

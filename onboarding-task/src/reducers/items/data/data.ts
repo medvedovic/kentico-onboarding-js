@@ -9,6 +9,7 @@ import { item } from './item';
 
 import { Reducer } from '../../reducers';
 import { ListItemData } from '../../../models/ListItemData';
+import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
 
 export const data: Reducer.Data = (state = Map(), action) => {
   switch (action.type) {
@@ -19,12 +20,15 @@ export const data: Reducer.Data = (state = Map(), action) => {
     }
 
     case ItemActions.POST_ITEM_TO_SERVER: {
-      const existingItem = state.get(action.payload.id);
-      const newItem = item(existingItem, action);
+      if (action.status === EHttpActionStatus.success) {
+        const existingItem = state.get(action.payload.id);
+        const newItem = item(existingItem, action);
+        return state
+          .delete(action.payload.id)
+          .set(action.payload.item.id, newItem);
+      }
 
-      return state
-        .delete(action.payload.id)
-        .set(action.payload.item.id, newItem);
+      return state;
     }
 
     case ItemActions.PUT_ITEM_TO_SERVER:
