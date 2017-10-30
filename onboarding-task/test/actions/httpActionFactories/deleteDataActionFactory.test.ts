@@ -1,32 +1,23 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { Promise } from 'es6-promise';
+import {
+  List,
+  Map
+} from 'immutable';
+
 import { deleteItemData } from '../../../src/actions/httpActionFactories/deleteDataActionFactory';
 import {
   LocalItemActions
 } from '../../../src/constants/actionTypes';
-import { OrderedMap } from 'immutable';
 import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
 import { HttpAction } from '../../../src/constants/HttpAction';
+import { ListItemData } from '../../../src/models/ListItemData';
+import { ListItemFlags } from '../../../src/models/ListItemFlags';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+import { Store } from '../../../src/reducers/stores';
 
 
-const localId = '1234';
-const mockInitialState = () => ({
-  items: {
-    data: OrderedMap([[localId, { id: localId, value: 'Do stuff' }]])
-  }
-});
-
-const mockDeleteSuccess = (_url: string) => Promise.resolve(
-  new Response()
-);
-const mockDeleteError = (_url: string) => Promise.reject(
-  'Error occurred'
-);
+const mockDeleteSuccess = (_url: string) => Promise.resolve(new Response());
+const mockDeleteError = (_url: string) => Promise.reject('Error occurred');
 const onDeleteError = (_localId: string, _response: Error) => ({
   type: HttpAction.DELETE,
   status: EHttpActionStatus.error,
@@ -36,49 +27,60 @@ const onDeleteSuccess = (_localId: string) => ({
   type: LocalItemActions.DELETE_ITEM,
   payload: _localId
 });
-
+const id = '403f6867-b729-475b-9119-fa62c975a653';
+const dispatch = jest.fn();
+const getState = (): Store.IRoot => ({
+  items: {
+    ids: List<string>([id]),
+    data: Map<string, ListItemData>([[id, new ListItemData({
+      id: id,
+      value: 'Test like a fucking satan'
+    })]]),
+    flags: Map<string, ListItemFlags>()
+  },
+  app: {
+    list: {
+      fetchHasFailed: false,
+      showLoader: false,
+    }
+  }
+});
 
 describe('deleteDataActionFactory', () => {
-  it('returns correct actions on success', () => {
-    const store = mockStore(mockInitialState());
+  it('Returns correct actions on success', async () => {
     const dependencies = {
       operation: mockDeleteSuccess,
       onSuccess: onDeleteSuccess,
       onError: onDeleteError,
       apiEndpoint: ''
     };
-    const expectedAction = {
+    const expectedAction = [{
       type: LocalItemActions.DELETE_ITEM,
-      payload: '1234'
-    };
+      payload: id
+    }];
+    const deleteItemAsync = itemDataActionFactory(deleteItemData, { ...dependencies })(id);
 
+    await deleteItemAsync(dispatch, getState);
 
-    return store.dispatch(itemDataActionFactory(deleteItemData, { ...dependencies })(localId))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toContainEqual(expectedAction);
-      });
+    expect(dispatch).toBeCalledWith(...expectedAction);
   });
 
-  it('returns correct actions on failure', () => {
-    const store = mockStore(mockInitialState());
-    const expectedAction = {
-      type: HttpAction.DELETE,
-      status: EHttpActionStatus.error,
-      payload: 'Error occurred'
-    };
+  it('Dispatches correct action on failure', async () => {
     const dependencies = {
       operation: mockDeleteError,
       onSuccess: onDeleteSuccess,
       onError: onDeleteError,
       apiEndpoint: ''
     };
+    const expectedActions = [{
+      type: HttpAction.DELETE,
+      status: EHttpActionStatus.error,
+      payload: 'Error occurred'
+    }];
+    const deleteItemAsync = itemDataActionFactory(deleteItemData, { ...dependencies })(id);
 
+    await deleteItemAsync(dispatch, getState);
 
-    return store.dispatch(itemDataActionFactory(deleteItemData, { ...dependencies })(localId))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toContainEqual(expectedAction);
-      });
+    expect(dispatch).toHaveBeenCalledWith(...expectedActions);
   });
 });
