@@ -1,10 +1,16 @@
 import { connect } from 'react-redux';
 
-import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../components/List';
+import {
+  IListCallbacksProps,
+  IListDataProps,
+  List as ListComponent
+} from '../components/List';
 
-import { Dispatch } from '../@types/globals';
 import { Store } from '../reducers/stores';
-import { fetchData, postData} from '../actions/actionCreators';
+import {
+  fetchData,
+  postData
+} from '../actions/actionCreators';
 
 
 const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
