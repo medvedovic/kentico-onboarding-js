@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../components/List';
 
-import { Dispatch } from '../Dispatch';
+import { Dispatch } from '../@types/Dispatch';
 import { Store } from '../reducers/stores';
 import { fetchData, postData} from '../actions/actionCreators';
 

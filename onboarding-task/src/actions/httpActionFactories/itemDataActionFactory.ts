@@ -3,7 +3,7 @@ import { ListItemData } from '../../models/ListItemData';
 import { IAction } from '../IAction';
 import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { Store } from '../../reducers/stores';
-import { Dispatch } from '../../Dispatch';
+import { Dispatch } from '../../@types/Dispatch';
 
 
 export interface IItemDataActionDependencies {

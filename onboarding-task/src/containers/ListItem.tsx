@@ -15,7 +15,7 @@ import {
 
 import { Store } from '../reducers/stores';
 import { httpActionDispatcher } from '../utils/httpActionsDispatcher';
-import { Dispatch } from '../Dispatch';
+import { Dispatch } from '../@types/Dispatch';
 
 
 interface IOwnProps {

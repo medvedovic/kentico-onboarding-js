@@ -3,7 +3,7 @@ import {
   toServerItemDataViewModel
 } from '../../models/IServerItemDataViewModel';
 
-import { Dispatch } from '../../Dispatch';
+import { Dispatch } from '../../@types/Dispatch';
 import { IAction } from '../IAction';
 import { IItemDataActionDependencies } from './itemDataActionFactory';
 
