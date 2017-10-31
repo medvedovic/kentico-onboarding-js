@@ -1,11 +1,10 @@
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { Promise } from 'es6-promise';
+import 'isomorphic-fetch';
 import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
+import { LocalItemActions, } from '../../../src/constants/actionTypes';
 import {
-  LocalItemActions,
-} from '../../../src/constants/actionTypes';
-import { Map } from 'immutable';
+  List,
+  Map
+} from 'immutable';
 import {
   putDataActionFactory,
   putItemData
@@ -14,20 +13,28 @@ import { ListItemData } from '../../../src/models/ListItemData';
 import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
 import { HttpAction } from '../../../src/constants/HttpAction';
+import { ListItemFlags } from '../../../src/models/ListItemFlags';
+import { Store } from '../../../src/reducers/stores';
 
 
-const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
-
-const id = '1234';
-
-const mockInitialState = () => ({
+const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
+const dispatch = jest.fn().mockImplementation((a: any) => a);
+const getState = (): Store.IRoot => ({
   items: {
-    data: Map([[id, new ListItemData({ id, value: 'Do stuff' })]]),
+    ids: List<string>([id]),
+    data: Map<string, ListItemData>([[id, new ListItemData({
+      id: id,
+      value: 'Test like a fucking satan'
+    })]]),
+    flags: Map<string, ListItemFlags>()
   },
+  app: {
+    list: {
+      fetchHasFailed: false,
+      showLoader: false,
+    }
+  }
 });
-
-
 const mockPutSuccess = (_url: string, _dto: IServerItemDataViewModel) => Promise.resolve(
   new Response(JSON.stringify({ id, value: 'Go home' }))
 );
@@ -44,14 +51,13 @@ const onPutError = (_localId: string, _response: Error) => ({
   status: EHttpActionStatus.error,
   payload: _response
 });
-
 const updateItemOperation = (localId: string, value: string) => ({
-    type: LocalItemActions.UPDATE_ITEM,
-      payload: {
-      localId,
-        value
-    }
-  });
+  type: LocalItemActions.UPDATE_ITEM,
+  payload: {
+    localId,
+    value
+  }
+});
 
 
 describe('putDataActionFactory', () => {
@@ -62,8 +68,7 @@ describe('putDataActionFactory', () => {
       value: 'Go home'
     }
   };
-  it('returns correct actions on success', () => {
-    const store = mockStore(mockInitialState());
+  it('returns correct actions on success', async () => {
     const dependencies = {
       operation: mockPutSuccess,
       onSuccess: onPutSuccess,
@@ -77,17 +82,15 @@ describe('putDataActionFactory', () => {
       payload: undefined
     };
 
+    const putItemAsync = putDataActionFactory(dependencies)(id, 'Go home');
 
-    return store.dispatch(putDataActionFactory(dependencies)(id, 'Go home'))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toContainEqual(updateResult);
-        expect(actions).toContainEqual(putSuccessResult);
-      });
+    await putItemAsync(dispatch, getState);
+
+    expect(dispatch).toBeCalledWith(putSuccessResult);
+    expect(dispatch).toBeCalledWith(updateResult);
   });
 
-  it('returns correct actions on failure', () => {
-    const store = mockStore(mockInitialState());
+  it('returns correct actions on failure', async () => {
     const dependencies = {
       operation: mockPutError,
       onSuccess: onPutSuccess,
@@ -101,18 +104,17 @@ describe('putDataActionFactory', () => {
       payload: new Error('Some nasty shit happened')
     };
 
-    return store.dispatch(putDataActionFactory(dependencies)(id, 'Go home'))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toContainEqual(updateResult);
-        expect(actions).toContainEqual(expectedResult);
-      });
+    const putItemAsync = putDataActionFactory(dependencies)(id, 'Go home');
+
+    await putItemAsync(dispatch, getState);
+
+    expect(dispatch).toBeCalledWith(expectedResult);
+    expect(dispatch).toBeCalledWith(updateResult);
   });
 });
 
-describe('reput', () => {
-  it('returns correct actions on success', () => {
-    const store = mockStore(mockInitialState());
+describe('reput item', () => {
+  it('returns correct actions on success', async () => {
     const dependencies = {
       operation: mockPutSuccess,
       onSuccess: onPutSuccess,
@@ -125,15 +127,14 @@ describe('reput', () => {
       payload: undefined
     };
 
-    return store.dispatch(itemDataActionFactory(putItemData, { ...dependencies })(id))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toContainEqual(expectedResult);
-      });
+    const reputDataAsync = itemDataActionFactory(putItemData, { ...dependencies })(id);
+
+    await reputDataAsync(dispatch, getState);
+
+    expect(dispatch).toBeCalledWith(expectedResult);
   });
 
-  it('returns correct actions on failure', () => {
-    const store = mockStore(mockInitialState());
+  it('returns correct actions on failure', async () => {
     const dependencies = {
       operation: mockPutError,
       onSuccess: onPutSuccess,
@@ -145,11 +146,10 @@ describe('reput', () => {
       status: EHttpActionStatus.error,
       payload: new Error('Some nasty shit happened')
     };
+    const reputItemAsync = itemDataActionFactory(putItemData, { ...dependencies })(id);
 
-    return store.dispatch(itemDataActionFactory(putItemData, { ...dependencies })(id))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toContainEqual(expectedResult);
-      });
+    await reputItemAsync(dispatch, getState);
+
+    expect(dispatch).toBeCalledWith(expectedResult);
   });
 });
