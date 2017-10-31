@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@types/es6-promise": "0.0.33",
     "@types/immutable": "^3.8.7",
     "@types/isomorphic-fetch": "0.0.34",
     "@types/jest": "^18.1.1",
