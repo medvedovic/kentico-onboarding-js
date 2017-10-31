@@ -1,6 +1,6 @@
 
 import { IItemDataActionDependencies } from './itemDataActionFactory';
-import { Dispatch } from '../../@types/Dispatch';
+import { Dispatch } from '../../@types/globals';
 
 
 export const deleteItemData = (

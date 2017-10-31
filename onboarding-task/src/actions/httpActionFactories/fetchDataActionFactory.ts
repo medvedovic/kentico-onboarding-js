@@ -1,6 +1,6 @@
 import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { IAction } from '../IAction';
-import { Dispatch } from '../../@types/Dispatch';
+import { Dispatch } from '../../@types/globals';
 
 interface IFetchDataActionFactory {
   fetchOperation: (value: string) => Promise<Response>;
