@@ -1,3 +1,4 @@
+import 'isomorphic-fetch';
 import {
   List,
   Map

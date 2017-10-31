@@ -1,4 +1,4 @@
-import { Promise } from 'es6-promise';
+import 'isomorphic-fetch';
 import { fetchBuilder } from '../../../src/actions/httpActionFactories/fetchBuilder';
 
 const mockResponse = (status: number, statusText: string, response: any) =>
