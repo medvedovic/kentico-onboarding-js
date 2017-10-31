@@ -1,8 +1,4 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-
 import { fetchDataActionFactory } from '../../../src/actions/httpActionFactories/fetchDataActionFactory';
-import { Promise } from 'es6-promise';
 import { FetchData } from '../../../src/constants/actionTypes';
 import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
 import {
@@ -10,10 +6,8 @@ import {
   fetchIsLoading
 } from '../../../src/actions/actionCreators';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
 
-
+const dispatch = jest.fn();
 const items = [
   { 'id': 1, 'value': 'Do stuff' },
   { 'id': 2, 'value': 'Go Home' }
@@ -35,7 +29,7 @@ const onFetchFailed = (error: Error) => fetchHasFailed(error);
 
 
 describe('fetchDataActionFactory', () => {
-  it('dispatches correct actions on success', () => {
+  it('dispatches correct actions on success', async () => {
     const dependencies = {
       fetchOperation: mockSuccessPromise,
       startLoader: fetchIsLoading,
@@ -43,21 +37,20 @@ describe('fetchDataActionFactory', () => {
       onFetchFailed,
       apiEndpoint: ''
     };
-    const store = mockStore({});
-    const expectedResult = [
+    const expectedActions = [
       { type: FetchData.IS_LOADING, payload: undefined },
       { type: FetchData.HAS_SUCCEEDED, payload: { items } }
     ];
 
+    const fetchDataAsync = fetchDataActionFactory(dependencies)();
 
-    return store.dispatch(fetchDataActionFactory(dependencies)())
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toEqual(expectedResult);
-      });
+    await fetchDataAsync(dispatch);
+
+    expect(dispatch).toBeCalledWith(expectedActions[0]);
+    expect(dispatch).toBeCalledWith(expectedActions[1]);
   });
 
-  it('dispatches correct actions on failure', () => {
+  it('dispatches correct actions on failure', async () => {
     const dependencies = {
       fetchOperation: mockErrorPromise,
       startLoader: fetchIsLoading,
@@ -65,21 +58,17 @@ describe('fetchDataActionFactory', () => {
       onFetchFailed,
       apiEndpoint: ''
     };
-    const store = mockStore({});
-    const expectedResult = [
+
+    const expectedActions = [
       { type: FetchData.IS_LOADING, payload: undefined },
-      {
-        type: FetchData.HAS_FAILED, payload: {
-        error: new Error('Some nasty shit happened')
-      }
-      }
+      { type: FetchData.HAS_FAILED, payload: { error: new Error('Some nasty shit happened') } }
     ];
 
+    const fetchDataAsync = fetchDataActionFactory(dependencies)();
 
-    return store.dispatch(fetchDataActionFactory(dependencies)())
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions).toEqual(expectedResult);
-      });
+    await fetchDataAsync(dispatch);
+
+    expect(dispatch).toBeCalledWith(expectedActions[0]);
+    expect(dispatch).toBeCalledWith(expectedActions[1]);
   });
 });
