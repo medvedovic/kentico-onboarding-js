@@ -1,4 +1,4 @@
-import { listItemDataConverterBuilder } from '../../src/utils/itemFactory.ts';
+import { listItemDataConverterBuilder } from '../../src/utils/listItemDataConverter.ts';
 import { ListItemData } from '../../src/models/ListItemData.ts';
 
 describe('Item factory', () => {

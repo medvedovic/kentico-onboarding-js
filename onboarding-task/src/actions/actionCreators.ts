@@ -7,7 +7,7 @@ import {
 import {
   IListItemDataConverterWithGenerator,
   listItemDataConverter
-} from '../utils/itemFactory';
+} from '../utils/listItemDataConverter';
 import { IAction } from './IAction';
 import {
   postItemDataActionFactory,
