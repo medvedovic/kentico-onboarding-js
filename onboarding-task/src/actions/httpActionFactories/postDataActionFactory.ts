@@ -11,9 +11,6 @@ interface IPostItemDataActionFactoryDependencies extends IItemDataActionDependen
   createItemOperation: (value: string) => IAction;
 }
 
-/**
- * Core function used in both derived functions
- */
 export const postItemData = (
   dependencies: IItemDataActionDependencies,
   dispatch: Dispatch,
@@ -28,9 +25,6 @@ export const postItemData = (
     .catch((response: Error) =>
       dispatch(dependencies.onError(localId, response)));
 
-/**
- * Creates and sends item to server
- */
 export const postItemDataActionFactory = (dependencies: IPostItemDataActionFactoryDependencies) =>
   (value: string) =>
     (dispatch: Dispatch) => {
