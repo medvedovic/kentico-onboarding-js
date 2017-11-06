@@ -19,7 +19,6 @@ export const postItemData = (
   itemDto: IServerItemDataViewModel | undefined
 ) =>
   dependencies.operation(url, itemDto)
-    .then(response => response.json())
     .then((response: IServerItemDataViewModel) =>
       dispatch(dependencies.onSuccess(localId, response)))
     .catch((response: Error) =>

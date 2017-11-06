@@ -20,7 +20,6 @@ export const putItemData = (
   itemDto: IServerItemDataViewModel | undefined
 ) =>
   dependencies.operation(url, itemDto)
-    .then((response: Response) => response.json())
     .then((response: IServerItemDataViewModel) =>
       dispatch(dependencies.onSuccess(id, response)))
     .catch((response: Error) =>

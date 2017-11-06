@@ -1,18 +1,18 @@
 import { ItemActions } from '../constants/actionTypes';
 import {
   deleteData,
-  repostData,
-  reputData
+  redoPostData,
+  redoPutData
 } from '../actions/publicActions';
 
 
 export const httpActionDispatcher = (localId: string, method: string) => {
   switch (method) {
     case ItemActions.POST_ITEM_TO_SERVER:
-      return repostData(localId);
+      return redoPostData(localId);
 
     case ItemActions.PUT_ITEM_TO_SERVER:
-      return reputData(localId);
+      return redoPutData(localId);
 
     case ItemActions.DELETE_ITEM_TO_SERVER:
       return deleteData(localId);

@@ -9,16 +9,9 @@ import {
   listItemDataConverter
 } from '../utils/listItemDataConverter';
 import { IAction } from './IAction';
-import {
-  postItemDataActionFactory,
-  postItemData,
-} from './httpActionFactories/postDataActionFactory';
+import { postItemDataActionFactory } from './httpActionFactories/postDataActionFactory';
 import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
-import {
-  putDataActionFactory,
-  putItemData
-} from './httpActionFactories/putDataActionFactory';
-import { deleteItemData } from './httpActionFactories/deleteDataActionFactory';
+import { putDataActionFactory } from './httpActionFactories/putDataActionFactory';
 import {
   deleteItem,
   updateItem
@@ -29,7 +22,7 @@ import {
   IServerItemDataViewModel,
   toServerItemDataViewModel
 } from '../models/IServerItemDataViewModel';
-import { itemDataActionFactory } from './httpActionFactories/itemDataActionFactory';
+import { redoRequestToServerFactory } from './httpActionFactories/itemDataActionFactory';
 import {
   httpActionErrorFactory,
   httpActionSuccessFactory
@@ -103,14 +96,6 @@ export const postData = postItemDataActionFactory({
   apiEndpoint
 });
 
-export const repostData = itemDataActionFactory(postItemData, {
-  operation: createItemOnServer,
-  transformDataToDto: toServerItemDataViewModel,
-  onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
-  onError: httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER),
-  apiEndpoint
-});
-
 
 export const putData = putDataActionFactory({
   operation: updateItemOnServer,
@@ -120,7 +105,16 @@ export const putData = putDataActionFactory({
   apiEndpoint
 });
 
-export const reputData = itemDataActionFactory(putItemData, {
+
+export const redoPostData = redoRequestToServerFactory({
+  operation: createItemOnServer,
+  transformDataToDto: toServerItemDataViewModel,
+  onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
+  onError: httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER),
+  apiEndpoint
+});
+
+export const redoPutData = redoRequestToServerFactory({
   operation: updateItemOnServer,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: httpActionSuccessFactory(ItemActions.PUT_ITEM_TO_SERVER),
@@ -128,8 +122,7 @@ export const reputData = itemDataActionFactory(putItemData, {
   apiEndpoint
 });
 
-
-export const deleteData = itemDataActionFactory(deleteItemData, {
+export const deleteData = redoRequestToServerFactory({
   operation: removeItemOnServer,
   onError: httpActionErrorFactory(ItemActions.DELETE_ITEM_TO_SERVER),
   onSuccess: deleteItem,

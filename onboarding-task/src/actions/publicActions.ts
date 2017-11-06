@@ -9,6 +9,6 @@ export {
   postData,
   putData,
   deleteData,
-  repostData,
-  reputData
+  redoPutData,
+  redoPostData
 } from './actionCreators';
