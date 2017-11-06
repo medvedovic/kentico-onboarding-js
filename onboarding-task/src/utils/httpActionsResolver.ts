@@ -6,7 +6,7 @@ import {
 } from '../actions/publicActions';
 
 
-export const httpActionDispatcher = (localId: string, method: string) => {
+export const httpActionResolver = (localId: string, method: string) => {
   switch (method) {
     case ItemActions.POST_ITEM_TO_SERVER:
       return redoPostData(localId);

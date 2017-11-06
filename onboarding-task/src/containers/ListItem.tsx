@@ -14,7 +14,7 @@ import {
 } from '../components/ListItem';
 
 import { Store } from '../reducers/stores';
-import { httpActionDispatcher } from '../utils/httpActionsDispatcher';
+import { httpActionResolver } from '../utils/httpActionsResolver';
 
 
 interface IOwnProps {
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch: Dispatch, { id }: IOwnProps): IListItemCom
   onUpdateItem: (value: string) => dispatch(putData(id, value)),
   onDeleteItem: () => dispatch(deleteData(id)),
   onToggleBeingEdited: () => dispatch(toggleBeingEdited(id)),
-  onResendRequest: (method: string) => dispatch(httpActionDispatcher(id, method))
+  onResendRequest: (method: string) => dispatch(httpActionResolver(id, method))
 });
 
 export const ListItem = connect(
