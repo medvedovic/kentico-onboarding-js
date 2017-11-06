@@ -1,10 +1,10 @@
-import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
+import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 
 interface IFetchDataActionFactory {
   fetchOperation: (value: string) => Promise<object>;
   startLoader: () => IAction;
-  onFetchSucceeded: (items: Array<IServerItemDataViewModel>) => IAction;
+  onFetchSucceeded: (items: Array<IServerItemDataModel>) => IAction;
   onFetchFailed: (error: Error) => IAction;
   apiEndpoint: string;
 }
@@ -15,7 +15,7 @@ export const fetchDataActionFactory = (dependencies: IFetchDataActionFactory ) =
       dispatch(dependencies.startLoader());
 
       return dependencies.fetchOperation(dependencies.apiEndpoint)
-        .then((response: Array<IServerItemDataViewModel>) => {
+        .then((response: Array<IServerItemDataModel>) => {
           dispatch(dependencies.onFetchSucceeded(response));
         })
         .catch((response: Error) => {

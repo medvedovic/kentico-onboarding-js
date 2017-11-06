@@ -1,7 +1,7 @@
 import {
-  IServerItemDataViewModel,
+  IServerItemDataModel,
   toServerItemDataViewModel
-} from '../../src/models/IServerItemDataViewModel';
+} from '../../src/models/IServerItemDataModel';
 import { ListItemData } from '../../src/models/ListItemData';
 
 describe('toItemDataDto', () => {
@@ -10,7 +10,7 @@ describe('toItemDataDto', () => {
       id: '00000000-0000-0000-0000-000000000000',
       value: 'Go home'
     });
-    const expectedResult: IServerItemDataViewModel = {
+    const expectedResult: IServerItemDataModel = {
       value: 'Go home',
       id: '00000000-0000-0000-0000-000000000000'
     };

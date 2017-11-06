@@ -1,7 +1,7 @@
 import {
-  IServerItemDataViewModel,
+  IServerItemDataModel,
   toServerItemDataViewModel
-} from '../../models/IServerItemDataViewModel';
+} from '../../models/IServerItemDataModel';
 
 import { IAction } from '../IAction';
 import { Store } from '../../reducers/stores';
@@ -23,7 +23,7 @@ export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
       return dependencies.operation(url, itemDto)
-        .then((response: IServerItemDataViewModel) =>
+        .then((response: IServerItemDataModel) =>
           dispatch(dependencies.onSuccess(id, response)))
         .catch((response: Error) =>
           dispatch(dependencies.onError(id, response)));

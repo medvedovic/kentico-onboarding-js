@@ -5,7 +5,7 @@ import {
   listItemDataConverter
 } from '../utils/listItemDataConverter';
 import { IAction } from './IAction';
-import { IServerItemDataViewModel } from '../models/IServerItemDataViewModel';
+import { IServerItemDataModel } from '../models/IServerItemDataModel';
 import { ListItemData } from '../models/ListItemData';
 
 
@@ -21,7 +21,7 @@ export const fetchHasFailed = (error: Error) => ({
 });
 
 export const fetchHasSucceededBuilder = (factory: (value: string, id: string) => ListItemData) =>
-  (items: Array<IServerItemDataViewModel>) => ({
+  (items: Array<IServerItemDataModel>) => ({
     type: FetchData.HAS_SUCCEEDED,
     payload: {
       items: items.map(item => factory(item.value, item.id))

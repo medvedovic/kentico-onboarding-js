@@ -1,15 +1,15 @@
 import { ListItemData } from '../../models/ListItemData';
 
 import { IAction } from '../IAction';
-import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
+import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { Store } from '../../reducers/stores';
 
 
 export interface IRedoRequestToServerFactoryDependencies {
-  operation: (_url: string, _itemDto?: IServerItemDataViewModel) => Promise<Response> & Promise<object>;
-  transformDataToDto?: (item: ListItemData) => IServerItemDataViewModel;
-  onSuccess: (_localId: string, _response?: IServerItemDataViewModel | Error) => IAction;
-  onError: (_localId: string, _error: IServerItemDataViewModel | Error) => IAction;
+  operation: (_url: string, _itemDto?: IServerItemDataModel) => Promise<Response> & Promise<object>;
+  transformDataToDto?: (item: ListItemData) => IServerItemDataModel;
+  onSuccess: (_localId: string, _response?: IServerItemDataModel | Error) => IAction;
+  onError: (_localId: string, _error: IServerItemDataModel | Error) => IAction;
   apiEndpoint: string;
 }
 
@@ -22,7 +22,7 @@ export const redoRequestToServerFactory = (dependencies: IRedoRequestToServerFac
         const url = item.id ? `${dependencies.apiEndpoint}/${item.id}` : dependencies.apiEndpoint;
 
         return dependencies.operation(url, itemDto)
-          .then((response: IServerItemDataViewModel) =>
+          .then((response: IServerItemDataModel) =>
             dispatch(dependencies.onSuccess(localId, response)))
           .catch((error: Error) =>
             dispatch(dependencies.onError(localId, error)));

@@ -1,11 +1,11 @@
 import { HttpActionStatus } from '../../constants/HttpActionStatus';
-import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
+import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
 
 
 export const httpActionSuccessFactory = (type: string) =>
-  (id: string, params: IServerItemDataViewModel): IAction => ({
+  (id: string, params: IServerItemDataModel): IAction => ({
     type,
     payload: {
       id,

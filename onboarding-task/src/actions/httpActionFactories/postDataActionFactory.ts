@@ -1,7 +1,7 @@
 import {
-  IServerItemDataViewModel,
+  IServerItemDataModel,
   toServerItemDataViewModel
-} from '../../models/IServerItemDataViewModel';
+} from '../../models/IServerItemDataModel';
 
 import { IAction } from '../IAction';
 import { IRedoRequestToServerFactoryDependencies } from './redoRequestToServerFactory';
@@ -21,7 +21,7 @@ export const postItemDataActionFactory = (dependencies: IPostItemDataActionFacto
       const url = dependencies.apiEndpoint;
 
       return dependencies.operation(url, itemDto)
-        .then((response: IServerItemDataViewModel) =>
+        .then((response: IServerItemDataModel) =>
           dispatch(dependencies.onSuccess(item.id, response)))
         .catch((response: Error) =>
           dispatch(dependencies.onError(item.id, response)));

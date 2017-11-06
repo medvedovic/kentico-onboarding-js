@@ -1,5 +1,5 @@
 import 'isomorphic-fetch';
-import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
+import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
 import { LocalItemActions, } from '../../../src/constants/actionTypes';
 import {
   List,
@@ -32,13 +32,13 @@ const getState = (): Store.IRoot => ({
     }
   }
 });
-const mockPutSuccess = (_url: string, _dto: IServerItemDataViewModel) => Promise.resolve(
+const mockPutSuccess = (_url: string, _dto: IServerItemDataModel) => Promise.resolve(
   new Response(JSON.stringify({ id, value: 'Go home' }))
 );
-const mockPutError = (_url: string, _dto: IServerItemDataViewModel) => Promise.reject(
+const mockPutError = (_url: string, _dto: IServerItemDataModel) => Promise.reject(
   new Error('Some nasty shit happened')
 );
-const onPutSuccess = (_localId: string, _response: IServerItemDataViewModel) => ({
+const onPutSuccess = (_localId: string, _response: IServerItemDataModel) => ({
   type: HttpAction.PUT,
   status: HttpActionStatus.success,
   payload: undefined

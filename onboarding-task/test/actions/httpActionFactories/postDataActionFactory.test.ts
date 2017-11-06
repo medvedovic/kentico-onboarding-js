@@ -4,7 +4,7 @@ import {
   Map
 } from 'immutable';
 import { postItemDataActionFactory } from '../../../src/actions/httpActionFactories/postDataActionFactory';
-import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
+import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
 import { LocalItemActions } from '../../../src/constants/actionTypes';
 import { HttpActionStatus } from '../../../src/constants/HttpActionStatus';
 import { HttpAction } from '../../../src/constants/HttpAction';
@@ -40,7 +40,7 @@ const mockErrorPost = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
 );
 
-const onPostSuccess = (_localId: string, _response: IServerItemDataViewModel) => ({
+const onPostSuccess = (_localId: string, _response: IServerItemDataModel) => ({
   type: HttpAction.POST,
   status: HttpActionStatus.success,
   payload: _response

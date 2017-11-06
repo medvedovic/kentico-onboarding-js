@@ -10,9 +10,9 @@ import {
 import {
   deleteItem} from './actionCreators';
 import {
-  IServerItemDataViewModel,
+  IServerItemDataModel,
   toServerItemDataViewModel
-} from '../models/IServerItemDataViewModel';
+} from '../models/IServerItemDataModel';
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
 import { postItemDataActionFactory } from './httpActionFactories/postDataActionFactory';
@@ -26,10 +26,10 @@ import { redoRequestToServerFactory } from './httpActionFactories/redoRequestToS
 
 const getItemsFromServer = (url: string) => fetchBuilder(fetch)(url, HttpAction.GET);
 const removeItemOnServer = (url: string) => fetchBuilder(fetch)(url, HttpAction.DELETE);
-const createItemOnServer = (url: string, itemDto: IServerItemDataViewModel) =>
-  fetchBuilder<IServerItemDataViewModel>(fetch)(url, HttpAction.POST, itemDto);
-const updateItemOnServer = (url: string, itemDto: IServerItemDataViewModel) =>
-  fetchBuilder<IServerItemDataViewModel>(fetch)(url, HttpAction.PUT, itemDto);
+const createItemOnServer = (url: string, itemDto: IServerItemDataModel) =>
+  fetchBuilder<IServerItemDataModel>(fetch)(url, HttpAction.POST, itemDto);
+const updateItemOnServer = (url: string, itemDto: IServerItemDataModel) =>
+  fetchBuilder<IServerItemDataModel>(fetch)(url, HttpAction.PUT, itemDto);
 
 
 export const fetchData = fetchDataActionFactory({
