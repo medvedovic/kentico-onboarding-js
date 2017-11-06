@@ -1,5 +1,6 @@
 import 'isomorphic-fetch';
 import { fetchBuilder } from '../../../src/actions/httpActionFactories/fetchBuilder';
+import { HttpAction } from '../../../src/constants/HttpAction';
 
 const mockResponse = (status: number, statusText: string, response: any) =>
   new Response(response, {
@@ -19,7 +20,7 @@ describe('httpActionBuilder', () => {
 
     const mockFetch = fetchBuilder(myFetch);
 
-    return mockFetch('', '', undefined)
+    return mockFetch('', HttpAction.GET, undefined)
       .then((response: Response) => {
         expect(response).toBeTruthy();
         expect(response).toBeInstanceOf(Response);
@@ -33,7 +34,7 @@ describe('httpActionBuilder', () => {
       Promise.reject(mockResponse(500, 'Internal server error', undefined)));
 
 
-    const result = fetchBuilder(myFetch)('', '');
+    const result = fetchBuilder(myFetch)('', HttpAction.GET);
 
 
     expect(result).toThrow();

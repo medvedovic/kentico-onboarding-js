@@ -1,6 +1,6 @@
-export namespace HttpAction {
-  export const GET = 'GET';
-  export const POST = 'POST';
-  export const DELETE = 'DELETE';
-  export const PUT = 'PUT';
+export enum HttpAction {
+  GET = 'GET',
+  POST = 'POST',
+  DELETE = 'DELETE',
+  PUT = 'PUT',
 }

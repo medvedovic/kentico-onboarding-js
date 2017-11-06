@@ -1,5 +1,7 @@
+import { HttpAction } from '../../constants/HttpAction';
+
 export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Promise<Response>) =>
-  (url: string, httpMethod: string, body?: T) => {
+  (url: string, httpMethod: HttpAction, body?: T) => {
     const requestParameters = {
       method: httpMethod,
       headers: {
@@ -13,6 +15,13 @@ export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Prom
         if (!response.ok)
           throw new Error(response.statusText + ' at ' + response.url);
 
-        return response;
+        switch (httpMethod) {
+          case HttpAction.GET:
+          case HttpAction.POST:
+          case HttpAction.PUT:
+            return response.json();
+          default:
+            return response;
+        }
       });
   };
