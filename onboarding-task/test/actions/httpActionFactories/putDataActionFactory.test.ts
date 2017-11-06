@@ -11,7 +11,7 @@ import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
 import { HttpAction } from '../../../src/constants/HttpAction';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { Store } from '../../../src/reducers/stores';
-import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
+import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/redoRequestToServerFactory';
 
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';

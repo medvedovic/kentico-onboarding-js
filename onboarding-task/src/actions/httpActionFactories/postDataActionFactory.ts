@@ -4,10 +4,10 @@ import {
 } from '../../models/IServerItemDataViewModel';
 
 import { IAction } from '../IAction';
-import { IItemDataActionDependencies } from './itemDataActionFactory';
+import { IRedoRequestToServerFactoryDependencies } from './redoRequestToServerFactory';
 
 
-interface IPostItemDataActionFactoryDependencies extends IItemDataActionDependencies {
+interface IPostItemDataActionFactoryDependencies extends IRedoRequestToServerFactoryDependencies {
   createItemOperation: (value: string) => IAction;
 }
 

@@ -22,7 +22,7 @@ import {
   IServerItemDataViewModel,
   toServerItemDataViewModel
 } from '../models/IServerItemDataViewModel';
-import { redoRequestToServerFactory } from './httpActionFactories/itemDataActionFactory';
+import { redoRequestToServerFactory } from './httpActionFactories/redoRequestToServerFactory';
 import {
   httpActionErrorFactory,
   httpActionSuccessFactory

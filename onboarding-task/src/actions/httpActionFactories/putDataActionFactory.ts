@@ -5,10 +5,10 @@ import {
 
 import { IAction } from '../IAction';
 import { Store } from '../../reducers/stores';
-import { IItemDataActionDependencies } from './itemDataActionFactory';
+import { IRedoRequestToServerFactoryDependencies } from './redoRequestToServerFactory';
 
 
-interface IPutDataActionFactory extends IItemDataActionDependencies {
+interface IPutDataActionFactory extends IRedoRequestToServerFactoryDependencies {
   updateItemOperation: (localId: string, value: string) => IAction;
 }
 

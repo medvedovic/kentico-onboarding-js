@@ -5,7 +5,7 @@ import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel'
 import { Store } from '../../reducers/stores';
 
 
-export interface IItemDataActionDependencies {
+export interface IRedoRequestToServerFactoryDependencies {
   operation: (_url: string, _itemDto?: IServerItemDataViewModel) => Promise<Response> & Promise<object>;
   transformDataToDto?: (item: ListItemData) => IServerItemDataViewModel;
   onSuccess: (_localId: string, _response?: IServerItemDataViewModel | Error) => IAction;
@@ -13,7 +13,7 @@ export interface IItemDataActionDependencies {
   apiEndpoint: string;
 }
 
-export const redoRequestToServerFactory = (dependencies: IItemDataActionDependencies) =>
+export const redoRequestToServerFactory = (dependencies: IRedoRequestToServerFactoryDependencies) =>
     (localId: string) =>
       (dispatch: Dispatch, getState: () =>Store.IRoot) => {
         const item = getState().items.data.get(localId);
