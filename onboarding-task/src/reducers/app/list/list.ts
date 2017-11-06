@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { showLoader } from './showLoader';
+import { isLoading } from './isLoading';
 import { fetchHasFailed } from './fetchHasFailed';
 
 export const list = combineReducers({
-  showLoader,
+  isLoading,
   fetchHasFailed
 });

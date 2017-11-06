@@ -1,7 +1,7 @@
 import { FetchData } from '../../../constants/actionTypes';
 import { IReducer } from '../../IReducer';
 
-export const showLoader: IReducer<boolean> = (state = true, action) => {
+export const isLoading: IReducer<boolean> = (state = true, action) => {
   switch (action.type) {
     case FetchData.IS_LOADING: {
       return true;

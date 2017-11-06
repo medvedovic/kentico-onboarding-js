@@ -1,14 +1,14 @@
-import { showLoader } from '../../../../src/reducers/app/list/showLoader';
+import { isLoading } from '../../../../src/reducers/app/list/isLoading';
 import { FetchData } from '../../../../src/constants/actionTypes';
 
-describe('fetchHasFailed', () => {
+describe('isLoading', () => {
   it('returns true on fetch is loading', () => {
     const action = {
       type: FetchData.IS_LOADING,
       payload: undefined
     };
 
-    const result = showLoader(false, action);
+    const result = isLoading(false, action);
 
     expect(result).toBeTruthy();
   });
@@ -19,7 +19,7 @@ describe('fetchHasFailed', () => {
       payload: undefined
     };
 
-    const result = showLoader(false, action);
+    const result = isLoading(false, action);
 
     expect(result).toBeFalsy();
   });
@@ -30,7 +30,7 @@ describe('fetchHasFailed', () => {
       payload: undefined
     };
 
-    const result = showLoader(false, action);
+    const result = isLoading(false, action);
 
     expect(result).toBeFalsy();
   });
@@ -41,7 +41,7 @@ describe('fetchHasFailed', () => {
       payload: undefined
     };
 
-    const result = showLoader(undefined, action);
+    const result = isLoading(undefined, action);
 
     expect(result).toBeTruthy();
   });
