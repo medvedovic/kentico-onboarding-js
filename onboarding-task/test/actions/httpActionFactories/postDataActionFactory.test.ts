@@ -3,11 +3,7 @@ import {
   List,
   Map
 } from 'immutable';
-import {
-  postItemData,
-  postItemDataActionFactory
-} from '../../../src/actions/httpActionFactories/postDataActionFactory';
-import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
+import { postItemDataActionFactory } from '../../../src/actions/httpActionFactories/postDataActionFactory';
 import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
 import { LocalItemActions } from '../../../src/constants/actionTypes';
 import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
@@ -15,6 +11,7 @@ import { HttpAction } from '../../../src/constants/HttpAction';
 import { Store } from '../../../src/reducers/stores';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
+import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
 const dispatch = jest.fn().mockImplementation((a: any) => a);
@@ -133,7 +130,7 @@ describe('repostData', () => {
       payload: { id, value: 'Go home' }
     };
 
-    const repostItemAsync = itemDataActionFactory(postItemData, { ...dependencies })(id);
+    const repostItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
 
     await repostItemAsync(dispatch, getState);
 
@@ -153,7 +150,7 @@ describe('repostData', () => {
       payload: new Error('Some nasty shit happened')
     };
 
-    const repostItemAsync = itemDataActionFactory(postItemData, { ...dependencies })(id);
+    const repostItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
 
     await repostItemAsync(dispatch, getState);
 

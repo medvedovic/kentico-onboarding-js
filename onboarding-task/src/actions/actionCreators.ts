@@ -87,7 +87,6 @@ export const fetchData = fetchDataActionFactory({
   apiEndpoint
 });
 
-
 export const postData = postItemDataActionFactory({
   operation: createItemOnServer,
   onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
@@ -95,7 +94,6 @@ export const postData = postItemDataActionFactory({
   createItemOperation: createItem,
   apiEndpoint
 });
-
 
 export const putData = putDataActionFactory({
   operation: updateItemOnServer,

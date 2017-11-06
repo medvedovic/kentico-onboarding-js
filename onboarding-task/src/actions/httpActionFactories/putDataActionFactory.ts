@@ -12,20 +12,6 @@ interface IPutDataActionFactory extends IItemDataActionDependencies {
   updateItemOperation: (localId: string, value: string) => IAction;
 }
 
-export const putItemData = (
-  dependencies: IItemDataActionDependencies,
-  dispatch: Dispatch,
-  url: string,
-  id: string,
-  itemDto: IServerItemDataViewModel | undefined
-) =>
-  dependencies.operation(url, itemDto)
-    .then((response: IServerItemDataViewModel) =>
-      dispatch(dependencies.onSuccess(id, response)))
-    .catch((response: Error) =>
-      dispatch(dependencies.onError(id, response)));
-
-
 export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
   (id: string, value: string) =>
     (dispatch: Dispatch, getState: () => Store.IRoot) => {
@@ -36,5 +22,9 @@ export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
-      return putItemData(dependencies, dispatch, url, id, itemDto);
+      return dependencies.operation(url, itemDto)
+        .then((response: IServerItemDataViewModel) =>
+          dispatch(dependencies.onSuccess(id, response)))
+        .catch((response: Error) =>
+          dispatch(dependencies.onError(id, response)));
     };

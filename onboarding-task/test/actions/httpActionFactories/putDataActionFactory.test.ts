@@ -5,16 +5,13 @@ import {
   List,
   Map
 } from 'immutable';
-import {
-  putDataActionFactory,
-  putItemData
-} from '../../../src/actions/httpActionFactories/putDataActionFactory';
+import { putDataActionFactory } from '../../../src/actions/httpActionFactories/putDataActionFactory';
 import { ListItemData } from '../../../src/models/ListItemData';
-import { itemDataActionFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
 import { HttpAction } from '../../../src/constants/HttpAction';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { Store } from '../../../src/reducers/stores';
+import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/itemDataActionFactory';
 
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
@@ -127,7 +124,7 @@ describe('reput item', () => {
       payload: undefined
     };
 
-    const reputDataAsync = itemDataActionFactory(putItemData, { ...dependencies })(id);
+    const reputDataAsync = redoRequestToServerFactory({ ...dependencies })(id);
 
     await reputDataAsync(dispatch, getState);
 
@@ -146,7 +143,7 @@ describe('reput item', () => {
       status: EHttpActionStatus.error,
       payload: new Error('Some nasty shit happened')
     };
-    const reputItemAsync = itemDataActionFactory(putItemData, { ...dependencies })(id);
+    const reputItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
 
     await reputItemAsync(dispatch, getState);
 

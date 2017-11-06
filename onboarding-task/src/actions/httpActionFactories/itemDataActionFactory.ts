@@ -13,24 +13,6 @@ export interface IItemDataActionDependencies {
   apiEndpoint: string;
 }
 
-export const itemDataActionFactory = (
-  core: (
-    dependencies: IItemDataActionDependencies,
-    dispatch: Dispatch,
-    url: string,
-    localId: string,
-    itemDto: IServerItemDataViewModel | undefined
-  ) => Promise<IAction>, dependencies: IItemDataActionDependencies) =>
-  (localId: string) =>
-    (dispatch: Dispatch, getState: () => Store.IRoot) => {
-      const item = getState().items.data.get(localId);
-      const itemDto = dependencies.transformDataToDto && dependencies.transformDataToDto(item);
-
-      const url = item.id ? `${dependencies.apiEndpoint}/${item.id}` : dependencies.apiEndpoint;
-
-      return core(dependencies, dispatch, url, localId, itemDto);
-    };
-
 export const redoRequestToServerFactory = (dependencies: IItemDataActionDependencies) =>
     (localId: string) =>
       (dispatch: Dispatch, getState: () =>Store.IRoot) => {

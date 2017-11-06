@@ -11,19 +11,6 @@ interface IPostItemDataActionFactoryDependencies extends IItemDataActionDependen
   createItemOperation: (value: string) => IAction;
 }
 
-export const postItemData = (
-  dependencies: IItemDataActionDependencies,
-  dispatch: Dispatch,
-  url: string,
-  localId: string,
-  itemDto: IServerItemDataViewModel | undefined
-) =>
-  dependencies.operation(url, itemDto)
-    .then((response: IServerItemDataViewModel) =>
-      dispatch(dependencies.onSuccess(localId, response)))
-    .catch((response: Error) =>
-      dispatch(dependencies.onError(localId, response)));
-
 export const postItemDataActionFactory = (dependencies: IPostItemDataActionFactoryDependencies) =>
   (value: string) =>
     (dispatch: Dispatch) => {
@@ -33,7 +20,11 @@ export const postItemDataActionFactory = (dependencies: IPostItemDataActionFacto
 
       const url = dependencies.apiEndpoint;
 
-      return postItemData(dependencies, dispatch, url, item.id, itemDto);
+      return dependencies.operation(url, itemDto)
+        .then((response: IServerItemDataViewModel) =>
+          dispatch(dependencies.onSuccess(item.id, response)))
+        .catch((response: Error) =>
+          dispatch(dependencies.onError(item.id, response)));
     };
 
 
