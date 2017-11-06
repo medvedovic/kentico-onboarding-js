@@ -30,10 +30,6 @@ class List extends React.PureComponent<ListProps> {
     onFetchData: PropTypes.func.isRequired,
   };
 
-  constructor(props: ListProps) {
-    super(props);
-  }
-
   componentWillMount() {
     this.props.onFetchData();
   }

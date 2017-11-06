@@ -21,10 +21,6 @@ class ListItemDisplayWithRedo extends React.PureComponent<ListItemDisplayWithRed
     onResendRequest: PropTypes.func.isRequired
   };
 
-  constructor(props: ListItemDisplayWithRedoProps) {
-    super(props);
-  }
-
   _resendRequest = () => {
     this.props.onResendRequest(this.props.method);
   };
