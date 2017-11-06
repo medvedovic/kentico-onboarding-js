@@ -20,7 +20,7 @@ export const data: Reducer.Data = (state = Map(), action) => {
     }
 
     case ItemActions.POST_ITEM_TO_SERVER: {
-      if (action.status === EHttpActionStatus.success) {
+      if (action.payload.status === EHttpActionStatus.success) {
         const existingItem = state.get(action.payload.id);
         const newItem = item(existingItem, action);
         return state

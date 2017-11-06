@@ -20,7 +20,7 @@ export const ids: Reducer.Ids = (state = List<string>(), action) => {
       )).toList();
 
     case ItemActions.POST_ITEM_TO_SERVER: {
-      if (action.status === EHttpActionStatus.error) {
+      if (action.payload.status === EHttpActionStatus.error) {
         return state;
       }
 

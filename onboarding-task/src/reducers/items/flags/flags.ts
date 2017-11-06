@@ -24,7 +24,7 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
     case ItemActions.POST_ITEM_TO_SERVER: {
       const newFlags = flag(undefined, action);
 
-      if (action.status === EHttpActionStatus.error) {
+      if (action.payload.status === EHttpActionStatus.error) {
         return state.set(action.payload.item.id, newFlags);
       }
 
