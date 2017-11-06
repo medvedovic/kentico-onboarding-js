@@ -19,15 +19,29 @@ export interface IListItemCallbacksProps {
 
 export type ListItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem, onResendRequest }) => (
-  itemViewModel.isBeingEdited
-    ? <ListItemEditor
-      onUpdateItem={onUpdateItem}
-      itemViewModel={itemViewModel}
-      onCancelEdit={onToggleBeingEdited}
-      onDeleteItem={onDeleteItem}
-    />
-    : itemViewModel.isSavedSuccess ?
+const ListItem: React.SFC<ListItemProps> = ({itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem, onResendRequest}) => {
+  if (itemViewModel.isBeingEdited) {
+    return (
+      <ListItemEditor
+        onUpdateItem={onUpdateItem}
+        itemViewModel={itemViewModel}
+        onCancelEdit={onToggleBeingEdited}
+        onDeleteItem={onDeleteItem}
+      />
+    )
+  }
+
+  if (!itemViewModel.isSavedSuccess) {
+    return (
+      <ListItemDisplayWithRedo
+        value={itemViewModel.value}
+        method={itemViewModel.failedHttpAction}
+        onResendRequest={onResendRequest}
+      />
+    );
+  }
+
+  return (
     <ListItemDisplay
       isSavedSuccess={itemViewModel.isSavedSuccess}
       value={itemViewModel.value}
@@ -35,13 +49,8 @@ const ListItem: React.SFC<ListItemProps> = ({ itemViewModel, onToggleBeingEdited
       onClick={onToggleBeingEdited}
       onResendRequest={onResendRequest}
     />
-    :
-    <ListItemDisplayWithRedo
-      value={itemViewModel.value}
-      method={itemViewModel.failedHttpAction}
-      onResendRequest={onResendRequest}
-    />
-);
+  );
+};
 
 ListItem.displayName = 'ListItem';
 
