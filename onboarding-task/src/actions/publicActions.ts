@@ -1,14 +1,15 @@
 export {
+  toggleBeingEdited,
   updateItem,
-  deleteItem,
-  toggleBeingEdited
-} from './userActions';
+  deleteItem
+} from './actionCreators';
 
 export {
+  deleteData,
   fetchData,
   postData,
   putData,
-  deleteData,
-  redoPutData,
-  redoPostData
-} from './actionCreators';
+  redoPostData,
+  redoPutData
+} from './dependencyInjections';
+
