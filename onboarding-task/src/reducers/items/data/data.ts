@@ -9,7 +9,7 @@ import { item } from './item';
 
 import { Reducer } from '../../reducers';
 import { ListItemData } from '../../../models/ListItemData';
-import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../../constants/HttpActionStatus';
 
 export const data: Reducer.Data = (state = Map(), action) => {
   switch (action.type) {
@@ -20,7 +20,7 @@ export const data: Reducer.Data = (state = Map(), action) => {
     }
 
     case ItemActions.POST_ITEM_TO_SERVER: {
-      if (action.payload.status === EHttpActionStatus.success) {
+      if (action.payload.status === HttpActionStatus.success) {
         const existingItem = state.get(action.payload.id);
         const newItem = item(existingItem, action);
         return state

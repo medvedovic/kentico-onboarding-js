@@ -10,7 +10,7 @@ import { flag } from './flag';
 import { Reducer } from '../../reducers';
 import { ListItemFlags } from '../../../models/ListItemFlags';
 import { ListItemData } from '../../../models/ListItemData';
-import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../../constants/HttpActionStatus';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {
@@ -24,7 +24,7 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
     case ItemActions.POST_ITEM_TO_SERVER: {
       const newFlags = flag(undefined, action);
 
-      if (action.payload.status === EHttpActionStatus.error) {
+      if (action.payload.status === HttpActionStatus.error) {
         return state.set(action.payload.item.id, newFlags);
       }
 

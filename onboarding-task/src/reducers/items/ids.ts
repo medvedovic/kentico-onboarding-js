@@ -7,7 +7,7 @@ import {
 } from '../../constants/actionTypes';
 
 import { Reducer } from '../reducers';
-import { EHttpActionStatus } from '../../constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../constants/HttpActionStatus';
 
 export const ids: Reducer.Ids = (state = List<string>(), action) => {
   switch (action.type) {
@@ -20,7 +20,7 @@ export const ids: Reducer.Ids = (state = List<string>(), action) => {
       )).toList();
 
     case ItemActions.POST_ITEM_TO_SERVER: {
-      if (action.payload.status === EHttpActionStatus.error) {
+      if (action.payload.status === HttpActionStatus.error) {
         return state;
       }
 

@@ -2,7 +2,7 @@ import {
   httpActionErrorFactory,
   httpActionSuccessFactory
 } from '../../../src/actions/httpActionFactories/httpActionStatusFactories';
-import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../../src/constants/HttpActionStatus';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { IAction } from '../../../src/actions/IAction';
 
@@ -16,7 +16,7 @@ describe('httpActionSuccessFactory', () => {
   it('builds new listItemData object on success', () => {
     const expectedResult: IAction = {
       type: 'GET',
-      status: EHttpActionStatus.success,
+      status: HttpActionStatus.success,
       payload: {
         id: guid,
         item: new ListItemData({
@@ -36,7 +36,7 @@ describe('httpActionErrorFactory', () => {
   it('builds new error message on failure', () => {
     const expectedResult: IAction = {
       type: 'GET',
-      status: EHttpActionStatus.error,
+      status: HttpActionStatus.error,
       payload: {
         error: new Error('failure'),
         item: {

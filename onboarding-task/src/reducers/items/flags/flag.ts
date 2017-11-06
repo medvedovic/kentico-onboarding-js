@@ -5,7 +5,7 @@ import {
 
 import { ListItemFlags } from '../../../models/ListItemFlags';
 import { IReducer } from '../../IReducer';
-import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../../constants/HttpActionStatus';
 
 export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), action) => {
   switch (action.type) {
@@ -13,7 +13,7 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
     case ItemActions.POST_ITEM_TO_SERVER:
     case ItemActions.DELETE_ITEM_TO_SERVER:
     case LocalItemActions.CREATE_ITEM: {
-      if (action.payload.status === EHttpActionStatus.error) {
+      if (action.payload.status === HttpActionStatus.error) {
         return new ListItemFlags({
           isSavedSuccess: false,
           failedHttpAction: action.type

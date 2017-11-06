@@ -1,4 +1,4 @@
-import { EHttpActionStatus } from '../../constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../constants/HttpActionStatus';
 import { IServerItemDataViewModel } from '../../models/IServerItemDataViewModel';
 import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
@@ -13,7 +13,7 @@ export const httpActionSuccessFactory = (type: string) =>
         id: params.id,
         value: params.value,
       }),
-      status: EHttpActionStatus.success
+      status: HttpActionStatus.success
     }
   });
 
@@ -25,6 +25,6 @@ export const httpActionErrorFactory = (type: string) =>
       item: {
         id
       },
-      status: EHttpActionStatus.error,
+      status: HttpActionStatus.error,
     }
   });

@@ -5,12 +5,12 @@ import {
 import {  ListItemData } from '../../../models/ListItemData';
 
 import { IReducer } from '../../IReducer';
-import { EHttpActionStatus } from '../../../constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../../constants/HttpActionStatus';
 
 export const item: IReducer<ListItemData> = (state = new ListItemData(), action) => {
   switch (action.type) {
     case ItemActions.POST_ITEM_TO_SERVER: {
-      if (action.payload.status === EHttpActionStatus.success) {
+      if (action.payload.status === HttpActionStatus.success) {
         return state.alter({
           id: action.payload.item.id,
           value: action.payload.item.value

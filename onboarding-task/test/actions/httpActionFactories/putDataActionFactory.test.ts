@@ -7,7 +7,7 @@ import {
 } from 'immutable';
 import { putDataActionFactory } from '../../../src/actions/httpActionFactories/putDataActionFactory';
 import { ListItemData } from '../../../src/models/ListItemData';
-import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../../src/constants/HttpActionStatus';
 import { HttpAction } from '../../../src/constants/HttpAction';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { Store } from '../../../src/reducers/stores';
@@ -40,12 +40,12 @@ const mockPutError = (_url: string, _dto: IServerItemDataViewModel) => Promise.r
 );
 const onPutSuccess = (_localId: string, _response: IServerItemDataViewModel) => ({
   type: HttpAction.PUT,
-  status: EHttpActionStatus.success,
+  status: HttpActionStatus.success,
   payload: undefined
 });
 const onPutError = (_localId: string, _response: Error) => ({
   type: HttpAction.PUT,
-  status: EHttpActionStatus.error,
+  status: HttpActionStatus.error,
   payload: _response
 });
 const updateItemOperation = (localId: string, value: string) => ({
@@ -75,7 +75,7 @@ describe('putDataActionFactory', () => {
     };
     const putSuccessResult = {
       type: HttpAction.PUT,
-      status: EHttpActionStatus.success,
+      status: HttpActionStatus.success,
       payload: undefined
     };
 
@@ -97,7 +97,7 @@ describe('putDataActionFactory', () => {
     };
     const expectedResult = {
       type: HttpAction.PUT,
-      status: EHttpActionStatus.error,
+      status: HttpActionStatus.error,
       payload: new Error('Some nasty shit happened')
     };
 
@@ -120,7 +120,7 @@ describe('reput item', () => {
     };
     const expectedResult = {
       type: HttpAction.PUT,
-      status: EHttpActionStatus.success,
+      status: HttpActionStatus.success,
       payload: undefined
     };
 
@@ -140,7 +140,7 @@ describe('reput item', () => {
     };
     const expectedResult = {
       type: HttpAction.PUT,
-      status: EHttpActionStatus.error,
+      status: HttpActionStatus.error,
       payload: new Error('Some nasty shit happened')
     };
     const reputItemAsync = redoRequestToServerFactory({ ...dependencies })(id);

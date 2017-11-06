@@ -6,7 +6,7 @@ import {
 import { postItemDataActionFactory } from '../../../src/actions/httpActionFactories/postDataActionFactory';
 import { IServerItemDataViewModel } from '../../../src/models/IServerItemDataViewModel';
 import { LocalItemActions } from '../../../src/constants/actionTypes';
-import { EHttpActionStatus } from '../../../src/constants/EHttpActionStatus';
+import { HttpActionStatus } from '../../../src/constants/HttpActionStatus';
 import { HttpAction } from '../../../src/constants/HttpAction';
 import { Store } from '../../../src/reducers/stores';
 import { ListItemData } from '../../../src/models/ListItemData';
@@ -42,13 +42,13 @@ const mockErrorPost = (_url: string) => Promise.reject(
 
 const onPostSuccess = (_localId: string, _response: IServerItemDataViewModel) => ({
   type: HttpAction.POST,
-  status: EHttpActionStatus.success,
+  status: HttpActionStatus.success,
   payload: _response
 });
 
 const onPostError = (_localId: string, _response: Error) => ({
   type: HttpAction.POST,
-  status: EHttpActionStatus.error,
+  status: HttpActionStatus.error,
   payload: _response
 });
 
@@ -77,7 +77,7 @@ describe('postDataActionFactory', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: EHttpActionStatus.success,
+      status: HttpActionStatus.success,
       payload: { id, value: 'Go home' }
     };
     const postItemAsync = postItemDataActionFactory(dependencies)('Go home');
@@ -98,7 +98,7 @@ describe('postDataActionFactory', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: EHttpActionStatus.error,
+      status: HttpActionStatus.error,
       payload: new Error('Some nasty shit happened')
     };
     const createItemExpectedResult = {
@@ -126,7 +126,7 @@ describe('repostData', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: EHttpActionStatus.success,
+      status: HttpActionStatus.success,
       payload: { id, value: 'Go home' }
     };
 
@@ -146,7 +146,7 @@ describe('repostData', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: EHttpActionStatus.error,
+      status: HttpActionStatus.error,
       payload: new Error('Some nasty shit happened')
     };
 

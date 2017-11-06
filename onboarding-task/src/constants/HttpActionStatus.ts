@@ -1,4 +1,4 @@
-export enum EHttpActionStatus {
+export enum HttpActionStatus {
   success = 'success',
   error = 'error'
 }
