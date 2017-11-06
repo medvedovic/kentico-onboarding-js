@@ -95,7 +95,9 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
                     type="submit"
                     className="btn btn-default btn-add no-border-radius btn-custom"
                     disabled={!value}
-                  >Add</button>
+                  >
+                    Add
+                  </button>
                 </span>
                 <input
                   type="text"

@@ -28,8 +28,15 @@ class ListItemDisplayWithRedo extends React.PureComponent<ListItemDisplayWithRed
   render() {
     return (
       <div className="error-message-item">
-        <span>{this.props.value}</span>
-        <button className="btn btn-default btn-custom" onClick={this._resendRequest}>Resend</button>
+        <span>
+          {this.props.value}
+        </span>
+        <button
+          className="btn btn-default btn-custom"
+          onClick={this._resendRequest}
+        >
+          Resend
+        </button>
       </div>
     );
   }

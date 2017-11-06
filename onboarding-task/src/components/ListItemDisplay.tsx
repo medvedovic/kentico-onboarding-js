@@ -15,7 +15,9 @@ export interface IListItemDisplayCallbacksProps {
 type ListItemDisplayProps = IListItemDisplayCallbacksProps & IListItemDisplayDataProps;
 
 const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, onClick }) => (
-    <span className="list-clickable" onClick={onClick}>{value}</span>
+    <span className="list-clickable" onClick={onClick}>
+      {value}
+    </span>
 );
 
 ListItemDisplay.displayName = 'ListItemDisplay';

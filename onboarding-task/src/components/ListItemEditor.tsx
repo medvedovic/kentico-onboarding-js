@@ -78,13 +78,33 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
             autoFocus
           />
           <div className="btn-group" role="group">
-            <button type="button" className="btn btn-default btn-custom" onClick={this._handleUpdate}>Save</button>
-            <button type="button" className="btn btn-default btn-custom" onClick={onCancelEdit}>Cancel</button>
-            <button type="button" className="btn btn-default delete-btn btn-custom" onClick={this.props.onDeleteItem}>Delete</button>
+            <button
+              type="button"
+              className="btn btn-default btn-custom"
+              onClick={this._handleUpdate}
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              className="btn btn-default btn-custom"
+              onClick={onCancelEdit}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="btn btn-default delete-btn btn-custom"
+              onClick={this.props.onDeleteItem}
+            >
+              Delete
+            </button>
           </div>
         </div>
         {!this.state.value &&
-          <span className="error shake">Invalid input!</span>
+          <span className="error shake">
+            Invalid input!
+          </span>
         }
 
       </HotKeys>
