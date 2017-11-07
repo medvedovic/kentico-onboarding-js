@@ -16,13 +16,13 @@ describe('httpActionSuccessFactory', () => {
   it('builds new listItemData object on success', () => {
     const expectedResult: IAction = {
       type: 'GET',
-      status: HttpActionStatus.success,
       payload: {
         id: guid,
         item: new ListItemData({
           id: params.id,
           value: params.value,
-        })
+        }),
+        status: HttpActionStatus.success,
       }
     };
 
@@ -36,12 +36,12 @@ describe('httpActionErrorFactory', () => {
   it('builds new error message on failure', () => {
     const expectedResult: IAction = {
       type: 'GET',
-      status: HttpActionStatus.error,
       payload: {
         error: new Error('failure'),
         item: {
           id: guid
-        }
+        },
+        status: HttpActionStatus.error,
       }
     };
 
