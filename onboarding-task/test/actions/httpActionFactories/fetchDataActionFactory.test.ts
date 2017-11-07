@@ -13,7 +13,7 @@ const items = [
   { 'id': 2, 'value': 'Go Home' }
 ];
 const mockSuccessPromise = (_url: string) => Promise.resolve(
-  new Response(JSON.stringify(items))
+  new Response(JSON.stringify(items)).json()
 );
 const mockErrorPromise = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')

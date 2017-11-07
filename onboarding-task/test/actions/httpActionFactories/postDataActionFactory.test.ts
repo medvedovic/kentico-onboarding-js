@@ -15,6 +15,7 @@ import { redoRequestToServerFactory } from '../../../src/actions/httpActionFacto
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
 const dispatch = jest.fn().mockImplementation((a: any) => a);
+
 const getState = (): Store.IRoot => ({
   items: {
     ids: List<string>([id]),
@@ -33,23 +34,27 @@ const getState = (): Store.IRoot => ({
 });
 
 const mockSuccessPost = (_url: string) => Promise.resolve(
-  new Response(JSON.stringify({ id, value: 'Go home' }))
+  new Response(JSON.stringify({ id, value: 'Go home' })).json()
 );
 
 const mockErrorPost = (_url: string) => Promise.reject(
-  new Error('Some nasty shit happened')
+  new Error('Something went wrong')
 );
 
 const onPostSuccess = (_localId: string, _response: IServerItemDataModel) => ({
   type: HttpAction.POST,
-  status: HttpActionStatus.success,
-  payload: _response
+  payload:  {
+    ..._response,
+    status: HttpActionStatus.success,
+  }
 });
 
 const onPostError = (_localId: string, _response: Error) => ({
   type: HttpAction.POST,
-  status: HttpActionStatus.error,
-  payload: _response
+  payload: {
+    error: _response,
+    status: HttpActionStatus.error,
+  }
 });
 
 const mockCreateItem = (value: string) => ({
@@ -77,8 +82,7 @@ describe('postDataActionFactory', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: HttpActionStatus.success,
-      payload: { id, value: 'Go home' }
+      payload: { id, value: 'Go home', status: HttpActionStatus.success }
     };
     const postItemAsync = postItemDataActionFactory(dependencies)('Go home');
 
@@ -98,8 +102,10 @@ describe('postDataActionFactory', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: HttpActionStatus.error,
-      payload: new Error('Some nasty shit happened')
+      payload: {
+        error: new Error('Something went wrong'),
+        status: HttpActionStatus.error
+      }
     };
     const createItemExpectedResult = {
       type: LocalItemActions.CREATE_ITEM,
@@ -126,8 +132,7 @@ describe('repostData', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: HttpActionStatus.success,
-      payload: { id, value: 'Go home' }
+      payload: { id, value: 'Go home', status: HttpActionStatus.success }
     };
 
     const repostItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
@@ -146,8 +151,10 @@ describe('repostData', () => {
     };
     const postExpectedResult = {
       type: HttpAction.POST,
-      status: HttpActionStatus.error,
-      payload: new Error('Some nasty shit happened')
+      payload: {
+        error: new Error('Something went wrong'),
+        status: HttpActionStatus.error,
+      }
     };
 
     const repostItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
