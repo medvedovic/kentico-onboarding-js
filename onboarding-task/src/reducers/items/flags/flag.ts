@@ -1,26 +1,20 @@
 import {
-  ItemActions,
-  LocalItemActions,
+  DELETE_ITEM_TO_SERVER,
+  LocalItemActions, POST_ITEM_TO_SERVER, PUT_ITEM_TO_SERVER,
 } from '../../../constants/actionTypes';
 
 import { ListItemFlags } from '../../../models/ListItemFlags';
 import { IReducer } from '../../IReducer';
-import { HttpActionStatus } from '../../../constants/HttpActionStatus';
 
 export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), action) => {
   switch (action.type) {
-    case ItemActions.PUT_ITEM_TO_SERVER:
-    case ItemActions.POST_ITEM_TO_SERVER:
-    case ItemActions.DELETE_ITEM_TO_SERVER:
-    case LocalItemActions.CREATE_ITEM: {
-      if (action.payload.status === HttpActionStatus.error) {
-        return new ListItemFlags({
-          isSavedSuccess: false,
-          failedHttpAction: action.type
-        });
-      }
-      return state;
-    }
+    case PUT_ITEM_TO_SERVER.FAILURE:
+    case POST_ITEM_TO_SERVER.FAILURE:
+    case DELETE_ITEM_TO_SERVER:
+      return new ListItemFlags({
+        isSavedSuccess: false,
+        failedHttpAction: action.type
+      });
 
     case LocalItemActions.TOGGLE_BEING_EDITED:
       return state.alter({

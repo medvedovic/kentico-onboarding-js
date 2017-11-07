@@ -1,5 +1,8 @@
 import { HttpAction } from '../constants/HttpAction';
-import { ItemActions } from '../constants/actionTypes';
+import { POST_ITEM_TO_SERVER,
+  PUT_ITEM_TO_SERVER,
+  DELETE_ITEM_TO_SERVER
+} from '../constants/actionTypes';
 import { apiEndpoint } from '../constants/apiEndpoint';
 import {
   createItem,
@@ -42,16 +45,16 @@ export const fetchData = fetchDataActionFactory({
 
 export const postData = postItemDataActionFactory({
   operation: createItemOnServer,
-  onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
-  onError: httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER),
+  onSuccess: httpActionSuccessFactory(POST_ITEM_TO_SERVER.SUCCESS),
+  onError: httpActionErrorFactory(POST_ITEM_TO_SERVER.FAILURE),
   createItemOperation: createItem,
   apiEndpoint
 });
 
 export const putData = putDataActionFactory({
   operation: updateItemOnServer,
-  onSuccess: httpActionSuccessFactory(ItemActions.PUT_ITEM_TO_SERVER),
-  onError: httpActionErrorFactory(ItemActions.PUT_ITEM_TO_SERVER),
+  onSuccess: httpActionSuccessFactory(PUT_ITEM_TO_SERVER.SUCCESS),
+  onError: httpActionErrorFactory(PUT_ITEM_TO_SERVER.FAILURE),
   updateItemOperation: updateItem,
   apiEndpoint
 });
@@ -59,22 +62,22 @@ export const putData = putDataActionFactory({
 export const redoPostData = redoRequestToServerFactory({
   operation: createItemOnServer,
   transformDataToDto: toServerItemDataViewModel,
-  onSuccess: httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER),
-  onError: httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER),
+  onSuccess: httpActionSuccessFactory(POST_ITEM_TO_SERVER.SUCCESS),
+  onError: httpActionErrorFactory(POST_ITEM_TO_SERVER.FAILURE),
   apiEndpoint
 });
 
 export const redoPutData = redoRequestToServerFactory({
   operation: updateItemOnServer,
   transformDataToDto: toServerItemDataViewModel,
-  onSuccess: httpActionSuccessFactory(ItemActions.PUT_ITEM_TO_SERVER),
-  onError: httpActionErrorFactory(ItemActions.PUT_ITEM_TO_SERVER),
+  onSuccess: httpActionSuccessFactory(PUT_ITEM_TO_SERVER.SUCCESS),
+  onError: httpActionErrorFactory(PUT_ITEM_TO_SERVER.FAILURE),
   apiEndpoint
 });
 
 export const deleteData = redoRequestToServerFactory({
   operation: removeItemOnServer,
-  onError: httpActionErrorFactory(ItemActions.DELETE_ITEM_TO_SERVER),
+  onError: httpActionErrorFactory(DELETE_ITEM_TO_SERVER),
   onSuccess: deleteItem,
   apiEndpoint
 });

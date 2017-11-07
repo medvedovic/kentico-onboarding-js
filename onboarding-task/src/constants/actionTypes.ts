@@ -11,9 +11,15 @@ export namespace FetchData {
   export const HAS_SUCCEEDED = 'FETCH_HAS_SUCCEEDED';
 }
 
-export namespace ItemActions {
-  export const POST_ITEM_TO_SERVER = 'POST_ITEM_TO_SERVER';
-  export const DELETE_ITEM_TO_SERVER = 'DELETE_ITEM_TO_SERVER';
-  export const PUT_ITEM_TO_SERVER = 'PUT_ITEM_TO_SERVER';
+export namespace POST_ITEM_TO_SERVER {
+  export const SUCCESS = 'POST_ITEM_TO_SERVER_SUCCESS';
+  export const FAILURE = 'POST_ITEM_TO_SERVER_FAILURE'
 }
+
+export namespace PUT_ITEM_TO_SERVER {
+  export const SUCCESS = 'PUT_ITEM_TO_SERVER_SUCCESS';
+  export const FAILURE = 'PUT_ITEM_TO_SERVER_FAILURE';
+}
+
+export const DELETE_ITEM_TO_SERVER = 'DELETE_ITEM_TO_SERVER';
 

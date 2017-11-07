@@ -1,16 +1,15 @@
 import { Map } from 'immutable';
 
 import {
+  DELETE_ITEM_TO_SERVER,
   FetchData,
-  ItemActions,
-  LocalItemActions,
+  LocalItemActions, POST_ITEM_TO_SERVER, PUT_ITEM_TO_SERVER,
 } from '../../../constants/actionTypes';
 import { flag } from './flag';
 
 import { Reducer } from '../../reducers';
 import { ListItemFlags } from '../../../models/ListItemFlags';
 import { ListItemData } from '../../../models/ListItemData';
-import { HttpActionStatus } from '../../../constants/HttpActionStatus';
 
 export const flags: Reducer.Flags = (state = Map(), action) => {
   switch (action.type) {
@@ -21,19 +20,21 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
       return state.set(action.payload.id, newFlags);
     }
 
-    case ItemActions.POST_ITEM_TO_SERVER: {
+    case POST_ITEM_TO_SERVER.FAILURE: {
       const newFlags = flag(undefined, action);
+      return state.set(action.payload.item.id, newFlags);
+    }
 
-      if (action.payload.status === HttpActionStatus.error) {
-        return state.set(action.payload.item.id, newFlags);
-      }
-
+    case POST_ITEM_TO_SERVER.SUCCESS: {
+      const newFlags = flag(undefined, action);
       return state
         .delete(action.payload.id)
         .set(action.payload.item.id, newFlags);
     }
-    case ItemActions.DELETE_ITEM_TO_SERVER:
-    case ItemActions.PUT_ITEM_TO_SERVER:
+
+    case DELETE_ITEM_TO_SERVER:
+    case PUT_ITEM_TO_SERVER.SUCCESS:
+    case PUT_ITEM_TO_SERVER.FAILURE:
     case LocalItemActions.CREATE_ITEM: {
       const newFlags = flag(undefined, action);
 

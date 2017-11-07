@@ -1,15 +1,14 @@
 import { Map } from 'immutable';
 
 import {
-  ItemActions,
   FetchData,
   LocalItemActions,
+  POST_ITEM_TO_SERVER, PUT_ITEM_TO_SERVER,
 } from '../../../constants/actionTypes';
 import { item } from './item';
 
 import { Reducer } from '../../reducers';
 import { ListItemData } from '../../../models/ListItemData';
-import { HttpActionStatus } from '../../../constants/HttpActionStatus';
 
 export const data: Reducer.Data = (state = Map(), action) => {
   switch (action.type) {
@@ -19,19 +18,16 @@ export const data: Reducer.Data = (state = Map(), action) => {
       return state.set(action.payload.item.id, newItem);
     }
 
-    case ItemActions.POST_ITEM_TO_SERVER: {
-      if (action.payload.status === HttpActionStatus.success) {
-        const existingItem = state.get(action.payload.id);
-        const newItem = item(existingItem, action);
-        return state
-          .delete(action.payload.id)
-          .set(action.payload.item.id, newItem);
-      }
-
-      return state;
+    case POST_ITEM_TO_SERVER.SUCCESS: {
+      const existingItem = state.get(action.payload.id);
+      const newItem = item(existingItem, action);
+      return state
+        .delete(action.payload.id)
+        .set(action.payload.item.id, newItem);
     }
 
-    case ItemActions.PUT_ITEM_TO_SERVER:
+    case PUT_ITEM_TO_SERVER.SUCCESS:
+    case PUT_ITEM_TO_SERVER.FAILURE:
     case LocalItemActions.UPDATE_ITEM: {
       const existingItem = state.get(action.payload.item.id);
       const newItem = item(existingItem, action);

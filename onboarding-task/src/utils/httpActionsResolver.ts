@@ -1,4 +1,8 @@
-import { ItemActions } from '../constants/actionTypes';
+import {
+  DELETE_ITEM_TO_SERVER,
+  POST_ITEM_TO_SERVER,
+  PUT_ITEM_TO_SERVER
+} from '../constants/actionTypes';
 import {
   deleteData,
   redoPostData,
@@ -8,13 +12,13 @@ import {
 
 export const httpActionResolver = (localId: string, method: string) => {
   switch (method) {
-    case ItemActions.POST_ITEM_TO_SERVER:
+    case POST_ITEM_TO_SERVER.FAILURE:
       return redoPostData(localId);
 
-    case ItemActions.PUT_ITEM_TO_SERVER:
+    case PUT_ITEM_TO_SERVER.FAILURE:
       return redoPutData(localId);
 
-    case ItemActions.DELETE_ITEM_TO_SERVER:
+    case DELETE_ITEM_TO_SERVER:
       return deleteData(localId);
 
     default:

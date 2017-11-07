@@ -2,12 +2,11 @@ import { List } from 'immutable';
 
 import {
   FetchData,
-  ItemActions,
   LocalItemActions,
+  POST_ITEM_TO_SERVER,
 } from '../../constants/actionTypes';
 
 import { Reducer } from '../reducers';
-import { HttpActionStatus } from '../../constants/HttpActionStatus';
 
 export const ids: Reducer.Ids = (state = List<string>(), action) => {
   switch (action.type) {
@@ -19,15 +18,10 @@ export const ids: Reducer.Ids = (state = List<string>(), action) => {
         id !== action.payload.id
       )).toList();
 
-    case ItemActions.POST_ITEM_TO_SERVER: {
-      if (action.payload.status === HttpActionStatus.error) {
-        return state;
-      }
-
+    case POST_ITEM_TO_SERVER.SUCCESS:
       return state.filter(id => (
         id !== action.payload.id
       )).toList().push(action.payload.item.id);
-    }
 
     case FetchData.HAS_SUCCEEDED: {
       action.payload.items.forEach((item: any) => {
