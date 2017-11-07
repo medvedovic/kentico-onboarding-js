@@ -38,7 +38,7 @@ describe('fetchDataActionFactory', () => {
       apiEndpoint: ''
     };
     const expectedActions = [
-      { type: FetchData.IS_LOADING, payload: undefined },
+      { type: FetchData.IS_LOADING },
       { type: FetchData.HAS_SUCCEEDED, payload: { items } }
     ];
 
@@ -60,7 +60,7 @@ describe('fetchDataActionFactory', () => {
     };
 
     const expectedActions = [
-      { type: FetchData.IS_LOADING, payload: undefined },
+      { type: FetchData.IS_LOADING },
       { type: FetchData.HAS_FAILED, payload: { error: new Error('Some nasty shit happened') } }
     ];
 

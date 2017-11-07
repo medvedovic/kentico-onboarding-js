@@ -1,7 +1,7 @@
 import { updateItem } from '../../../../src/actions/publicActions.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { item } from '../../../../src/reducers/items/data/item.ts';
-import { ItemActions } from '../../../../src/constants/actionTypes.ts';
+import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes.ts';
 import { httpActionSuccessFactory } from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
 
 describe('Item Reducer', () => {
@@ -39,7 +39,7 @@ describe('Item Reducer', () => {
       id: '79c63dd4-b96f-4c6d-b505-0574f1344e70',
       value: 'Go home',
     });
-    const action = httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER)('dbd223d5-0951-42db-8f8c-9d1c4eec68c4', {
+    const action = httpActionSuccessFactory(POST_ITEM_TO_SERVER.SUCCESS)('dbd223d5-0951-42db-8f8c-9d1c4eec68c4', {
       id: '79c63dd4-b96f-4c6d-b505-0574f1344e70',
       value: 'Go home',
     });

@@ -2,7 +2,7 @@ import { ListItemFlags } from '../../../../src/models/ListItemFlags.ts';
 import { flag } from '../../../../src/reducers/items/flags/flag.ts';
 import { toggleBeingEdited } from '../../../../src/actions/publicActions.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
-import { ItemActions } from '../../../../src/constants/actionTypes.ts';
+import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes.ts';
 import {
   httpActionErrorFactory,
   httpActionSuccessFactory,
@@ -40,9 +40,9 @@ describe('Flag Reducer', () => {
     const expectedResult = new ListItemFlags({
       isBeingEdited: false,
       isSavedSuccess: false,
-      failedHttpAction: ItemActions.POST_ITEM_TO_SERVER,
+      failedHttpAction: POST_ITEM_TO_SERVER.FAILURE,
     });
-    const action = httpActionErrorFactory(ItemActions.POST_ITEM_TO_SERVER)('id', new Error());
+    const action = httpActionErrorFactory(POST_ITEM_TO_SERVER.FAILURE)('id', new Error());
 
     const testResult = flag(undefined, action);
 
@@ -55,7 +55,7 @@ describe('Flag Reducer', () => {
       isSavedSuccess: true,
       failedHttpAction: undefined,
     });
-    const action = httpActionSuccessFactory(ItemActions.POST_ITEM_TO_SERVER)('id', new Error());
+    const action = httpActionSuccessFactory(POST_ITEM_TO_SERVER.SUCCESS)('id', new Error());
 
     const testResult = flag(undefined, action);
 

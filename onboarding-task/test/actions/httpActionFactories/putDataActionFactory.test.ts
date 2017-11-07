@@ -1,14 +1,12 @@
 import 'isomorphic-fetch';
 import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
-import { LocalItemActions, } from '../../../src/constants/actionTypes';
+import { LocalItemActions, PUT_ITEM_TO_SERVER, } from '../../../src/constants/actionTypes';
 import {
   List,
   Map
 } from 'immutable';
 import { putDataActionFactory } from '../../../src/actions/httpActionFactories/putDataActionFactory';
 import { ListItemData } from '../../../src/models/ListItemData';
-import { HttpActionStatus } from '../../../src/constants/HttpActionStatus';
-import { HttpAction } from '../../../src/constants/HttpAction';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { Store } from '../../../src/reducers/stores';
 import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/redoRequestToServerFactory';
@@ -39,13 +37,11 @@ const mockPutError = (_url: string, _dto: IServerItemDataModel) => Promise.rejec
   new Error('Some nasty shit happened')
 );
 const onPutSuccess = (_localId: string, _response: IServerItemDataModel) => ({
-  type: HttpAction.PUT,
-  status: HttpActionStatus.success,
+  type: PUT_ITEM_TO_SERVER.SUCCESS,
   payload: undefined
 });
 const onPutError = (_localId: string, _response: Error) => ({
-  type: HttpAction.PUT,
-  status: HttpActionStatus.error,
+  type: PUT_ITEM_TO_SERVER.FAILURE,
   payload: _response
 });
 const updateItemOperation = (localId: string, value: string) => ({
@@ -74,8 +70,7 @@ describe('putDataActionFactory', () => {
       apiEndpoint: ''
     };
     const putSuccessResult = {
-      type: HttpAction.PUT,
-      status: HttpActionStatus.success,
+      type: PUT_ITEM_TO_SERVER.SUCCESS,
       payload: undefined
     };
 
@@ -96,8 +91,7 @@ describe('putDataActionFactory', () => {
       apiEndpoint: ''
     };
     const expectedResult = {
-      type: HttpAction.PUT,
-      status: HttpActionStatus.error,
+      type: PUT_ITEM_TO_SERVER.FAILURE,
       payload: new Error('Some nasty shit happened')
     };
 
@@ -119,8 +113,7 @@ describe('reput item', () => {
       apiEndpoint: ''
     };
     const expectedResult = {
-      type: HttpAction.PUT,
-      status: HttpActionStatus.success,
+      type: PUT_ITEM_TO_SERVER.SUCCESS,
       payload: undefined
     };
 
@@ -139,8 +132,7 @@ describe('reput item', () => {
       apiEndpoint: ''
     };
     const expectedResult = {
-      type: HttpAction.PUT,
-      status: HttpActionStatus.error,
+      type: PUT_ITEM_TO_SERVER.FAILURE,
       payload: new Error('Some nasty shit happened')
     };
     const reputItemAsync = redoRequestToServerFactory({ ...dependencies })(id);

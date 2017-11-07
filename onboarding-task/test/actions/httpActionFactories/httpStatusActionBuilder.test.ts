@@ -2,7 +2,6 @@ import {
   httpActionErrorFactory,
   httpActionSuccessFactory
 } from '../../../src/actions/httpActionFactories/httpActionStatusFactories';
-import { HttpActionStatus } from '../../../src/constants/HttpActionStatus';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { IAction } from '../../../src/actions/IAction';
 
@@ -21,8 +20,7 @@ describe('httpActionSuccessFactory', () => {
         item: new ListItemData({
           id: params.id,
           value: params.value,
-        }),
-        status: HttpActionStatus.success,
+        })
       }
     };
 
@@ -40,8 +38,7 @@ describe('httpActionErrorFactory', () => {
         error: new Error('failure'),
         item: {
           id: guid
-        },
-        status: HttpActionStatus.error,
+        }
       }
     };
 

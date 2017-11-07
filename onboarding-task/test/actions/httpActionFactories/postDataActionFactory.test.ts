@@ -5,9 +5,7 @@ import {
 } from 'immutable';
 import { postItemDataActionFactory } from '../../../src/actions/httpActionFactories/postDataActionFactory';
 import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
-import { LocalItemActions } from '../../../src/constants/actionTypes';
-import { HttpActionStatus } from '../../../src/constants/HttpActionStatus';
-import { HttpAction } from '../../../src/constants/HttpAction';
+import { LocalItemActions, POST_ITEM_TO_SERVER } from '../../../src/constants/actionTypes';
 import { Store } from '../../../src/reducers/stores';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
@@ -42,18 +40,16 @@ const mockErrorPost = (_url: string) => Promise.reject(
 );
 
 const onPostSuccess = (_localId: string, _response: IServerItemDataModel) => ({
-  type: HttpAction.POST,
+  type: POST_ITEM_TO_SERVER.SUCCESS,
   payload:  {
     ..._response,
-    status: HttpActionStatus.success,
   }
 });
 
 const onPostError = (_localId: string, _response: Error) => ({
-  type: HttpAction.POST,
+  type: POST_ITEM_TO_SERVER.FAILURE,
   payload: {
     error: _response,
-    status: HttpActionStatus.error,
   }
 });
 
@@ -81,8 +77,8 @@ describe('postDataActionFactory', () => {
       }
     };
     const postExpectedResult = {
-      type: HttpAction.POST,
-      payload: { id, value: 'Go home', status: HttpActionStatus.success }
+      type: POST_ITEM_TO_SERVER.SUCCESS,
+      payload: { id, value: 'Go home' }
     };
     const postItemAsync = postItemDataActionFactory(dependencies)('Go home');
 
@@ -101,10 +97,9 @@ describe('postDataActionFactory', () => {
       apiEndpoint: ''
     };
     const postExpectedResult = {
-      type: HttpAction.POST,
+      type: POST_ITEM_TO_SERVER.FAILURE,
       payload: {
         error: new Error('Something went wrong'),
-        status: HttpActionStatus.error
       }
     };
     const createItemExpectedResult = {
@@ -131,8 +126,8 @@ describe('repostData', () => {
       apiEndpoint: ''
     };
     const postExpectedResult = {
-      type: HttpAction.POST,
-      payload: { id, value: 'Go home', status: HttpActionStatus.success }
+      type: POST_ITEM_TO_SERVER.SUCCESS,
+      payload: { id, value: 'Go home' }
     };
 
     const repostItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
@@ -150,10 +145,9 @@ describe('repostData', () => {
       apiEndpoint: ''
     };
     const postExpectedResult = {
-      type: HttpAction.POST,
+      type: POST_ITEM_TO_SERVER.FAILURE,
       payload: {
-        error: new Error('Something went wrong'),
-        status: HttpActionStatus.error,
+        error: new Error('Something went wrong')
       }
     };
 
