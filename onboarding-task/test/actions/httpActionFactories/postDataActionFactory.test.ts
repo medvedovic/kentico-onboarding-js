@@ -27,7 +27,7 @@ const getState = (): Store.IRoot => ({
   app: {
     list: {
       fetchHasFailed: false,
-      showLoader: false,
+      isLoading: false,
     }
   }
 });

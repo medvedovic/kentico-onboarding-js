@@ -5,7 +5,7 @@ import { Loader } from './Loader';
 import { IAppSettings } from '../models/IAppSettings';
 import * as PropTypes from 'prop-types';
 
-const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAppSettings) => (
+const App: React.SFC<IAppSettings> = ({ isLoading, fetchHasFailed }: IAppSettings) => (
   <div>
     <div className="container">
       <div className="header clearfix">
@@ -14,7 +14,7 @@ const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAppSettin
 
       <div id="app-content">
         {
-          showLoader &&
+          isLoading &&
           <Loader />
         }
         <List/>
@@ -51,7 +51,7 @@ const App: React.SFC<IAppSettings> = ({ showLoader, fetchHasFailed }: IAppSettin
 App.displayName = 'App';
 
 App.propTypes = {
-  showLoader: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   fetchHasFailed: PropTypes.bool.isRequired
 };
 

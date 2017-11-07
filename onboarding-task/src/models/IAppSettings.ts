@@ -1,5 +1,5 @@
 export interface IAppSettings {
-  showLoader: boolean;
+  isLoading: boolean;
   fetchHasFailed: boolean;
 }
 

@@ -10,7 +10,7 @@ export const initialState: Store.IRoot = {
   },
   app: {
     list: {
-      showLoader: true,
+      isLoading: true,
       fetchHasFailed: false,
     }
   }
