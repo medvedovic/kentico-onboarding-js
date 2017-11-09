@@ -3,7 +3,7 @@ import { Map } from 'immutable';
 import {
   FetchData,
   LocalItemActions,
-  POST_ITEM_TO_SERVER, PUT_ITEM_TO_SERVER,
+  POST_ITEM_TO_SERVER
 } from '../../../constants/actionTypes';
 import { item } from './item';
 
@@ -26,8 +26,6 @@ export const data: Reducer.Data = (state = Map(), action) => {
         .set(action.payload.item.id, newItem);
     }
 
-    case PUT_ITEM_TO_SERVER.SUCCESS:
-    case PUT_ITEM_TO_SERVER.FAILURE:
     case LocalItemActions.UPDATE_ITEM: {
       const existingItem = state.get(action.payload.item.id);
       const newItem = item(existingItem, action);

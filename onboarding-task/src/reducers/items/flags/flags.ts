@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 
 import {
-  DELETE_ITEM_TO_SERVER,
+  DELETE_ITEM_TO_SERVER_FAILURE,
   FetchData,
   LocalItemActions, POST_ITEM_TO_SERVER, PUT_ITEM_TO_SERVER,
 } from '../../../constants/actionTypes';
@@ -20,11 +20,6 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
       return state.set(action.payload.id, newFlags);
     }
 
-    case POST_ITEM_TO_SERVER.FAILURE: {
-      const newFlags = flag(undefined, action);
-      return state.set(action.payload.item.id, newFlags);
-    }
-
     case POST_ITEM_TO_SERVER.SUCCESS: {
       const newFlags = flag(undefined, action);
       return state
@@ -32,12 +27,11 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
         .set(action.payload.item.id, newFlags);
     }
 
-    case DELETE_ITEM_TO_SERVER:
-    case PUT_ITEM_TO_SERVER.SUCCESS:
+    case LocalItemActions.CREATE_ITEM:
+    case POST_ITEM_TO_SERVER.FAILURE:
     case PUT_ITEM_TO_SERVER.FAILURE:
-    case LocalItemActions.CREATE_ITEM: {
+    case DELETE_ITEM_TO_SERVER_FAILURE: {
       const newFlags = flag(undefined, action);
-
       return state.set(action.payload.item.id, newFlags);
     }
 
