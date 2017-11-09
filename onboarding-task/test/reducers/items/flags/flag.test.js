@@ -7,17 +7,15 @@ import {
   httpActionErrorFactory,
   httpActionSuccessFactory,
 } from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
+import {
+  DELETE_ITEM_TO_SERVER_FAILURE,
+  PUT_ITEM_TO_SERVER
+} from '../../../../src/constants/actionTypes';
 
 const createItem = (value) =>
   new ListItemData({ id: '982f42cd-106e-4530-b6bc-bcdfe7fecbb9', value });
 
-describe('Flag Reducer', () => {
-  it('returns new flags on create item', () => {
-    const test = flag(undefined, createItem('Make a sandwich'));
-
-    expect(test).toEqual(new ListItemFlags());
-  });
-
+describe('flagReducer', () => {
   it('toggles being edited properly', () => {
     const expectedState = new ListItemFlags({
       isBeingEdited: true,
@@ -28,37 +26,31 @@ describe('Flag Reducer', () => {
     expect(newState).toEqual(expectedState);
   });
 
-  it('returns default state on wrong input', () => {
+  it('sets flags correctly of action to server failure', () => {
+    const actionsToTest = [
+      POST_ITEM_TO_SERVER.FAILURE,
+      PUT_ITEM_TO_SERVER.FAILURE,
+      DELETE_ITEM_TO_SERVER_FAILURE
+    ];
+    actionsToTest.forEach((actionType) => {
+      const expectedResult = new ListItemFlags({
+        isBeingEdited: false,
+        isSavedSuccess: false,
+        failedHttpAction: actionType,
+      });
+      const action = httpActionErrorFactory(actionType)('id', new Error());
+
+      const testResult = flag(undefined, action);
+
+      expect(testResult).toEqual(expectedResult);
+    });
+  });
+
+  it('returns default state', () => {
     const expectedState = new ListItemFlags();
 
-    const test = flag(undefined, createItem(''));
+    const test = flag(undefined, {});
 
     expect(test).toEqual(expectedState);
-  });
-
-  it('sets flags correctly of action to server failure', () => {
-    const expectedResult = new ListItemFlags({
-      isBeingEdited: false,
-      isSavedSuccess: false,
-      failedHttpAction: POST_ITEM_TO_SERVER.FAILURE,
-    });
-    const action = httpActionErrorFactory(POST_ITEM_TO_SERVER.FAILURE)('id', new Error());
-
-    const testResult = flag(undefined, action);
-
-    expect(testResult).toEqual(expectedResult);
-  });
-
-  it('sets flags correctly of action to server success', () => {
-    const expectedResult = new ListItemFlags({
-      isBeingEdited: false,
-      isSavedSuccess: true,
-      failedHttpAction: undefined,
-    });
-    const action = httpActionSuccessFactory(POST_ITEM_TO_SERVER.SUCCESS)('id', new Error());
-
-    const testResult = flag(undefined, action);
-
-    expect(testResult).toEqual(expectedResult);
   });
 });

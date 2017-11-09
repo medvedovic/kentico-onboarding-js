@@ -4,38 +4,22 @@ import { item } from '../../../../src/reducers/items/data/item.ts';
 import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes.ts';
 import { httpActionSuccessFactory } from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
 
-describe('Item Reducer', () => {
+describe('itemReducer', () => {
   const id = '650cb02b-de56-41a6-8693-50fbf3e40192';
-  const createItem = (_value) =>
-    new ListItemData({ id, value: 'Make tea' });
-  const initialItem = new ListItemData({ localId: id, value: 'Make coffee' });
+  const initialItem = new ListItemData({ id, value: 'Make coffee' });
 
-  it('Returns new updated item', () => {
+  it('returns new updated item', () => {
     const action = updateItem(id, 'Make tea');
-    const expectedResult = new ListItemData({ localId: id, value: 'Make tea' });
+    const expectedResult = new ListItemData({ id, value: 'Make tea' });
+
     const resultItem = item(initialItem, action);
 
-    // Check for properties
     expect(resultItem).toEqual(expectedResult);
-    // Check for reference
     expect(resultItem).not.toBe(expectedResult);
   });
 
-  it('Returns the same item on wrong action', () => {
-    const resultItem = item(initialItem, createItem);
-
-    expect(resultItem).toBe(initialItem);
-  });
-
-  it('Returns default state on wrong input', () => {
-    const resultState = item(undefined, createItem);
-
-    expect(resultState).toEqual(new ListItemData());
-  });
-
-  it('Perform post and put to server correctly', () => {
+  it('returns correct state on post item to server success', () => {
     const expectedResult = new ListItemData({
-      localId: id,
       id: '79c63dd4-b96f-4c6d-b505-0574f1344e70',
       value: 'Go home',
     });
@@ -48,4 +32,11 @@ describe('Item Reducer', () => {
 
     expect(testResult).toEqual(expectedResult);
   });
+
+  it('returns default state', () => {
+    const resultState = item(undefined, {});
+
+    expect(resultState).toEqual(new ListItemData());
+  });
 });
+

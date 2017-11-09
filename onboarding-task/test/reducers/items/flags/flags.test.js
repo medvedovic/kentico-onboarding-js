@@ -10,28 +10,19 @@ import {
 } from '../../../../src/actions/actionCreators.ts';
 import { ListItemFlags } from '../../../../src/models/ListItemFlags.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
+import {
+  POST_ITEM_TO_SERVER,
+  PUT_ITEM_TO_SERVER,
+  DELETE_ITEM_TO_SERVER_FAILURE
+} from '../../../../src/constants/actionTypes';
 
-describe('Flags reducer', () => {
+describe('flagsReducer', () => {
   const id1 = 'e9082417-eae0-4b00-a2d0-5722ba3b1641';
   const id2 = '946ca2ad-a77f-4f8b-8b58-7e40de6f7ba5';
   const initialState = new Map([
     [id1, new ListItemFlags()],
     [id2, new ListItemFlags()],
   ]);
-
-  it('returns new state on create properly', () => {
-    const expectedResult = new Map([
-      [id1, new ListItemFlags()],
-      [id2, new ListItemFlags()],
-      ['xxyyzz', new ListItemFlags()],
-    ]);
-    const dummyFactory = () => new ListItemData({ id: 'xxyyzz' });
-    const dummyCreateItem = createItemBuilder(dummyFactory);
-
-    const result = flags(initialState, dummyCreateItem(''));
-
-    expect(result).toEqual(expectedResult);
-  });
 
   it('toggles flags correctly', () => {
     const expectedResult = new Map([
@@ -47,19 +38,77 @@ describe('Flags reducer', () => {
     expect(result).not.toBe(expectedResult);
   });
 
-  it('returns new state on delete correctly', () => {
+  it('returns correct state on post item to server success',() => {
+    const id = '9cf7f383-6ab2-45b7-b0a9-f2a091160d5f';
+    const action = {
+      type: POST_ITEM_TO_SERVER.SUCCESS,
+      payload: {
+        id: id2,
+        item: {
+          id
+        }
+      }
+    };
+    const expectedResult = new Map([
+      [id1, new ListItemFlags()],
+      [id, new ListItemFlags()],
+    ]);
+
+    const result = flags(initialState, action);
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  it('returns new state on create item properly', () => {
+    const expectedResult = new Map([
+      [id1, new ListItemFlags()],
+      [id2, new ListItemFlags()],
+      ['xxyyzz', new ListItemFlags()],
+    ]);
+    const dummyFactory = () => new ListItemData({ id: 'xxyyzz' });
+    const dummyCreateItem = createItemBuilder(dummyFactory);
+
+    const result = flags(initialState, dummyCreateItem(''));
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  it('sets flags correctly on actions failure',() => {
+    const actionTypes = [
+      POST_ITEM_TO_SERVER.FAILURE,
+      PUT_ITEM_TO_SERVER.FAILURE,
+      DELETE_ITEM_TO_SERVER_FAILURE
+    ];
+    actionTypes.forEach((actionType) => {
+      const expectedResult = new Map([
+        [id1, new ListItemFlags({
+          isSavedSuccess: false,
+          failedHttpAction: actionType
+        })],
+        [id2, new ListItemFlags()],
+      ]);
+      const action = {
+        type: actionType,
+        payload: {
+          item: {
+            id: id1
+          }
+        }
+      };
+
+      const result = flags(initialState, action);
+
+      expect(result).toEqual(expectedResult);
+    })
+  });
+
+  it('returns new state on delete item correctly', () => {
     const expectedResult = new Map([
       [id1, new ListItemFlags()],
     ]);
     const result = flags(initialState, deleteItem(id2));
 
     expect(result).toEqual(expectedResult);
-  });
-
-  it('returns default state on wrong input', () => {
-    const test = flags(undefined, {});
-
-    expect(test).toEqual(new Map());
   });
 
   it('creates new flags for items after fetch correctly', () => {
@@ -78,5 +127,11 @@ describe('Flags reducer', () => {
     const testResult = flags(undefined, fetch);
 
     expect(testResult).toEqual(expectedStoreState);
+  });
+
+  it('returns default state on wrong input', () => {
+    const test = flags(undefined, {});
+
+    expect(test).toEqual(new Map());
   });
 });
