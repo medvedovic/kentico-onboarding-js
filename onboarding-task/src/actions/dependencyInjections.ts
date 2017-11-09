@@ -1,7 +1,7 @@
 import { HttpAction } from '../constants/HttpAction';
 import { POST_ITEM_TO_SERVER,
   PUT_ITEM_TO_SERVER,
-  DELETE_ITEM_TO_SERVER
+  DELETE_ITEM_TO_SERVER_FAILURE
 } from '../constants/actionTypes';
 import { apiEndpoint } from '../constants/apiEndpoint';
 import {
@@ -77,7 +77,7 @@ export const redoPutData = redoRequestToServerFactory({
 
 export const deleteData = redoRequestToServerFactory({
   operation: removeItemOnServer,
-  onError: httpActionErrorFactory(DELETE_ITEM_TO_SERVER),
+  onError: httpActionErrorFactory(DELETE_ITEM_TO_SERVER_FAILURE),
   onSuccess: deleteItem,
   apiEndpoint
 });

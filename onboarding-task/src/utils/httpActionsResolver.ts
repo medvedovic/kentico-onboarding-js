@@ -1,5 +1,5 @@
 import {
-  DELETE_ITEM_TO_SERVER,
+  DELETE_ITEM_TO_SERVER_FAILURE,
   POST_ITEM_TO_SERVER,
   PUT_ITEM_TO_SERVER
 } from '../constants/actionTypes';
@@ -18,7 +18,7 @@ export const httpActionResolver = (localId: string, method: string) => {
     case PUT_ITEM_TO_SERVER.FAILURE:
       return redoPutData(localId);
 
-    case DELETE_ITEM_TO_SERVER:
+    case DELETE_ITEM_TO_SERVER_FAILURE:
       return deleteData(localId);
 
     default:
