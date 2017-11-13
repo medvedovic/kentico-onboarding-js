@@ -13,7 +13,7 @@ import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import {
   POST_ITEM_TO_SERVER,
   PUT_ITEM_TO_SERVER,
-  DELETE_ITEM_TO_SERVER_FAILURE
+  DELETE_ITEM_AT_SERVER_FAILURE
 } from '../../../../src/constants/actionTypes';
 
 describe('flagsReducer', () => {
@@ -77,7 +77,7 @@ describe('flagsReducer', () => {
     const actionTypes = [
       POST_ITEM_TO_SERVER.FAILURE,
       PUT_ITEM_TO_SERVER.FAILURE,
-      DELETE_ITEM_TO_SERVER_FAILURE
+      DELETE_ITEM_AT_SERVER_FAILURE
     ];
     actionTypes.forEach((actionType) => {
       const expectedResult = new Map([

@@ -11,7 +11,7 @@ import {
 } from '../../../../src/actions/actionCreators.ts';
 import {
   POST_ITEM_TO_SERVER,
-  FetchData
+  FETCH_DATA
 } from '../../../../src/constants/actionTypes';
 
 describe('dataReducer', () => {

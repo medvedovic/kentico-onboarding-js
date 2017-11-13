@@ -8,7 +8,7 @@ import {
   handleSuccessfulRequest,
 } from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
 import {
-  DELETE_ITEM_TO_SERVER_FAILURE,
+  DELETE_ITEM_AT_SERVER_FAILURE,
   PUT_ITEM_TO_SERVER
 } from '../../../../src/constants/actionTypes';
 
@@ -30,7 +30,7 @@ describe('flagReducer', () => {
     const actionsToTest = [
       POST_ITEM_TO_SERVER.FAILURE,
       PUT_ITEM_TO_SERVER.FAILURE,
-      DELETE_ITEM_TO_SERVER_FAILURE
+      DELETE_ITEM_AT_SERVER_FAILURE
     ];
     actionsToTest.forEach((actionType) => {
       const expectedResult = new ListItemFlags({

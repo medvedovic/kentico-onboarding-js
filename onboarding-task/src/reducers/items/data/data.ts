@@ -1,9 +1,11 @@
 import { Map } from 'immutable';
 
 import {
-  FetchData,
-  LocalItemActions,
-  POST_ITEM_TO_SERVER
+  CREATE_ITEM,
+  DELETE_ITEM,
+  FETCH_DATA,
+  POST_ITEM_TO_SERVER,
+  UPDATE_ITEM
 } from '../../../constants/actionTypes';
 import { item } from './item';
 
@@ -12,7 +14,7 @@ import { ListItemData } from '../../../models/ListItemData';
 
 export const data: Reducer.Data = (state = Map(), action) => {
   switch (action.type) {
-    case LocalItemActions.CREATE_ITEM: {
+    case CREATE_ITEM: {
       const newItem = action.payload.item;
 
       return state.set(action.payload.item.id, newItem);
@@ -26,17 +28,17 @@ export const data: Reducer.Data = (state = Map(), action) => {
         .set(action.payload.item.id, newItem);
     }
 
-    case LocalItemActions.UPDATE_ITEM: {
+    case UPDATE_ITEM: {
       const existingItem = state.get(action.payload.item.id);
       const newItem = item(existingItem, action);
 
       return state.set(action.payload.item.id, newItem);
     }
 
-    case LocalItemActions.DELETE_ITEM:
+    case DELETE_ITEM:
       return state.delete(action.payload.id);
 
-    case FetchData.HAS_SUCCEEDED: {
+    case FETCH_DATA.HAS_SUCCEEDED: {
       action.payload.items.forEach((item: ListItemData) => {
         state = state.set(item.id, item);
       });

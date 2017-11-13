@@ -1,6 +1,8 @@
 import 'isomorphic-fetch';
 import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
-import { LocalItemActions, PUT_ITEM_TO_SERVER, } from '../../../src/constants/actionTypes';
+import {
+  PUT_ITEM_TO_SERVER, UPDATE_ITEM,
+} from '../../../src/constants/actionTypes';
 import {
   List,
   Map
@@ -45,7 +47,7 @@ const onPutError = (_localId: string, _response: Error) => ({
   payload: _response
 });
 const updateItemOperation = (localId: string, value: string) => ({
-  type: LocalItemActions.UPDATE_ITEM,
+  type: UPDATE_ITEM,
   payload: {
     localId,
     value
@@ -55,7 +57,7 @@ const updateItemOperation = (localId: string, value: string) => ({
 
 describe('putDataActionFactory', () => {
   const updateResult = {
-    type: LocalItemActions.UPDATE_ITEM,
+    type: UPDATE_ITEM,
     payload: {
       localId: id,
       value: 'Go home'

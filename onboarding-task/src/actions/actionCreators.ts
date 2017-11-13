@@ -1,5 +1,11 @@
 import 'isomorphic-fetch';
-import { FetchData, LocalItemActions, } from '../constants/actionTypes';
+import {
+  CREATE_ITEM,
+  DELETE_ITEM,
+  FETCH_DATA,
+  TOGGLE_BEING_EDITED,
+  UPDATE_ITEM,
+} from '../constants/actionTypes';
 import {
   IListItemDataConverterWithGenerator,
   listItemDataConverter
@@ -10,11 +16,11 @@ import { ListItemData } from '../models/ListItemData';
 
 
 export const fetchIsLoading = () => ({
-  type: FetchData.IS_LOADING,
+  type: FETCH_DATA.IS_LOADING,
 });
 
 export const fetchHasFailed = (error: Error) => ({
-  type: FetchData.HAS_FAILED,
+  type: FETCH_DATA.HAS_FAILED,
   payload: {
     error,
   }
@@ -22,7 +28,7 @@ export const fetchHasFailed = (error: Error) => ({
 
 export const fetchHasSucceededBuilder = (factory: (value: string, id: string) => ListItemData) =>
   (items: Array<IServerItemDataModel>) => ({
-    type: FetchData.HAS_SUCCEEDED,
+    type: FETCH_DATA.HAS_SUCCEEDED,
     payload: {
       items: items.map(item => factory(item.value, item.id))
     }
@@ -32,7 +38,7 @@ export const fetchHasSucceeded = fetchHasSucceededBuilder(listItemDataConverter)
 
 export const createItemBuilder = (factory: IListItemDataConverterWithGenerator): (value: string) => IAction =>
   (value: string): IAction => ({
-    type: LocalItemActions.CREATE_ITEM,
+    type: CREATE_ITEM,
     payload: {
       item: factory(value),
     },
@@ -41,7 +47,7 @@ export const createItemBuilder = (factory: IListItemDataConverterWithGenerator):
 export const createItem = createItemBuilder(listItemDataConverter);
 
 export const updateItem = (id: string, value: string): IAction => ({
-  type: LocalItemActions.UPDATE_ITEM,
+  type: UPDATE_ITEM,
   payload: {
     item: {
       id,
@@ -50,13 +56,13 @@ export const updateItem = (id: string, value: string): IAction => ({
   },
 });
 export const deleteItem = (id: string): IAction => ({
-  type: LocalItemActions.DELETE_ITEM,
+  type: DELETE_ITEM,
   payload: {
     id,
   },
 });
 export const toggleBeingEdited = (id: string): IAction => ({
-  type: LocalItemActions.TOGGLE_BEING_EDITED,
+  type: TOGGLE_BEING_EDITED,
   payload: {
     id,
   },

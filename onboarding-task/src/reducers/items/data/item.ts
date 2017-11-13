@@ -1,8 +1,8 @@
 import {
-  LocalItemActions,
   POST_ITEM_TO_SERVER,
+  UPDATE_ITEM,
 } from '../../../constants/actionTypes';
-import {  ListItemData } from '../../../models/ListItemData';
+import { ListItemData } from '../../../models/ListItemData';
 
 import { IReducer } from '../../IReducer';
 
@@ -14,7 +14,7 @@ export const item: IReducer<ListItemData> = (state = new ListItemData(), action)
         value: action.payload.item.value
       });
 
-    case LocalItemActions.UPDATE_ITEM:
+    case UPDATE_ITEM:
       return state.alter({
         value: action.payload.item.value
       });

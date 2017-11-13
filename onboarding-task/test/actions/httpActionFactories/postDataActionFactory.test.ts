@@ -1,11 +1,11 @@
 import 'isomorphic-fetch';
-import {
-  List,
-  Map
-} from 'immutable';
+import { List, Map } from 'immutable';
 import { postItemDataActionFactory } from '../../../src/actions/httpActionFactories/postDataActionFactory';
 import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
-import { LocalItemActions, POST_ITEM_TO_SERVER } from '../../../src/constants/actionTypes';
+import {
+  CREATE_ITEM,
+  POST_ITEM_TO_SERVER
+} from '../../../src/constants/actionTypes';
 import { Store } from '../../../src/reducers/stores';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
@@ -32,7 +32,7 @@ const getState = (): Store.IRoot => ({
 });
 
 const mockSuccessPost = (_url: string) => Promise.resolve(
-  new Response(JSON.stringify({ id, value: 'Go home' })).json()
+  new Response(JSON.stringify({id, value: 'Go home'})).json()
 );
 
 const mockErrorPost = (_url: string) => Promise.reject(
@@ -41,7 +41,7 @@ const mockErrorPost = (_url: string) => Promise.reject(
 
 const onPostSuccess = (_localId: string, _response: IServerItemDataModel) => ({
   type: POST_ITEM_TO_SERVER.SUCCESS,
-  payload:  {
+  payload: {
     ..._response,
   }
 });
@@ -54,9 +54,9 @@ const onPostError = (_localId: string, _response: Error) => ({
 });
 
 const mockCreateItem = (value: string) => ({
-  type: LocalItemActions.CREATE_ITEM,
+  type: CREATE_ITEM,
   payload: {
-    item: { id, value }
+    item: {id, value}
   }
 });
 
@@ -71,14 +71,14 @@ describe('postDataActionFactory', () => {
       apiEndpoint: ''
     };
     const createItemExpectedResult = {
-      type: LocalItemActions.CREATE_ITEM,
+      type: CREATE_ITEM,
       payload: {
-        item: { id, value: 'Go home' }
+        item: {id, value: 'Go home'}
       }
     };
     const postExpectedResult = {
       type: POST_ITEM_TO_SERVER.SUCCESS,
-      payload: { id, value: 'Go home' }
+      payload: {id, value: 'Go home'}
     };
     const postItemAsync = postItemDataActionFactory(dependencies)('Go home');
 
@@ -103,9 +103,9 @@ describe('postDataActionFactory', () => {
       }
     };
     const createItemExpectedResult = {
-      type: LocalItemActions.CREATE_ITEM,
+      type: CREATE_ITEM,
       payload: {
-        item: { id, value: 'Do stuff' }
+        item: {id, value: 'Do stuff'}
       }
     };
     const postItemAsync = postItemDataActionFactory(dependencies)('Do stuff');
@@ -127,10 +127,10 @@ describe('repostData', () => {
     };
     const postExpectedResult = {
       type: POST_ITEM_TO_SERVER.SUCCESS,
-      payload: { id, value: 'Go home' }
+      payload: {id, value: 'Go home'}
     };
 
-    const repostItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
+    const repostItemAsync = redoRequestToServerFactory({...dependencies})(id);
 
     await repostItemAsync(dispatch, getState);
 
@@ -151,7 +151,7 @@ describe('repostData', () => {
       }
     };
 
-    const repostItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
+    const repostItemAsync = redoRequestToServerFactory({...dependencies})(id);
 
     await repostItemAsync(dispatch, getState);
 

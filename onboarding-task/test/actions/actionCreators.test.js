@@ -6,7 +6,7 @@ import {
   fetchHasSucceededBuilder,
 } from '../../src/actions/actionCreators.ts';
 import {
-  FetchData,
+  FETCH_DATA,
   LocalItemActions,
 } from '../../src/constants/actionTypes.ts';
 
@@ -36,7 +36,7 @@ describe('createItemBuilder', () => {
 describe('fetchIsLoading', () => {
   it('returns correctly built action', () => {
     const expectedResult = {
-      type: FetchData.IS_LOADING,
+      type: FETCH_DATA.IS_LOADING,
       payload: undefined,
     };
 
@@ -49,7 +49,7 @@ describe('fetchIsLoading', () => {
 describe('fetchHasFailed', () => {
   it('returns correctly built action', () => {
     const expectedResult = {
-      type: FetchData.HAS_FAILED,
+      type: FETCH_DATA.HAS_FAILED,
       payload: {
         error: new Error('failure'),
       },
@@ -69,7 +69,7 @@ describe('fetchHasSucceededBuilder', () => {
   ];
   it('returns correct collection', () => {
     const expectedResult = {
-      type: FetchData.HAS_SUCCEEDED,
+      type: FETCH_DATA.HAS_SUCCEEDED,
       payload: {
         items: [
           ListItemData({

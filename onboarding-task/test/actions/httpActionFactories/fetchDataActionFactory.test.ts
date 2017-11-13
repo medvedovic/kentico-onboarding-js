@@ -1,5 +1,5 @@
 import { fetchDataActionFactory } from '../../../src/actions/httpActionFactories/fetchDataActionFactory';
-import { FetchData } from '../../../src/constants/actionTypes';
+import { FETCH_DATA } from '../../../src/constants/actionTypes';
 import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
 import {
   fetchHasFailed,
@@ -20,7 +20,7 @@ const mockErrorPromise = (_url: string) => Promise.reject(
 );
 
 const onFetchSucceeded = (input: Array<IServerItemDataModel>) => ({
-  type: FetchData.HAS_SUCCEEDED,
+  type: FETCH_DATA.HAS_SUCCEEDED,
   payload: {
     items: input
   }
@@ -38,8 +38,8 @@ describe('fetchDataActionFactory', () => {
       apiEndpoint: ''
     };
     const expectedActions = [
-      { type: FetchData.IS_LOADING },
-      { type: FetchData.HAS_SUCCEEDED, payload: { items } }
+      { type: FETCH_DATA.IS_LOADING },
+      { type: FETCH_DATA.HAS_SUCCEEDED, payload: { items } }
     ];
 
     const fetchDataAsync = fetchDataActionFactory(dependencies)();
@@ -60,8 +60,8 @@ describe('fetchDataActionFactory', () => {
     };
 
     const expectedActions = [
-      { type: FetchData.IS_LOADING },
-      { type: FetchData.HAS_FAILED, payload: { error: new Error('Some nasty shit happened') } }
+      { type: FETCH_DATA.IS_LOADING },
+      { type: FETCH_DATA.HAS_FAILED, payload: { error: new Error('Some nasty shit happened') } }
     ];
 
     const fetchDataAsync = fetchDataActionFactory(dependencies)();

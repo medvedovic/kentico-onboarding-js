@@ -4,7 +4,7 @@ import { deleteItem } from '../../src/actions/publicActions';
 import { ListItemData } from '../../src/models/ListItemData';
 import { createItemBuilder } from '../../src/actions/actionCreators';
 import {
-  FetchData,
+  FETCH_DATA,
   POST_ITEM_TO_SERVER
 } from '../../src/constants/actionTypes';
 
@@ -52,7 +52,7 @@ describe('idsReducer', () => {
   it('returns correct state on FetchData.HAS_SUCCEEDED', () => {
     const initialState = new List();
     const action = {
-      type: FetchData.HAS_SUCCEEDED,
+      type: FETCH_DATA.HAS_SUCCEEDED,
       payload: {
         items: [
           { id },

@@ -1,10 +1,10 @@
 import { isLoading } from '../../../../src/reducers/app/list/isLoading';
-import { FetchData } from '../../../../src/constants/actionTypes';
+import { FETCH_DATA } from '../../../../src/constants/actionTypes';
 
 describe('isLoading', () => {
   it('returns true on fetch is loading', () => {
     const action = {
-      type: FetchData.IS_LOADING,
+      type: FETCH_DATA.IS_LOADING,
       payload: undefined
     };
 
@@ -15,7 +15,7 @@ describe('isLoading', () => {
 
   it('returns false on fetch has succeeded', () => {
     const action = {
-      type: FetchData.HAS_SUCCEEDED,
+      type: FETCH_DATA.HAS_SUCCEEDED,
       payload: undefined
     };
 
@@ -26,7 +26,7 @@ describe('isLoading', () => {
 
   it('returns false on fetch has failed', () => {
     const action = {
-      type: FetchData.HAS_FAILED,
+      type: FETCH_DATA.HAS_FAILED,
       payload: undefined
     };
 

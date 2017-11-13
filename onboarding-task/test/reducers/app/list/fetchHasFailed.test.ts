@@ -1,10 +1,10 @@
 import { fetchHasFailed } from '../../../../src/reducers/app/list/fetchHasFailed';
-import { FetchData } from '../../../../src/constants/actionTypes';
+import { FETCH_DATA } from '../../../../src/constants/actionTypes';
 
 describe('fetchHasFailed', () => {
   it('returns true on fetch has succeeded', () => {
     const action = {
-      type: FetchData.HAS_SUCCEEDED,
+      type: FETCH_DATA.HAS_SUCCEEDED,
       payload: undefined
     };
 
@@ -15,7 +15,7 @@ describe('fetchHasFailed', () => {
 
   it('returns false on fetch has failed', () => {
     const action = {
-      type: FetchData.HAS_FAILED,
+      type: FETCH_DATA.HAS_FAILED,
       payload: undefined
     };
 
