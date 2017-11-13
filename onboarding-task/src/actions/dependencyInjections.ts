@@ -26,6 +26,7 @@ import {
 } from './httpActionFactories/httpActionStatusFactories';
 import { putDataActionFactory } from './httpActionFactories/putDataActionFactory';
 import { redoRequestToServerFactory } from './httpActionFactories/redoRequestToServerFactory';
+import { listItemDataConverter } from '../utils/listItemDataConverter';
 
 
 const getItemsFromServer = fetchBuilder(fetch, HttpAction.GET);
@@ -46,7 +47,8 @@ export const postData = postItemDataActionFactory({
   operation: createItemOnServer,
   onSuccess: handleSuccessfulRequest(POST_ITEM_TO_SERVER.SUCCESS),
   onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
-  createItemOperation: createItem,
+  createItem: listItemDataConverter,
+  onItemCreated: createItem,
   apiEndpoint
 });
 

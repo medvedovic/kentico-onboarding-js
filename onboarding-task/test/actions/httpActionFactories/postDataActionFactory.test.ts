@@ -53,10 +53,15 @@ const onPostError = (_localId: string, _response: Error) => ({
   }
 });
 
-const mockCreateItem = (value: string) => ({
+const mockItemConverter = (value: string) => new ListItemData({
+  id,
+  value
+});
+
+const mockCreateItem = (item: ListItemData) => ({
   type: CREATE_ITEM,
   payload: {
-    item: {id, value}
+    item
   }
 });
 
@@ -67,7 +72,8 @@ describe('postDataActionFactory', () => {
       operation: mockSuccessPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
-      createItemOperation: mockCreateItem,
+      createItem: mockItemConverter,
+      onItemCreated: mockCreateItem,
       apiEndpoint: ''
     };
     const createItemExpectedResult = {
@@ -93,7 +99,8 @@ describe('postDataActionFactory', () => {
       operation: mockErrorPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
-      createItemOperation: mockCreateItem,
+      createItem: mockItemConverter,
+      onItemCreated: mockCreateItem,
       apiEndpoint: ''
     };
     const postExpectedResult = {

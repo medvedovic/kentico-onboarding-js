@@ -7,7 +7,6 @@ import {
   UPDATE_ITEM,
 } from '../constants/actionTypes';
 import {
-  IListItemDataConverterWithGenerator,
   listItemDataConverter
 } from '../utils/listItemDataConverter';
 import { IAction } from './IAction';
@@ -36,15 +35,12 @@ export const fetchHasSucceededBuilder = (factory: (value: string, id: string) =>
 
 export const fetchHasSucceeded = fetchHasSucceededBuilder(listItemDataConverter);
 
-export const createItemBuilder = (factory: IListItemDataConverterWithGenerator): (value: string) => IAction =>
-  (value: string): IAction => ({
-    type: CREATE_ITEM,
+export const createItem = (item: ListItemData): IAction => ({
+  type: CREATE_ITEM,
     payload: {
-      item: factory(value),
+      item,
     },
   });
-
-export const createItem = createItemBuilder(listItemDataConverter);
 
 export const updateItem = (id: string, value: string): IAction => ({
   type: UPDATE_ITEM,
@@ -55,12 +51,14 @@ export const updateItem = (id: string, value: string): IAction => ({
     },
   },
 });
+
 export const deleteItem = (id: string): IAction => ({
   type: DELETE_ITEM,
   payload: {
     id,
   },
 });
+
 export const toggleBeingEdited = (id: string): IAction => ({
   type: TOGGLE_BEING_EDITED,
   payload: {
