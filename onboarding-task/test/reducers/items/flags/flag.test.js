@@ -4,8 +4,8 @@ import { toggleBeingEdited } from '../../../../src/actions/publicActions.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes.ts';
 import {
-  httpActionErrorFactory,
-  httpActionSuccessFactory,
+  handleErrorRequest,
+  handleSuccessfulRequest,
 } from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
 import {
   DELETE_ITEM_TO_SERVER_FAILURE,
@@ -38,7 +38,7 @@ describe('flagReducer', () => {
         isSavedSuccess: false,
         failedHttpAction: actionType,
       });
-      const action = httpActionErrorFactory(actionType)('id', new Error());
+      const action = handleErrorRequest(actionType)('id', new Error());
 
       const testResult = flag(undefined, action);
 

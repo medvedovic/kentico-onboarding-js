@@ -3,7 +3,7 @@ import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
 
 
-export const httpActionSuccessFactory = (type: string) =>
+export const handleSuccessfulRequest = (type: string) =>
   (id: string, params: IServerItemDataModel): IAction => ({
     type,
     payload: {
@@ -15,7 +15,7 @@ export const httpActionSuccessFactory = (type: string) =>
     }
   });
 
-export const httpActionErrorFactory = (type: string) =>
+export const handleErrorRequest = (type: string) =>
   (id: string, params: Error): IAction => ({
     type,
     payload: {

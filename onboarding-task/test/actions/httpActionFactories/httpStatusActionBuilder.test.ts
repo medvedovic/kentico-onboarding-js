@@ -1,6 +1,6 @@
 import {
-  httpActionErrorFactory,
-  httpActionSuccessFactory
+  handleErrorRequest,
+  handleSuccessfulRequest
 } from '../../../src/actions/httpActionFactories/httpActionStatusFactories';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { IAction } from '../../../src/actions/IAction';
@@ -24,7 +24,7 @@ describe('httpActionSuccessFactory', () => {
       }
     };
 
-    const result = httpActionSuccessFactory('GET')(guid, params);
+    const result = handleSuccessfulRequest('GET')(guid, params);
 
     expect(result).toEqual(expectedResult);
   });
@@ -42,7 +42,7 @@ describe('httpActionErrorFactory', () => {
       }
     };
 
-    const testResult = httpActionErrorFactory('GET')(guid, new Error('failure'));
+    const testResult = handleErrorRequest('GET')(guid, new Error('failure'));
 
     expect(testResult).toEqual(expectedResult);
   });
