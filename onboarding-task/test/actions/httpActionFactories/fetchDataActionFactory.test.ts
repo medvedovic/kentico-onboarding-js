@@ -32,7 +32,7 @@ describe('fetchDataActionFactory', () => {
   it('dispatches correct actions on success', async () => {
     const dependencies = {
       fetchOperation: mockSuccessPromise,
-      startLoader: fetchIsLoading,
+      fetchIsLoading: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
       apiEndpoint: ''
@@ -53,7 +53,7 @@ describe('fetchDataActionFactory', () => {
   it('dispatches correct actions on failure', async () => {
     const dependencies = {
       fetchOperation: mockErrorPromise,
-      startLoader: fetchIsLoading,
+      fetchIsLoading: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
       apiEndpoint: ''
