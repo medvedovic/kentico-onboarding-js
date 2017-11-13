@@ -15,13 +15,6 @@ export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Prom
         if (!response.ok)
           throw new Error(response.statusText + ' at ' + response.url);
 
-        switch (httpMethod) {
-          case HttpAction.GET:
-          case HttpAction.POST:
-          case HttpAction.PUT:
-            return response.json();
-          default:
-            return response;
-        }
+        return response;
       });
   };

@@ -1,7 +1,10 @@
 import 'isomorphic-fetch';
 import { List, Map } from 'immutable';
 import { postItemDataActionFactory } from '../../../src/actions/httpActionFactories/postDataActionFactory';
-import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
+import {
+  IServerItemDataModel,
+  toServerItemDataViewModel
+} from '../../../src/models/IServerItemDataModel';
 import {
   CREATE_ITEM,
   POST_ITEM_TO_SERVER
@@ -130,6 +133,7 @@ describe('repostData', () => {
       operation: mockSuccessPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const postExpectedResult = {
@@ -149,6 +153,7 @@ describe('repostData', () => {
       operation: mockErrorPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const postExpectedResult = {

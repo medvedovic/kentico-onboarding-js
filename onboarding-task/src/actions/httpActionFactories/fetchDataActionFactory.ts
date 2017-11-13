@@ -15,6 +15,7 @@ export const fetchDataActionFactory = (dependencies: IFetchDataActionFactory ) =
       dispatch(dependencies.fetchIsLoading());
 
       return dependencies.fetchOperation(dependencies.apiEndpoint)
+        .then((response: Response) => response.json())
         .then((response: Array<IServerItemDataModel>) => {
           dispatch(dependencies.onFetchSucceeded(response));
         })

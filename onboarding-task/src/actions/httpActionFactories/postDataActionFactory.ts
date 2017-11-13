@@ -4,13 +4,16 @@ import {
 } from '../../models/IServerItemDataModel';
 
 import { IAction } from '../IAction';
-import { IRedoRequestToServerFactoryDependencies } from './redoRequestToServerFactory';
 import { ListItemData } from '../../models/ListItemData';
 
 
-interface IPostItemDataActionFactoryDependencies extends IRedoRequestToServerFactoryDependencies {
+interface IPostItemDataActionFactoryDependencies {
+  operation: (_url: string, _itemDto?: IServerItemDataModel) => Promise<Response>;
   createItem: (value: string) => ListItemData;
   onItemCreated: (item: ListItemData) => IAction;
+  onSuccess: (_localId: string, _response?: IServerItemDataModel | Error) => IAction;
+  onError: (_localId: string, _error: IServerItemDataModel | Error) => IAction;
+  apiEndpoint: string;
 }
 
 export const postItemDataActionFactory = (dependencies: IPostItemDataActionFactoryDependencies) =>
@@ -22,6 +25,7 @@ export const postItemDataActionFactory = (dependencies: IPostItemDataActionFacto
       const url = dependencies.apiEndpoint;
 
       return dependencies.operation(url, itemDto)
+        .then((response: Response) => response.json())
         .then((response: IServerItemDataModel) =>
           dispatch(dependencies.onSuccess(newItem.id, response)))
         .catch((response: Error) =>

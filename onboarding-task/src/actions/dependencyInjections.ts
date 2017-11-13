@@ -27,6 +27,7 @@ import {
 import { putDataActionFactory } from './httpActionFactories/putDataActionFactory';
 import { redoRequestToServerFactory } from './httpActionFactories/redoRequestToServerFactory';
 import { listItemDataConverter } from '../utils/listItemDataConverter';
+import { deleteItemThunkFactory } from './httpActionFactories/deleteItemThunkFactory';
 
 
 const getItemsFromServer = fetchBuilder(fetch, HttpAction.GET);
@@ -56,7 +57,7 @@ export const putData = putDataActionFactory({
   operation: updateItemOnServer,
   onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
-  updateItemOperation: updateItem,
+  updateItem: updateItem,
   apiEndpoint
 });
 
@@ -76,7 +77,7 @@ export const redoPutData = redoRequestToServerFactory({
   apiEndpoint
 });
 
-export const deleteData = redoRequestToServerFactory({
+export const deleteData = deleteItemThunkFactory({
   operation: removeItemOnServer,
   onError: handleErrorRequest(DELETE_ITEM_AT_SERVER_FAILURE),
   onSuccess: deleteItem,

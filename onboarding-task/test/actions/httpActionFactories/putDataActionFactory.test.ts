@@ -1,5 +1,8 @@
 import 'isomorphic-fetch';
-import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
+import {
+  IServerItemDataModel,
+  toServerItemDataViewModel
+} from '../../../src/models/IServerItemDataModel';
 import {
   PUT_ITEM_TO_SERVER, UPDATE_ITEM,
 } from '../../../src/constants/actionTypes';
@@ -68,7 +71,7 @@ describe('putDataActionFactory', () => {
       operation: mockPutSuccess,
       onSuccess: onPutSuccess,
       onError: onPutError,
-      updateItemOperation,
+      updateItem: updateItemOperation,
       apiEndpoint: ''
     };
     const putSuccessResult = {
@@ -89,7 +92,7 @@ describe('putDataActionFactory', () => {
       operation: mockPutError,
       onSuccess: onPutSuccess,
       onError: onPutError,
-      updateItemOperation,
+      updateItem: updateItemOperation,
       apiEndpoint: ''
     };
     const expectedResult = {
@@ -112,6 +115,7 @@ describe('reput item', () => {
       operation: mockPutSuccess,
       onSuccess: onPutSuccess,
       onError: onPutError,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const expectedResult = {
@@ -131,6 +135,7 @@ describe('reput item', () => {
       operation: mockPutError,
       onSuccess: onPutSuccess,
       onError: onPutError,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const expectedResult = {
