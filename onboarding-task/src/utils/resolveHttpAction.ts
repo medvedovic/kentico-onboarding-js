@@ -10,7 +10,7 @@ import {
 } from '../actions/publicActions';
 
 
-export const httpActionResolver = (localId: string, method: string) => {
+export const resolveHttpAction = (localId: string, method: string) => {
   switch (method) {
     case POST_ITEM_TO_SERVER.FAILURE:
       return redoPostData(localId);
