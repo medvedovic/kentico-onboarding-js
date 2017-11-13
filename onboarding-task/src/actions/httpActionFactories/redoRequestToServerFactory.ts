@@ -15,7 +15,7 @@ export interface IRedoRequestToServerFactoryDependencies {
 
 export const redoRequestToServerFactory = (dependencies: IRedoRequestToServerFactoryDependencies) =>
     (localId: string) =>
-      (dispatch: Dispatch, getState: () =>Store.IRoot) => {
+      (dispatch: Dispatch, getState: () => Store.IRoot) => {
         const item = getState().items.data.get(localId);
         const itemDto = dependencies.transformDataToDto && dependencies.transformDataToDto(item);
 
