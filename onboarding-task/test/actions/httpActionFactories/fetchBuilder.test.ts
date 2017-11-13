@@ -16,9 +16,9 @@ describe('httpActionBuilder', () => {
     const mockBody = {foo: 'bar'};
     const myFetch = jest.fn((_url: string, _body?: any) =>
       Promise.resolve(mockResponse(201, 'Created', JSON.stringify(mockBody))));
-    const mockFetch = fetchBuilder(myFetch);
+    const mockFetch = fetchBuilder(myFetch, HttpAction.GET);
 
-    const result = await mockFetch('', HttpAction.GET, undefined);
+    const result = await mockFetch('', undefined);
 
     expect(result).toEqual(mockBody);
   });
@@ -26,9 +26,9 @@ describe('httpActionBuilder', () => {
   it('returns response', async () => {
     const myFetch = jest.fn((_url: string, _body?: any) =>
       Promise.resolve(mockResponse(204, 'Created')));
-    const mockFetch = fetchBuilder(myFetch);
+    const mockFetch = fetchBuilder(myFetch, HttpAction.DELETE);
 
-    const result = await mockFetch('', HttpAction.DELETE, undefined);
+    const result = await mockFetch('', undefined);
 
     expect(result).toBeInstanceOf(Response);
     expect(result.status).toBe(204);
@@ -39,7 +39,7 @@ describe('httpActionBuilder', () => {
       Promise.reject(mockResponse(500, 'Internal server error', undefined)));
 
 
-    const result = fetchBuilder(myFetch)('', HttpAction.GET);
+    const result = fetchBuilder(myFetch, HttpAction.GET)('');
 
 
     expect(result).toThrow();

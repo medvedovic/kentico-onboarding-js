@@ -28,12 +28,10 @@ import { putDataActionFactory } from './httpActionFactories/putDataActionFactory
 import { redoRequestToServerFactory } from './httpActionFactories/redoRequestToServerFactory';
 
 
-const getItemsFromServer = (url: string) => fetchBuilder(fetch)(url, HttpAction.GET);
-const removeItemOnServer = (url: string) => fetchBuilder(fetch)(url, HttpAction.DELETE);
-const createItemOnServer = (url: string, itemDto: IServerItemDataModel) =>
-  fetchBuilder<IServerItemDataModel>(fetch)(url, HttpAction.POST, itemDto);
-const updateItemOnServer = (url: string, itemDto: IServerItemDataModel) =>
-  fetchBuilder<IServerItemDataModel>(fetch)(url, HttpAction.PUT, itemDto);
+const getItemsFromServer = fetchBuilder(fetch, HttpAction.GET);
+const removeItemOnServer = fetchBuilder(fetch, HttpAction.DELETE);
+const createItemOnServer = fetchBuilder<IServerItemDataModel>(fetch, HttpAction.POST);
+const updateItemOnServer = fetchBuilder<IServerItemDataModel>(fetch, HttpAction.PUT);
 
 
 export const fetchData = fetchDataActionFactory({
