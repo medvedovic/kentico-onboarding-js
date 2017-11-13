@@ -19,7 +19,7 @@ const store = createStore(
   rootReducer,
   initialState,
   composeEnhancers(
-    applyMiddleware(logger, thunk)
+    applyMiddleware(thunk, logger)
   )
 );
 
