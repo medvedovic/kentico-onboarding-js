@@ -1,17 +1,18 @@
 import { HttpAction } from '../constants/HttpAction';
-import { POST_ITEM_TO_SERVER,
+import {
+  POST_ITEM_TO_SERVER,
   PUT_ITEM_TO_SERVER,
   DELETE_ITEM_TO_SERVER_FAILURE
 } from '../constants/actionTypes';
 import { apiEndpoint } from '../constants/apiEndpoint';
 import {
   createItem,
+  updateItem,
+  deleteItem,
   fetchHasFailed,
   fetchHasSucceeded,
-  fetchIsLoading, updateItem
+  fetchIsLoading,
 } from './actionCreators';
-import {
-  deleteItem} from './actionCreators';
 import {
   IServerItemDataModel,
   toServerItemDataViewModel
