@@ -13,5 +13,4 @@ export const listItemDataConverterBuilder = (idGenerator: () => string): IListIt
     })
   );
 
-export const listItemDataConverter = (value: string, id: string): ListItemData =>
-  listItemDataConverterBuilder(generateGuid)(value, id);
+export const listItemDataConverter = listItemDataConverterBuilder(generateGuid);
