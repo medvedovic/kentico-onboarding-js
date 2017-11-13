@@ -3,7 +3,7 @@ import { IAction } from '../IAction';
 
 interface IFetchDataActionFactory {
   fetchOperation: (value: string) => Promise<object>;
-  startLoader: () => IAction;
+  fetchIsLoading: () => IAction;
   onFetchSucceeded: (items: Array<IServerItemDataModel>) => IAction;
   onFetchFailed: (error: Error) => IAction;
   apiEndpoint: string;
@@ -12,7 +12,7 @@ interface IFetchDataActionFactory {
 export const fetchDataActionFactory = (dependencies: IFetchDataActionFactory ) =>
   () =>
     (dispatch: Dispatch) => {
-      dispatch(dependencies.startLoader());
+      dispatch(dependencies.fetchIsLoading());
 
       return dependencies.fetchOperation(dependencies.apiEndpoint)
         .then((response: Array<IServerItemDataModel>) => {

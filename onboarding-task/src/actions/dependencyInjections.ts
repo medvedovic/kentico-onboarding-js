@@ -38,7 +38,7 @@ const updateItemOnServer = (url: string, itemDto: IServerItemDataModel) =>
 
 export const fetchData = fetchDataActionFactory({
   fetchOperation: getItemsFromServer,
-  startLoader: fetchIsLoading,
+  fetchIsLoading: fetchIsLoading,
   onFetchSucceeded: fetchHasSucceeded,
   onFetchFailed: fetchHasFailed,
   apiEndpoint
