@@ -46,6 +46,7 @@ export const fetchData = fetchDataThunkFactory({
 
 export const postData = postItemDataThunkFactory({
   operation: sendRequest,
+  transformDataToDto: toServerItemDataViewModel,
   onSuccess: handleSuccessfulPost,
   onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
   createItem: listItemDataConverter,
@@ -56,6 +57,7 @@ export const postData = postItemDataThunkFactory({
 
 export const putData = putDataThunkFactory({
   operation: sendRequest,
+  transformDataToDto: toServerItemDataViewModel,
   onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
   updateItem: updateItem,

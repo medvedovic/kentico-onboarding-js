@@ -1,18 +1,21 @@
-import { IServerItemDataModel, toServerItemDataViewModel } from '../../models/IServerItemDataModel';
-
+import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { Store } from '../../reducers/stores';
 import { HttpAction } from '../../constants/HttpAction';
 import { ListItemData } from '../../models/ListItemData';
 
 
-interface IPutDataThunkFactory {
+export interface IReputItemThunkFactory {
   operation: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
-  updateItem: (localId: string, value: string) => IAction;
+  transformDataToDto: (item: ListItemData) => IServerItemDataModel;
   onSuccess: (_response: IServerItemDataModel) => IAction;
   onError: (_localId: string, _error: Error) => IAction;
-  httpMethod: HttpAction;
+  httpMethod: HttpAction,
   apiEndpoint: string;
+}
+
+interface IPutDataThunkFactory extends IReputItemThunkFactory{
+  updateItem: (localId: string, value: string) => IAction;
 }
 
 export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>
@@ -21,7 +24,7 @@ export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>
       dispatch(dependencies.updateItem(id, value));
 
       const item = getState().items.data.get(id);
-      const itemDto = toServerItemDataViewModel(item);
+      const itemDto = dependencies.transformDataToDto(item);
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
@@ -32,15 +35,6 @@ export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>
         .catch((response) =>
           dispatch(dependencies.onError(id, response)));
     };
-
-export interface IReputItemThunkFactory {
-  operation: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
-  transformDataToDto: (item: ListItemData) => IServerItemDataModel;
-  onSuccess: (_response: IServerItemDataModel) => IAction;
-  onError: (_localId: string, _error: Error) => IAction;
-  httpMethod: HttpAction,
-  apiEndpoint: string;
-}
 
 export const reputItemThunkFactory = (dependencies: IReputItemThunkFactory) =>
   (localId: string) =>
