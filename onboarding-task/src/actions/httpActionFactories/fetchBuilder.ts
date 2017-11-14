@@ -1,7 +1,7 @@
 import { HttpAction } from '../../constants/HttpAction';
 
-export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Promise<Response>, httpMethod: HttpAction) =>
-  (url: string, body?: T) => {
+export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Promise<Response>) =>
+  (url: string, httpMethod: HttpAction, body?: T) => {
     const requestParameters = {
       method: httpMethod,
       headers: {

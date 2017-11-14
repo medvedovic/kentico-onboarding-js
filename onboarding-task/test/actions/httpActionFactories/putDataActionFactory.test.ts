@@ -15,6 +15,7 @@ import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { Store } from '../../../src/reducers/stores';
 import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/redoRequestToServerFactory';
+import { HttpAction } from '../../../src/constants/HttpAction';
 
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
@@ -35,10 +36,10 @@ const getState = (): Store.IRoot => ({
     }
   }
 });
-const mockPutSuccess = (_url: string, _dto: IServerItemDataModel) => Promise.resolve(
+const mockPutSuccess = (_url: string, _httpMethod: HttpAction, _dto: IServerItemDataModel) => Promise.resolve(
   new Response(JSON.stringify({ id, value: 'Go home' }))
 );
-const mockPutError = (_url: string, _dto: IServerItemDataModel) => Promise.reject(
+const mockPutError = (_url: string, _httpMethod: HttpAction, _dto: IServerItemDataModel) => Promise.reject(
   new Error('Some nasty shit happened')
 );
 const onPutSuccess = (_localId: string, _response: IServerItemDataModel) => ({
@@ -72,6 +73,7 @@ describe('putDataActionFactory', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
+      httpMethod: HttpAction.PUT,
       apiEndpoint: ''
     };
     const putSuccessResult = {
@@ -93,6 +95,7 @@ describe('putDataActionFactory', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
+      httpMethod: HttpAction.PUT,
       apiEndpoint: ''
     };
     const expectedResult = {
@@ -116,6 +119,7 @@ describe('reput item', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       transformDataToDto: toServerItemDataViewModel,
+      httpMethod: HttpAction.PUT,
       apiEndpoint: ''
     };
     const expectedResult = {
@@ -136,6 +140,7 @@ describe('reput item', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       transformDataToDto: toServerItemDataViewModel,
+      httpMethod: HttpAction.PUT,
       apiEndpoint: ''
     };
     const expectedResult = {

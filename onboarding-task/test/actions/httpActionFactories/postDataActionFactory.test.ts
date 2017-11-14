@@ -13,6 +13,7 @@ import { Store } from '../../../src/reducers/stores';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/redoRequestToServerFactory';
+import { HttpAction } from '../../../src/constants/HttpAction';
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
 const dispatch = jest.fn().mockImplementation((a: any) => a);
@@ -34,11 +35,11 @@ const getState = (): Store.IRoot => ({
   }
 });
 
-const mockSuccessPost = (_url: string) => Promise.resolve(
-  new Response(JSON.stringify({id, value: 'Go home'})).json()
+const mockSuccessPost = (_url: string, _httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise.resolve(
+  new Response(JSON.stringify({id, value: 'Go home'}))
 );
 
-const mockErrorPost = (_url: string) => Promise.reject(
+const mockErrorPost = (_url: string, _httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise.reject(
   new Error('Something went wrong')
 );
 
@@ -63,7 +64,7 @@ const mockItemConverter = (value: string) => new ListItemData({
 
 const mockCreateItem = (item: ListItemData) => ({
   type: CREATE_ITEM,
-  payload: {
+  payload:  {
     item
   }
 });
@@ -77,12 +78,13 @@ describe('postDataActionFactory', () => {
       onError: onPostError,
       createItem: mockItemConverter,
       onItemCreated: mockCreateItem,
+      httpMethod: HttpAction.POST,
       apiEndpoint: ''
     };
     const createItemExpectedResult = {
       type: CREATE_ITEM,
       payload: {
-        item: {id, value: 'Go home'}
+        item: new ListItemData({id, value: 'Go home'})
       }
     };
     const postExpectedResult = {
@@ -93,8 +95,8 @@ describe('postDataActionFactory', () => {
 
     await postItemAsync(dispatch);
 
-    expect(dispatch).toBeCalledWith(createItemExpectedResult);
-    expect(dispatch).toBeCalledWith(postExpectedResult);
+    expect(dispatch).toHaveBeenCalledWith(postExpectedResult);
+    expect(dispatch).toHaveBeenCalledWith(createItemExpectedResult);
   });
 
   it('returns correct actions on failure', async () => {
@@ -104,6 +106,7 @@ describe('postDataActionFactory', () => {
       onError: onPostError,
       createItem: mockItemConverter,
       onItemCreated: mockCreateItem,
+      httpMethod: HttpAction.POST,
       apiEndpoint: ''
     };
     const postExpectedResult = {
@@ -115,7 +118,7 @@ describe('postDataActionFactory', () => {
     const createItemExpectedResult = {
       type: CREATE_ITEM,
       payload: {
-        item: {id, value: 'Do stuff'}
+        item: new ListItemData({id, value: 'Do stuff'})
       }
     };
     const postItemAsync = postItemDataActionFactory(dependencies)('Do stuff');
@@ -134,6 +137,7 @@ describe('repostData', () => {
       onSuccess: onPostSuccess,
       onError: onPostError,
       transformDataToDto: toServerItemDataViewModel,
+      httpMethod: HttpAction.POST,
       apiEndpoint: ''
     };
     const postExpectedResult = {
@@ -154,6 +158,7 @@ describe('repostData', () => {
       onSuccess: onPostSuccess,
       onError: onPostError,
       transformDataToDto: toServerItemDataViewModel,
+      httpMethod: HttpAction.POST,
       apiEndpoint: ''
     };
     const postExpectedResult = {

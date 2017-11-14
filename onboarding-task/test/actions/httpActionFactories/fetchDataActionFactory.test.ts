@@ -5,6 +5,7 @@ import {
   fetchHasFailed,
   fetchIsLoading
 } from '../../../src/actions/actionCreators';
+import { HttpAction } from '../../../src/constants/HttpAction';
 
 
 const dispatch = jest.fn();
@@ -13,7 +14,7 @@ const items = [
   { 'id': 2, 'value': 'Go Home' }
 ];
 const mockSuccessPromise = (_url: string) => Promise.resolve(
-  new Response(JSON.stringify(items)).json()
+  new Response(JSON.stringify(items))
 );
 const mockErrorPromise = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
@@ -35,6 +36,7 @@ describe('fetchDataActionFactory', () => {
       fetchIsLoading: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
+      httpMethod: HttpAction.GET,
       apiEndpoint: ''
     };
     const expectedActions = [
@@ -56,6 +58,7 @@ describe('fetchDataActionFactory', () => {
       fetchIsLoading: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
+      httpMethod: HttpAction.GET,
       apiEndpoint: ''
     };
 
