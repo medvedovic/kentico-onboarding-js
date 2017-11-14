@@ -12,7 +12,7 @@ import {
 import { Store } from '../../../src/reducers/stores';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
-import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/redoRequestToServerFactory';
+import { reputItemThunkFactory } from '../../../src/actions/httpActionFactories/putDataThunkFactory';
 import { HttpAction } from '../../../src/constants/HttpAction';
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
@@ -145,7 +145,7 @@ describe('repostData', () => {
       payload: {id, value: 'Go home'}
     };
 
-    const repostItemAsync = redoRequestToServerFactory({...dependencies})(id);
+    const repostItemAsync = reputItemThunkFactory({...dependencies})(id);
 
     await repostItemAsync(dispatch, getState);
 
@@ -168,7 +168,7 @@ describe('repostData', () => {
       }
     };
 
-    const repostItemAsync = redoRequestToServerFactory({...dependencies})(id);
+    const repostItemAsync = reputItemThunkFactory({...dependencies})(id);
 
     await repostItemAsync(dispatch, getState);
 

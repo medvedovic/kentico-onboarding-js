@@ -29,7 +29,7 @@ import {
 } from './httpActionFactories/requestStatusActions';
 import { putDataThunkFactory } from './httpActionFactories/putDataThunkFactory';
 import {
-  redoRequestToServerFactory} from './httpActionFactories/redoRequestToServerFactory';
+  reputItemThunkFactory} from './httpActionFactories/putDataThunkFactory';
 import { listItemDataConverter } from '../utils/listItemDataConverter';
 import { deleteItemThunkFactory } from './httpActionFactories/deleteItemThunkFactory';
 
@@ -72,7 +72,7 @@ export const redoPostData = repostRequestThunkFactory({
   apiEndpoint
 });
 
-export const redoPutData = redoRequestToServerFactory({
+export const redoPutData = reputItemThunkFactory({
   operation: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),

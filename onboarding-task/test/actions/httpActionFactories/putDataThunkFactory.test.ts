@@ -14,7 +14,7 @@ import { putDataThunkFactory } from '../../../src/actions/httpActionFactories/pu
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { Store } from '../../../src/reducers/stores';
-import { redoRequestToServerFactory } from '../../../src/actions/httpActionFactories/redoRequestToServerFactory';
+import { reputItemThunkFactory } from '../../../src/actions/httpActionFactories/putDataThunkFactory';
 import { HttpAction } from '../../../src/constants/HttpAction';
 
 
@@ -127,7 +127,7 @@ describe('reput item', () => {
       payload: undefined
     };
 
-    const reputDataAsync = redoRequestToServerFactory({ ...dependencies })(id);
+    const reputDataAsync = reputItemThunkFactory({ ...dependencies })(id);
 
     await reputDataAsync(dispatch, getState);
 
@@ -147,7 +147,7 @@ describe('reput item', () => {
       type: PUT_ITEM_TO_SERVER.FAILURE,
       payload: new Error('Some nasty shit happened')
     };
-    const reputItemAsync = redoRequestToServerFactory({ ...dependencies })(id);
+    const reputItemAsync = reputItemThunkFactory({ ...dependencies })(id);
 
     await reputItemAsync(dispatch, getState);
 
