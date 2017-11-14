@@ -1,7 +1,5 @@
-import {
-  updateItem,
-  deleteItem,
-} from '../../src/actions/publicActions.ts';
+import { deleteItem } from '../../src/actions/httpActionFactories/deleteItemThunkFactory.ts';
+import { updateItem } from '../../src/actions/httpActionFactories/putDataThunkFactory.ts';
 import {
   UPDATE_ITEM,
   DELETE_ITEM

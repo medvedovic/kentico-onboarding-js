@@ -1,13 +1,9 @@
 import { Map } from 'immutable';
 import { flags } from '../../../../src/reducers/items/flags/flags.ts';
-import {
-  deleteItem,
-  toggleBeingEdited,
-} from '../../../../src/actions/publicActions.ts';
-import {
-  createItem,
-  fetchHasSucceededBuilder,
-} from '../../../../src/actions/actionCreators.ts';
+import { toggleBeingEdited } from '../../../../src/actions/publicActions.ts';
+import { deleteItem } from '../../../../src/actions/httpActionFactories/deleteItemThunkFactory.ts';
+import { createItem } from '../../../../src/actions/httpActionFactories/postDataThunkFactory.ts';
+import { fetchHasSucceededBuilder } from '../../../../src/actions/httpActionFactories/fetchDataThunkFactory.ts';
 import { ListItemFlags } from '../../../../src/models/ListItemFlags.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import {
@@ -43,7 +39,7 @@ describe('flagsReducer', () => {
     const action = {
       type: POST_ITEM_TO_SERVER.SUCCESS,
       payload: {
-        id: id2,
+        temporaryId: id2,
         item: {
           id
         }
