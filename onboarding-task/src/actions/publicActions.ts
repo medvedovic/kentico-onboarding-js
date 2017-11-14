@@ -13,7 +13,10 @@ export {
 } from "./httpActionFactories/putDataThunkFactory"
 
 export {
+  fetchData
+} from "./httpActionFactories/fetchDataThunkFactory";
+
+export {
   deleteData,
-  fetchData,
 } from './dependencyInjections';
 

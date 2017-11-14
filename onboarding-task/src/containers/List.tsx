@@ -10,7 +10,7 @@ import { Store } from '../reducers/stores';
 import {
   postData
 } from '../actions/httpActionFactories/postDataThunkFactory';
-import { fetchData } from '../actions/dependencyInjections';
+import { fetchData } from '../actions/publicActions';
 
 
 const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
