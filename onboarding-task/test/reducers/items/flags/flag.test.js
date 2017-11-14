@@ -6,7 +6,7 @@ import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes.ts';
 import {
   handleErrorRequest,
   handleSuccessfulRequest,
-} from '../../../../src/actions/httpActionFactories/httpActionStatusFactories.ts';
+} from '../../../../src/actions/httpActionFactories/requestStatusActions.ts';
 import {
   DELETE_ITEM_AT_SERVER_FAILURE,
   PUT_ITEM_TO_SERVER

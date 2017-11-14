@@ -26,7 +26,7 @@ import {
 import {
   handleErrorRequest, handleSuccessfulPost,
   handleSuccessfulRequest
-} from './httpActionFactories/httpActionStatusFactories';
+} from './httpActionFactories/requestStatusActions';
 import { putDataThunkFactory } from './httpActionFactories/putDataThunkFactory';
 import {
   redoRequestToServerFactory} from './httpActionFactories/redoRequestToServerFactory';
