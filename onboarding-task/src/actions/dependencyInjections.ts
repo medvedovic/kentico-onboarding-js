@@ -1,12 +1,10 @@
 import { HttpAction } from '../constants/HttpAction';
 import {
-  POST_ITEM_TO_SERVER,
   PUT_ITEM_TO_SERVER,
   DELETE_ITEM_AT_SERVER_FAILURE
 } from '../constants/actionTypes';
 import { apiEndpoint } from '../constants/apiEndpoint';
 import {
-  createItem,
   updateItem,
   deleteItem,
   fetchHasFailed,
@@ -14,23 +12,17 @@ import {
   fetchIsLoading,
 } from './actionCreators';
 import {
-  //IServerItemDataModel,
   toServerItemDataViewModel
 } from '../models/IServerItemDataModel';
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import { fetchDataThunkFactory } from './httpActionFactories/fetchDataThunkFactory';
 import {
-  postItemDataThunkFactory,
-  repostRequestThunkFactory
-} from './httpActionFactories/postDataThunkFactory';
-import {
-  handleErrorRequest, handleSuccessfulPost,
+  handleErrorRequest,
   handleSuccessfulRequest
 } from './httpActionFactories/requestStatusActions';
 import { putDataThunkFactory } from './httpActionFactories/putDataThunkFactory';
 import {
   reputItemThunkFactory} from './httpActionFactories/putDataThunkFactory';
-import { listItemDataConverter } from '../utils/listItemDataConverter';
 import { deleteItemThunkFactory } from './httpActionFactories/deleteItemThunkFactory';
 
 const sendRequest = fetchBuilder(fetch);
@@ -44,17 +36,6 @@ export const fetchData = fetchDataThunkFactory({
   apiEndpoint
 });
 
-export const postData = postItemDataThunkFactory({
-  operation: sendRequest,
-  transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulPost,
-  onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
-  createItem: listItemDataConverter,
-  onItemCreated: createItem,
-  httpMethod: HttpAction.POST,
-  apiEndpoint
-});
-
 export const putData = putDataThunkFactory({
   operation: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
@@ -62,15 +43,6 @@ export const putData = putDataThunkFactory({
   onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
   updateItem: updateItem,
   httpMethod: HttpAction.PUT,
-  apiEndpoint
-});
-
-export const redoPostData = repostRequestThunkFactory({
-  operation: sendRequest,
-  transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulPost,
-  onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
-  httpMethod: HttpAction.POST,
   apiEndpoint
 });
 

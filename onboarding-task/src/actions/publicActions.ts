@@ -3,11 +3,14 @@ export {
 } from './actionCreators';
 
 export {
+  postData,
+  redoPostData
+} from "./httpActionFactories/postDataThunkFactory";
+
+export {
   deleteData,
   fetchData,
-  postData,
   putData,
-  redoPostData,
   redoPutData
 } from './dependencyInjections';
 

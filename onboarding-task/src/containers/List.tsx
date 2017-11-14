@@ -9,7 +9,7 @@ import {
 import { Store } from '../reducers/stores';
 import {
   postData
-} from '../actions/dependencyInjections';
+} from '../actions/httpActionFactories/postDataThunkFactory';
 import { fetchData } from '../actions/dependencyInjections';
 
 

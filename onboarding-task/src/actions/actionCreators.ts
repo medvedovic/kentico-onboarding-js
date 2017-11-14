@@ -1,6 +1,5 @@
 import 'isomorphic-fetch';
 import {
-  CREATE_ITEM,
   DELETE_ITEM,
   FETCH_DATA,
   TOGGLE_BEING_EDITED,
@@ -34,13 +33,6 @@ export const fetchHasSucceededBuilder = (factory: (value: string, id: string) =>
   });
 
 export const fetchHasSucceeded = fetchHasSucceededBuilder(listItemDataConverter);
-
-export const createItem = (item: ListItemData): IAction => ({
-  type: CREATE_ITEM,
-    payload: {
-      item,
-    },
-  });
 
 export const updateItem = (id: string, value: string): IAction => ({
   type: UPDATE_ITEM,
