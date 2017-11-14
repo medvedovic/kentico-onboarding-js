@@ -21,10 +21,10 @@ export const data: Reducer.Data = (state = Map(), action) => {
     }
 
     case POST_ITEM_TO_SERVER.SUCCESS: {
-      const existingItem = state.get(action.payload.id);
+      const existingItem = state.get(action.payload.temporaryId);
       const newItem = item(existingItem, action);
       return state
-        .delete(action.payload.id)
+        .delete(action.payload.temporaryId)
         .set(action.payload.item.id, newItem);
     }
 

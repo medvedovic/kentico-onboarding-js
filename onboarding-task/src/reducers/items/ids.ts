@@ -19,7 +19,7 @@ export const ids: Reducer.Ids = (state = List<string>(), action) => {
 
     case POST_ITEM_TO_SERVER.SUCCESS:
       return state.filter(id => (
-        id !== action.payload.id
+        id !== action.payload.temporaryId
       )).toList().push(action.payload.item.id);
 
     case FETCH_DATA.HAS_SUCCEEDED: {

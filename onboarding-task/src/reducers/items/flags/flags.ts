@@ -27,7 +27,13 @@ export const flags: Reducer.Flags = (state = Map(), action) => {
     case POST_ITEM_TO_SERVER.SUCCESS: {
       const newFlags = flag(undefined, action);
       return state
-        .delete(action.payload.id)
+        .delete(action.payload.temporaryId)
+        .set(action.payload.item.id, newFlags);
+    }
+
+    case PUT_ITEM_TO_SERVER.SUCCESS: {
+      const newFlags = flag(undefined, action);
+      return state
         .set(action.payload.item.id, newFlags);
     }
 

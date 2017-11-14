@@ -19,13 +19,17 @@ import {
 } from '../models/IServerItemDataModel';
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import { fetchDataThunkFactory } from './httpActionFactories/fetchDataThunkFactory';
-import { postItemDataThunkFactory } from './httpActionFactories/postDataThunkFactory';
 import {
-  handleErrorRequest,
+  postItemDataThunkFactory,
+  repostRequestThunkFactory
+} from './httpActionFactories/postDataThunkFactory';
+import {
+  handleErrorRequest, handleSuccessfulPost,
   handleSuccessfulRequest
 } from './httpActionFactories/httpActionStatusFactories';
 import { putDataThunkFactory } from './httpActionFactories/putDataThunkFactory';
-import { redoRequestToServerFactory } from './httpActionFactories/redoRequestToServerFactory';
+import {
+  redoRequestToServerFactory} from './httpActionFactories/redoRequestToServerFactory';
 import { listItemDataConverter } from '../utils/listItemDataConverter';
 import { deleteItemThunkFactory } from './httpActionFactories/deleteItemThunkFactory';
 
@@ -42,7 +46,7 @@ export const fetchData = fetchDataThunkFactory({
 
 export const postData = postItemDataThunkFactory({
   operation: sendRequest,
-  onSuccess: handleSuccessfulRequest(POST_ITEM_TO_SERVER.SUCCESS),
+  onSuccess: handleSuccessfulPost,
   onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
   createItem: listItemDataConverter,
   onItemCreated: createItem,
@@ -59,10 +63,10 @@ export const putData = putDataThunkFactory({
   apiEndpoint
 });
 
-export const redoPostData = redoRequestToServerFactory({
+export const redoPostData = repostRequestThunkFactory({
   operation: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulRequest(POST_ITEM_TO_SERVER.SUCCESS),
+  onSuccess: handleSuccessfulPost,
   onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
   httpMethod: HttpAction.POST,
   apiEndpoint
