@@ -42,7 +42,7 @@ const mockPutSuccess = (_url: string, _httpMethod: HttpAction, _dto: IServerItem
 const mockPutError = (_url: string, _httpMethod: HttpAction, _dto: IServerItemDataModel) => Promise.reject(
   new Error('Some nasty shit happened')
 );
-const onPutSuccess = (_localId: string, _response: IServerItemDataModel) => ({
+const onPutSuccess = (_response: IServerItemDataModel) => ({
   type: PUT_ITEM_TO_SERVER.SUCCESS,
   payload: undefined
 });
@@ -70,6 +70,7 @@ describe('putDataThunkFactory', () => {
   it('returns correct actions on success', async () => {
     const dependencies = {
       operation: mockPutSuccess,
+      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
@@ -92,6 +93,7 @@ describe('putDataThunkFactory', () => {
   it('returns correct actions on failure', async () => {
     const dependencies = {
       operation: mockPutError,
+      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,

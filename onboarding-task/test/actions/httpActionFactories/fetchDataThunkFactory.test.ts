@@ -1,10 +1,11 @@
-import { fetchDataThunkFactory } from '../../../src/actions/httpActionFactories/fetchDataThunkFactory';
+import {
+  fetchDataThunkFactory,
+  fetchIsLoading,
+  fetchHasFailed,
+} from '../../../src/actions/httpActionFactories/fetchDataThunkFactory';
 import { FETCH_DATA } from '../../../src/constants/actionTypes';
 import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
-import {
-  fetchHasFailed,
-  fetchIsLoading
-} from '../../../src/actions/actionCreators';
+
 import { HttpAction } from '../../../src/constants/HttpAction';
 
 

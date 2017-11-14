@@ -1,6 +1,11 @@
 import 'isomorphic-fetch';
 import { List, Map } from 'immutable';
-import { postItemDataThunkFactory } from '../../../src/actions/httpActionFactories/postDataThunkFactory';
+import {
+  IPostItemDataThunkFactoryDependencies,
+  IRepostRequestThunkFactory,
+  postItemDataThunkFactory,
+  repostRequestThunkFactory
+} from '../../../src/actions/httpActionFactories/postDataThunkFactory';
 import {
   IServerItemDataModel,
   toServerItemDataViewModel
@@ -12,7 +17,6 @@ import {
 import { Store } from '../../../src/reducers/stores';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
-import { reputItemThunkFactory } from '../../../src/actions/httpActionFactories/putDataThunkFactory';
 import { HttpAction } from '../../../src/constants/HttpAction';
 
 const id = '62661d39-1c39-4b34-950e-5cb3b5a3ffad';
@@ -43,6 +47,18 @@ const mockErrorPost = (_url: string, _httpMethod: HttpAction, _itemDto?: IServer
   new Error('Something went wrong')
 );
 
+const mockItemConverter = (value: string) => new ListItemData({
+  id,
+  value
+});
+
+const mockCreateItem = (item: ListItemData) => ({
+  type: CREATE_ITEM,
+  payload:  {
+    item
+  }
+});
+
 const onPostSuccess = (_localId: string, _response: IServerItemDataModel) => ({
   type: POST_ITEM_TO_SERVER.SUCCESS,
   payload: {
@@ -57,23 +73,12 @@ const onPostError = (_localId: string, _response: Error) => ({
   }
 });
 
-const mockItemConverter = (value: string) => new ListItemData({
-  id,
-  value
-});
-
-const mockCreateItem = (item: ListItemData) => ({
-  type: CREATE_ITEM,
-  payload:  {
-    item
-  }
-});
-
 
 describe('postDataThunkFactory', () => {
   it('returns correct actions on success', async () => {
-    const dependencies = {
+    const dependencies: IPostItemDataThunkFactoryDependencies = {
       operation: mockSuccessPost,
+      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPostSuccess,
       onError: onPostError,
       createItem: mockItemConverter,
@@ -100,8 +105,9 @@ describe('postDataThunkFactory', () => {
   });
 
   it('returns correct actions on failure', async () => {
-    const dependencies = {
+    const dependencies: IPostItemDataThunkFactoryDependencies = {
       operation: mockErrorPost,
+      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPostSuccess,
       onError: onPostError,
       createItem: mockItemConverter,
@@ -132,7 +138,7 @@ describe('postDataThunkFactory', () => {
 
 describe('repostData', () => {
   it('returns correct actions on success', async () => {
-    const dependencies = {
+    const dependencies: IRepostRequestThunkFactory = {
       operation: mockSuccessPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
@@ -145,7 +151,7 @@ describe('repostData', () => {
       payload: {id, value: 'Go home'}
     };
 
-    const repostItemAsync = reputItemThunkFactory({...dependencies})(id);
+    const repostItemAsync = repostRequestThunkFactory({...dependencies})(id);
 
     await repostItemAsync(dispatch, getState);
 
@@ -168,7 +174,7 @@ describe('repostData', () => {
       }
     };
 
-    const repostItemAsync = reputItemThunkFactory({...dependencies})(id);
+    const repostItemAsync = repostRequestThunkFactory({...dependencies})(id);
 
     await repostItemAsync(dispatch, getState);
 
