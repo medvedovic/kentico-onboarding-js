@@ -5,7 +5,7 @@ import {
   toggleBeingEdited,
 } from '../../../../src/actions/publicActions.ts';
 import {
-  createItemBuilder,
+  createItem,
   fetchHasSucceededBuilder,
 } from '../../../../src/actions/actionCreators.ts';
 import { ListItemFlags } from '../../../../src/models/ListItemFlags.ts';
@@ -65,10 +65,9 @@ describe('flagsReducer', () => {
       [id2, new ListItemFlags()],
       ['xxyyzz', new ListItemFlags()],
     ]);
-    const dummyFactory = () => new ListItemData({ id: 'xxyyzz' });
-    const dummyCreateItem = createItemBuilder(dummyFactory);
+    const createItemAction = createItem(new ListItemData({ id: 'xxyyzz' }));
 
-    const result = flags(initialState, dummyCreateItem(''));
+    const result = flags(initialState, createItemAction);
 
     expect(result).toEqual(expectedResult);
   });

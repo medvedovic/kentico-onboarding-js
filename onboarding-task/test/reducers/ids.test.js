@@ -2,7 +2,7 @@ import { List } from 'immutable';
 import { ids } from '../../src/reducers/items/ids';
 import { deleteItem } from '../../src/actions/publicActions';
 import { ListItemData } from '../../src/models/ListItemData';
-import { createItemBuilder } from '../../src/actions/actionCreators';
+import { createItem } from '../../src/actions/actionCreators';
 import {
   FETCH_DATA,
   POST_ITEM_TO_SERVER
@@ -15,10 +15,9 @@ describe('idsReducer', () => {
   it('returns new state on create properly', () => {
     const initialState = new List();
     const expectedState = initialState.push(id);
-    const dummyFactory = () => new ListItemData({ id });
-    const dummyCreateItem = createItemBuilder(dummyFactory);
+    const createItemAction = createItem(new ListItemData({ id }));
 
-    const test = ids(initialState, dummyCreateItem(''));
+    const test = ids(initialState, createItemAction);
 
     expect(test).toEqual(expectedState);
   });

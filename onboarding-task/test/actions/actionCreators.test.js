@@ -1,20 +1,20 @@
 import { ListItemData } from '../../src/models/ListItemData.ts';
 import {
-  createItemBuilder,
+  createItem,
   fetchIsLoading,
   fetchHasFailed,
   fetchHasSucceededBuilder,
 } from '../../src/actions/actionCreators.ts';
 import {
   FETCH_DATA,
-  LocalItemActions,
+  CREATE_ITEM,
 } from '../../src/constants/actionTypes.ts';
 
 
-describe('createItemBuilder', () => {
-  it('builds createItem action properly', () => {
+describe('createItem', () => {
+  it('creates correct action', () => {
     const expectedAction = {
-      type: LocalItemActions.CREATE_ITEM,
+      type: CREATE_ITEM,
       payload: {
         item: new ListItemData({
           id: 'xxyy',
@@ -22,12 +22,10 @@ describe('createItemBuilder', () => {
         }),
       },
     };
-    const dummyFactory = (value) => new ListItemData({
+    const testAction = createItem(new ListItemData({
       id: 'xxyy',
-      value,
-    });
-
-    const testAction = createItemBuilder(dummyFactory)('Make a sandwich');
+      value: 'Make a sandwich',
+    }));
 
     expect(testAction).toEqual(expectedAction);
   });

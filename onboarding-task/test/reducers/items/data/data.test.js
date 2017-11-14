@@ -6,12 +6,11 @@ import {
   updateItem,
 } from '../../../../src/actions/publicActions.ts';
 import {
-  createItemBuilder,
+  createItem,
   fetchHasSucceededBuilder,
 } from '../../../../src/actions/actionCreators.ts';
 import {
   POST_ITEM_TO_SERVER,
-  FETCH_DATA
 } from '../../../../src/constants/actionTypes';
 
 describe('dataReducer', () => {
@@ -26,10 +25,9 @@ describe('dataReducer', () => {
   it('creates new item properly', () => {
     const newListItem = new ListItemModel({ id: _id3, value: 'Make a sandwich' });
     const expectedStoreState = initialState.set(_id3, newListItem);
-    const dummyItemGenerator = () => newListItem;
-    const dummyCreateItem = createItemBuilder(dummyItemGenerator);
+    const createItemAction = createItem(newListItem);
 
-    const result = data(initialState, dummyCreateItem('Make a sandwich'));
+    const result = data(initialState, createItemAction);
 
     expect(result).toEqual(expectedStoreState);
   });
