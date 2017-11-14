@@ -3,7 +3,6 @@ import {
   DELETE_ITEM,
   FETCH_DATA,
   TOGGLE_BEING_EDITED,
-  UPDATE_ITEM,
 } from '../constants/actionTypes';
 import {
   listItemDataConverter
@@ -33,16 +32,6 @@ export const fetchHasSucceededBuilder = (factory: (value: string, id: string) =>
   });
 
 export const fetchHasSucceeded = fetchHasSucceededBuilder(listItemDataConverter);
-
-export const updateItem = (id: string, value: string): IAction => ({
-  type: UPDATE_ITEM,
-  payload: {
-    item: {
-      id,
-      value,
-    },
-  },
-});
 
 export const deleteItem = (id: string): IAction => ({
   type: DELETE_ITEM,

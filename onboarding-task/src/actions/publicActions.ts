@@ -8,9 +8,12 @@ export {
 } from "./httpActionFactories/postDataThunkFactory";
 
 export {
-  deleteData,
-  fetchData,
   putData,
   redoPutData
+} from "./httpActionFactories/putDataThunkFactory"
+
+export {
+  deleteData,
+  fetchData,
 } from './dependencyInjections';
 
