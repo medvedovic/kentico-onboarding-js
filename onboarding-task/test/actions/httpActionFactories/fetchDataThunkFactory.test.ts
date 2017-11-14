@@ -1,4 +1,4 @@
-import { fetchDataActionFactory } from '../../../src/actions/httpActionFactories/fetchDataActionFactory';
+import { fetchDataThunkFactory } from '../../../src/actions/httpActionFactories/fetchDataThunkFactory';
 import { FETCH_DATA } from '../../../src/constants/actionTypes';
 import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
 import {
@@ -29,7 +29,7 @@ const onFetchSucceeded = (input: Array<IServerItemDataModel>) => ({
 const onFetchFailed = (error: Error) => fetchHasFailed(error);
 
 
-describe('fetchDataActionFactory', () => {
+describe('fetchDataThunkFactory', () => {
   it('dispatches correct actions on success', async () => {
     const dependencies = {
       fetchOperation: mockSuccessPromise,
@@ -44,7 +44,7 @@ describe('fetchDataActionFactory', () => {
       { type: FETCH_DATA.HAS_SUCCEEDED, payload: { items } }
     ];
 
-    const fetchDataAsync = fetchDataActionFactory(dependencies)();
+    const fetchDataAsync = fetchDataThunkFactory(dependencies)();
 
     await fetchDataAsync(dispatch);
 
@@ -67,7 +67,7 @@ describe('fetchDataActionFactory', () => {
       { type: FETCH_DATA.HAS_FAILED, payload: { error: new Error('Some nasty shit happened') } }
     ];
 
-    const fetchDataAsync = fetchDataActionFactory(dependencies)();
+    const fetchDataAsync = fetchDataThunkFactory(dependencies)();
 
     await fetchDataAsync(dispatch);
 

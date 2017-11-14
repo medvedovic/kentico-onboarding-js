@@ -8,7 +8,7 @@ import { Store } from '../../reducers/stores';
 import { HttpAction } from '../../constants/HttpAction';
 
 
-interface IPutDataActionFactory {
+interface IPutDataThunkFactory {
   operation: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
   updateItem: (localId: string, value: string) => IAction;
   onSuccess: (_localId: string, _response?: IServerItemDataModel) => IAction;
@@ -17,7 +17,7 @@ interface IPutDataActionFactory {
   apiEndpoint: string;
 }
 
-export const putDataActionFactory = (dependencies: IPutDataActionFactory) =>
+export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>
   (id: string, value: string) =>
     (dispatch: Dispatch, getState: () => Store.IRoot) => {
       dispatch(dependencies.updateItem(id, value));

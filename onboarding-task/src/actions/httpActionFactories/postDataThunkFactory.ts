@@ -8,7 +8,7 @@ import { ListItemData } from '../../models/ListItemData';
 import { HttpAction } from '../../constants/HttpAction';
 
 
-interface IPostItemDataActionFactoryDependencies {
+interface IPostItemDataThunkFactoryDependencies {
   operation: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
   createItem: (value: string) => ListItemData;
   onItemCreated: (item: ListItemData) => IAction;
@@ -18,7 +18,7 @@ interface IPostItemDataActionFactoryDependencies {
   apiEndpoint: string;
 }
 
-export const postItemDataActionFactory = (dependencies: IPostItemDataActionFactoryDependencies) =>
+export const postItemDataThunkFactory = (dependencies: IPostItemDataThunkFactoryDependencies) =>
   (value: string) =>
     (dispatch: Dispatch) => {
       const newItem = dependencies.createItem(value);

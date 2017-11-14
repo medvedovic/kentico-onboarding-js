@@ -10,7 +10,7 @@ import {
   List,
   Map
 } from 'immutable';
-import { putDataActionFactory } from '../../../src/actions/httpActionFactories/putDataActionFactory';
+import { putDataThunkFactory } from '../../../src/actions/httpActionFactories/putDataThunkFactory';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { ListItemFlags } from '../../../src/models/ListItemFlags';
 import { Store } from '../../../src/reducers/stores';
@@ -59,7 +59,7 @@ const updateItemOperation = (localId: string, value: string) => ({
 });
 
 
-describe('putDataActionFactory', () => {
+describe('putDataThunkFactory', () => {
   const updateResult = {
     type: UPDATE_ITEM,
     payload: {
@@ -81,7 +81,7 @@ describe('putDataActionFactory', () => {
       payload: undefined
     };
 
-    const putItemAsync = putDataActionFactory(dependencies)(id, 'Go home');
+    const putItemAsync = putDataThunkFactory(dependencies)(id, 'Go home');
 
     await putItemAsync(dispatch, getState);
 
@@ -103,7 +103,7 @@ describe('putDataActionFactory', () => {
       payload: new Error('Some nasty shit happened')
     };
 
-    const putItemAsync = putDataActionFactory(dependencies)(id, 'Go home');
+    const putItemAsync = putDataThunkFactory(dependencies)(id, 'Go home');
 
     await putItemAsync(dispatch, getState);
 

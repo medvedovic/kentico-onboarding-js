@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 import { List, Map } from 'immutable';
-import { postItemDataActionFactory } from '../../../src/actions/httpActionFactories/postDataActionFactory';
+import { postItemDataThunkFactory } from '../../../src/actions/httpActionFactories/postDataThunkFactory';
 import {
   IServerItemDataModel,
   toServerItemDataViewModel
@@ -70,7 +70,7 @@ const mockCreateItem = (item: ListItemData) => ({
 });
 
 
-describe('postDataActionFactory', () => {
+describe('postDataThunkFactory', () => {
   it('returns correct actions on success', async () => {
     const dependencies = {
       operation: mockSuccessPost,
@@ -91,7 +91,7 @@ describe('postDataActionFactory', () => {
       type: POST_ITEM_TO_SERVER.SUCCESS,
       payload: {id, value: 'Go home'}
     };
-    const postItemAsync = postItemDataActionFactory(dependencies)('Go home');
+    const postItemAsync = postItemDataThunkFactory(dependencies)('Go home');
 
     await postItemAsync(dispatch);
 
@@ -121,7 +121,7 @@ describe('postDataActionFactory', () => {
         item: new ListItemData({id, value: 'Do stuff'})
       }
     };
-    const postItemAsync = postItemDataActionFactory(dependencies)('Do stuff');
+    const postItemAsync = postItemDataThunkFactory(dependencies)('Do stuff');
 
     await postItemAsync(dispatch);
 

@@ -2,7 +2,7 @@ import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { HttpAction } from '../../constants/HttpAction';
 
-interface IFetchDataActionFactory {
+interface IFetchDataThunkFactory {
   fetchOperation: (value: string, httpMethod: HttpAction) => Promise<Response>;
   fetchIsLoading: () => IAction;
   onFetchSucceeded: (items: Array<IServerItemDataModel>) => IAction;
@@ -11,7 +11,7 @@ interface IFetchDataActionFactory {
   apiEndpoint: string;
 }
 
-export const fetchDataActionFactory = (dependencies: IFetchDataActionFactory ) =>
+export const fetchDataThunkFactory = (dependencies: IFetchDataThunkFactory ) =>
   () =>
     (dispatch: Dispatch) => {
       dispatch(dependencies.fetchIsLoading());

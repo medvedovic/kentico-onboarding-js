@@ -18,20 +18,20 @@ import {
   toServerItemDataViewModel
 } from '../models/IServerItemDataModel';
 import { fetchBuilder } from './httpActionFactories/fetchBuilder';
-import { fetchDataActionFactory } from './httpActionFactories/fetchDataActionFactory';
-import { postItemDataActionFactory } from './httpActionFactories/postDataActionFactory';
+import { fetchDataThunkFactory } from './httpActionFactories/fetchDataThunkFactory';
+import { postItemDataThunkFactory } from './httpActionFactories/postDataThunkFactory';
 import {
   handleErrorRequest,
   handleSuccessfulRequest
 } from './httpActionFactories/httpActionStatusFactories';
-import { putDataActionFactory } from './httpActionFactories/putDataActionFactory';
+import { putDataThunkFactory } from './httpActionFactories/putDataThunkFactory';
 import { redoRequestToServerFactory } from './httpActionFactories/redoRequestToServerFactory';
 import { listItemDataConverter } from '../utils/listItemDataConverter';
 import { deleteItemThunkFactory } from './httpActionFactories/deleteItemThunkFactory';
 
 const sendRequest = fetchBuilder(fetch);
 
-export const fetchData = fetchDataActionFactory({
+export const fetchData = fetchDataThunkFactory({
   fetchOperation: sendRequest,
   fetchIsLoading: fetchIsLoading,
   onFetchSucceeded: fetchHasSucceeded,
@@ -40,7 +40,7 @@ export const fetchData = fetchDataActionFactory({
   apiEndpoint
 });
 
-export const postData = postItemDataActionFactory({
+export const postData = postItemDataThunkFactory({
   operation: sendRequest,
   onSuccess: handleSuccessfulRequest(POST_ITEM_TO_SERVER.SUCCESS),
   onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
@@ -50,7 +50,7 @@ export const postData = postItemDataActionFactory({
   apiEndpoint
 });
 
-export const putData = putDataActionFactory({
+export const putData = putDataThunkFactory({
   operation: sendRequest,
   onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
