@@ -2,7 +2,7 @@ import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 
 interface IFetchDataActionFactory {
-  fetchOperation: (value: string) => Promise<object>;
+  fetchOperation: (value: string) => Promise<Response>;
   fetchIsLoading: () => IAction;
   onFetchSucceeded: (items: Array<IServerItemDataModel>) => IAction;
   onFetchFailed: (error: Error) => IAction;
@@ -15,11 +15,11 @@ export const fetchDataActionFactory = (dependencies: IFetchDataActionFactory ) =
       dispatch(dependencies.fetchIsLoading());
 
       return dependencies.fetchOperation(dependencies.apiEndpoint)
-        .then((response: Response) => response.json())
-        .then((response: Array<IServerItemDataModel>) => {
+        .then((response) => response.json())
+        .then((response) => {
           dispatch(dependencies.onFetchSucceeded(response));
         })
-        .catch((response: Error) => {
+        .catch((response) => {
           dispatch(dependencies.onFetchFailed(response));
         });
     };

@@ -8,8 +8,8 @@ import { Store } from '../../reducers/stores';
 export interface IRedoRequestToServerFactoryDependencies {
   operation: (_url: string, _itemDto?: IServerItemDataModel) => Promise<Response>;
   transformDataToDto: (item: ListItemData) => IServerItemDataModel;
-  onSuccess: (_localId: string, _response?: IServerItemDataModel | Error) => IAction;
-  onError: (_localId: string, _error: IServerItemDataModel | Error) => IAction;
+  onSuccess: (_localId: string, _response?: IServerItemDataModel) => IAction;
+  onError: (_localId: string, _error: Error) => IAction;
   apiEndpoint: string;
 }
 
@@ -18,13 +18,12 @@ export const redoRequestToServerFactory = (dependencies: IRedoRequestToServerFac
       (dispatch: Dispatch, getState: () => Store.IRoot) => {
         const item = getState().items.data.get(localId);
         const itemDto = dependencies.transformDataToDto(item);
-
-        const url = item.id ? `${dependencies.apiEndpoint}/${item.id}` : dependencies.apiEndpoint;
+        const url = `${dependencies.apiEndpoint}/${item.id}`;
 
         return dependencies.operation(url, itemDto)
-          .then((response: Response) => response.json())
-          .then((response: IServerItemDataModel) =>
+          .then((response) => response.json())
+          .then((response) =>
             dispatch(dependencies.onSuccess(localId, response)))
-          .catch((error: Error) =>
+          .catch((error) =>
             dispatch(dependencies.onError(localId, error)));
   };

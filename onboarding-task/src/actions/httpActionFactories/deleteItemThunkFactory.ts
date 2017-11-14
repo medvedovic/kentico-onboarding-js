@@ -9,12 +9,12 @@ interface IDeleteItemThunkFactoryDependencies {
 
 export const deleteItemThunkFactory = (dependencies: IDeleteItemThunkFactoryDependencies) =>
   (itemId: string) =>
-    (dispatch: Dispatch) =>{
+    (dispatch: Dispatch) => {
       const url = `${dependencies.apiEndpoint}/${itemId}`;
 
       return dependencies.operation(url)
-        .then((response: Response) =>
+        .then((response) =>
           dispatch(dependencies.onSuccess(itemId, response)))
-        .catch((error: Error) =>
+        .catch((error) =>
           dispatch(dependencies.onError(itemId, error)));
     };
