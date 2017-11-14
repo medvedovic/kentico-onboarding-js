@@ -5,18 +5,18 @@ export {
 export {
   postData,
   redoPostData
-} from "./httpActionFactories/postDataThunkFactory";
+} from './httpActionFactories/postDataThunkFactory';
 
 export {
   putData,
   redoPutData
-} from "./httpActionFactories/putDataThunkFactory"
+} from './httpActionFactories/putDataThunkFactory'
 
 export {
   fetchData
-} from "./httpActionFactories/fetchDataThunkFactory";
+} from './httpActionFactories/fetchDataThunkFactory';
 
 export {
   deleteData,
-} from './dependencyInjections';
+} from './httpActionFactories/deleteItemThunkFactory';
 
