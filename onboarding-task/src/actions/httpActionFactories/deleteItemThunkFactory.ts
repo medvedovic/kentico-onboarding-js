@@ -6,7 +6,7 @@ import { DELETE_ITEM, DELETE_ITEM_AT_SERVER_FAILURE } from '../../constants/acti
 import { apiEndpoint } from '../../constants/apiEndpoint';
 import { fetchBuilder } from './fetchBuilder';
 
-interface IDeleteItemThunkFactoryDependencies {
+export interface IDeleteItemThunkFactoryDependencies {
   operation: (url: string, httpMethod: HttpAction) => Promise<Response>;
   onSuccess: (_itemId: string, _response: Response) => IAction;
   onError: (_itemId: string, _error: Error) => IAction;
