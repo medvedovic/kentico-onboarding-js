@@ -1,7 +1,5 @@
 export {
   toggleBeingEdited,
-  updateItem,
-  deleteItem
 } from './actionCreators';
 
 export {
