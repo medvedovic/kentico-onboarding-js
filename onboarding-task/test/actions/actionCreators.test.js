@@ -3,7 +3,8 @@ import {
   createItem,
   fetchIsLoading,
   fetchHasFailed,
-  fetchHasSucceededBuilder } from '../../src/actions/actionCreators.ts';
+  fetchHasSucceeded
+} from '../../src/actions/actionCreators.ts';
 import {
   FETCH_DATA,
   CREATE_ITEM,
@@ -59,10 +60,9 @@ describe('fetchHasFailed', () => {
 });
 
 describe('fetchHasSucceededBuilder', () => {
-  const mockItemFactory = (value, id) => ListItemData({ value, id });
   const mockPayload = [
-    { id: '21ed6482-b58e-4175-8130-e20dff01cf79', value: 'Go home' },
-    { id: '7b017282-2d9a-45ba-9708-7a70b41a1992', value: 'Do stuff' },
+    ListItemData({ id: '21ed6482-b58e-4175-8130-e20dff01cf79', value: 'Go home' }),
+    ListItemData({ id: '7b017282-2d9a-45ba-9708-7a70b41a1992', value: 'Do stuff' }),
   ];
   it('returns correct collection', () => {
     const expectedResult = {
@@ -81,7 +81,7 @@ describe('fetchHasSucceededBuilder', () => {
       },
     };
 
-    const testResult = fetchHasSucceededBuilder(mockItemFactory)(mockPayload);
+    const testResult = fetchHasSucceeded(mockPayload);
 
     expect(testResult).toEqual(expectedResult);
   });

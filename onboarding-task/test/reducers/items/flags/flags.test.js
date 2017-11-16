@@ -4,7 +4,7 @@ import { toggleBeingEdited } from '../../../../src/actions/publicActions.ts';
 import {
   createItem,
   deleteItem,
-  fetchHasSucceededBuilder
+  fetchHasSucceeded
 } from '../../../../src/actions/actionCreators.ts';
 import { ListItemFlags } from '../../../../src/models/ListItemFlags.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
@@ -110,8 +110,8 @@ describe('flagsReducer', () => {
 
   it('creates new flags for items after fetch correctly', () => {
     const mockResponse = [
-      { id: id1, value: 'Make coffee' },
-      { id: id2, value: 'Master React' },
+      new ListItemData({ id: id1, value: 'Make coffee' }),
+      new ListItemData({ id: id2, value: 'Master React' }),
     ];
     const expectedStoreState = new Map([
       [id1, new ListItemFlags()],
@@ -119,7 +119,7 @@ describe('flagsReducer', () => {
     ]);
 
     const mockParse = (value, id) => new ListItemData({ id, value, localId: id });
-    const fetch = fetchHasSucceededBuilder(mockParse)(mockResponse);
+    const fetch = fetchHasSucceeded(mockResponse);
 
     const testResult = flags(undefined, fetch);
 

@@ -6,9 +6,6 @@ import {
   TOGGLE_BEING_EDITED,
   UPDATE_ITEM,
 } from '../constants/actionTypes';
-import {
-  listItemDataConverter
-} from '../utils/listItemDataConverter';
 import { IAction } from './IAction';
 import { IServerItemDataModel } from '../models/IServerItemDataModel';
 import { ListItemData } from '../models/ListItemData';
@@ -25,15 +22,12 @@ export const fetchHasFailed = (error: Error) => ({
   }
 });
 
-export const fetchHasSucceededBuilder = (factory: (value: string, id: string) => ListItemData) =>
-  (items: Array<IServerItemDataModel>) => ({
+export const fetchHasSucceeded = (items: Array<IServerItemDataModel>) => ({
     type: FETCH_DATA.HAS_SUCCEEDED,
     payload: {
-      items: items.map(item => factory(item.value, item.id))
+      items
     }
   });
-
-export const fetchHasSucceeded = fetchHasSucceededBuilder(listItemDataConverter);
 
 export const createItem = (item: ListItemData): IAction => ({
   type: CREATE_ITEM,

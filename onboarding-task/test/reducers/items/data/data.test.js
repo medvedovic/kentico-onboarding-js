@@ -5,7 +5,7 @@ import {
   createItem,
   updateItem,
   deleteItem,
-  fetchHasSucceededBuilder
+  fetchHasSucceeded
 } from '../../../../src/actions/actionCreators.ts';
 import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes';
 
@@ -90,14 +90,14 @@ describe('dataReducer', () => {
 
   it('stores new items from fetch correctly', () => {
     const mockResponse = [
-      {
+      new ListItemModel({
         id: _id1,
         value: 'Make coffee'
-      },
-      {
+      }),
+      new ListItemModel({
         id: _id2,
         value: 'Master React'
-      },
+      }),
     ];
     const expectedStoreState = new Map([
       [
@@ -116,11 +116,7 @@ describe('dataReducer', () => {
       ],
     ]);
 
-    const mockParse = (value, id) => new ListItemModel({
-      id,
-      value
-    });
-    const fetch = fetchHasSucceededBuilder(mockParse)(mockResponse);
+    const fetch = fetchHasSucceeded(mockResponse);
 
     const testResult = data(undefined, fetch);
 

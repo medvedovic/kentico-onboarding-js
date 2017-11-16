@@ -34,6 +34,7 @@ const sendRequest = fetchBuilder(fetch);
 export const fetchData = fetchDataThunkFactory({
   sendRequest: sendRequest,
   fetchIsLoading: fetchIsLoading,
+  convertItem: listItemDataConverter,
   onFetchSucceeded: fetchHasSucceeded,
   onFetchFailed: fetchHasFailed,
   apiEndpoint

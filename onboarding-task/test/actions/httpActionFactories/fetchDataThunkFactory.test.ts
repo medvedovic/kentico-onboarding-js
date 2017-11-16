@@ -6,12 +6,13 @@ import {
   fetchIsLoading
 } from '../../../src/actions/actionCreators';
 import { HttpAction } from '../../../src/constants/HttpAction';
+import { ListItemData } from '../../../src/models/ListItemData';
 
 
 const dispatch = jest.fn();
 const items = [
-  { 'id': 1, 'value': 'Do stuff' },
-  { 'id': 2, 'value': 'Go Home' }
+  new ListItemData({ id: '1', value: 'Do stuff' }),
+  new ListItemData({ id: '2', value: 'Go Home' })
 ];
 const mockSuccessPromise = (_url: string) => Promise.resolve(
   new Response(JSON.stringify(items))
@@ -27,13 +28,18 @@ const onFetchSucceeded = (input: Array<IServerItemDataModel>) => ({
   }
 });
 const onFetchFailed = (error: Error) => fetchHasFailed(error);
-
+const convertItem = (value: string, id: string) =>
+  new ListItemData({
+    id,
+    value,
+  });
 
 describe('fetchDataThunkFactory', () => {
   it('dispatches correct actions on success', async () => {
     const dependencies = {
       sendRequest: mockSuccessPromise,
-      fetchIsLoading: fetchIsLoading,
+      convertItem,
+      fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
       httpMethod: HttpAction.GET,
@@ -55,7 +61,8 @@ describe('fetchDataThunkFactory', () => {
   it('dispatches correct actions on failure', async () => {
     const dependencies = {
       sendRequest: mockErrorPromise,
-      fetchIsLoading: fetchIsLoading,
+      convertItem,
+      fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
       httpMethod: HttpAction.GET,
