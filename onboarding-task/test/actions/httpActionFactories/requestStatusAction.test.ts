@@ -9,10 +9,10 @@ import { POST_ITEM_TO_SERVER } from '../../../src/constants/actionTypes';
 const guid = '339dcff5-abfb-4b23-9757-633ec05a5a45';
 
 describe('handleSuccessfulRequest', () => {
-  const params = {
-    id: '0ac3af95-2319-4692-9dc5-8bbc1a4d2564',
-    value: 'Go home and do stuff'
-  };
+  const params = new ListItemData({
+      id: '0ac3af95-2319-4692-9dc5-8bbc1a4d2564',
+      value: 'Go home and do stuff'
+    });
   it('builds new listItemData object on success', () => {
     const expectedResult: IAction = {
       type: 'GET',

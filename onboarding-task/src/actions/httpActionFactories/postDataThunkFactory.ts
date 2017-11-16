@@ -1,4 +1,4 @@
-import { IServerItemDataModel } from '../../models/IServerItemDataModel';
+import { IServerItemUpdateModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
 import { HttpAction } from '../../constants/HttpAction';
@@ -6,9 +6,9 @@ import { Store } from '../../reducers/stores';
 
 
 export interface IRepostRequestThunkFactory {
-  readonly sendRequest: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
-  readonly transformDataToDto: (item: ListItemData) => IServerItemDataModel;
-  readonly onSuccess: (itemId: string, _response: IServerItemDataModel) => IAction;
+  readonly sendRequest: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemUpdateModel) => Promise<Response>;
+  readonly transformDataToDto: (item: ListItemData) => IServerItemUpdateModel;
+  readonly onSuccess: (itemId: string, _response: IServerItemUpdateModel) => IAction;
   readonly onError: (itemId: string, _error: Error) => IAction;
   readonly apiEndpoint: string;
 }

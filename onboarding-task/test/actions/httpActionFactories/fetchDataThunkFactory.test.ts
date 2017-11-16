@@ -1,6 +1,5 @@
 import { fetchDataThunkFactory } from '../../../src/actions/httpActionFactories/fetchDataThunkFactory';
 import { FETCH_DATA } from '../../../src/constants/actionTypes';
-import { IServerItemDataModel } from '../../../src/models/IServerItemDataModel';
 import {
   fetchHasFailed,
   fetchIsLoading
@@ -21,7 +20,7 @@ const mockErrorPromise = (_url: string) => Promise.reject(
   new Error('Some nasty shit happened')
 );
 
-const onFetchSucceeded = (input: Array<IServerItemDataModel>) => ({
+const onFetchSucceeded = (input: Array<ListItemData>) => ({
   type: FETCH_DATA.HAS_SUCCEEDED,
   payload: {
     items: input

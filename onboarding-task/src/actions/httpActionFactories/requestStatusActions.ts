@@ -1,9 +1,9 @@
-import { IServerItemDataModel } from '../../models/IServerItemDataModel';
+import { IServerItemUpdateModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
 import { POST_ITEM_TO_SERVER } from '../../constants/actionTypes';
 
-export const postRequestHasSucceeded = (temporaryId: string, params: IServerItemDataModel) => ({
+export const postRequestHasSucceeded = (temporaryId: string, params: IServerItemUpdateModel) => ({
   type: POST_ITEM_TO_SERVER.SUCCESS,
   payload: {
     temporaryId,
@@ -15,7 +15,7 @@ export const postRequestHasSucceeded = (temporaryId: string, params: IServerItem
 });
 
 export const requestHasSucceeded = (type: string) =>
-  (params: IServerItemDataModel): IAction => ({
+  (params: IServerItemUpdateModel): IAction => ({
     type,
     payload: {
       item: new ListItemData({

@@ -7,7 +7,7 @@ import {
   UPDATE_ITEM,
 } from '../constants/actionTypes';
 import { IAction } from './IAction';
-import { IServerItemDataModel } from '../models/IServerItemDataModel';
+import { IServerItemUpdateModel } from '../models/IServerItemDataModel';
 import { ListItemData } from '../models/ListItemData';
 
 
@@ -22,7 +22,7 @@ export const fetchHasFailed = (error: Error) => ({
   }
 });
 
-export const fetchHasSucceeded = (items: Array<IServerItemDataModel>) => ({
+export const fetchHasSucceeded = (items: Array<IServerItemUpdateModel>) => ({
     type: FETCH_DATA.HAS_SUCCEEDED,
     payload: {
       items
