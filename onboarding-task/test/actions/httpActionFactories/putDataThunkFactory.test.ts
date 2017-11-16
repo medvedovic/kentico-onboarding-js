@@ -70,11 +70,11 @@ describe('putDataThunkFactory', () => {
   it('returns correct actions on success', async () => {
     const dependencies = {
       operation: mockPutSuccess,
-      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
       httpMethod: HttpAction.PUT,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const putSuccessResult = {
@@ -93,11 +93,11 @@ describe('putDataThunkFactory', () => {
   it('returns correct actions on failure', async () => {
     const dependencies = {
       operation: mockPutError,
-      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
       httpMethod: HttpAction.PUT,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const expectedResult = {

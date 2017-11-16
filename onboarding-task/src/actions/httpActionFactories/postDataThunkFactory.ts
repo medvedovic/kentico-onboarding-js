@@ -1,14 +1,8 @@
-import 'isomorphic-fetch';
-import { IServerItemDataModel, toServerItemDataViewModel } from '../../models/IServerItemDataModel';
+import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
 import { HttpAction } from '../../constants/HttpAction';
 import { Store } from '../../reducers/stores';
-import { handleErrorRequest, handleSuccessfulPost } from './requestStatusActions';
-import { CREATE_ITEM, POST_ITEM_TO_SERVER } from '../../constants/actionTypes';
-import { apiEndpoint } from '../../constants/apiEndpoint';
-import { listItemDataConverter } from '../../utils/listItemDataConverter';
-import { fetchBuilder } from './fetchBuilder';
 
 
 export interface IRepostRequestThunkFactory {
@@ -20,7 +14,7 @@ export interface IRepostRequestThunkFactory {
   apiEndpoint: string;
 }
 
-export interface IPostItemDataThunkFactoryDependencies extends IRepostRequestThunkFactory {
+interface IPostItemDataThunkFactoryDependencies extends IRepostRequestThunkFactory {
   createItem: (value: string) => ListItemData;
   onItemCreated: (item: ListItemData) => IAction;
 }
@@ -54,30 +48,3 @@ export const repostRequestThunkFactory = (dependencies: IRepostRequestThunkFacto
         .catch((error) =>
           dispatch(dependencies.onError(itemId, error)));
     };
-
-export const createItem = (item: ListItemData): IAction => ({
-  type: CREATE_ITEM,
-  payload: {
-    item,
-  },
-});
-
-export const postData = postItemDataThunkFactory({
-  operation: fetchBuilder(fetch),
-  transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulPost,
-  onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
-  createItem: listItemDataConverter,
-  onItemCreated: createItem,
-  httpMethod: HttpAction.POST,
-  apiEndpoint
-});
-
-export const redoPostData = repostRequestThunkFactory({
-  operation: fetchBuilder(fetch),
-  transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulPost,
-  onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
-  httpMethod: HttpAction.POST,
-  apiEndpoint
-});

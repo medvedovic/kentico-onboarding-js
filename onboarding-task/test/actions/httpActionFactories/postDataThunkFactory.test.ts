@@ -1,8 +1,6 @@
 import 'isomorphic-fetch';
 import { List, Map } from 'immutable';
 import {
-  IPostItemDataThunkFactoryDependencies,
-  IRepostRequestThunkFactory,
   postItemDataThunkFactory,
   repostRequestThunkFactory
 } from '../../../src/actions/httpActionFactories/postDataThunkFactory';
@@ -47,18 +45,6 @@ const mockErrorPost = (_url: string, _httpMethod: HttpAction, _itemDto?: IServer
   new Error('Something went wrong')
 );
 
-const mockItemConverter = (value: string) => new ListItemData({
-  id,
-  value
-});
-
-const mockCreateItem = (item: ListItemData) => ({
-  type: CREATE_ITEM,
-  payload:  {
-    item
-  }
-});
-
 const onPostSuccess = (_localId: string, _response: IServerItemDataModel) => ({
   type: POST_ITEM_TO_SERVER.SUCCESS,
   payload: {
@@ -73,17 +59,29 @@ const onPostError = (_localId: string, _response: Error) => ({
   }
 });
 
+const mockItemConverter = (value: string) => new ListItemData({
+  id,
+  value
+});
+
+const mockCreateItem = (item: ListItemData) => ({
+  type: CREATE_ITEM,
+  payload:  {
+    item
+  }
+});
+
 
 describe('postDataThunkFactory', () => {
   it('returns correct actions on success', async () => {
-    const dependencies: IPostItemDataThunkFactoryDependencies = {
+    const dependencies = {
       operation: mockSuccessPost,
-      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPostSuccess,
       onError: onPostError,
       createItem: mockItemConverter,
       onItemCreated: mockCreateItem,
       httpMethod: HttpAction.POST,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const createItemExpectedResult = {
@@ -105,14 +103,14 @@ describe('postDataThunkFactory', () => {
   });
 
   it('returns correct actions on failure', async () => {
-    const dependencies: IPostItemDataThunkFactoryDependencies = {
+    const dependencies = {
       operation: mockErrorPost,
-      transformDataToDto: toServerItemDataViewModel,
       onSuccess: onPostSuccess,
       onError: onPostError,
       createItem: mockItemConverter,
       onItemCreated: mockCreateItem,
       httpMethod: HttpAction.POST,
+      transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
     const postExpectedResult = {
@@ -138,7 +136,7 @@ describe('postDataThunkFactory', () => {
 
 describe('repostData', () => {
   it('returns correct actions on success', async () => {
-    const dependencies: IRepostRequestThunkFactory = {
+    const dependencies = {
       operation: mockSuccessPost,
       onSuccess: onPostSuccess,
       onError: onPostError,

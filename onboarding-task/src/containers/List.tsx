@@ -8,9 +8,9 @@ import {
 
 import { Store } from '../reducers/stores';
 import {
-  fetchData,
   postData
-} from '../actions/publicActions';
+} from '../actions/dependencyInjections';
+import { fetchData } from '../actions/dependencyInjections';
 
 
 const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({

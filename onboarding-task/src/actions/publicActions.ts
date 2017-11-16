@@ -3,20 +3,11 @@ export {
 } from './actionCreators';
 
 export {
-  postData,
-  redoPostData
-} from './httpActionFactories/postDataThunkFactory';
-
-export {
-  putData,
-  redoPutData
-} from './httpActionFactories/putDataThunkFactory'
-
-export {
-  fetchData
-} from './httpActionFactories/fetchDataThunkFactory';
-
-export {
   deleteData,
-} from './httpActionFactories/deleteItemThunkFactory';
+  fetchData,
+  postData,
+  putData,
+  redoPostData,
+  redoPutData
+} from './dependencyInjections';
 

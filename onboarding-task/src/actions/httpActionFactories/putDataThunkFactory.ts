@@ -1,22 +1,8 @@
-import 'isomorphic-fetch';
-import {
-  IServerItemDataModel,
-  toServerItemDataViewModel
-} from '../../models/IServerItemDataModel';
+import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { Store } from '../../reducers/stores';
 import { HttpAction } from '../../constants/HttpAction';
 import { ListItemData } from '../../models/ListItemData';
-import {
-  handleErrorRequest,
-  handleSuccessfulRequest
-} from './requestStatusActions';
-import {
-  PUT_ITEM_TO_SERVER,
-  UPDATE_ITEM
-} from '../../constants/actionTypes';
-import { apiEndpoint } from '../../constants/apiEndpoint';
-import { fetchBuilder } from './fetchBuilder';
 
 
 export interface IReputItemThunkFactory {
@@ -28,7 +14,7 @@ export interface IReputItemThunkFactory {
   apiEndpoint: string;
 }
 
-interface IPutDataThunkFactory extends IReputItemThunkFactory {
+interface IPutDataThunkFactory extends IReputItemThunkFactory{
   updateItem: (localId: string, value: string) => IAction;
 }
 
@@ -64,32 +50,3 @@ export const reputItemThunkFactory = (dependencies: IReputItemThunkFactory) =>
         .catch((error) =>
           dispatch(dependencies.onError(localId, error)));
     };
-
-export const updateItem = (id: string, value: string): IAction => ({
-  type: UPDATE_ITEM,
-  payload: {
-    item: {
-      id,
-      value,
-    },
-  },
-});
-
-export const putData = putDataThunkFactory({
-  operation: fetchBuilder(fetch),
-  transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
-  onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
-  updateItem: updateItem,
-  httpMethod: HttpAction.PUT,
-  apiEndpoint
-});
-
-export const redoPutData = reputItemThunkFactory({
-  operation: fetchBuilder(fetch),
-  transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
-  onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
-  httpMethod: HttpAction.PUT,
-  apiEndpoint
-});
