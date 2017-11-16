@@ -7,7 +7,6 @@ interface IFetchDataThunkFactory {
   fetchIsLoading: () => IAction;
   onFetchSucceeded: (items: Array<IServerItemDataModel>) => IAction;
   onFetchFailed: (error: Error) => IAction;
-  httpMethod: HttpAction;
   apiEndpoint: string;
 }
 
@@ -16,7 +15,7 @@ export const fetchDataThunkFactory = (dependencies: IFetchDataThunkFactory ) =>
     (dispatch: Dispatch) => {
       dispatch(dependencies.fetchIsLoading());
 
-      return dependencies.fetchOperation(dependencies.apiEndpoint, dependencies.httpMethod)
+      return dependencies.fetchOperation(dependencies.apiEndpoint, HttpAction.GET)
         .then((response) => response.json())
         .then((response) => {
           dispatch(dependencies.onFetchSucceeded(response));

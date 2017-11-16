@@ -80,7 +80,6 @@ describe('postDataThunkFactory', () => {
       onError: onPostError,
       createItem: mockItemConverter,
       onItemCreated: mockCreateItem,
-      httpMethod: HttpAction.POST,
       transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
@@ -94,7 +93,7 @@ describe('postDataThunkFactory', () => {
       type: POST_ITEM_TO_SERVER.SUCCESS,
       payload: {id, value: 'Go home'}
     };
-    const postItemAsync = postItemDataThunkFactory(dependencies)('Go home');
+    const postItemAsync = postItemDataThunkFactory({ ...dependencies })('Go home');
 
     await postItemAsync(dispatch);
 
@@ -109,7 +108,6 @@ describe('postDataThunkFactory', () => {
       onError: onPostError,
       createItem: mockItemConverter,
       onItemCreated: mockCreateItem,
-      httpMethod: HttpAction.POST,
       transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
@@ -125,7 +123,7 @@ describe('postDataThunkFactory', () => {
         item: new ListItemData({id, value: 'Do stuff'})
       }
     };
-    const postItemAsync = postItemDataThunkFactory(dependencies)('Do stuff');
+    const postItemAsync = postItemDataThunkFactory({ ...dependencies })('Do stuff');
 
     await postItemAsync(dispatch);
 
@@ -141,7 +139,6 @@ describe('repostData', () => {
       onSuccess: onPostSuccess,
       onError: onPostError,
       transformDataToDto: toServerItemDataViewModel,
-      httpMethod: HttpAction.POST,
       apiEndpoint: ''
     };
     const postExpectedResult = {
@@ -162,7 +159,6 @@ describe('repostData', () => {
       onSuccess: onPostSuccess,
       onError: onPostError,
       transformDataToDto: toServerItemDataViewModel,
-      httpMethod: HttpAction.POST,
       apiEndpoint: ''
     };
     const postExpectedResult = {

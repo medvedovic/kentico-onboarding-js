@@ -10,7 +10,6 @@ export interface IReputItemThunkFactory {
   transformDataToDto: (item: ListItemData) => IServerItemDataModel;
   onSuccess: (_response: IServerItemDataModel) => IAction;
   onError: (_localId: string, _error: Error) => IAction;
-  httpMethod: HttpAction,
   apiEndpoint: string;
 }
 
@@ -28,7 +27,7 @@ export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
-      return dependencies.operation(url, dependencies.httpMethod, itemDto)
+      return dependencies.operation(url, HttpAction.PUT, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(response)))
@@ -43,7 +42,7 @@ export const reputItemThunkFactory = (dependencies: IReputItemThunkFactory) =>
       const itemDto = dependencies.transformDataToDto(item);
       let url = `${dependencies.apiEndpoint}/${item.id}`;
 
-      return dependencies.operation(url, dependencies.httpMethod, itemDto)
+      return dependencies.operation(url, HttpAction.PUT, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(response)))

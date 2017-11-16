@@ -73,7 +73,6 @@ describe('putDataThunkFactory', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
-      httpMethod: HttpAction.PUT,
       transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
@@ -82,7 +81,7 @@ describe('putDataThunkFactory', () => {
       payload: undefined
     };
 
-    const putItemAsync = putDataThunkFactory(dependencies)(id, 'Go home');
+    const putItemAsync = putDataThunkFactory({ ...dependencies })(id, 'Go home');
 
     await putItemAsync(dispatch, getState);
 
@@ -96,7 +95,6 @@ describe('putDataThunkFactory', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
-      httpMethod: HttpAction.PUT,
       transformDataToDto: toServerItemDataViewModel,
       apiEndpoint: ''
     };
@@ -105,7 +103,7 @@ describe('putDataThunkFactory', () => {
       payload: new Error('Some nasty shit happened')
     };
 
-    const putItemAsync = putDataThunkFactory(dependencies)(id, 'Go home');
+    const putItemAsync = putDataThunkFactory({ ...dependencies })(id, 'Go home');
 
     await putItemAsync(dispatch, getState);
 
@@ -121,7 +119,6 @@ describe('reput item', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       transformDataToDto: toServerItemDataViewModel,
-      httpMethod: HttpAction.PUT,
       apiEndpoint: ''
     };
     const expectedResult = {
@@ -142,7 +139,6 @@ describe('reput item', () => {
       onSuccess: onPutSuccess,
       onError: onPutError,
       transformDataToDto: toServerItemDataViewModel,
-      httpMethod: HttpAction.PUT,
       apiEndpoint: ''
     };
     const expectedResult = {

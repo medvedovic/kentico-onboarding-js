@@ -10,7 +10,6 @@ export interface IRepostRequestThunkFactory {
   transformDataToDto: (item: ListItemData) => IServerItemDataModel;
   onSuccess: (itemId: string, _response: IServerItemDataModel) => IAction;
   onError: (itemId: string, _error: Error) => IAction;
-  httpMethod: HttpAction,
   apiEndpoint: string;
 }
 
@@ -27,7 +26,7 @@ export const postItemDataThunkFactory = (dependencies: IPostItemDataThunkFactory
       const itemDto = dependencies.transformDataToDto(newItem);
       const url = dependencies.apiEndpoint;
 
-      return dependencies.operation(url, dependencies.httpMethod, itemDto)
+      return dependencies.operation(url, HttpAction.POST, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(newItem.id, response)))
@@ -41,7 +40,7 @@ export const repostRequestThunkFactory = (dependencies: IRepostRequestThunkFacto
       const item = getState().items.data.get(itemId);
       const itemDto = dependencies.transformDataToDto(item);
 
-      return dependencies.operation(dependencies.apiEndpoint, dependencies.httpMethod, itemDto)
+      return dependencies.operation(dependencies.apiEndpoint, HttpAction.POST, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(itemId, response)))
