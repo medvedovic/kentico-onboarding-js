@@ -20,9 +20,9 @@ import {
   repostRequestThunkFactory
 } from './httpActionFactories/postDataThunkFactory';
 import {
-  handleErrorRequest,
-  handleSuccessfulPost,
-  handleSuccessfulRequest
+  requestHasFailed,
+  postRequestHasSucceeded,
+  requestHasSucceeded
 } from './httpActionFactories/requestStatusActions';
 import { putDataThunkFactory } from './httpActionFactories/putDataThunkFactory';
 import { reputItemThunkFactory} from './httpActionFactories/putDataThunkFactory';
@@ -42,8 +42,8 @@ export const fetchData = fetchDataThunkFactory({
 export const postData = postItemDataThunkFactory({
   operation: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulPost,
-  onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
+  onSuccess: postRequestHasSucceeded,
+  onError: requestHasFailed(POST_ITEM_TO_SERVER.FAILURE),
   createItem: listItemDataConverter,
   onItemCreated: createItem,
   apiEndpoint
@@ -52,8 +52,8 @@ export const postData = postItemDataThunkFactory({
 export const putData = putDataThunkFactory({
   operation: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
-  onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
+  onSuccess: requestHasSucceeded(PUT_ITEM_TO_SERVER.SUCCESS),
+  onError: requestHasFailed(PUT_ITEM_TO_SERVER.FAILURE),
   updateItem,
   apiEndpoint
 });
@@ -61,22 +61,22 @@ export const putData = putDataThunkFactory({
 export const redoPostData = repostRequestThunkFactory({
   operation: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulPost,
-  onError: handleErrorRequest(POST_ITEM_TO_SERVER.FAILURE),
+  onSuccess: postRequestHasSucceeded,
+  onError: requestHasFailed(POST_ITEM_TO_SERVER.FAILURE),
   apiEndpoint
 });
 
 export const redoPutData = reputItemThunkFactory({
   operation: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
-  onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
-  onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
+  onSuccess: requestHasSucceeded(PUT_ITEM_TO_SERVER.SUCCESS),
+  onError: requestHasFailed(PUT_ITEM_TO_SERVER.FAILURE),
   apiEndpoint
 });
 
 export const deleteData = deleteItemThunkFactory({
   operation: sendRequest,
-  onError: handleErrorRequest(DELETE_ITEM_AT_SERVER_FAILURE),
+  onError: requestHasFailed(DELETE_ITEM_AT_SERVER_FAILURE),
   onSuccess: deleteItem,
   apiEndpoint
 });

@@ -3,7 +3,7 @@ import { IAction } from '../IAction';
 import { ListItemData } from '../../models/ListItemData';
 import { POST_ITEM_TO_SERVER } from '../../constants/actionTypes';
 
-export const handleSuccessfulPost = (temporaryId: string, params: IServerItemDataModel) => ({
+export const postRequestHasSucceeded = (temporaryId: string, params: IServerItemDataModel) => ({
   type: POST_ITEM_TO_SERVER.SUCCESS,
   payload: {
     temporaryId,
@@ -14,7 +14,7 @@ export const handleSuccessfulPost = (temporaryId: string, params: IServerItemDat
   }
 });
 
-export const handleSuccessfulRequest = (type: string) =>
+export const requestHasSucceeded = (type: string) =>
   (params: IServerItemDataModel): IAction => ({
     type,
     payload: {
@@ -25,7 +25,7 @@ export const handleSuccessfulRequest = (type: string) =>
     }
   });
 
-export const handleErrorRequest = (type: string) =>
+export const requestHasFailed = (type: string) =>
   (id: string, params: Error): IAction => ({
     type,
     payload: {

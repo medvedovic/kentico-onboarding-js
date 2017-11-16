@@ -1,6 +1,6 @@
 import {
-  handleErrorRequest, handleSuccessfulPost,
-  handleSuccessfulRequest
+  requestHasFailed, postRequestHasSucceeded,
+  requestHasSucceeded
 } from '../../../src/actions/httpActionFactories/requestStatusActions';
 import { ListItemData } from '../../../src/models/ListItemData';
 import { IAction } from '../../../src/actions/IAction';
@@ -24,7 +24,7 @@ describe('handleSuccessfulRequest', () => {
       }
     };
 
-    const result = handleSuccessfulRequest('GET')(params);
+    const result = requestHasSucceeded('GET')(params);
 
     expect(result).toEqual(expectedResult);
   });
@@ -42,7 +42,7 @@ describe('handleErrorRequest', () => {
       }
     };
 
-    const testResult = handleErrorRequest('GET')(guid, new Error('failure'));
+    const testResult = requestHasFailed('GET')(guid, new Error('failure'));
 
     expect(testResult).toEqual(expectedResult);
   });
@@ -64,7 +64,7 @@ describe('handleSuccessfulPost', () => {
       }
     };
 
-    const actualResult = handleSuccessfulPost(guid, params);
+    const actualResult = postRequestHasSucceeded(guid, params);
 
     expect(actualResult).toEqual(expectedResult);
   })
