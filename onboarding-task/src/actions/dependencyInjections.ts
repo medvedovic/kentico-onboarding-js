@@ -54,7 +54,7 @@ export const putData = putDataThunkFactory({
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: handleSuccessfulRequest(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: handleErrorRequest(PUT_ITEM_TO_SERVER.FAILURE),
-  updateItem: updateItem,
+  updateItem,
   apiEndpoint
 });
 
