@@ -1,7 +1,4 @@
-import {
-  deleteItemThunkFactory,
-  IDeleteItemThunkFactoryDependencies
-} from '../../../src/actions/httpActionFactories/deleteItemThunkFactory';
+import { deleteItemThunkFactory } from '../../../src/actions/httpActionFactories/deleteItemThunkFactory';
 import { HttpAction } from '../../../src/constants/HttpAction';
 import { DELETE_ITEM, DELETE_ITEM_AT_SERVER_FAILURE } from '../../../src/constants/actionTypes';
 
@@ -10,7 +7,7 @@ const dispatch = jest.fn().mockImplementation((a: any) => a);
 const mockSuccessfulRequest = (_url: string, _httpAction: HttpAction) =>
   Promise.resolve(new Response());
 
-const mockErrorReques = (_url: string, _httpMethod: HttpAction) =>
+const mockErrorRequest = (_url: string, _httpMethod: HttpAction) =>
   Promise.reject(new Error('Error occurred'));
 
 const onSuccess = (_itemId: string, _response: Response) => ({
@@ -38,7 +35,7 @@ describe('deleteItemThunkFactory', () => {
         id
       }
     };
-    const dependencies: IDeleteItemThunkFactoryDependencies = {
+    const dependencies = {
       operation: mockSuccessfulRequest,
       onSuccess,
       onError,
@@ -60,8 +57,8 @@ describe('deleteItemThunkFactory', () => {
         id
       }
     };
-    const dependencies: IDeleteItemThunkFactoryDependencies = {
-      operation: mockErrorReques,
+    const dependencies = {
+      operation: mockErrorRequest,
       onSuccess,
       onError,
       httpMethod: HttpAction.DELETE,
