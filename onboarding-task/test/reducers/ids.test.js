@@ -1,8 +1,10 @@
 import { List } from 'immutable';
 import { ids } from '../../src/reducers/items/ids';
-import { deleteItem } from '../../src/actions/httpActionFactories/deleteItemThunkFactory.ts';
 import { ListItemData } from '../../src/models/ListItemData';
-import { createItem } from '../../src/actions/httpActionFactories/postDataThunkFactory.ts';
+import {
+  createItem,
+  deleteItem,
+} from '../../src/actions/actionCreators.ts';
 import {
   FETCH_DATA,
   POST_ITEM_TO_SERVER

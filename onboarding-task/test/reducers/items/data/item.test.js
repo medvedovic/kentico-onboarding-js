@@ -1,4 +1,4 @@
-import { updateItem } from '../../../../src/actions/httpActionFactories/putDataThunkFactory.ts';
+import { updateItem } from '../../../../src/actions/actionCreators.ts';;
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { item } from '../../../../src/reducers/items/data/item.ts';
 import { handleSuccessfulPost } from '../../../../src/actions/httpActionFactories/requestStatusActions.ts';

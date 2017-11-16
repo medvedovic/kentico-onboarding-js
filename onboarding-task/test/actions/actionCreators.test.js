@@ -1,9 +1,9 @@
 import { ListItemData } from '../../src/models/ListItemData.ts';
-import { createItem } from '../../src/actions/httpActionFactories/postDataThunkFactory.ts';
 import {
+  createItem,
   fetchIsLoading,
   fetchHasFailed,
-  fetchHasSucceededBuilder } from '../../src/actions/httpActionFactories/fetchDataThunkFactory.ts';
+  fetchHasSucceededBuilder } from '../../src/actions/actionCreators.ts';
 import {
   FETCH_DATA,
   CREATE_ITEM,

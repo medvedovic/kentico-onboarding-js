@@ -1,10 +1,12 @@
 import { ListItemData as ListItemModel } from '../../../../src/models/ListItemData.ts';
 import { Map } from 'immutable';
 import { data } from '../../../../src/reducers/items/data/data.ts';
-import { deleteItem } from '../../../../src/actions/httpActionFactories/deleteItemThunkFactory.ts';
-import { updateItem } from '../../../../src/actions/httpActionFactories/putDataThunkFactory.ts';
-import { createItem } from '../../../../src/actions/httpActionFactories/postDataThunkFactory.ts';
-import { fetchHasSucceededBuilder } from '../../../../src/actions/httpActionFactories/fetchDataThunkFactory.ts';
+import {
+  createItem,
+  updateItem,
+  deleteItem,
+  fetchHasSucceededBuilder
+} from '../../../../src/actions/actionCreators.ts';
 import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes';
 
 describe('dataReducer', () => {

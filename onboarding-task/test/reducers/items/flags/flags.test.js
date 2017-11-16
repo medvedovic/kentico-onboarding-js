@@ -1,9 +1,11 @@
 import { Map } from 'immutable';
 import { flags } from '../../../../src/reducers/items/flags/flags.ts';
 import { toggleBeingEdited } from '../../../../src/actions/publicActions.ts';
-import { deleteItem } from '../../../../src/actions/httpActionFactories/deleteItemThunkFactory.ts';
-import { createItem } from '../../../../src/actions/httpActionFactories/postDataThunkFactory.ts';
-import { fetchHasSucceededBuilder } from '../../../../src/actions/httpActionFactories/fetchDataThunkFactory.ts';
+import {
+  createItem,
+  deleteItem,
+  fetchHasSucceededBuilder
+} from '../../../../src/actions/actionCreators.ts';
 import { ListItemFlags } from '../../../../src/models/ListItemFlags.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import {
