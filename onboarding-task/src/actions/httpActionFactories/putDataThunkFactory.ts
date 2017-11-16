@@ -6,15 +6,15 @@ import { ListItemData } from '../../models/ListItemData';
 
 
 export interface IReputItemThunkFactory {
-  putItem: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
-  transformDataToDto: (item: ListItemData) => IServerItemDataModel;
-  onSuccess: (_response: IServerItemDataModel) => IAction;
-  onError: (_localId: string, _error: Error) => IAction;
-  apiEndpoint: string;
+  readonly putItem: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
+  readonly transformDataToDto: (item: ListItemData) => IServerItemDataModel;
+  readonly onSuccess: (_response: IServerItemDataModel) => IAction;
+  readonly onError: (_localId: string, _error: Error) => IAction;
+  readonly apiEndpoint: string;
 }
 
 interface IPutDataThunkFactory extends IReputItemThunkFactory{
-  updateItem: (localId: string, value: string) => IAction;
+  readonly updateItem: (localId: string, value: string) => IAction;
 }
 
 export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>

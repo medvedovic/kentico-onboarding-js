@@ -6,16 +6,16 @@ import { Store } from '../../reducers/stores';
 
 
 export interface IRepostRequestThunkFactory {
-  postItem: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
-  transformDataToDto: (item: ListItemData) => IServerItemDataModel;
-  onSuccess: (itemId: string, _response: IServerItemDataModel) => IAction;
-  onError: (itemId: string, _error: Error) => IAction;
-  apiEndpoint: string;
+  readonly postItem: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
+  readonly transformDataToDto: (item: ListItemData) => IServerItemDataModel;
+  readonly onSuccess: (itemId: string, _response: IServerItemDataModel) => IAction;
+  readonly onError: (itemId: string, _error: Error) => IAction;
+  readonly apiEndpoint: string;
 }
 
 interface IPostItemDataThunkFactoryDependencies extends IRepostRequestThunkFactory {
-  createItem: (value: string) => ListItemData;
-  onItemCreated: (item: ListItemData) => IAction;
+  readonly createItem: (value: string) => ListItemData;
+  readonly onItemCreated: (item: ListItemData) => IAction;
 }
 
 export const postItemDataThunkFactory = (dependencies: IPostItemDataThunkFactoryDependencies) =>

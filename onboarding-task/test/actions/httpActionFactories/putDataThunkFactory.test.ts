@@ -81,7 +81,7 @@ describe('putDataThunkFactory', () => {
       payload: undefined
     };
 
-    const putItemAsync = putDataThunkFactory({ ...dependencies })(id, 'Go home');
+    const putItemAsync = putDataThunkFactory(dependencies)(id, 'Go home');
 
     await putItemAsync(dispatch, getState);
 
@@ -103,7 +103,7 @@ describe('putDataThunkFactory', () => {
       payload: new Error('Some nasty shit happened')
     };
 
-    const putItemAsync = putDataThunkFactory({ ...dependencies })(id, 'Go home');
+    const putItemAsync = putDataThunkFactory(dependencies)(id, 'Go home');
 
     await putItemAsync(dispatch, getState);
 
@@ -126,7 +126,7 @@ describe('reput item', () => {
       payload: undefined
     };
 
-    const reputDataAsync = reputItemThunkFactory({ ...dependencies })(id);
+    const reputDataAsync = reputItemThunkFactory(dependencies)(id);
 
     await reputDataAsync(dispatch, getState);
 
@@ -145,7 +145,7 @@ describe('reput item', () => {
       type: PUT_ITEM_TO_SERVER.FAILURE,
       payload: new Error('Some nasty shit happened')
     };
-    const reputItemAsync = reputItemThunkFactory({ ...dependencies })(id);
+    const reputItemAsync = reputItemThunkFactory(dependencies)(id);
 
     await reputItemAsync(dispatch, getState);
 

@@ -3,10 +3,10 @@ import { HttpAction } from '../../constants/HttpAction';
 
 
 interface IDeleteItemThunkFactoryDependencies {
-  deleteItem: (url: string, httpMethod: HttpAction) => Promise<Response>;
-  onSuccess: (_itemId: string, _response: Response) => IAction;
-  onError: (_itemId: string, _error: Error) => IAction;
-  apiEndpoint: string;
+  readonly deleteItem: (url: string, httpMethod: HttpAction) => Promise<Response>;
+  readonly onSuccess: (_itemId: string, _response: Response) => IAction;
+  readonly onError: (_itemId: string, _error: Error) => IAction;
+  readonly apiEndpoint: string;
 }
 
 export const deleteItemThunkFactory = (dependencies: IDeleteItemThunkFactoryDependencies) =>

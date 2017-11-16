@@ -4,11 +4,11 @@ import { HttpAction } from '../../constants/HttpAction';
 
 
 interface IFetchDataThunkFactory {
-  fetchOperation: (value: string, httpMethod: HttpAction) => Promise<Response>;
-  fetchIsLoading: () => IAction;
-  onFetchSucceeded: (items: Array<IServerItemDataModel>) => IAction;
-  onFetchFailed: (error: Error) => IAction;
-  apiEndpoint: string;
+  readonly fetchOperation: (value: string, httpMethod: HttpAction) => Promise<Response>;
+  readonly fetchIsLoading: () => IAction;
+  readonly onFetchSucceeded: (items: Array<IServerItemDataModel>) => IAction;
+  readonly onFetchFailed: (error: Error) => IAction;
+  readonly apiEndpoint: string;
 }
 
 export const fetchDataThunkFactory = (dependencies: IFetchDataThunkFactory ) =>
