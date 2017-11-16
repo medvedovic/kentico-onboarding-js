@@ -2,6 +2,7 @@ import { IServerItemDataModel } from '../../models/IServerItemDataModel';
 import { IAction } from '../IAction';
 import { HttpAction } from '../../constants/HttpAction';
 
+
 interface IFetchDataThunkFactory {
   fetchOperation: (value: string, httpMethod: HttpAction) => Promise<Response>;
   fetchIsLoading: () => IAction;

@@ -40,7 +40,7 @@ export const fetchData = fetchDataThunkFactory({
 });
 
 export const postData = postItemDataThunkFactory({
-  operation: sendRequest,
+  postItem: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: postRequestHasSucceeded,
   onError: requestHasFailed(POST_ITEM_TO_SERVER.FAILURE),
@@ -50,7 +50,7 @@ export const postData = postItemDataThunkFactory({
 });
 
 export const putData = putDataThunkFactory({
-  operation: sendRequest,
+  putItem: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: requestHasSucceeded(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: requestHasFailed(PUT_ITEM_TO_SERVER.FAILURE),
@@ -59,7 +59,7 @@ export const putData = putDataThunkFactory({
 });
 
 export const redoPostData = repostRequestThunkFactory({
-  operation: sendRequest,
+  postItem: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: postRequestHasSucceeded,
   onError: requestHasFailed(POST_ITEM_TO_SERVER.FAILURE),
@@ -67,7 +67,7 @@ export const redoPostData = repostRequestThunkFactory({
 });
 
 export const redoPutData = reputItemThunkFactory({
-  operation: sendRequest,
+  putItem: sendRequest,
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: requestHasSucceeded(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: requestHasFailed(PUT_ITEM_TO_SERVER.FAILURE),
@@ -75,7 +75,7 @@ export const redoPutData = reputItemThunkFactory({
 });
 
 export const deleteData = deleteItemThunkFactory({
-  operation: sendRequest,
+  deleteItem: sendRequest,
   onError: requestHasFailed(DELETE_ITEM_AT_SERVER_FAILURE),
   onSuccess: deleteItem,
   apiEndpoint

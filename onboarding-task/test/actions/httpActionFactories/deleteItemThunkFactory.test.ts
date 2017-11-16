@@ -36,10 +36,9 @@ describe('deleteItemThunkFactory', () => {
       }
     };
     const dependencies = {
-      operation: mockSuccessfulRequest,
+      deleteItem: mockSuccessfulRequest,
       onSuccess,
       onError,
-      httpMethod: HttpAction.DELETE,
       apiEndpoint: ''
     };
     const deleteAsync = deleteItemThunkFactory(dependencies)(id);
@@ -58,7 +57,7 @@ describe('deleteItemThunkFactory', () => {
       }
     };
     const dependencies = {
-      operation: mockErrorRequest,
+      deleteItem: mockErrorRequest,
       onSuccess,
       onError,
       httpMethod: HttpAction.DELETE,

@@ -6,7 +6,7 @@ import { Store } from '../../reducers/stores';
 
 
 export interface IRepostRequestThunkFactory {
-  operation: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
+  postItem: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
   transformDataToDto: (item: ListItemData) => IServerItemDataModel;
   onSuccess: (itemId: string, _response: IServerItemDataModel) => IAction;
   onError: (itemId: string, _error: Error) => IAction;
@@ -26,7 +26,7 @@ export const postItemDataThunkFactory = (dependencies: IPostItemDataThunkFactory
       const itemDto = dependencies.transformDataToDto(newItem);
       const url = dependencies.apiEndpoint;
 
-      return dependencies.operation(url, HttpAction.POST, itemDto)
+      return dependencies.postItem(url, HttpAction.POST, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(newItem.id, response)))
@@ -40,7 +40,7 @@ export const repostRequestThunkFactory = (dependencies: IRepostRequestThunkFacto
       const item = getState().items.data.get(itemId);
       const itemDto = dependencies.transformDataToDto(item);
 
-      return dependencies.operation(dependencies.apiEndpoint, HttpAction.POST, itemDto)
+      return dependencies.postItem(dependencies.apiEndpoint, HttpAction.POST, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(itemId, response)))

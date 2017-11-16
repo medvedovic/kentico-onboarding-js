@@ -75,7 +75,7 @@ const mockCreateItem = (item: ListItemData) => ({
 describe('postDataThunkFactory', () => {
   it('returns correct actions on success', async () => {
     const dependencies = {
-      operation: mockSuccessPost,
+      postItem: mockSuccessPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
       createItem: mockItemConverter,
@@ -103,7 +103,7 @@ describe('postDataThunkFactory', () => {
 
   it('returns correct actions on failure', async () => {
     const dependencies = {
-      operation: mockErrorPost,
+      postItem: mockErrorPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
       createItem: mockItemConverter,
@@ -135,7 +135,7 @@ describe('postDataThunkFactory', () => {
 describe('repostData', () => {
   it('returns correct actions on success', async () => {
     const dependencies = {
-      operation: mockSuccessPost,
+      postItem: mockSuccessPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
       transformDataToDto: toServerItemDataViewModel,
@@ -155,7 +155,7 @@ describe('repostData', () => {
 
   it('returns correct actions on failure', async () => {
     const dependencies = {
-      operation: mockErrorPost,
+      postItem: mockErrorPost,
       onSuccess: onPostSuccess,
       onError: onPostError,
       transformDataToDto: toServerItemDataViewModel,
