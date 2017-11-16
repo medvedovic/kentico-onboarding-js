@@ -69,7 +69,7 @@ describe('putDataThunkFactory', () => {
   };
   it('returns correct actions on success', async () => {
     const dependencies = {
-      putItem: mockPutSuccess,
+      sendRequest: mockPutSuccess,
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
@@ -91,7 +91,7 @@ describe('putDataThunkFactory', () => {
 
   it('returns correct actions on failure', async () => {
     const dependencies = {
-      putItem: mockPutError,
+      sendRequest: mockPutError,
       onSuccess: onPutSuccess,
       onError: onPutError,
       updateItem: updateItemOperation,
@@ -115,7 +115,7 @@ describe('putDataThunkFactory', () => {
 describe('reput item', () => {
   it('returns correct actions on success', async () => {
     const dependencies = {
-      putItem: mockPutSuccess,
+      sendRequest: mockPutSuccess,
       onSuccess: onPutSuccess,
       onError: onPutError,
       transformDataToDto: toServerItemDataViewModel,
@@ -135,7 +135,7 @@ describe('reput item', () => {
 
   it('returns correct actions on failure', async () => {
     const dependencies = {
-      putItem: mockPutError,
+      sendRequest: mockPutError,
       onSuccess: onPutSuccess,
       onError: onPutError,
       transformDataToDto: toServerItemDataViewModel,

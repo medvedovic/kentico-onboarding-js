@@ -6,7 +6,7 @@ import { ListItemData } from '../../models/ListItemData';
 
 
 export interface IReputItemThunkFactory {
-  readonly putItem: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
+  readonly sendRequest: (_url: string, httpMethod: HttpAction, _itemDto?: IServerItemDataModel) => Promise<Response>;
   readonly transformDataToDto: (item: ListItemData) => IServerItemDataModel;
   readonly onSuccess: (_response: IServerItemDataModel) => IAction;
   readonly onError: (_localId: string, _error: Error) => IAction;
@@ -27,7 +27,7 @@ export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
 
-      return dependencies.putItem(url, HttpAction.PUT, itemDto)
+      return dependencies.sendRequest(url, HttpAction.PUT, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(response)))
@@ -42,7 +42,7 @@ export const reputItemThunkFactory = (dependencies: IReputItemThunkFactory) =>
       const itemDto = dependencies.transformDataToDto(item);
       let url = `${dependencies.apiEndpoint}/${item.id}`;
 
-      return dependencies.putItem(url, HttpAction.PUT, itemDto)
+      return dependencies.sendRequest(url, HttpAction.PUT, itemDto)
         .then((response) => response.json())
         .then((response) =>
           dispatch(dependencies.onSuccess(response)))

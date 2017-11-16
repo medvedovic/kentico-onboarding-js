@@ -32,7 +32,7 @@ const onFetchFailed = (error: Error) => fetchHasFailed(error);
 describe('fetchDataThunkFactory', () => {
   it('dispatches correct actions on success', async () => {
     const dependencies = {
-      fetchOperation: mockSuccessPromise,
+      sendRequest: mockSuccessPromise,
       fetchIsLoading: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,
@@ -54,7 +54,7 @@ describe('fetchDataThunkFactory', () => {
 
   it('dispatches correct actions on failure', async () => {
     const dependencies = {
-      fetchOperation: mockErrorPromise,
+      sendRequest: mockErrorPromise,
       fetchIsLoading: fetchIsLoading,
       onFetchSucceeded,
       onFetchFailed,

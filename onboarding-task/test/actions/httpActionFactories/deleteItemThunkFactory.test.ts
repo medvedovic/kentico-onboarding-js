@@ -36,7 +36,7 @@ describe('deleteItemThunkFactory', () => {
       }
     };
     const dependencies = {
-      deleteItem: mockSuccessfulRequest,
+      sendRequest: mockSuccessfulRequest,
       onSuccess,
       onError,
       apiEndpoint: ''
@@ -57,7 +57,7 @@ describe('deleteItemThunkFactory', () => {
       }
     };
     const dependencies = {
-      deleteItem: mockErrorRequest,
+      sendRequest: mockErrorRequest,
       onSuccess,
       onError,
       httpMethod: HttpAction.DELETE,
