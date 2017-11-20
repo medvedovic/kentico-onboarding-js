@@ -12,7 +12,7 @@ interface IListItemData {
 
 const defaultValues: IListItemData = {
   id: '',
-  value: '',
+  value: 'unknown',
 };
 
 /**

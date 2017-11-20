@@ -13,8 +13,8 @@ export interface IListItemEditorDataProps {
 
 export interface IListItemEditorCallbacksProps {
   onCancelEdit: () => void;
-  onUpdateItem: (value: string) => void;
   onDeleteItem: () => void;
+  onUpdateItem: (value: string) => void;
 }
 
 type ListItemEditorProps = IListItemEditorDataProps & IListItemEditorCallbacksProps;
@@ -32,8 +32,8 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
       value: PropTypes.string.isRequired,
       isBeingEdited: PropTypes.bool.isRequired,
     }).isRequired,
-    onUpdateItem: PropTypes.func.isRequired,
     onDeleteItem: PropTypes.func.isRequired,
+    onUpdateItem: PropTypes.func.isRequired,
     onCancelEdit: PropTypes.func.isRequired,
   };
 
@@ -78,13 +78,33 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
             autoFocus
           />
           <div className="btn-group" role="group">
-            <button type="button" className="btn btn-default" onClick={this._handleUpdate}>Save</button>
-            <button type="button" className="btn btn-default" onClick={onCancelEdit}>Cancel</button>
-            <button type="button" className="btn btn-default" onClick={this.props.onDeleteItem}>Delete</button>
+            <button
+              type="button"
+              className="btn btn-default btn-custom"
+              onClick={this._handleUpdate}
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              className="btn btn-default btn-custom"
+              onClick={onCancelEdit}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="btn btn-default delete-btn btn-custom"
+              onClick={this.props.onDeleteItem}
+            >
+              Delete
+            </button>
           </div>
         </div>
         {!this.state.value &&
-          <span className="error shake">Invalid input!</span>
+          <span className="error shake">
+            Invalid input!
+          </span>
         }
 
       </HotKeys>

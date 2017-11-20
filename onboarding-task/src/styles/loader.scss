@@ -1,0 +1,48 @@
+@mixin createCurve($size) {
+  border-top: 2px solid;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $size;
+  height: $size;
+  margin-left: -($size/2);
+  margin-top: -($size/2);
+}
+
+.loader {
+  @include createCurve(200px);
+  animation: spin 1.5s linear 0s infinite;
+  border-color: #500;
+  z-index: 1000;
+  &:before {
+    content: "";
+    @include createCurve(160px);
+    animation: spin 1s linear 0s infinite;
+    border-color: #f00;
+  }
+  &:after {
+    content: "";
+    @include createCurve(180px);
+    animation: spin .5s linear 0s infinite reverse;
+    border-color: #b00;
+  }
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+.loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 100;
+  opacity: .75;
+}
+
+@import "error";

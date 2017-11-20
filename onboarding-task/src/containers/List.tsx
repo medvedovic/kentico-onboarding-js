@@ -1,17 +1,25 @@
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
-import { IListCallbacksProps, IListDataProps, List as ListComponent } from '../components/List';
-import { createItem } from '../actions/publicActions';
+import {
+  IListCallbacksProps,
+  IListDataProps,
+  List as ListComponent
+} from '../components/List';
 
 import { Store } from '../reducers/stores';
+import {
+  postData
+} from '../actions/dependencyInjections';
+import { fetchData } from '../actions/dependencyInjections';
 
 
 const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
   itemIds: items.ids,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): IListCallbacksProps => ({
-  onCreateItem: (value: string) => dispatch(createItem(value)),
+const mapDispatchToProps = (dispatch: Dispatch): IListCallbacksProps => ({
+  onCreateItem: (value: string) => dispatch(postData(value)),
+  onFetchData: () => dispatch(fetchData()),
 });
 
 export const List = connect(
