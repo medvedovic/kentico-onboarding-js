@@ -1,11 +1,11 @@
 import {
-  updateItem,
   deleteItem,
-} from '../../src/actions/publicActions';
+  updateItem
+} from '../../src/actions/actionCreators.ts';
 import {
   UPDATE_ITEM,
-  DELETE_ITEM,
-} from '../../src/constants/actionTypes';
+  DELETE_ITEM
+} from '../../src/constants/actionTypes.ts';
 
 describe('User Actions', () => {
   const _id = 'b0771aeb-da9e-47e4-b3f0-c52856eaacb0';

@@ -1,11 +1,11 @@
 import { List } from 'immutable';
-
+import { Reducer } from '../reducers';
 import {
   CREATE_ITEM,
   DELETE_ITEM,
+  FETCH_DATA,
+  POST_ITEM_TO_SERVER
 } from '../../constants/actionTypes';
-
-import { Reducer } from '../reducers';
 
 export const ids: Reducer.Ids = (state = List<string>(), action) => {
   switch (action.type) {
@@ -16,6 +16,19 @@ export const ids: Reducer.Ids = (state = List<string>(), action) => {
       return state.filter(id => (
         id !== action.payload.id
       )).toList();
+
+    case POST_ITEM_TO_SERVER.SUCCESS:
+      return state.filter(id => (
+        id !== action.payload.temporaryId
+      )).toList().push(action.payload.item.id);
+
+    case FETCH_DATA.HAS_SUCCEEDED: {
+      action.payload.items.forEach((item: any) => {
+        state = state.push(item.id);
+      });
+
+      return state;
+    }
 
     default:
       return state;

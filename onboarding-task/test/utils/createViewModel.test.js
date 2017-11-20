@@ -1,8 +1,8 @@
-import { memoizedCreateViewModel, createViewModel } from '../../src/utils/createViewModel';
-import { ListItemData } from '../../src/models/ListItemData';
-import { ListItemFlags } from '../../src/models/ListItemFlags';
+import { memoizedCreateViewModel, createViewModel } from '../../src/utils/createViewModel.ts';
+import { ListItemData } from '../../src/models/ListItemData.ts';
+import { ListItemFlags } from '../../src/models/ListItemFlags.ts';
 
-const id = 'xxxxxx-yyyyyy';
+const id = '50';
 const item = new ListItemData({
   id,
   value: 'Do stuff',
@@ -15,6 +15,7 @@ describe('CreateViewModel', () => {
       id,
       value: 'Do stuff',
       isBeingEdited: false,
+      isSavedSuccess: true,
     };
 
     const test = createViewModel(item, itemFlags);
