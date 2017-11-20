@@ -67,5 +67,5 @@ describe('deleteItemThunkFactory', () => {
     await deleteAsync(dispatch);
 
     expect(dispatch).toHaveBeenCalledWith(expectedAction);
-  })
+  });
 });

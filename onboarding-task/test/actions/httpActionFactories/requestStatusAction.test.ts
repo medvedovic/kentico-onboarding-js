@@ -67,5 +67,5 @@ describe('handleSuccessfulPost', () => {
     const actualResult = postRequestHasSucceeded(guid, params);
 
     expect(actualResult).toEqual(expectedResult);
-  })
+  });
 });

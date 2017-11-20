@@ -28,7 +28,7 @@ const ListItem: React.SFC<ListItemProps> = ({itemViewModel, onToggleBeingEdited,
         onCancelEdit={onToggleBeingEdited}
         onDeleteItem={onDeleteItem}
       />
-    )
+    );
   }
 
   if (!itemViewModel.isSavedSuccess) {

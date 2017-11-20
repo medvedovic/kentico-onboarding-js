@@ -11,7 +11,7 @@ export namespace FETCH_DATA {
 
 export namespace POST_ITEM_TO_SERVER {
   export const SUCCESS = 'POST_ITEM_TO_SERVER_SUCCESS';
-  export const FAILURE = 'POST_ITEM_TO_SERVER_FAILURE'
+  export const FAILURE = 'POST_ITEM_TO_SERVER_FAILURE';
 }
 
 export namespace PUT_ITEM_TO_SERVER {

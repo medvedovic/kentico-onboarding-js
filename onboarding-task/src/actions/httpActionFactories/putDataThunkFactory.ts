@@ -13,7 +13,7 @@ export interface IReputItemThunkFactory {
   readonly apiEndpoint: string;
 }
 
-interface IPutDataThunkFactory extends IReputItemThunkFactory{
+interface IPutDataThunkFactory extends IReputItemThunkFactory {
   readonly updateItem: (localId: string, value: string) => IAction;
 }
 

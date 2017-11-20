@@ -7,7 +7,7 @@ import { ListItemData } from '../../models/ListItemData';
 interface IFetchDataThunkFactory {
   readonly sendRequest: (value: string, httpMethod: HttpAction) => Promise<Response>;
   readonly fetchIsLoading: () => IAction;
-  readonly convertItem: (value: string, id: string) => ListItemData
+  readonly convertItem: (value: string, id: string) => ListItemData;
   readonly onFetchSucceeded: (items: Array<ListItemData>) => IAction;
   readonly onFetchFailed: (error: Error) => IAction;
   readonly apiEndpoint: string;

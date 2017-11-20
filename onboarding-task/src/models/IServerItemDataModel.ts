@@ -3,8 +3,8 @@ import { ListItemData } from './ListItemData';
 export interface IServerItemDataModel {
   readonly id: string;
   readonly value: string;
-  readonly createdAt: Date,
-  readonly updatedAt: Date
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }
 
 export interface IServerItemUpdateModel {
