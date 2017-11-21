@@ -8,10 +8,6 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
-    branches:
-      only:
-        - master
-        - develop
     working_directory: ~/onboarding-task
 
     steps:
