@@ -132,3 +132,5 @@ Do not forget to tell the client app to [proxy your requests to the server](http
 You might experience a dependency hell due to different versions of promises, fetch and their respective typings. The solution is to install `isomorphic-fetch` and `es6-promise` libraries plus their typings (see Task 4). Also make sure to *uninstall* all other packages for promises and fetch (plus their typings) otherwise you will get many wierd error messages. 
 
 In order to wirte tests properly, you will surely need to use some [mocking functionality provided by Jest testing framework](https://facebook.github.io/jest/docs/mock-functions.html#content). In case your linter starts to complain about it forllow [this SO answer](http://stackoverflow.com/a/40265356).
+
+*Master* branch: [![CircleCI](https://circleci.com/gh/medvedovic/kentico-onboarding-js/tree/master.svg?style=svg)](https://circleci.com/gh/medvedovic/kentico-onboarding-js/tree/master)
