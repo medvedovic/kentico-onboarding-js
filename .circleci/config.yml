@@ -25,3 +25,14 @@ jobs:
       - run:
           name: Build project
           command: cd onboarding-task && npm run build
+      - deploy:
+          name: Start deployment
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              surge --project ./onboarding-task/public --domain http://patrikm-todo-app.surge.sh/
+            fi
+#  deployment:
+#    production:
+#      branch: master
+#      commands:
+#        - surge --project ./onboarding-task/public --domain http://patrikm-todo-app.surge.sh/
