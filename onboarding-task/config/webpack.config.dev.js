@@ -7,7 +7,6 @@ var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeMod
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
 const path = require('path');
-console.log(path.resolve(__dirname, "src"), "node_modules");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -156,10 +155,6 @@ module.exports = {
             }
           },
           'sass-loader'
-          // 'style-loader',
-          // 'css-loader',
-          // 'postcss-loader',
-          // 'sass-loader'
         ]
       },
       // "file" loader for svg
@@ -171,92 +166,7 @@ module.exports = {
         }
       }
     ],
-    // loaders: [
-    //   // Default loader: load all assets that are not handled
-    //   // by other loaders with the url loader.
-    //   // Note: This list needs to be updated with every change of extensions
-    //   // the other loaders match.
-    //   // E.g., when adding a loader for a new supported file extension,
-    //   // we need to add the supported extension to this loader too.
-    //   // Add one new line in `exclude` for each loader.
-    //   //
-    //   // "file" loader makes sure those assets get served by WebpackDevServer.
-    //   // When you `import` an asset, you get its (virtual) filename.
-    //   // In production, they would get copied to the `build` folder.
-    //   // "url" loader works like "file" loader except that it embeds assets
-    //   // smaller than specified limit in bytes as data URLs to avoid requests.
-    //   // A missing `test` is equivalent to a match.
-    //   {
-    //     exclude: [
-    //       /\.html$/,
-    //       /\.(ts|tsx)$/,
-    //       /\.(js|jsx)$/,
-    //       /\.(css|scss)$/,
-    //       /\.json$/,
-    //       /\.svg$/
-    //     ],
-    //     loader: 'url',
-    //     query: {
-    //       limit: 10000,
-    //       name: 'static/media/[name].[hash:8].[ext]'
-    //     }
-    //   },
-    //   // Process JS with Babel.
-    //   {
-    //     test: /\.(js|jsx)$/,
-    //     include: paths.appSrc,
-    //     loader: 'babel',
-    //     query: {
-    //
-    //       // This is a feature of `babel-loader` for webpack (not Babel itself).
-    //       // It enables caching results in ./node_modules/.cache/babel-loader/
-    //       // directory for faster rebuilds.
-    //       cacheDirectory: true
-    //     }
-    //   },
-    //   {
-    //     test: /\.(ts|tsx)$/,
-    //     loader: "awesome-typescript-loader"
-    //   },
-    //   // "postcss" loader applies autoprefixer to our CSS.
-    //   // "css" loader resolves paths in CSS and adds assets as dependencies.
-    //   // "style" loader turns CSS into JS modules that inject <style> tags.
-    //   // In production, we use a plugin to extract that CSS to a file, but
-    //   // in development "style" loader enables hot editing of CSS.
-    //   {
-    //     test: /\.(css|scss)$/,
-    //     loader: 'style!css?importLoaders=2!postcss!sass'
-    //   },
-    //   // JSON is not enabled by default in Webpack but both Node and Browserify
-    //   // allow it implicitly so we also enable it.
-    //   {
-    //     test: /\.json$/,
-    //     loader: 'json'
-    //   },
-    //   // "file" loader for svg
-    //   {
-    //     test: /\.svg$/,
-    //     loader: 'file',
-    //     query: {
-    //       name: 'static/media/[name].[hash:8].[ext]'
-    //     }
-    //   }
-    // ]
   },
-
-  // We use PostCSS for autoprefixing only.
-  // postcss: function() {
-  //   return [
-  //     autoprefixer({
-  //       browsers: [
-  //         '>1%',
-  //         'last 4 versions',
-  //         'Firefox ESR',
-  //         'not ie < 9', // React doesn't support IE8 anyway
-  //       ]
-  //     }),
-  //   ];
-  // },
   plugins: [
     // Makes the public URL available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
