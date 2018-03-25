@@ -1,3 +1,4 @@
+const getConfig = require('./config');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -17,6 +18,8 @@ var publicPath = '/';
 var publicUrl = '';
 // Get environment variables to inject into our app.
 var env = getClientEnvironment(publicUrl);
+
+getConfig(process.env);
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.

@@ -1,3 +1,4 @@
+const getConfig = require('./config');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -8,7 +9,9 @@ var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
 const path = require('path');
+const saveAs = require('file-saver');
 
+getConfig(process.env);
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
