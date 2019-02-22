@@ -22,11 +22,12 @@ module.exports = {
         'ts-loader',
         { loader: 'tslint-loader', options: { configFile: 'tslint.json' } }
       ] },
-      { test: /\.css$/, use: [
+      { test: /\.(scss|css)$/, use: [
         { loader: 'file-loader', options: { name: 'styles/[name].[ext]' } },
         { loader: 'extract-loader', options: { publicPath: '../' } },
-        { loader: 'css-loader' }
-      ] },
+        { loader: 'css-loader' },
+        { loader: 'sass-loader' }
+        ] },
       { test: /\.(eot|svg|ttf|woff|woff2)/, use: [
         { loader: 'url-loader', options: { name: 'font-icons/[name].[ext]', limit: 10000 } }
       ] },

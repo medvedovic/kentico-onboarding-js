@@ -1,12 +1,33 @@
-require.context('../public/', true);
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import ReactDom from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
 
-import { App } from './App.jsx';
+import { App } from './containers/App.tsx';
+import { rootReducer } from './reducers/rootReducer.ts';
+import { initialState } from './constants/initialState.ts';
 
-ReactDom.render(
-  <React.StrictMode>
+import 'bootstrap/dist/css/bootstrap.css';
+import './styles/index.scss';
+
+console.log(process.env);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const logger = createLogger();
+const store = createStore(
+  rootReducer,
+  initialState,
+  composeEnhancers(
+    applyMiddleware(thunk, logger)
+  )
+);
+
+ReactDOM.render(
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('app-root'));
+  </Provider>,
+  document.getElementById('app-root')
+);
