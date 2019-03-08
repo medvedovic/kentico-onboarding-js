@@ -3,10 +3,10 @@ import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
 import { ListItemCreator } from './ListItemCreator';
-import { ListItem } from '../containers/ListItem';
-import { keyMap } from '../constants/keyMap';
+import { ListItem } from '../../containers/ListItem';
+import { keyMap } from '../../constants/keyMap';
 
-import { Store } from '../reducers/stores';
+import { Store } from '../../reducers/stores';
 
 export interface IListDataProps {
   itemIds: Store.IIds;
@@ -42,7 +42,8 @@ class List extends React.PureComponent<ListProps> {
               {this.props.itemIds.map(id => (
                 <li key={id}>
                   <ListItem id={id!} />
-                </li>))}
+                </li>
+              ))}
             </ol>
             <ListItemCreator onCreateItem={this.props.onCreateItem} />
           </div>

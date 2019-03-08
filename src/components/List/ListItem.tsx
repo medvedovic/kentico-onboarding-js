@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 
 import { ListItemDisplay } from './ListItemDisplay';
 import { ListItemEditor } from './ListItemEditor';
-import { IItemViewModel } from '../models/IItemViewModel';
+import { IItemViewModel } from '../../models/IItemViewModel';
 import { ListItemDisplayWithRedo } from './ListItemDisplayWithRedo';
 
 export interface IListItemDataProps {

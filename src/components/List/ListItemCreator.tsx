@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
-import { isTextInputValid } from '../utils/isTextInputValid';
-import { IKeyMapHandlers } from '../constants/keyMap';
+import { isTextInputValid } from '../../utils/isTextInputValid';
+import { IKeyMapHandlers } from '../../constants/keyMap';
 
 interface IListItemCreatorCallbacksProps {
   onCreateItem: (value: string) => void;
@@ -34,7 +34,7 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
 
   _onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {value} = this.state;
+    const { value } = this.state;
 
     if (isTextInputValid(value)) {
       this.props.onCreateItem(value);
@@ -43,7 +43,7 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
     this._resetInput();
   };
 
-  _handleInputChanged = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) => {
+  _handleInputChanged = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(() => ({
       value,
       showError: !value,
@@ -63,7 +63,7 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
   };
 
   render(): JSX.Element {
-    const {value} = this.state;
+    const { value } = this.state;
     const globalHandlers: Partial<IKeyMapHandlers> = {
       focusNewItemKey: () => {
         if (this.textInput) {
@@ -112,7 +112,8 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
             {this.state.showError && (
               <div className="error add-input-error shake">
                 Invalid input !
-              </div>)}
+              </div>
+            )}
           </div>
         </HotKeys>
       </div>

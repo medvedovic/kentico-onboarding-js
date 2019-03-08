@@ -2,10 +2,10 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
-import { isTextInputValid } from '../utils/isTextInputValid';
+import { isTextInputValid } from '../../utils/isTextInputValid';
 
-import { IItemViewModel } from '../models/IItemViewModel';
-import { IKeyMapHandlers } from '../constants/keyMap';
+import { IItemViewModel } from '../../models/IItemViewModel';
+import { IKeyMapHandlers } from '../../constants/keyMap';
 
 export interface IListItemEditorDataProps {
   itemViewModel: IItemViewModel;
@@ -45,14 +45,14 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
     };
   }
 
-  _handleItemNameChanged = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) => {
+  _handleItemNameChanged = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(() => ({
       value,
     }));
   };
 
   _handleUpdate = () => {
-    const {value} = this.state;
+    const { value } = this.state;
 
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(value);
@@ -61,7 +61,7 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
   };
 
   render(): JSX.Element {
-    const {onCancelEdit} = this.props;
+    const { onCancelEdit } = this.props;
     const handlers: Partial<IKeyMapHandlers> = {
       saveKey: this._handleUpdate,
       cancelKey: onCancelEdit,
@@ -107,7 +107,8 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
         {!this.state.value && (
           <span className="error shake">
             Invalid input!
-          </span>)}
+          </span>
+        )}
       </HotKeys>
     );
   }

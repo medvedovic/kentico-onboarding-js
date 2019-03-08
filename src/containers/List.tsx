@@ -5,7 +5,7 @@ import {
   IListCallbacksProps,
   IListDataProps,
   List as ListComponent,
-} from '../components/List';
+} from '../components/List/List';
 import { Store } from '../reducers/stores';
 import { postData } from '../actions/dependencyInjections';
 import { fetchData } from '../actions/dependencyInjections';

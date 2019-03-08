@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { ListItem as ListItemComponent } from '../components/ListItem';
+import { ListItem as ListItemComponent } from '../components/List/ListItem';
 import {
   toggleBeingEdited,
   putData,
@@ -11,7 +11,7 @@ import { memoizedCreateViewModel } from '../utils/createViewModel';
 import {
   IListItemDataProps as IListItemComponentDataProps,
   IListItemCallbacksProps as IListItemComponentCallbacksProps,
-} from '../components/ListItem';
+} from '../components/List/ListItem';
 
 import { Store } from '../reducers/stores';
 import { resolveHttpAction } from '../utils/resolveHttpAction';
