@@ -34,7 +34,7 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
 
   _onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { value } = this.state;
+    const {value} = this.state;
 
     if (isTextInputValid(value)) {
       this.props.onCreateItem(value);
@@ -43,7 +43,7 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
     this._resetInput();
   };
 
-  _handleInputChanged = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+  _handleInputChanged = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(() => ({
       value,
       showError: !value,
@@ -63,7 +63,7 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
   };
 
   render(): JSX.Element {
-    const { value } = this.state;
+    const {value} = this.state;
     const globalHandlers: Partial<IKeyMapHandlers> = {
       focusNewItemKey: () => {
         if (this.textInput) {
@@ -82,11 +82,11 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
     return (
       <div>
         <HotKeys
-          handlers={globalHandlers}
+          handlers={globalHandlers as any}
           focused={true}
-          attach={document}
+          attach={document as any}
         />
-        <HotKeys handlers={handlers} >
+        <HotKeys handlers={handlers as any}>
           <div className="col-sm-12 top-offset">
             <form onSubmit={this._onSubmitForm}>
               <div className="input-group">
@@ -105,15 +105,14 @@ class ListItemCreator extends React.PureComponent<IListItemCreatorCallbacksProps
                   onChange={this._handleInputChanged}
                   onBlur={this._hideError}
                   value={value}
-                  ref={(input) => {
-                    this.textInput = input;
-                  }}
+                  ref={input => this.textInput = input}
                 />
               </div>
             </form>
-            {this.state.showError &&
-              <div className="error add-input-error shake">Invalid input!</div>
-            }
+            {this.state.showError && (
+              <div className="error add-input-error shake">
+                Invalid input !
+              </div>)}
           </div>
         </HotKeys>
       </div>

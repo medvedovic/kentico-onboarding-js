@@ -23,6 +23,9 @@ export const putDataThunkFactory = (dependencies: IPutDataThunkFactory) =>
       dispatch(dependencies.updateItem(id, value));
 
       const item = getState().items.data.get(id);
+      if (!item) {
+        throw new Error('Such item does not exist');
+      }
       const itemDto = dependencies.transformDataToDto(item);
 
       const url = `${dependencies.apiEndpoint}/${item.id}`;
@@ -39,6 +42,10 @@ export const reputItemThunkFactory = (dependencies: IReputItemThunkFactory) =>
   (localId: string) =>
     (dispatch: Dispatch, getState: () => Store.IRoot) => {
       const item = getState().items.data.get(localId);
+      if (!item) {
+        throw new Error('Such item does not exist');
+      }
+
       const itemDto = dependencies.transformDataToDto(item);
       let url = `${dependencies.apiEndpoint}/${item.id}`;
 

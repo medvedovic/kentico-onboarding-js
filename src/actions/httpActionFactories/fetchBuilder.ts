@@ -5,9 +5,9 @@ export const fetchBuilder = <T>(injectedFetch: (url: string, init?: any) => Prom
     const requestParameters = {
       method: httpMethod,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     };
 
     return injectedFetch(url, requestParameters)

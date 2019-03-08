@@ -1,12 +1,12 @@
 import {
   DELETE_ITEM_AT_SERVER_FAILURE,
   POST_ITEM_TO_SERVER,
-  PUT_ITEM_TO_SERVER
+  PUT_ITEM_TO_SERVER,
 } from '../constants/actionTypes';
 import {
   deleteData,
   redoPostData,
-  redoPutData
+  redoPutData,
 } from '../actions/publicActions';
 
 

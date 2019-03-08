@@ -10,8 +10,8 @@ export const postRequestHasSucceeded = (temporaryId: string, params: IServerItem
     item: new ListItemData({
       id: params.id,
       value: params.value,
-    })
-  }
+    }),
+  },
 });
 
 export const requestHasSucceeded = (type: string) =>
@@ -21,8 +21,8 @@ export const requestHasSucceeded = (type: string) =>
       item: new ListItemData({
         id: params.id,
         value: params.value,
-      })
-    }
+      }),
+    },
   });
 
 export const requestHasFailed = (type: string) =>
@@ -31,7 +31,7 @@ export const requestHasFailed = (type: string) =>
     payload: {
       error: params,
       item: {
-        id
-      }
-    }
+        id,
+      },
+    },
   });

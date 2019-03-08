@@ -5,7 +5,7 @@ import {
   DELETE_ITEM,
   FETCH_DATA,
   POST_ITEM_TO_SERVER,
-  UPDATE_ITEM
+  UPDATE_ITEM,
 } from '../../../constants/actionTypes';
 import { item } from './item';
 
@@ -39,8 +39,8 @@ export const data: Reducer.Data = (state = Map(), action) => {
       return state.delete(action.payload.id);
 
     case FETCH_DATA.HAS_SUCCEEDED: {
-      action.payload.items.forEach((item: ListItemData) => {
-        state = state.set(item.id, item);
+      action.payload.items.forEach((listItemData: ListItemData) => {
+        state = state.set(listItemData.id, listItemData);
       });
 
       return state;

@@ -18,14 +18,14 @@ class ListItemDisplayWithRedo extends React.PureComponent<ListItemDisplayWithRed
   static propTypes = {
     value: PropTypes.string.isRequired,
     method: PropTypes.string.isRequired,
-    onResendRequest: PropTypes.func.isRequired
+    onResendRequest: PropTypes.func.isRequired,
   };
 
-  _resendRequest = () => {
+  _resendRequest = (): void => {
     this.props.onResendRequest(this.props.method);
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className="error-message-item">
         <span>
@@ -42,4 +42,4 @@ class ListItemDisplayWithRedo extends React.PureComponent<ListItemDisplayWithRed
   }
 }
 
-export { ListItemDisplayWithRedo }
+export { ListItemDisplayWithRedo };

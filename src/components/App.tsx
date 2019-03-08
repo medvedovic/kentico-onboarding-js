@@ -5,7 +5,7 @@ import { Loader } from './Loader';
 import { IAppSettings } from '../models/IAppSettings';
 import * as PropTypes from 'prop-types';
 
-const App: React.SFC<IAppSettings> = ({ isLoading, fetchHasFailed }: IAppSettings) => (
+const App: React.SFC<IAppSettings> = ({isLoading, fetchHasFailed}: IAppSettings) => (
   <div>
     <div className="container">
       <div className="header clearfix">
@@ -13,24 +13,18 @@ const App: React.SFC<IAppSettings> = ({ isLoading, fetchHasFailed }: IAppSetting
       </div>
 
       <div id="app-content">
-        {
-          isLoading &&
-          <Loader />
-        }
-        <List/>
+        {isLoading && (
+          <Loader />)}
+        <List />
       </div>
-
-      {
-        fetchHasFailed &&
+      {fetchHasFailed && (
         <div className="error-wrapper">
           <div className="error-message">
             <i>X</i>
             <b>Something went wrong :(</b>
             <p>Hit "F5" to reload application</p>
           </div>
-        </div>
-      }
-
+        </div>)}
       <section className="shortcuts">
         <h3>List of shortcuts</h3>
         <ul>
@@ -39,9 +33,7 @@ const App: React.SFC<IAppSettings> = ({ isLoading, fetchHasFailed }: IAppSetting
         </ul>
         <p>More to be added...</p>
       </section>
-
     </div>
-
     <footer className="footer">
       <p>&copy; 2016 Kentico Software</p>
     </footer>
@@ -52,7 +44,7 @@ App.displayName = 'App';
 
 App.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  fetchHasFailed: PropTypes.bool.isRequired
+  fetchHasFailed: PropTypes.bool.isRequired,
 };
 
-export { App }
+export { App };

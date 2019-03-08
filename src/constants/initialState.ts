@@ -12,6 +12,6 @@ export const initialState: Store.IRoot = {
     list: {
       isLoading: true,
       fetchHasFailed: false,
-    }
-  }
+    },
+  },
 };

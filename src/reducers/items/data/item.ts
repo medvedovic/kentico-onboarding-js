@@ -11,12 +11,12 @@ export const item: IReducer<ListItemData> = (state = new ListItemData(), action)
     case POST_ITEM_TO_SERVER.SUCCESS:
       return state.alter({
         id: action.payload.item.id,
-        value: action.payload.item.value
+        value: action.payload.item.value,
       });
 
     case UPDATE_ITEM:
       return state.alter({
-        value: action.payload.item.value
+        value: action.payload.item.value,
       });
 
     default:

@@ -45,14 +45,14 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
     };
   }
 
-  _handleItemNameChanged = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+  _handleItemNameChanged = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(() => ({
       value,
     }));
   };
 
   _handleUpdate = () => {
-    const { value } = this.state;
+    const {value} = this.state;
 
     if (isTextInputValid(value)) {
       this.props.onUpdateItem(value);
@@ -61,23 +61,26 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
   };
 
   render(): JSX.Element {
-    const { onCancelEdit } = this.props;
+    const {onCancelEdit} = this.props;
     const handlers: Partial<IKeyMapHandlers> = {
       saveKey: this._handleUpdate,
       cancelKey: onCancelEdit,
     };
 
     return (
-      <HotKeys handlers={handlers} >
+      <HotKeys handlers={handlers as any}>
         <div className="form-group">
           <input
             type="text"
             className="form-control"
             value={this.state.value}
             onChange={this._handleItemNameChanged}
-            autoFocus
+            autoFocus={true}
           />
-          <div className="btn-group" role="group">
+          <div
+            className="btn-group"
+            role="group"
+          >
             <button
               type="button"
               className="btn btn-default btn-custom"
@@ -101,12 +104,10 @@ class ListItemEditor extends React.PureComponent<ListItemEditorProps, IListItemE
             </button>
           </div>
         </div>
-        {!this.state.value &&
+        {!this.state.value && (
           <span className="error shake">
             Invalid input!
-          </span>
-        }
-
+          </span>)}
       </HotKeys>
     );
   }

@@ -1,7 +1,7 @@
 import {
   POST_ITEM_TO_SERVER,
   PUT_ITEM_TO_SERVER,
-  DELETE_ITEM_AT_SERVER_FAILURE
+  DELETE_ITEM_AT_SERVER_FAILURE,
 } from '../constants/actionTypes';
 import { apiEndpoint } from '../constants/apiEndpoint';
 import {
@@ -17,12 +17,12 @@ import { fetchBuilder } from './httpActionFactories/fetchBuilder';
 import { fetchDataThunkFactory } from './httpActionFactories/fetchDataThunkFactory';
 import {
   postItemDataThunkFactory,
-  repostRequestThunkFactory
+  repostRequestThunkFactory,
 } from './httpActionFactories/postDataThunkFactory';
 import {
   requestHasFailed,
   postRequestHasSucceeded,
-  requestHasSucceeded
+  requestHasSucceeded,
 } from './httpActionFactories/requestStatusActions';
 import { putDataThunkFactory } from './httpActionFactories/putDataThunkFactory';
 import { reputItemThunkFactory} from './httpActionFactories/putDataThunkFactory';
@@ -37,7 +37,7 @@ export const fetchData = fetchDataThunkFactory({
   convertItem: listItemDataConverter,
   onFetchSucceeded: fetchHasSucceeded,
   onFetchFailed: fetchHasFailed,
-  apiEndpoint
+  apiEndpoint,
 });
 
 export const postData = postItemDataThunkFactory({
@@ -47,7 +47,7 @@ export const postData = postItemDataThunkFactory({
   onError: requestHasFailed(POST_ITEM_TO_SERVER.FAILURE),
   createItem: listItemDataConverter,
   onItemCreated: createItem,
-  apiEndpoint
+  apiEndpoint,
 });
 
 export const putData = putDataThunkFactory({
@@ -56,7 +56,7 @@ export const putData = putDataThunkFactory({
   onSuccess: requestHasSucceeded(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: requestHasFailed(PUT_ITEM_TO_SERVER.FAILURE),
   updateItem,
-  apiEndpoint
+  apiEndpoint,
 });
 
 export const redoPostData = repostRequestThunkFactory({
@@ -64,7 +64,7 @@ export const redoPostData = repostRequestThunkFactory({
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: postRequestHasSucceeded,
   onError: requestHasFailed(POST_ITEM_TO_SERVER.FAILURE),
-  apiEndpoint
+  apiEndpoint,
 });
 
 export const redoPutData = reputItemThunkFactory({
@@ -72,12 +72,12 @@ export const redoPutData = reputItemThunkFactory({
   transformDataToDto: toServerItemDataViewModel,
   onSuccess: requestHasSucceeded(PUT_ITEM_TO_SERVER.SUCCESS),
   onError: requestHasFailed(PUT_ITEM_TO_SERVER.FAILURE),
-  apiEndpoint
+  apiEndpoint,
 });
 
 export const deleteData = deleteItemThunkFactory({
   sendRequest,
   onError: requestHasFailed(DELETE_ITEM_AT_SERVER_FAILURE),
   onSuccess: deleteItem,
-  apiEndpoint
+  apiEndpoint,
 });

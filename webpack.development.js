@@ -16,6 +16,21 @@ module.exports = merge(common, {
     contentBase: path.resolve(__dirname, 'build'),
     port: 3000,
     open: true,
-    hot: true
+    hot: true,
+    proxy: {
+      '*': 'http://localhost:49520/'
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' }
+        ]
+      },
+    ]
   }
 });

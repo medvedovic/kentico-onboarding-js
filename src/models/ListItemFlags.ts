@@ -15,7 +15,7 @@ interface IListItemFlags {
 const defaultValues: IListItemFlags = {
   isBeingEdited: false,
   isSavedSuccess: true,
-  failedHttpAction: undefined
+  failedHttpAction: undefined,
 };
 
 /**

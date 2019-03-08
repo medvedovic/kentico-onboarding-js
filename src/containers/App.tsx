@@ -7,8 +7,6 @@ const mapStateToProps = ({ app: { list: { isLoading, fetchHasFailed } } }: Store
   fetchHasFailed: fetchHasFailed,
 });
 
-const App = connect(
-  mapStateToProps
-)(AppComponent);
+const App = connect(mapStateToProps)(AppComponent);
 
 export { App };

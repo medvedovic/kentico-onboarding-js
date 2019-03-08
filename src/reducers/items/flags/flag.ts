@@ -15,12 +15,12 @@ export const flag: IReducer<ListItemFlags> = (state = new ListItemFlags(), actio
     case DELETE_ITEM_AT_SERVER_FAILURE:
       return state.alter({
         isSavedSuccess: false,
-        failedHttpAction: action.type
+        failedHttpAction: action.type,
       });
 
     case TOGGLE_BEING_EDITED:
       return state.alter({
-        isBeingEdited: !state.isBeingEdited
+        isBeingEdited: !state.isBeingEdited,
       });
 
     default:

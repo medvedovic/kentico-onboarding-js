@@ -38,6 +38,10 @@ export const repostRequestThunkFactory = (dependencies: IRepostRequestThunkFacto
   (itemId: string) =>
     (dispatch: Dispatch, getState: () => Store.IRoot) => {
       const item = getState().items.data.get(itemId);
+      if (!item) {
+        throw new Error('Such item was not found');
+      }
+
       const itemDto = dependencies.transformDataToDto(item);
 
       return dependencies.sendRequest(dependencies.apiEndpoint, HttpAction.POST, itemDto)

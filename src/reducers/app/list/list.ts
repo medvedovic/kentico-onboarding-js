@@ -4,5 +4,5 @@ import { fetchHasFailed } from './fetchHasFailed';
 
 export const list = combineReducers({
   isLoading,
-  fetchHasFailed
+  fetchHasFailed,
 });

@@ -19,22 +19,22 @@ export const fetchHasFailed = (error: Error) => ({
   type: FETCH_DATA.HAS_FAILED,
   payload: {
     error,
-  }
+  },
 });
 
 export const fetchHasSucceeded = (items: Array<IServerItemUpdateModel>) => ({
-    type: FETCH_DATA.HAS_SUCCEEDED,
-    payload: {
-      items
-    }
-  });
+  type: FETCH_DATA.HAS_SUCCEEDED,
+  payload: {
+    items,
+  },
+});
 
 export const createItem = (item: ListItemData): IAction => ({
   type: CREATE_ITEM,
-    payload: {
-      item,
-    },
-  });
+  payload: {
+    item,
+  },
+});
 
 export const updateItem = (id: string, value: string): IAction => ({
   type: UPDATE_ITEM,

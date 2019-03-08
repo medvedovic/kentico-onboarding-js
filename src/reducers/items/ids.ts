@@ -4,7 +4,7 @@ import {
   CREATE_ITEM,
   DELETE_ITEM,
   FETCH_DATA,
-  POST_ITEM_TO_SERVER
+  POST_ITEM_TO_SERVER,
 } from '../../constants/actionTypes';
 
 export const ids: Reducer.Ids = (state = List<string>(), action) => {

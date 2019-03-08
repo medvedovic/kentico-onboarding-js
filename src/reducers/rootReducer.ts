@@ -6,6 +6,6 @@ import { Store } from './stores';
 import { app } from './app/app';
 
 export const rootReducer = combineReducers<Store.IRoot>({
-  items,
-  app,
+  items: (items as any),
+  app: app as any,
 });

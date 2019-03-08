@@ -1,19 +1,17 @@
+import * as React from 'react';
 import { connect } from 'react-redux';
 
 import {
   IListCallbacksProps,
   IListDataProps,
-  List as ListComponent
+  List as ListComponent,
 } from '../components/List';
-
 import { Store } from '../reducers/stores';
-import {
-  postData
-} from '../actions/dependencyInjections';
+import { postData } from '../actions/dependencyInjections';
 import { fetchData } from '../actions/dependencyInjections';
 
 
-const mapStateToProps = ({ items }: Store.IRoot): IListDataProps => ({
+const mapStateToProps = ({items}: Store.IRoot): IListDataProps => ({
   itemIds: items.ids,
 });
 
@@ -22,7 +20,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IListCallbacksProps => ({
   onFetchData: () => dispatch(fetchData()),
 });
 
-export const List = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ListComponent);
+export const List: React.ComponentClass = connect(mapStateToProps, mapDispatchToProps)(ListComponent);

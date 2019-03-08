@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
-import { List as ImmutableList } from 'immutable';
 
 import { ListItemCreator } from './ListItemCreator';
 import { ListItem } from '../containers/ListItem';
@@ -25,28 +24,25 @@ class List extends React.PureComponent<ListProps> {
   static displayName = 'List';
 
   static propTypes = {
-    itemIds: PropTypes.instanceOf(ImmutableList).isRequired,
+    itemIds: PropTypes.any.isRequired,
     onCreateItem: PropTypes.func.isRequired,
     onFetchData: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
+  componentWillMount(): void {
     this.props.onFetchData();
   }
 
-  render() {
+  render(): JSX.Element {
     return (
-      <HotKeys keyMap={keyMap}>
+      <HotKeys keyMap={keyMap as any}>
         <div className="row">
           <div className="col-sm-12 col-md-6">
             <ol className="list">
-              {
-                this.props.itemIds.map((id: string) => (
-                  <li key={id}>
-                    <ListItem id={id} />
-                  </li>
-                ))
-              }
+              {this.props.itemIds.map(id => (
+                <li key={id}>
+                  <ListItem id={id!} />
+                </li>))}
             </ol>
             <ListItemCreator onCreateItem={this.props.onCreateItem} />
           </div>

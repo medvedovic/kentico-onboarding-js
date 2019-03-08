@@ -12,5 +12,24 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: { name: 'styles/[name].css' }
+          },
+          {
+            loader: 'extract-loader',
+            options: { publicPath: '../' }
+          },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' }
+        ]
+      },
+    ]
+  }
 });

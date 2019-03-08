@@ -19,7 +19,13 @@ export interface IListItemCallbacksProps {
 
 export type ListItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.SFC<ListItemProps> = ({itemViewModel, onToggleBeingEdited, onUpdateItem, onDeleteItem, onResendRequest}) => {
+const ListItem: React.StatelessComponent<ListItemProps> = ({
+  itemViewModel,
+  onToggleBeingEdited,
+  onUpdateItem,
+  onDeleteItem,
+  onResendRequest,
+}) => {
   if (itemViewModel.isBeingEdited) {
     return (
       <ListItemEditor

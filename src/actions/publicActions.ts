@@ -8,6 +8,6 @@ export {
   postData,
   putData,
   redoPostData,
-  redoPutData
+  redoPutData,
 } from './dependencyInjections';
 

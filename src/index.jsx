@@ -1,3 +1,4 @@
+require.context('../public/', true);
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -11,8 +12,6 @@ import { initialState } from './constants/initialState.ts';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/index.scss';
-
-console.log(process.env);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
