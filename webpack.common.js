@@ -3,6 +3,7 @@
 /* eslint-disable no-path-concat */
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -74,7 +75,10 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   plugins: [
-    new CleanWebpackPlugin(['build/*'])
+    new CleanWebpackPlugin(['build/*']),
+    new webpack.ProvidePlugin({
+      Immutable: 'immutable',
+    }),
   ],
   stats: {
     colors: true,

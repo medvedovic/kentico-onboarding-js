@@ -19,5 +19,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "test/**/*.ts"
+  ],
+  "files": [
+    "node_modules/immutable/dist/immutable.d.ts"
   ]
 }
