@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-
 import { ListItemDisplay } from './ListItemDisplay';
 import { ListItemEditor } from './ListItemEditor';
-import { IItemViewModel } from '../../models/IItemViewModel';
 import { ListItemDisplayWithRedo } from './ListItemDisplayWithRedo';
+import { ItemViewModel, ItemViewModelPropTypeShape } from '../../models/ItemViewModel';
 
 export interface IListItemDataProps {
-  itemViewModel: IItemViewModel;
+  itemViewModel: ItemViewModel;
 }
 
 export interface IListItemCallbacksProps {
@@ -19,13 +18,13 @@ export interface IListItemCallbacksProps {
 
 export type ListItemProps = IListItemDataProps & IListItemCallbacksProps;
 
-const ListItem: React.StatelessComponent<ListItemProps> = ({
-  itemViewModel,
-  onToggleBeingEdited,
-  onUpdateItem,
-  onDeleteItem,
-  onResendRequest,
-}) => {
+const ListItem: React.FC<ListItemProps> = ({
+                                             itemViewModel,
+                                             onToggleBeingEdited,
+                                             onUpdateItem,
+                                             onDeleteItem,
+                                             onResendRequest,
+                                           }) => {
   if (itemViewModel.isBeingEdited) {
     return (
       <ListItemEditor
@@ -61,11 +60,7 @@ const ListItem: React.StatelessComponent<ListItemProps> = ({
 ListItem.displayName = 'ListItem';
 
 ListItem.propTypes = {
-  itemViewModel: PropTypes.shape({
-    id: PropTypes.string,
-    value: PropTypes.string.isRequired,
-    isBeingEdited: PropTypes.bool.isRequired,
-  }).isRequired,
+  itemViewModel: PropTypes.shape(ItemViewModelPropTypeShape).isRequired,
   onToggleBeingEdited: PropTypes.func.isRequired,
   onDeleteItem: PropTypes.func.isRequired,
   onUpdateItem: PropTypes.func.isRequired,

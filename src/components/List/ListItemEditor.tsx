@@ -1,14 +1,12 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
-
 import { isTextInputValid } from '../../utils/isTextInputValid';
-
-import { IItemViewModel } from '../../models/IItemViewModel';
 import { IKeyMapHandlers } from '../../constants/keyMap';
+import { ItemViewModel } from '../../models/ItemViewModel';
 
 export interface IListItemEditorDataProps {
-  itemViewModel: IItemViewModel;
+  itemViewModel: ItemViewModel;
 }
 
 export interface IListItemEditorCallbacksProps {
