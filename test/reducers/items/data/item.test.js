@@ -1,4 +1,4 @@
-import { updateItem } from '../../../../src/actions/actionCreators.ts';;
+import { updateItem } from '../../../../src/actions/actionCreators.ts';
 import { ListItemData } from '../../../../src/models/ListItemData.ts';
 import { item } from '../../../../src/reducers/items/data/item.ts';
 import { postRequestHasSucceeded } from '../../../../src/actions/httpActionFactories/requestStatusActions.ts';
@@ -38,4 +38,3 @@ describe('itemReducer', () => {
     expect(resultState).toEqual(new ListItemData());
   });
 });
-

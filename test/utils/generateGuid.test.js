@@ -1,4 +1,4 @@
-import { generateGuid } from '../../src/utils/generateGuid';
+import { generateGuid } from '../../src/utils/generateGuid.ts';
 
 describe('generateGuid', () => {
   it('provides correct format', () => {

@@ -1,5 +1,5 @@
-import { ListItemData as ListItemModel } from '../../../../src/models/ListItemData.ts';
 import { Map } from 'immutable';
+import { ListItemData as ListItemModel } from '../../../../src/models/ListItemData.ts';
 import { data } from '../../../../src/reducers/items/data/data.ts';
 import {
   createItem,
@@ -7,7 +7,7 @@ import {
   deleteItem,
   fetchHasSucceeded
 } from '../../../../src/actions/actionCreators.ts';
-import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes';
+import { POST_ITEM_TO_SERVER } from '../../../../src/constants/actionTypes.ts';
 
 describe('dataReducer', () => {
   const _id1 = '9406272b-46bb-4bf2-9e6f-902683bbcae0';

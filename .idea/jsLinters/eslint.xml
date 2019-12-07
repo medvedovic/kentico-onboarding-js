@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EslintConfiguration">
-    <extra-options value="--ext .ts --ext .tsx" />
+    <extra-options value="--ignore-pattern '*.ts' --ignore-pattern '*.tsx'" />
   </component>
 </project>

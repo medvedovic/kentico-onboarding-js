@@ -12,7 +12,7 @@ import {
   POST_ITEM_TO_SERVER,
   PUT_ITEM_TO_SERVER,
   DELETE_ITEM_AT_SERVER_FAILURE
-} from '../../../../src/constants/actionTypes';
+} from '../../../../src/constants/actionTypes.ts';
 
 describe('flagsReducer', () => {
   const id1 = 'e9082417-eae0-4b00-a2d0-5722ba3b1641';
@@ -36,7 +36,7 @@ describe('flagsReducer', () => {
     expect(result).not.toBe(expectedResult);
   });
 
-  it('returns correct state on post item to server success',() => {
+  it('returns correct state on post item to server success', () => {
     const id = '9cf7f383-6ab2-45b7-b0a9-f2a091160d5f';
     const action = {
       type: POST_ITEM_TO_SERVER.SUCCESS,
@@ -70,7 +70,7 @@ describe('flagsReducer', () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it('sets flags correctly on actions failure',() => {
+  it('sets flags correctly on actions failure', () => {
     const actionTypes = [
       POST_ITEM_TO_SERVER.FAILURE,
       PUT_ITEM_TO_SERVER.FAILURE,
@@ -96,7 +96,7 @@ describe('flagsReducer', () => {
       const result = flags(initialState, action);
 
       expect(result).toEqual(expectedResult);
-    })
+    });
   });
 
   it('returns new state on delete item correctly', () => {
@@ -118,7 +118,6 @@ describe('flagsReducer', () => {
       [id2, new ListItemFlags()],
     ]);
 
-    const mockParse = (value, id) => new ListItemData({ id, value, localId: id });
     const fetch = fetchHasSucceeded(mockResponse);
 
     const testResult = flags(undefined, fetch);

@@ -1,4 +1,4 @@
-import { isTextInputValid } from '../../src/utils/isTextInputValid';
+import { isTextInputValid } from '../../src/utils/isTextInputValid.ts';
 
 describe('isTextInputValid', () => {
   it('returns false for whitespaces', () => {

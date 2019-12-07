@@ -1,6 +1,6 @@
 import { List } from 'immutable';
-import { ids } from '../../src/reducers/items/ids';
-import { ListItemData } from '../../src/models/ListItemData';
+import { ids } from '../../src/reducers/items/ids.ts';
+import { ListItemData } from '../../src/models/ListItemData.ts';
 import {
   createItem,
   deleteItem,
@@ -8,7 +8,7 @@ import {
 import {
   FETCH_DATA,
   POST_ITEM_TO_SERVER
-} from '../../src/constants/actionTypes';
+} from '../../src/constants/actionTypes.ts';
 
 describe('idsReducer', () => {
   const id = 'adfdb758-2adb-43f5-8a67-c9186c109864';
@@ -71,7 +71,7 @@ describe('idsReducer', () => {
   it('returns default state', () => {
     const initialState = new List([id, id2]);
 
-    let test = ids(initialState, {});
+    const test = ids(initialState, {});
 
     expect(test).toBe(initialState);
   });
