@@ -13,12 +13,22 @@ interface IFetchDataThunkFactory {
   readonly apiEndpoint: string;
 }
 
-export const fetchDataThunkFactory = (dependencies: IFetchDataThunkFactory ) =>
+export const fetchDataThunkFactory = (dependencies: IFetchDataThunkFactory) =>
   () =>
     (dispatch: Dispatch) => {
       dispatch(dependencies.fetchIsLoading());
 
-      return dependencies.sendRequest(dependencies.apiEndpoint, HttpAction.GET)
+      // return dependencies.sendRequest(dependencies.apiEndpoint, HttpAction.GET)
+      return Promise.resolve({
+        json: () => [
+          {
+            id: '0',
+            value: 'something',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+        ],
+      })
         .then(response => response.json())
         .then((items: Array<IServerItemDataModel>) =>
           items.map(item => dependencies.convertItem(item.value, item.id)))

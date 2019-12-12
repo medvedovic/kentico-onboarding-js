@@ -8,10 +8,23 @@ import { ListOfShortcuts } from './uiComponents/ListOfShortcuts';
 import { ErrorPopup } from './uiComponents/ErrorPopup';
 import { AppFooter } from './uiComponents/AppFooter';
 import { Header } from './uiComponents/Header';
+import styled from 'styled-components';
 
-const App: React.SFC<IAppSettings> = ({ isLoading, fetchHasFailed }) => (
-  <div>
-    <div className="container">
+const Container = styled.section`
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px;
+
+  //@media (min-width: 1440px) {
+  //  max-width: 1440px;
+  //  padding: 16px;
+  //}
+`;
+
+const App: React.FC<IAppSettings> = ({ isLoading, fetchHasFailed }) => (
+  <>
+    <Container>
       <Header />
       <div id="app-content">
         {isLoading && (
@@ -23,9 +36,9 @@ const App: React.SFC<IAppSettings> = ({ isLoading, fetchHasFailed }) => (
         <ErrorPopup />
       )}
       <ListOfShortcuts />
-    </div>
+    </Container>
     <AppFooter />
-  </div>
+  </>
 );
 App.displayName = 'App';
 

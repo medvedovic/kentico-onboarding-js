@@ -26,7 +26,8 @@
     "react-hotkeys": "1.1.4",
     "react-redux": "5.0.7",
     "redux": "4.0.0",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "@types/es6-promise": "3.3.0",
@@ -41,6 +42,7 @@
     "@types/redux": "3.6.0",
     "@types/redux-logger": "3.0.7",
     "@types/redux-thunk": "2.1.0",
+    "@types/styled-components": "^4.4.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.3",
     "babel-eslint": "10.0.3",

@@ -1,23 +1,25 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { ListItemClickable } from './ListItemDisplay.style';
 
-export interface IListItemDisplayDataProps {
-  isSavedSuccess: boolean;
-  value: string;
-  method: string;
-}
+export type ListItemDisplayDataProps = {
+  readonly isSavedSuccess: boolean;
+  readonly value: string;
+  readonly method: string;
+};
 
-export interface IListItemDisplayCallbacksProps {
-  onResendRequest: (method: string) => void;
-  onClick: () => void;
-}
+export type ListItemDisplayCallbacksProps = {
+  readonly onResendRequest: (method: string) => void;
+  readonly onClick: () => void;
+};
 
-type ListItemDisplayProps = IListItemDisplayCallbacksProps & IListItemDisplayDataProps;
+type ListItemDisplayProps = ListItemDisplayCallbacksProps
+  & ListItemDisplayDataProps;
 
-const ListItemDisplay: React.SFC<ListItemDisplayProps> = ({ value, onClick }) => (
-    <span className="list-clickable" onClick={onClick}>
-      {value}
-    </span>
+export const ListItemDisplay: React.FC<ListItemDisplayProps> = ({ value, onClick }) => (
+  <ListItemClickable onClick={onClick}>
+    {value}
+  </ListItemClickable>
 );
 
 ListItemDisplay.displayName = 'ListItemDisplay';
@@ -26,5 +28,3 @@ ListItemDisplay.propTypes = {
   onClick: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
-
-export { ListItemDisplay };
